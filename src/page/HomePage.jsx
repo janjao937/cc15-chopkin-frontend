@@ -49,7 +49,7 @@ export default function HomePage() {
 
 			{/* Recommended Restaurants */}
 			<div>Recommended Restaurants !</div>
-			<div className="flex items-center justify-evenly">
+			<div className="gap-16 grid lg:grid-cols-4 md:grid-cols-3 p-8">
 				{mocRestaurant.map((item, index) => (
 					<div key={index}>
 						<RestaurantList data={item} />
