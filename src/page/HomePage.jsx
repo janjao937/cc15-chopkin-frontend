@@ -1,5 +1,5 @@
 import React from "react";
-import { AiFillStar } from "react-icons/ai";
+// import { AiFillStar } from "react-icons/ai";
 import RestaurantList from "../features/restaurant/RestaurantList";
 import DefaultCarousel from "../components/DefaultCarousel";
 import { MdKeyboardArrowRight } from "react-icons/md";
@@ -7,45 +7,8 @@ import CuisineList from "../features/restaurant/CuisineList";
 import bgHome from "../assets/image/bgHome.png";
 import { Link } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
-
-const mocRestaurant = [
-	{
-		id: 1,
-		restaurantImage:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6oonV82rnxPstfh8eaUJRwoAR4kUhvOQR3Q&usqp=CAU",
-		restaurantName: "reataurantName",
-		resType: "Thai",
-		star: <AiFillStar size={30} className="text-yellow-400" />,
-		price: 1000,
-	},
-	{
-		id: 2,
-		restaurantImage:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6oonV82rnxPstfh8eaUJRwoAR4kUhvOQR3Q&usqp=CAU",
-		restaurantName: "reataurantName",
-		resType: "Thai",
-		star: <AiFillStar size={30} className="text-yellow-400" />,
-		price: 1000,
-	},
-	{
-		id: 3,
-		restaurantImage:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6oonV82rnxPstfh8eaUJRwoAR4kUhvOQR3Q&usqp=CAU",
-		restaurantName: "reataurantName",
-		resType: "Thai",
-		star: <AiFillStar size={30} className="text-yellow-400" />,
-		price: 1000,
-	},
-	{
-		id: 4,
-		restaurantImage:
-			"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6oonV82rnxPstfh8eaUJRwoAR4kUhvOQR3Q&usqp=CAU",
-		restaurantName: "reataurantName",
-		resType: "Thai",
-		star: <AiFillStar size={30} className="text-yellow-400" />,
-		price: 1000,
-	},
-];
+import { mockRestaurant } from "../data/mock-data";
+// console.log(mockRestaurant);
 
 const mocCuisine = [
 	{
@@ -129,8 +92,8 @@ export default function HomePage() {
 						</span>
 					</Link>
 				</div>
-				<div className="flex items-center justify-evenly">
-					{mocRestaurant.map((item, index) => (
+				<div className="border grid grid-cols-2 md:grid-cols-4 gap-2">
+					{mockRestaurant.map((item, index) => (
 						<div key={index}>
 							<RestaurantList data={item} />
 						</div>
@@ -171,9 +134,9 @@ export default function HomePage() {
 						</span>
 					</Link>
 				</div>
-				<div className="flex items-center justify-evenly">
-					{mocRestaurant.map((item, index) => (
-						<div key={index}>
+				<div className="border grid grid-cols-2 md:grid-cols-4 gap-2">
+					{mockRestaurant.map((item, index) => (
+						<div key={index} className="gi">
 							<RestaurantList data={item} />
 						</div>
 					))}

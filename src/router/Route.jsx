@@ -3,6 +3,13 @@ import Layout from "../layout/Layout";
 import HomePage from "../page/HomePage";
 import RestaurantPage from "../page/RestaurantPage";
 import RegisterPage from "../page/RegisterPage";
+import LayoutAdmin from "../layout/LayoutAdmin";
+import AdminPage from "../page/admin/AdminPage";
+import AdminRestaurantPage from "../page/admin/RestaurantPage";
+import NewRestaurantPage from "../page/admin/NewRestaurantPage";
+import CustomerPage from "../page/admin/CustomerPage";
+import BookingPage from "../page/admin/BookingPage";
+import EditingPage from "../page/admin/EditingPage";
 
 const router = createBrowserRouter([
 	{
@@ -16,6 +23,18 @@ const router = createBrowserRouter([
 	{
 		path: "/register",
 		element: <RegisterPage />,
+	},
+	{
+		path: "/admin",
+		element: <LayoutAdmin />,
+		children: [
+			{ path: "", element: <AdminPage /> },
+			{ path: "list-restaurant", element: <AdminRestaurantPage /> },
+			{ path: "new-restaurant", element: <NewRestaurantPage /> },
+			{ path: "customer", element: <CustomerPage /> },
+			{ path: "booking", element: <BookingPage /> },
+			{ path: "edit", element: <EditingPage /> },
+		],
 	},
 ]);
 

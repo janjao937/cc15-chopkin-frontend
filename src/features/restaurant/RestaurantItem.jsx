@@ -10,7 +10,7 @@ export default function RestaurantItem({
 	return (
 		<>
 			<div className="flex flex-col gap-2">
-				<div className="w-[200px] h-[100px] border">
+				<div className="w-[200px] h-[100px] ">
 					<img
 						src={image}
 						alt={name}
