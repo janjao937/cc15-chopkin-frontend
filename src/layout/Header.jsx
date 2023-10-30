@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
-    <header className="bg-white shadow-sm flex items-center justify-between px-4 py-5 sticky top-0 z-30">
+    <header className="bg-white shadow-sm flex items-center justify-between px-4 py-5 sticky top-0 z-30 h-[7vh]">
       {/* Logo */}
       <div className="">
         <Link to="/">

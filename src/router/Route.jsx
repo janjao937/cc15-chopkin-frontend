@@ -5,6 +5,7 @@ import RestaurantPage from "../page/RestaurantPage";
 import RegisterPage from "../page/RegisterPage";
 import RecommendedPage from "../page/RecommendPage";
 import AllRestuarantPage from "../page/AllRestaurantPage";
+import UserProfile from "../page/UserProfile";
 
 const router = createBrowserRouter([
   {
@@ -13,8 +14,9 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "/restaurant", element: <RestaurantPage /> },
-      { path: "/recommend", element: <RecommendedPage /> },
-      { path: "/all-restaurant", element: <AllRestuarantPage /> },
+      { path: "/recommended", element: <RecommendedPage /> },
+      { path: "/all-restaurants", element: <AllRestuarantPage /> },
+      { path: "/profile/:userId", element: <UserProfile /> },
     ],
   },
   {

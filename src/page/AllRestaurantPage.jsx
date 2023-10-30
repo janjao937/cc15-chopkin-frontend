@@ -81,7 +81,7 @@ export default function AllRestuarantPage() {
         ))}
       </div>
       <div className="text-center py-8">
-        <MyButton style={`py-3 px-6 rounded-full`}>Show More</MyButton>
+        <MyButton style={`py-3 px-6 rounded-full bg-secondary`}>Show More</MyButton>
       </div>
     </div>
     </>
