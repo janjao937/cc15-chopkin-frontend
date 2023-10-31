@@ -81,10 +81,10 @@ export default function NewRestaurantItem({
 			</div>
 
 			<div className="flex items-center justify-center gap-4 my-4">
-				<MyButton style={`bg-green-500 hover:bg-green-400 px-6`}>
+				<MyButton style={`bg-green-500 hover:bg-green-400 px-6 rounded-full`}>
 					Approve
 				</MyButton>
-				<MyButton style={`bg-red-500 hover:bg-red-400 px-8`}>
+				<MyButton style={`bg-red-500 hover:bg-red-400 px-8 rounded-full`}>
 					Reject
 				</MyButton>
 			</div>

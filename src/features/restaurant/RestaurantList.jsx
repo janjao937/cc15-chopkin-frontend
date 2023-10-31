@@ -5,7 +5,7 @@ export default function RestaurantList({ data }) {
 	// console.log(data);
 
 	return (
-		<div className="border px-2 py-2 rounded-md">
+			<div className="border border-gray-200 rounded-3xl max-w-[350px] cursor-pointer hover:shadow-lg hover:transition">
 			<RestaurantItem
 				image={data.restaurantImage}
 				name={data.restaurantName}

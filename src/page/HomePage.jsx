@@ -121,7 +121,14 @@ export default function HomePage() {
 						</div>
 					))}
 				</div>
-			</div>
+			{/* <div>Recommended Restaurants !</div>
+			<div className="gap-16 grid lg:grid-cols-4 md:grid-cols-3">
+				{mockRestaurant.map((item, index) => (
+					<div key={index}>
+						<RestaurantList data={item} />
+					</div>
+				))}
+			</div> */}
 
 			{/* All Restaurants */}
 			<div className="mb-4 mx-4">
@@ -142,6 +149,7 @@ export default function HomePage() {
 					))}
 				</div>
 			</div>
+		</div>
 		</div>
 	);
 }
