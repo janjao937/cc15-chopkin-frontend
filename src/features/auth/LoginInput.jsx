@@ -10,7 +10,8 @@ export default function LoginInput({
 }) {
   return (
     <Input
-      className={`block w-full border px-3 py-1.5 text-sm
+      size="lg"
+      className={`block w-full border text-sm
     ${hasError && "border-red-500 "}
     `}
       type={type}

@@ -53,11 +53,11 @@ export default function LoginForm() {
   return (
     <div>
       <form
-        className="px-8 pt-28 pb-14 flex flex-col justify-evenly gap-4 border shadow-lg w-96 h-96 bg-white relative z-10"
+        className="px-8 pt-8 flex flex-col justify-center gap-8 border shadow-lg w-[36rem] h-[34rem] bg-white relative z-10"
         onSubmit={handleSumbitForm}
       >
         <Logo />
-        <h1 className="text-center text-xl font-semibold">SIGN IN</h1>
+        <h1 className="text-center text-3xl font-semibold">SIGN IN</h1>
         <div>
           <LoginInput
             label="EMAIL OR PHONE NUMBER"
@@ -87,12 +87,12 @@ export default function LoginForm() {
 
         <div className="flex gap-2">
           <input type="checkbox" />
-          <span className="text-xs">Remember Me</span>
+          <span className="text-sm">Remember Me</span>
         </div>
         <LoginButton />
         <div className="flex flex-col items-center gap-3">
-          <span className="text-xs">OR USE</span>
-          <FcGoogle className="w-5 h-5 cursor-pointer" />
+          <span className="text-sm">OR USE</span>
+          <FcGoogle className="w-7 h-7 cursor-pointer" />
         </div>
       </form>
     </div>

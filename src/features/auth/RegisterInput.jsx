@@ -1,23 +1,25 @@
 import React from "react";
+import { Input } from "@material-tailwind/react";
 
 export default function RegisterInput({
-	type = "text",
-	placeholder,
-	value,
-	onChange,
-	name,
-	hasError,
+  type = "text",
+  label,
+  value,
+  onChange,
+  name,
+  hasError,
 }) {
-	return (
-		<input
-			className={`block w-full border rounded-sm px-3 py-1.5 text-sm
+  return (
+    <Input
+      size="lg"
+      className={`block w-full border px-3 py-1.5 text-sm
     ${hasError && "border-red-500 "}
     `}
-			type={type}
-			placeholder={placeholder}
-			value={value}
-			onChange={onChange}
-			name={name}
-		/>
-	);
+      type={type}
+      label={label}
+      value={value}
+      onChange={onChange}
+      name={name}
+    />
+  );
 }

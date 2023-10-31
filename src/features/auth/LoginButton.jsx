@@ -1,3 +1,5 @@
 export default function LoginButton() {
-  return <button className="bg-[#FFC24B] p-2">SIGN IN</button>;
+  return (
+    <button className="bg-[#FFC24B] p-3 text-white shadow-sm">SIGN IN</button>
+  );
 }
