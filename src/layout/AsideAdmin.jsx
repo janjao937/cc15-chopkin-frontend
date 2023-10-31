@@ -1,8 +1,9 @@
 import React from "react";
-import { AiOutlineHome, AiOutlineBook } from "react-icons/ai";
+import { AiOutlineHome } from "react-icons/ai";
 import { BsBorderWidth } from "react-icons/bs";
 import { HiOutlineArchiveBox } from "react-icons/hi2";
 import { BsPerson, BsFillPencilFill } from "react-icons/bs";
+import { TfiBookmarkAlt } from "react-icons/tfi";
 import MenuList from "../features/admin/MenuList";
 
 const menuAdmin = [
@@ -34,7 +35,7 @@ const menuAdmin = [
 		id: 5,
 		to: "/admin/booking",
 		text: "Booking",
-		icon: <AiOutlineBook />,
+		icon: <TfiBookmarkAlt />,
 	},
 	{
 		id: 6,

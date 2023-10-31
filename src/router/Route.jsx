@@ -13,23 +13,24 @@ import NewRestaurantPage from "../page/admin/NewRestaurantPage";
 import CustomerPage from "../page/admin/CustomerPage";
 import BookingPage from "../page/admin/BookingPage";
 import EditingPage from "../page/admin/EditingPage";
+import DetailBookingPage from "../page/admin/DetailBookingPage";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      { path: "/", element: <HomePage /> },
-      { path: "/restaurant", element: <RestaurantPage /> },
-      { path: "/recommended", element: <RecommendedPage /> },
-      { path: "/all-restaurants", element: <AllRestuarantPage /> },
-      { path: "/profile/:userId", element: <UserProfile /> },
-    ],
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
-  },
+	{
+		path: "/",
+		element: <Layout />,
+		children: [
+			{ path: "/", element: <HomePage /> },
+			{ path: "/restaurant", element: <RestaurantPage /> },
+			{ path: "/recommended", element: <RecommendedPage /> },
+			{ path: "/all-restaurants", element: <AllRestuarantPage /> },
+			{ path: "/profile/:userId", element: <UserProfile /> },
+		],
+	},
+	{
+		path: "/register",
+		element: <RegisterPage />,
+	},
 	{
 		path: "/",
 		element: <Layout />,
@@ -51,11 +52,12 @@ const router = createBrowserRouter([
 			{ path: "new-restaurant", element: <NewRestaurantPage /> },
 			{ path: "customer", element: <CustomerPage /> },
 			{ path: "booking", element: <BookingPage /> },
+			{ path: "booking/:bookingId", element: <DetailBookingPage /> },
 			{ path: "edit", element: <EditingPage /> },
 		],
 	},
 ]);
 
 export default function Route() {
-  return <RouterProvider router={router} />;
+	return <RouterProvider router={router} />;
 }
