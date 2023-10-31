@@ -1,4 +1,4 @@
-export default function Logo() {
+export default function LogoLogin() {
   return (
     <div className="absolute top-[-4rem] left-[40%] w-[120px] h-[120px] rounded-full border shadow-lg overflow-hidden bg-white">
       <img

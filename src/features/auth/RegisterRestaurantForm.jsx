@@ -1,19 +1,17 @@
-import RegisterInput from "./RegisterInput";
 import { useState } from "react";
 import { registerSchema } from "../../validation/auth-validator";
-import InputErrorMessage from "./InputErrorMessage";
-import MyButton from "../../components/MyButton";
 import LogoLogin from "./LogoLogin";
-import { BsEyeSlash } from "react-icons/bs";
+import RegisterInput from "./RegisterInput";
+import MyButton from "../../components/MyButton";
+import InputErrorMessage from "./InputErrorMessage";
 
-export default function RegisterForm() {
+export default function RegisterRestaurantForm() {
   const [input, setInput] = useState({
-    firstName: "",
-    lastName: "",
+    restaurantName: "",
+    ownerFirstName: "",
+    ownerLastName: "",
     email: "",
     phone: "",
-    password: "",
-    confirmPassword: "",
   });
 
   const [checkbox, setCheckbox] = useState(false);
@@ -43,9 +41,8 @@ export default function RegisterForm() {
       return setError(validationError);
     }
     setError({});
-
-    // register(input).catch((err) => console.log(err));
   };
+
   return (
     <>
       <form
@@ -53,26 +50,47 @@ export default function RegisterForm() {
         className="px-8 pt-14 pb-6 flex flex-col justify-evenly border shadow-lg w-[36rem] h-[40rem] bg-white relative z-10"
       >
         <LogoLogin />
-        <h1 className="text-center text-3xl font-semibold">SIGN UP</h1>
+        <h1 className="text-center text-3xl font-semibold">
+          SIGN UP FOR BUSINESS
+        </h1>
+
         <div>
           <RegisterInput
-            value={input.firstName}
+            value={input.ownerFirstName}
             onChange={handleChangeInput}
-            name="firstName"
-            label="FIRST NAME"
-            hasError={error.firstName}
+            name="ownerFirstName"
+            label="OWNER FIRST NAME"
+            hasError={error.ownerFirstName}
           />
-          {error.firstName && <InputErrorMessage message={error.firstName} />}
+          {error.ownerFirstName && (
+            <InputErrorMessage message={error.ownerFirstName} />
+          )}
         </div>
+
         <div>
           <RegisterInput
-            value={input.lastName}
+            value={input.ownerLastName}
             onChange={handleChangeInput}
-            name="lastName"
-            label="LAST NAME"
-            hasError={error.lastName}
+            name="ownerLastName"
+            label="OWNER LAST NAME"
+            hasError={error.ownerLastName}
           />
-          {error.lastName && <InputErrorMessage message={error.lastName} />}
+          {error.ownerLastName && (
+            <InputErrorMessage message={error.ownerLastName} />
+          )}
+        </div>
+
+        <div>
+          <RegisterInput
+            value={input.restaurantName}
+            onChange={handleChangeInput}
+            name="restaurantName"
+            label="RESTAURANT NAME"
+            hasError={error.restaurantName}
+          />
+          {error.restaurantName && (
+            <InputErrorMessage message={error.restaurantName} />
+          )}
         </div>
 
         <div>
@@ -85,6 +103,7 @@ export default function RegisterForm() {
           />
           {error.email && <InputErrorMessage message={error.email} />}
         </div>
+
         <div>
           <RegisterInput
             value={input.phone}
@@ -94,32 +113,6 @@ export default function RegisterForm() {
             hasError={error.phone}
           />
           {error.phone && <InputErrorMessage message={error.phone} />}
-        </div>
-        <div>
-          <RegisterInput
-            value={input.password}
-            onChange={handleChangeInput}
-            name="password"
-            label="PASSWORD"
-            type="password"
-            icon={<BsEyeSlash />}
-            hasError={error.password}
-          />
-          {error.password && <InputErrorMessage message={error.password} />}
-        </div>
-        <div>
-          <RegisterInput
-            value={input.confirmPassword}
-            onChange={handleChangeInput}
-            name="confirmPassword"
-            label="CONFIRM-PASSWORD"
-            type="password"
-            icon={<BsEyeSlash />}
-            hasError={error.confirmPassword}
-          />
-          {error.confirmPassword && (
-            <InputErrorMessage message={error.confirmPassword} />
-          )}
         </div>
 
         <div className="flex gap-2">
@@ -135,13 +128,13 @@ export default function RegisterForm() {
         {checkbox ? (
           <>
             <MyButton type={"submit"} style={`py-2`}>
-              CREATE AN ACCOUNT
+              SUBMIT
             </MyButton>
           </>
         ) : (
           <>
             <div className="inline-block text-center bg-gray-600 px-4 py-2 text-white shadow-sm ">
-              CREATE AN ACCOUNT
+              SUBMIT
             </div>
           </>
         )}

@@ -7,11 +7,12 @@ export default function LoginInput({
   name,
   onChange,
   hasError,
+  icon,
 }) {
   return (
     <Input
       size="lg"
-      className={`block w-full border text-sm
+      className={`block w-full py-6 border text-sm
     ${hasError && "border-red-500 "}
     `}
       type={type}
@@ -19,6 +20,7 @@ export default function LoginInput({
       value={value}
       name={name}
       onChange={onChange}
+      icon={icon}
     />
   );
 }

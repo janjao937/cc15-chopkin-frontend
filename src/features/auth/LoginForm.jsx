@@ -1,16 +1,12 @@
 import { useState } from "react";
 import LoginInput from "./LoginInput";
-import Joi from "joi";
+import { loginSchema } from "../../validation/auth-validator";
 import useAuth from "../../Hooks/use-auth";
 import InputErrorMessage from "./InputErrorMessage";
 import LoginButton from "./LoginButton";
 import { FcGoogle } from "react-icons/fc";
-import Logo from "./Logo";
-
-const loginSchema = Joi.object({
-  emailOrPhone: Joi.string().required(),
-  password: Joi.string().required(),
-});
+import LogoLogin from "./LogoLogin";
+import { BsEyeSlash } from "react-icons/bs";
 
 const validateLogin = (input) => {
   const { error } = loginSchema.validate(input, { abortEarly: false });
@@ -51,12 +47,12 @@ export default function LoginForm() {
   };
 
   return (
-    <div>
+    <>
       <form
         className="px-8 pt-8 flex flex-col justify-center gap-8 border shadow-lg w-[36rem] h-[34rem] bg-white relative z-10"
         onSubmit={handleSumbitForm}
       >
-        <Logo />
+        <LogoLogin />
         <h1 className="text-center text-3xl font-semibold">SIGN IN</h1>
         <div>
           <LoginInput
@@ -80,6 +76,7 @@ export default function LoginForm() {
             value={input.password}
             onChange={(e) => setInput({ ...input, password: e.target.value })}
             name="password"
+            icon={<BsEyeSlash />}
             hasError={error.password}
           />
           {error.password && <InputErrorMessage message={error.password} />}
@@ -95,6 +92,6 @@ export default function LoginForm() {
           <FcGoogle className="w-7 h-7 cursor-pointer" />
         </div>
       </form>
-    </div>
+    </>
   );
 }

@@ -8,6 +8,7 @@ export default function RegisterInput({
   onChange,
   name,
   hasError,
+  icon,
 }) {
   return (
     <Input
@@ -20,6 +21,7 @@ export default function RegisterInput({
       value={value}
       onChange={onChange}
       name={name}
+      icon={icon}
     />
   );
 }
