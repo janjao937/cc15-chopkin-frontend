@@ -121,29 +121,36 @@ export default function UserProfile() {
               <p className="font-bold">
                 Hello, username! Are you feeling hungry today?
               </p>
-              <UserProfileInfo text="name" value="username"></UserProfileInfo>
               <UserProfileInfo
+                icon="icon"
+                text="name"
+                value="username"
+              ></UserProfileInfo>
+              <UserProfileInfo
+                icon="icon"
                 text="email"
                 value="a@gmail.com"
               ></UserProfileInfo>
               <UserProfileInfo
+                icon="icon"
                 text="phone"
                 value="xxxxxxxxxx"
               ></UserProfileInfo>
               <UserProfileInfo
+                icon="icon"
                 text="referral Code?"
                 value="xxxxxx"
               ></UserProfileInfo>
             </div>
             <div className="flex-1 flex items-center justify-center">
-              <div className="bg-gradient-to-r from-gray-400 to-white border w-[60%] h-[100%] rounded-2xl flex">
+              <div className="bg-gradient-to-r from-gray-400 to-white border w-[60%] h-[100%] rounded-2xl flex xs:p-3">
                 <div className="flex-1 flex items-center justify-center text-3xl font-bold">
                   Silver
                 </div>
                 <div className="flex-1 flex flex-col justify-center items-center">
                   <p>My Member Point</p>
                   <p>XXX</p>
-                  <MyOutlineButton outlinestyle={`outline w-[130px]`}>
+                  <MyOutlineButton outlinestyle={`outline w-[80%]`}>
                     Point History
                   </MyOutlineButton>
                 </div>
