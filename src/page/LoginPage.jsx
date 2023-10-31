@@ -11,7 +11,7 @@ export default function LoginPage() {
           SIGN UP
         </button>
       </Link>
-      <div className="flex-1 flex items-center justify-center absolute inset-0">
+      <div className="flex items-center justify-center absolute inset-0">
         <LoginForm />
       </div>
     </div>

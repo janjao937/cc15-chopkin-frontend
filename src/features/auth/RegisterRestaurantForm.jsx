@@ -4,6 +4,9 @@ import LogoLogin from "./LogoLogin";
 import RegisterInput from "./RegisterInput";
 import MyButton from "../../components/MyButton";
 import InputErrorMessage from "./InputErrorMessage";
+import DropdownCategory from "./DropdownCategory";
+import DropdownNation from "./DropdownNation";
+import DropdownLocation from "./DropdownLocation";
 
 export default function RegisterRestaurantForm() {
   const [input, setInput] = useState({
@@ -12,6 +15,10 @@ export default function RegisterRestaurantForm() {
     ownerLastName: "",
     email: "",
     phone: "",
+    category: "",
+    nation: "",
+    latitude: "",
+    longitude: "",
   });
 
   const [checkbox, setCheckbox] = useState(false);
@@ -113,6 +120,16 @@ export default function RegisterRestaurantForm() {
             hasError={error.phone}
           />
           {error.phone && <InputErrorMessage message={error.phone} />}
+        </div>
+
+        <div>
+          <DropdownCategory />
+        </div>
+        <div>
+          <DropdownNation />
+        </div>
+        <div>
+          <DropdownLocation />
         </div>
 
         <div className="flex gap-2">

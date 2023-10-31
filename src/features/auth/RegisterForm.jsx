@@ -112,7 +112,7 @@ export default function RegisterForm() {
             value={input.confirmPassword}
             onChange={handleChangeInput}
             name="confirmPassword"
-            label="CONFIRM-PASSWORD"
+            label="CONFIRM PASSWORD"
             type="password"
             icon={<BsEyeSlash />}
             hasError={error.confirmPassword}
