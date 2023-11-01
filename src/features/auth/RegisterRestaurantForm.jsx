@@ -24,7 +24,7 @@ export default function RegisterRestaurantForm() {
   const [checkbox, setCheckbox] = useState(false);
   const [error, setError] = useState({});
 
-  const validateRegister = (input) => {
+  const validateRegisterRestaurant = (input) => {
     const { error } = registerRestaurantSchema.validate(input, {
       abortEarly: false,
     });
@@ -45,7 +45,7 @@ export default function RegisterRestaurantForm() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const validationError = validateRegister(input);
+    const validationError = validateRegisterRestaurant(input);
     if (validationError) {
       return setError(validationError);
     }
@@ -140,11 +140,7 @@ export default function RegisterRestaurantForm() {
         </div>
 
         <div>
-          <DropdownLocation
-            onChange={handleChangeInput}
-            input={input}
-            error={error}
-          />
+          <DropdownLocation input={input} setInput={setInput} error={error} />
         </div>
 
         <div className="flex gap-2">

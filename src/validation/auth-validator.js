@@ -33,8 +33,8 @@ export const registerRestaurantSchema = Joi.object({
   phone: Joi.string()
     .pattern(/^[0-9]{10}$/)
     .required(),
-  categoryIndex: Joi.string().required(),
-  nationIndex: Joi.string().required(),
+  categoryIndex: Joi.number().integer().positive().required(),
+  nationIndex: Joi.number().integer().positive().required(),
   latitude: Joi.number().required(),
   longitude: Joi.number().required(),
 });

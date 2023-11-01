@@ -3,8 +3,12 @@ import { HiChevronDown } from "react-icons/hi";
 import InputLocation from "./InputLocation";
 import InputErrorMessage from "./InputErrorMessage";
 
-export default function DropdownLocation({ hasError, onChange, input, error }) {
+export default function DropdownLocation({ input, setInput, error }) {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleChangeInput = (e) => {
+    setInput({ ...input, [e.target.name]: +e.target.value });
+  };
 
   return (
     <>
@@ -23,7 +27,7 @@ export default function DropdownLocation({ hasError, onChange, input, error }) {
           isOpen={isOpen}
           value={input.latitude}
           placeholder="Latitude"
-          onChange={onChange}
+          onChange={handleChangeInput}
           name="latitude"
           hasError={error.latitude}
         />
@@ -35,7 +39,7 @@ export default function DropdownLocation({ hasError, onChange, input, error }) {
           isOpen={isOpen}
           value={input.longitude}
           placeholder="Longitude"
-          onChange={onChange}
+          onChange={handleChangeInput}
           name="longitude"
           hasError={error.longitude}
         />
