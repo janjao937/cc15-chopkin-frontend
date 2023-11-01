@@ -14,6 +14,8 @@ import CustomerPage from "../page/admin/CustomerPage";
 import BookingPage from "../page/admin/BookingPage";
 import EditingPage from "../page/admin/EditingPage";
 import DetailBookingPage from "../page/admin/DetailBookingPage";
+import DetailCustomerPage from "../page/admin/DetailCustomerPage";
+import ViewEditingPage from "../page/admin/ViewEditingPage";
 
 const router = createBrowserRouter([
 	{
@@ -51,9 +53,11 @@ const router = createBrowserRouter([
 			{ path: "list-restaurant", element: <AdminRestaurantPage /> },
 			{ path: "new-restaurant", element: <NewRestaurantPage /> },
 			{ path: "customer", element: <CustomerPage /> },
+			{ path: "customer/:customerId", element: <DetailCustomerPage /> },
 			{ path: "booking", element: <BookingPage /> },
 			{ path: "booking/:bookingId", element: <DetailBookingPage /> },
 			{ path: "edit", element: <EditingPage /> },
+			{ path: "edit/:restaurantId", element: <ViewEditingPage /> },
 		],
 	},
 ]);

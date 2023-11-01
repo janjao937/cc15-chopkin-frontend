@@ -13,7 +13,9 @@ export default function NewRestaurantItem({
 	located,
 	type,
 	nation,
+	status,
 }) {
+	const handleClickApprove = () => {};
 	return (
 		<div className="flex flex-col gap-2 mb-4">
 			<div className="grid grid-cols-12 gap-14 ">
@@ -81,12 +83,31 @@ export default function NewRestaurantItem({
 			</div>
 
 			<div className="flex items-center justify-center gap-4 my-4">
-				<MyButton style={`bg-green-500 hover:bg-green-400 px-6 rounded-full`}>
-					Approve
-				</MyButton>
-				<MyButton style={`bg-red-500 hover:bg-red-400 px-8 rounded-full`}>
-					Reject
-				</MyButton>
+				{status ? (
+					<>
+						{/* <MyButton
+							style={`bg-red-500 hover:bg-red-400 px-8 rounded-full`}
+						>
+							RemoveDataBase
+						</MyButton> */}
+						<h1 className="border-b border-red-500 text-green-500 font-semibold">
+							OK APPROVE
+						</h1>
+					</>
+				) : (
+					<>
+						<MyButton
+							style={`bg-green-500 hover:bg-green-400 px-6 rounded-full`}
+						>
+							Approve
+						</MyButton>
+						<MyButton
+							style={`bg-red-500 hover:bg-red-400 px-8 rounded-full`}
+						>
+							Reject
+						</MyButton>
+					</>
+				)}
 			</div>
 			<hr />
 		</div>

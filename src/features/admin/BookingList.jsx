@@ -2,6 +2,8 @@ import React from "react";
 import BookingItem from "../../features/admin/BookingItem";
 
 export default function BookingList({ data }) {
+	console.log(data);
+
 	return (
 		<>
 			<BookingItem
@@ -12,9 +14,10 @@ export default function BookingList({ data }) {
 				phone={data.customer.phone}
 				date={data.createdAt}
 				totalCustomer={data.totalCustomer}
+				totalKid={data.totalKid}
 				reataurantName={data.reataurant.reataurantName}
-				packageName={data.package.name}
-				packPrice={data.package.price}
+				packageName={data.reataurant.package.name}
+				packPrice={data.reataurant.package.price}
 			/>
 		</>
 	);

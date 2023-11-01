@@ -15,14 +15,16 @@ import { AiOutlineMail } from "react-icons/ai";
 import { SlDiamond } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 
-import { mockBooking } from "../../data/mock-booking";
+import { mockCustomer } from "../../data/mock-customer";
 
-export default function DetailBookingPage() {
-	const { bookingId } = useParams();
-	console.log("bookingId ==>", bookingId);
+export default function DetailCustomerPage() {
+	const { customerId } = useParams();
+	console.log("customerId ==>", customerId);
 
-	const [newBookId] = mockBooking.filter((item) => item.id === +bookingId);
-	console.log("newBookId ==>", newBookId);
+	const [newCustomerId] = mockCustomer.filter(
+		(item) => item.id === +customerId
+	);
+	console.log("newCustomerId ==>", newCustomerId);
 
 	return (
 		<div className="p-4 flex flex-col gap-4">
@@ -36,7 +38,7 @@ export default function DetailBookingPage() {
 				</div>
 
 				{/* Charged Summary */}
-				<div className="border rounded-md shadow-md px-8 py-4 flex flex-col gap-3 w-[360px]">
+				{/* <div className="border rounded-md shadow-md px-8 py-4 flex flex-col gap-3 w-[360px]">
 					<div className="flex items-center gap-4">
 						<div>
 							<TfiBookmarkAlt
@@ -85,13 +87,14 @@ export default function DetailBookingPage() {
 						<BsChevronDown size={20} />
 						View Menu
 					</button>
-				</div>
+				</div> */}
 			</div>
-			{/* Detail BookingId */}
+
+			{/* Detail CustomerId */}
 			<div className="flex flex-col w-[70%] gap-2 p-4 ">
 				<h1 className="text-xl mb-4 font-semibold">
 					Booking ID:
-					<span className="text-red-600"> {newBookId.id}</span>
+					<span className="text-red-600"> {newCustomerId.id}</span>
 				</h1>
 				<div className="flex flex-col gap-4 mb-10">
 					<div className="grid grid-cols-12 items-center">
@@ -105,7 +108,7 @@ export default function DetailBookingPage() {
 							Name
 						</div>
 						<div className="col-span-6">
-							{newBookId.customer.firstName}
+							{newCustomerId.firstName}
 						</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
@@ -115,9 +118,7 @@ export default function DetailBookingPage() {
 						<div className="col-span-5 text-red-600 font-semibold">
 							Email
 						</div>
-						<div className="col-span-6">
-							{newBookId.customer.email}
-						</div>
+						<div className="col-span-6">{newCustomerId.email}</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
 						<div className="col-span-1">
@@ -126,9 +127,7 @@ export default function DetailBookingPage() {
 						<div className="col-span-5 text-red-600 font-semibold">
 							Phone
 						</div>
-						<div className="col-span-6">
-							{newBookId.customer.phone}
-						</div>
+						<div className="col-span-6">{newCustomerId.phone}</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
 						<div className="col-span-1">
@@ -137,44 +136,11 @@ export default function DetailBookingPage() {
 						<div className="col-span-5 text-red-600 font-semibold">
 							Date & Time
 						</div>
-						<div className="col-span-6">{newBookId.createdAt}</div>
-					</div>
-					<div className="grid grid-cols-12 items-center">
-						<div className="col-span-1">
-							<BsPersonPlus size={20} className="text-red-600" />
-						</div>
-						<div className="col-span-5 text-red-600 font-semibold">
-							Number of people
-						</div>
-						<div className="col-span-6">
-							{newBookId.totalCustomer}
-						</div>
-					</div>
-					<div className="grid grid-cols-12 items-center">
-						<div className="col-span-1">
-							<FaPizzaSlice size={20} className="text-red-600" />
-						</div>
-						<div className="col-span-5 text-red-600 font-semibold">
-							Restaurant
-						</div>
-						<div className="col-span-6">
-							{newBookId.reataurant.reataurantName}
-						</div>
-					</div>
-					<div className="grid grid-cols-12 items-center">
-						<div className="col-span-1">
-							<BsBook size={20} className="text-red-600" />
-						</div>
-						<div className="col-span-5 text-red-600 font-semibold">
-							Package Type
-						</div>
-						<div className="col-span-6">
-							{newBookId.reataurant.package.name}
-						</div>
+						<div className="col-span-6">11111</div>
 					</div>
 				</div>
 
-				<div className="grid grid-cols-12 items-cente gap-4 mb-20">
+				{/* <div className="grid grid-cols-12 items-cente gap-4 mb-20">
 					<button
 						className={`text-red-600 border border-red-600 px-4 py-1 rounded-full col-span-6 hover:bg-red-500 hover:text-white`}
 					>
@@ -185,7 +151,7 @@ export default function DetailBookingPage() {
 					>
 						SHARE BOOKING
 					</button>
-				</div>
+				</div> */}
 				<div className="flex items-center justify-center gap-4 mb-4">
 					<div>
 						<SlDiamond size={20} className="text-red-600" />

@@ -2,7 +2,7 @@ import React from "react";
 import NewRestaurantItem from "./NewRestaurantItem";
 
 export default function NewRestaurantList({ data }) {
-	console.log(data);
+	console.log("mockFatchRestaurant ==>", data);
 
 	return (
 		<>
@@ -15,6 +15,7 @@ export default function NewRestaurantList({ data }) {
 				located={data.district.name}
 				type={data.category.name}
 				nation={data.nation.name}
+				status={data.status}
 			/>
 		</>
 	);

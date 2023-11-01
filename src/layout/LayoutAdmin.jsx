@@ -8,7 +8,7 @@ export default function LayoutAdmin() {
 	return (
 		<div className="">
 			<Header />
-			<div className="grid grid-cols-12">
+			<div className="grid grid-cols-12 auto-cols-max">
 				<div className="col-span-2">
 					<AsideAdmin />
 				</div>
