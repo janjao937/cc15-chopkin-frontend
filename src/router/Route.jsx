@@ -13,6 +13,7 @@ import NewRestaurantPage from "../page/admin/NewRestaurantPage";
 import CustomerPage from "../page/admin/CustomerPage";
 import BookingPage from "../page/admin/BookingPage";
 import EditingPage from "../page/admin/EditingPage";
+import RestaurantInfoPage from "../page/RestuarantInfoPage";
 
 const router = createBrowserRouter([
   {
@@ -20,40 +21,29 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <HomePage /> },
-      { path: "/restaurant", element: <RestaurantPage /> },
+    //   { path: "/restaurant", element: <RestaurantPage /> },
       { path: "/recommended", element: <RecommendedPage /> },
       { path: "/all-restaurants", element: <AllRestuarantPage /> },
       { path: "/profile/:userId", element: <UserProfile /> },
+      { path: "/restaurant/:restuarantId", element: <RestaurantInfoPage /> },
     ],
   },
   {
     path: "/register",
     element: <RegisterPage />,
   },
-	{
-		path: "/",
-		element: <Layout />,
-		children: [
-			{ path: "/", element: <HomePage /> },
-			{ path: "/restaurant", element: <RestaurantPage /> },
-		],
-	},
-	{
-		path: "/register",
-		element: <RegisterPage />,
-	},
-	{
-		path: "/admin",
-		element: <LayoutAdmin />,
-		children: [
-			{ path: "", element: <AdminPage /> },
-			{ path: "list-restaurant", element: <AdminRestaurantPage /> },
-			{ path: "new-restaurant", element: <NewRestaurantPage /> },
-			{ path: "customer", element: <CustomerPage /> },
-			{ path: "booking", element: <BookingPage /> },
-			{ path: "edit", element: <EditingPage /> },
-		],
-	},
+  {
+    path: "/admin",
+    element: <LayoutAdmin />,
+    children: [
+      { path: "", element: <AdminPage /> },
+      { path: "list-restaurant", element: <AdminRestaurantPage /> },
+      { path: "new-restaurant", element: <NewRestaurantPage /> },
+      { path: "customer", element: <CustomerPage /> },
+      { path: "booking", element: <BookingPage /> },
+      { path: "edit", element: <EditingPage /> },
+    ],
+  },
 ]);
 
 export default function Route() {
