@@ -1,5 +1,7 @@
 import { useState } from "react";
 import MyButton from "../components/MyButton";
+import { Step, Stepper } from "@material-tailwind/react";
+
 
 const mockRestuarantInfo = {
   id: 1,
@@ -52,9 +54,20 @@ const mockPackage = [
 
 export default function RestaurantInfoPage() {
   const [openMenu, setOpenMenu] = useState(false);
+  const [booking, setBooking] = useState(false);
+
+  const [activeStep, setActiveStep] = useState(0);
+  const [isLastStep, setIsLastStep] = useState(false);
+  const [isFirstStep, setIsFirstStep] = useState(false);
+  const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
+  const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
 
   const handleOpenMenu = (itemId) => {
     setOpenMenu(itemId === openMenu ? null : itemId);
+  };
+
+  const handleBooking = () => {
+    setBooking(!booking);
   };
 
   return (
@@ -87,6 +100,7 @@ export default function RestaurantInfoPage() {
           </div>
 
           <div>
+            
             <p className="font-light">Packages</p>
             <div className="border-l-8 shadow-xl border-primary">
               {mockPackage.map((item, index) => (
@@ -96,7 +110,7 @@ export default function RestaurantInfoPage() {
                       <p className="font-semibold">{item.packageName}</p>
                       <button
                         onClick={() => handleOpenMenu(item.id)}
-                        className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4`}
+                        className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4 text-primary`}
                       >
                         Menu
                       </button>
@@ -158,14 +172,13 @@ export default function RestaurantInfoPage() {
                       </div>
                       <img className="w-full" src={item.menuImage} alt="" />
                       <div className="text-center p-4">
-                                          <button
-                        onClick={handleOpenMenu}
-                        className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4`}
-                      >
-                        Close
-                      </button>
+                        <button
+                          onClick={handleOpenMenu}
+                          className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4`}
+                        >
+                          Close
+                        </button>
                       </div>
-    
                     </div>
                   ) : undefined}
                 </section>
@@ -174,8 +187,69 @@ export default function RestaurantInfoPage() {
           </div>
         </section>
 
-        <section className="min-w-[300px] h-[300px] bg-green-200 sticky top-16">
-          Booking
+        <section className="w-[300px] self-start  border border-gray-100 shadow-md sticky top-16">
+          <div className="w-full py-4 px-8">
+            {booking ? (
+              <div className="flex flex-col gap-4">
+                <Stepper
+                 lineClassName="!bg-black"
+                 activeLineClassName="!bg-secondary"
+                  activeStep={activeStep}
+                  isLastStep={(value) => setIsLastStep(value)}
+                  isFirstStep={(value) => setIsFirstStep(value)}
+                >
+                  <Step activeClassName="!bg-secondary" completedClassName="!bg-secondary text-white" onClick={() => setActiveStep(0)}>
+                    <div>Icon</div>
+                  </Step>
+                  <Step  activeClassName="!bg-secondary"completedClassName="!bg-secondary text-white" onClick={() => setActiveStep(1)}>
+                    <div>Icon</div>
+                  </Step>
+                  <Step activeClassName="!bg-secondary" completedClassName="!bg-secondary text-white" onClick={() => setActiveStep(2)}>
+                    <div>Icon</div>
+                  </Step>
+                </Stepper>
+                <div className="mt-16 flex justify-between">
+                  <MyButton
+                    style={`bg-secondary`}
+                    onClick={handlePrev}
+                    disabled={isFirstStep}
+                  >
+                    Prev
+                  </MyButton>
+                  <MyButton
+                    style={`bg-secondary`}
+                    onClick={handleNext}
+                    disabled={isLastStep}
+                  >
+                    Next
+                  </MyButton>
+                </div>
+                <hr />
+                {/* <div className="flex">
+                  <MyButton
+                    style={`bg-secondary w-full rounded-full`}
+                    onClick={handleBooking}
+                  >
+                    back
+                  </MyButton>
+                  <MyButton style={`bg-secondary w-full rounded-full`}>
+                    next
+                  </MyButton>
+                </div> */}
+              </div>
+            ) : (
+              <div className="flex flex-col gap-4">
+                <p className="text-primary">Click to Book</p>
+                <hr />
+                <MyButton
+                  style={`bg-secondary w-full rounded-full`}
+                  onClick={handleBooking}
+                >
+                  BOOK NOW
+                </MyButton>
+              </div>
+            )}
+          </div>
         </section>
       </main>
     </div>
