@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { registerRestaurantSchema } from "../../validation/auth-validator";
-import LogoLogin from "./LogoLogin";
 import RegisterInput from "./RegisterInput";
 import MyButton from "../../components/MyButton";
 import InputErrorMessage from "./InputErrorMessage";
 import DropdownCategory from "./DropdownCategory";
 import DropdownNation from "./DropdownNation";
 import DropdownLocation from "./DropdownLocation";
+import Logo from "../../components/Logo";
 
 export default function RegisterRestaurantForm() {
   const [input, setInput] = useState({
@@ -58,7 +58,9 @@ export default function RegisterRestaurantForm() {
         onSubmit={handleOnSubmit}
         className="px-8 pt-14 pb-6 flex flex-col justify-evenly border shadow-lg w-[36rem] h-[50rem] bg-white relative z-10"
       >
-        <LogoLogin />
+        <div className="absolute top-[-4rem] left-[40%]">
+          <Logo />
+        </div>
         <h1 className="text-center text-3xl font-semibold">
           SIGN UP FOR BUSINESS
         </h1>

@@ -5,8 +5,8 @@ import useAuth from "../../Hooks/use-auth";
 import InputErrorMessage from "./InputErrorMessage";
 import LoginButton from "./LoginButton";
 import { FcGoogle } from "react-icons/fc";
-import LogoLogin from "./LogoLogin";
 import { BsEyeSlash } from "react-icons/bs";
+import Logo from "../../components/Logo";
 
 const validateLogin = (input) => {
   const { error } = loginSchema.validate(input, { abortEarly: false });
@@ -52,7 +52,9 @@ export default function LoginForm() {
         className="px-8 pt-8 flex flex-col justify-center gap-8 border shadow-lg w-[36rem] h-[34rem] bg-white relative z-10"
         onSubmit={handleSumbitForm}
       >
-        <LogoLogin />
+        <div className="absolute top-[-4rem] left-[40%]">
+          <Logo />
+        </div>
         <h1 className="text-center text-3xl font-semibold">SIGN IN</h1>
         <div>
           <LoginInput

@@ -3,8 +3,8 @@ import { useState } from "react";
 import { registerSchema } from "../../validation/auth-validator";
 import InputErrorMessage from "./InputErrorMessage";
 import MyButton from "../../components/MyButton";
-import LogoLogin from "./LogoLogin";
 import { BsEyeSlash } from "react-icons/bs";
+import Logo from "../../components/Logo";
 
 export default function RegisterForm() {
   const [input, setInput] = useState({
@@ -52,7 +52,9 @@ export default function RegisterForm() {
         onSubmit={handleOnSubmit}
         className="px-8 pt-14 pb-6 flex flex-col justify-evenly border shadow-lg w-[36rem] h-[40rem] bg-white relative z-10"
       >
-        <LogoLogin />
+        <div className="absolute top-[-4rem] left-[40%]">
+          <Logo />
+        </div>
         <h1 className="text-center text-3xl font-semibold">SIGN UP</h1>
         <div>
           <RegisterInput
