@@ -1,5 +1,10 @@
 import React from "react";
+import RestaurantReview from "../components/RestaurantReview";
 
 export default function LoginPage() {
-	return <div>LoginPage</div>;
+  return (
+    <div>
+      <RestaurantReview />
+    </div>
+  );
 }
