@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { registerSchema } from "../../validation/auth-validator";
+import { registerRestaurantSchema } from "../../validation/auth-validator";
 import LogoLogin from "./LogoLogin";
 import RegisterInput from "./RegisterInput";
 import MyButton from "../../components/MyButton";
@@ -15,8 +15,8 @@ export default function RegisterRestaurantForm() {
     ownerLastName: "",
     email: "",
     phone: "",
-    category: "",
-    nation: "",
+    categoryIndex: "",
+    nationIndex: "",
     latitude: "",
     longitude: "",
   });
@@ -25,7 +25,9 @@ export default function RegisterRestaurantForm() {
   const [error, setError] = useState({});
 
   const validateRegister = (input) => {
-    const { error } = registerSchema.validate(input, { abortEarly: false });
+    const { error } = registerRestaurantSchema.validate(input, {
+      abortEarly: false,
+    });
 
     if (error) {
       const result = error.details.reduce((acc, el) => {
@@ -54,7 +56,7 @@ export default function RegisterRestaurantForm() {
     <>
       <form
         onSubmit={handleOnSubmit}
-        className="px-8 pt-14 pb-6 flex flex-col justify-evenly border shadow-lg w-[36rem] h-[40rem] bg-white relative z-10"
+        className="px-8 pt-14 pb-6 flex flex-col justify-evenly border shadow-lg w-[36rem] h-[50rem] bg-white relative z-10"
       >
         <LogoLogin />
         <h1 className="text-center text-3xl font-semibold">
@@ -123,13 +125,24 @@ export default function RegisterRestaurantForm() {
         </div>
 
         <div>
-          <DropdownCategory />
+          <DropdownCategory input={input} setInput={setInput} />
+          {error.categoryIndex && (
+            <InputErrorMessage message={error.categoryIndex} />
+          )}
         </div>
         <div>
-          <DropdownNation />
+          <DropdownNation input={input} setInput={setInput} />
+          {error.nationIndex && (
+            <InputErrorMessage message={error.nationIndex} />
+          )}
         </div>
+
         <div>
-          <DropdownLocation />
+          <DropdownLocation
+            onChange={handleChangeInput}
+            input={input}
+            error={error}
+          />
         </div>
 
         <div className="flex gap-2">

@@ -14,8 +14,8 @@ export default function RegisterInput({
     <Input
       size="lg"
       className={`block w-full border px-3 py-1.5 text-sm
-    ${hasError && "border-red-500 "}
-    `}
+      ${hasError ? "border-2 border-red-500" : "border-blue-gray-200"}
+      `}
       type={type}
       label={label}
       value={value}

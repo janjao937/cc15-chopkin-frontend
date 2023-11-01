@@ -1,33 +1,46 @@
 import { useState } from "react";
 import { HiChevronDown } from "react-icons/hi";
+import InputLocation from "./InputLocation";
+import InputErrorMessage from "./InputErrorMessage";
 
-export default function DropdownLocation() {
+export default function DropdownLocation({ hasError, onChange, input, error }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       <div
         onClick={() => setIsOpen(!isOpen)}
-        className="flex justify-between w-full bg-transparent text-blue-gray-700 outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all border text-sm px-3 py-3 rounded-md border-blue-gray-200 focus:border-gray-900 focus:border-2"
+        className={`flex justify-between w-full bg-transparent text-blue-gray-700 outline outline-0 focus:outline-0 disabled:bg-blue-gray-50 disabled:border-0 transition-all border text-sm px-3 py-3 rounded-md ${
+          isOpen ? "border-2 border-gray-900" : "border-blue-gray-200"
+        }`}
       >
         <span>RESTAURANT LOCATED</span>
         <HiChevronDown />
       </div>
 
-      {isOpen && (
-        <div className="flex justify-evenly mt-2">
-          <input
-            type="text"
-            placeholder="latitude"
-            className="border border-gray-600"
-          />
-          <input
-            type="text"
-            placeholder="longitude"
-            className="border border-gray-600"
-          />
-        </div>
-      )}
+      <div>
+        <InputLocation
+          isOpen={isOpen}
+          value={input.latitude}
+          placeholder="Latitude"
+          onChange={onChange}
+          name="latitude"
+          hasError={error.latitude}
+        />
+        {error.latitude && <InputErrorMessage message={error.latitude} />}
+      </div>
+
+      <div>
+        <InputLocation
+          isOpen={isOpen}
+          value={input.longitude}
+          placeholder="Longitude"
+          onChange={onChange}
+          name="longitude"
+          hasError={error.longitude}
+        />
+        {error.longitude && <InputErrorMessage message={error.longitude} />}
+      </div>
     </>
   );
 }
