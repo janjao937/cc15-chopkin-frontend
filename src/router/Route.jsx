@@ -3,6 +3,8 @@ import Layout from "../layout/Layout";
 import HomePage from "../page/HomePage";
 import RestaurantPage from "../page/RestaurantPage";
 import RegisterPage from "../page/RegisterPage";
+import LoginPage from "../page/LoginPage";
+import RegisterRestaurantPage from "../page/RegisterRestaurantPage";
 import RecommendedPage from "../page/RecommendPage";
 import AllRestuarantPage from "../page/AllRestaurantPage";
 import UserProfile from "../page/UserProfile";
@@ -13,9 +15,10 @@ import NewRestaurantPage from "../page/admin/NewRestaurantPage";
 import CustomerPage from "../page/admin/CustomerPage";
 import BookingPage from "../page/admin/BookingPage";
 import EditingPage from "../page/admin/EditingPage";
-import DetailBookingPage from "../page/admin/DetailBookingPage";
+import RestaurantInfoPage from "../page/RestuarantInfoPage";
 import DetailCustomerPage from "../page/admin/DetailCustomerPage";
 import ViewEditingPage from "../page/admin/ViewEditingPage";
+import DetailBookingPage from "../page/admin/DetailBookingPage";
 
 const router = createBrowserRouter([
 	{
@@ -27,6 +30,10 @@ const router = createBrowserRouter([
 			{ path: "/recommended", element: <RecommendedPage /> },
 			{ path: "/all-restaurants", element: <AllRestuarantPage /> },
 			{ path: "/profile/:userId", element: <UserProfile /> },
+			{
+				path: "/restaurant/:restuarantId",
+				element: <RestaurantInfoPage />,
+			},
 		],
 	},
 	{
@@ -34,17 +41,14 @@ const router = createBrowserRouter([
 		element: <RegisterPage />,
 	},
 	{
-		path: "/",
-		element: <Layout />,
-		children: [
-			{ path: "/", element: <HomePage /> },
-			{ path: "/restaurant", element: <RestaurantPage /> },
-		],
+		path: "/login",
+		element: <LoginPage />,
 	},
 	{
-		path: "/register",
-		element: <RegisterPage />,
+		path: "/register-restaurant",
+		element: <RegisterRestaurantPage />,
 	},
+
 	{
 		path: "/admin",
 		element: <LayoutAdmin />,

@@ -15,11 +15,14 @@ dependencies:
     specifier: ^2.1.4
     version: 2.1.4(react-dom@18.2.0)(react@18.2.0)
   '@mui/material':
-    specifier: ^5.14.16
+    specifier: ^5.14.15
     version: 5.14.16(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@types/react@18.2.33)(react-dom@18.2.0)(react@18.2.0)
   '@mui/x-date-pickers':
     specifier: ^6.17.0
     version: 6.17.0(@emotion/react@11.11.1)(@emotion/styled@11.11.0)(@mui/material@5.14.16)(@mui/system@5.14.16)(@types/react@18.2.33)(dayjs@1.11.10)(react-dom@18.2.0)(react@18.2.0)
+  '@react-oauth/google':
+    specifier: ^0.11.1
+    version: 0.11.1(react-dom@18.2.0)(react@18.2.0)
   axios:
     specifier: ^1.6.0
     version: 1.6.0
@@ -32,6 +35,9 @@ dependencies:
   flowbite-react:
     specifier: ^0.6.4
     version: 0.6.4(react-dom@18.2.0)(react@18.2.0)(tailwindcss@3.3.5)
+  gapi-script:
+    specifier: ^1.2.0
+    version: 1.2.0
   joi:
     specifier: ^17.11.0
     version: 17.11.0
@@ -1109,6 +1115,16 @@ packages:
     resolution: {integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==}
     dev: false
 
+  /@react-oauth/google@0.11.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-tywZisXbsdaRBVbEu0VX6dRbOSL2I6DgY97woq5NMOOOz+xtDsm418vqq+Vx10KMtra3kdHMRMf0hXLWrk2RMg==}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /@remix-run/router@1.10.0:
     resolution: {integrity: sha512-Lm+fYpMfZoEucJ7cMxgt4dYt8jLfbpwRCzAjm9UgSLOkmlqo9gupxt6YX3DY0Fk155NT9l17d/ydi+964uS9Lw==}
     engines: {node: '>=14.0.0'}
@@ -2079,6 +2095,10 @@ packages:
   /functions-have-names@1.2.3:
     resolution: {integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==}
     dev: true
+
+  /gapi-script@1.2.0:
+    resolution: {integrity: sha512-NKTVKiIwFdkO1j1EzcrWu/Pz7gsl1GmBmgh+qhuV2Ytls04W/Eg5aiBL91SCiBM9lU0PMu7p1hTVxhh1rPT5Lw==}
+    dev: false
 
   /gensync@1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
