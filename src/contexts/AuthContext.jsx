@@ -30,8 +30,8 @@ export default function AuthContextProvider({ children }) {
     setAuthUser(res.data.user);
   };
 
-  const login = async (LoginInputObject) => {
-    const res = await axios.post("/auth/login", LoginInputObject);
+  const login = async (loginInputObject) => {
+    const res = await axios.post("/auth/login", loginInputObject);
     addAccessToken(res.data.accessToken);
     setAuthUser(res.data.user);
   };
