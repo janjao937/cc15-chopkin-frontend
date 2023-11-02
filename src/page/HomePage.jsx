@@ -8,6 +8,7 @@ import bgHome from "../assets/image/bgHome.png";
 import { Link } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
 import { mockRestaurant } from "../data/mock-data";
+import Login from "../features/googleAuth/login";
 // console.log(mockRestaurant);
 
 const mocCuisine = [
@@ -121,14 +122,8 @@ export default function HomePage() {
 						</div>
 					))}
 				</div>
-			{/* <div>Recommended Restaurants !</div>
-			<div className="gap-16 grid lg:grid-cols-4 md:grid-cols-3">
-				{mockRestaurant.map((item, index) => (
-					<div key={index}>
-						<RestaurantList data={item} />
-					</div>
-				))}
-			</div> */}
+
+			<Login></Login>
 
 			{/* All Restaurants */}
 			<div className="mb-4 mx-4">

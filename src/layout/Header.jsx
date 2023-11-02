@@ -11,8 +11,6 @@ export default function Header() {
           <div>Logo</div>
         </Link>
       </div>
-
-      {/* Login */}
       <div>
         {false ? (
           <>
