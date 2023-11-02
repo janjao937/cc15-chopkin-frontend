@@ -41,3 +41,7 @@ export const mockRestaurant = [
 		status: 0,
 	},
 ];
+
+export const dataDistrict = ["bankgn", "adlskfj"];
+export const nation = ["thai", "eng"];
+export const category = ["coffee", "japan"];

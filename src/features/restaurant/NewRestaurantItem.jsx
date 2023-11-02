@@ -85,11 +85,11 @@ export default function NewRestaurantItem({
 			<div className="flex items-center justify-center gap-4 my-4">
 				{status ? (
 					<>
-						{/* <MyButton
+						<MyButton
 							style={`bg-red-500 hover:bg-red-400 px-8 rounded-full`}
 						>
 							RemoveDataBase
-						</MyButton> */}
+						</MyButton>
 						<h1 className="border-b border-red-500 text-green-500 font-semibold">
 							OK APPROVE
 						</h1>
