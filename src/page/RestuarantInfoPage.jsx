@@ -189,7 +189,7 @@ export default function RestaurantInfoPage() {
                 <MyStepper setBooking={setBooking} booking={booking} />
                 <MyRadio />
 
-                <hr />
+          
               </div>
             ) : (
               <div className="flex flex-col gap-4">
