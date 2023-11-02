@@ -88,7 +88,7 @@ export default function LoginForm() {
           <input type="checkbox" />
           <span className="text-sm">Remember Me</span>
         </div>
-        <MyButton type={"submit"} style={`py-3`}>
+        <MyButton type={`submit`} style={`py-3 bg-primary`}>
           SIGN IN
         </MyButton>
         <div className="flex flex-col items-center gap-3">

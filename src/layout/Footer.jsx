@@ -9,7 +9,7 @@ import {
 
 export default function Footer() {
 	return (
-		<footer className="bg-[#FFC24B] flex items-center justify-between px-4 py-8">
+		<footer className="bg-[#FFC24B] flex items-center justify-between h-[10vh]">
 			<div>
 				<h3 className="text-slate-400">
 					copyright &copy; Chopkin Enjoy Eating{" "}

@@ -136,7 +136,7 @@ export default function RegisterForm() {
         </div>
         {checkbox ? (
           <>
-            <MyButton type={"submit"} style={`py-2`}>
+            <MyButton type={"submit"} style={`py-2 bg-primary`}>
               CREATE AN ACCOUNT
             </MyButton>
           </>

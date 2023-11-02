@@ -155,7 +155,7 @@ export default function RegisterRestaurantForm() {
         </div>
         {checkbox ? (
           <>
-            <MyButton type={"submit"} style={`py-2`}>
+            <MyButton type={`submit`} style={`py-2 bg-primary`}>
               SUBMIT
             </MyButton>
           </>
