@@ -1,4 +1,4 @@
-import { AiOutlineStar } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 import { BiImageAdd } from "react-icons/bi";
 import MyOutlineButton from "../../components/MyOutlineButton";
 import { useState } from "react";
@@ -6,8 +6,18 @@ import { useRef } from "react";
 import InputErrorMessage from "../auth/InputErrorMessage";
 
 export default function ReviewForm({ isOpenAfterComplete }) {
+  const [messageReview, setMessageReview] = useState({
+    message: "",
+  });
   const [file, setFile] = useState(null);
+  const [score, setScore] = useState(0);
+
   const fileEl = useRef(null);
+
+  const handleChangeMessageReview = (e) => {
+    setMessageReview({ ...messageReview, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
       {isOpenAfterComplete && (
@@ -15,11 +25,11 @@ export default function ReviewForm({ isOpenAfterComplete }) {
           <div className="flex gap-4 pb-3">
             <div>Rating Score :</div>
             <div className="flex justify-center items-center cursor-pointer">
-              <AiOutlineStar className="w-6 h-6" />
-              <AiOutlineStar className="w-6 h-6" />
-              <AiOutlineStar className="w-6 h-6" />
-              <AiOutlineStar className="w-6 h-6" />
-              <AiOutlineStar className="w-6 h-6" />
+              <AiFillStar className="w-6 h-6 fill-blue-gray-200 hover:fill-yellow-600" />
+              <AiFillStar className="w-6 h-6 fill-blue-gray-200 hover:fill-yellow-600" />
+              <AiFillStar className="w-6 h-6 fill-blue-gray-200 hover:fill-yellow-600" />
+              <AiFillStar className="w-6 h-6 fill-blue-gray-200 hover:fill-yellow-600" />
+              <AiFillStar className="w-6 h-6 fill-blue-gray-200 hover:fill-yellow-600" />
             </div>
           </div>
           <div className="flex gap-4">
@@ -27,6 +37,9 @@ export default function ReviewForm({ isOpenAfterComplete }) {
             <div>
               <textarea
                 className="border border-gray-400 shadow-lg"
+                name="message"
+                value={messageReview.message}
+                onChange={handleChangeMessageReview}
                 rows="5"
                 cols="40"
               ></textarea>
@@ -40,8 +53,11 @@ export default function ReviewForm({ isOpenAfterComplete }) {
               className="hidden"
               ref={fileEl}
               onChange={(e) => {
-                if (e.target.files.length > 0 && e.target.files.length <= 4) {
+                if (e.target.files.length > 0) {
                   setFile(Array.from(e.target.files));
+                }
+                if (e.target.files.length > 4) {
+                  setFile(null);
                 }
               }}
             />
@@ -60,7 +76,7 @@ export default function ReviewForm({ isOpenAfterComplete }) {
                 ))}
               </div>
             ) : (
-              <>
+              <div>
                 <div
                   className="flex justify-center items-center bg-gray-200 border border-gray-300 shadow w-20 h-20 cursor-pointer"
                   onClick={() => fileEl.current.click()}
@@ -68,7 +84,7 @@ export default function ReviewForm({ isOpenAfterComplete }) {
                   <BiImageAdd />
                 </div>
                 <InputErrorMessage message="Only add 4 images" />
-              </>
+              </div>
             )}
           </div>
 
