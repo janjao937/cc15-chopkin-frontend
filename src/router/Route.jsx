@@ -19,13 +19,15 @@ import RestaurantInfoPage from "../page/RestuarantInfoPage";
 import DetailCustomerPage from "../page/admin/DetailCustomerPage";
 import ViewEditingPage from "../page/admin/ViewEditingPage";
 import DetailBookingPage from "../page/admin/DetailBookingPage";
+import RedirectIfAuthenticated from "../features/auth/RedirectIfAuthenticated";
+import AuthenticatedAdmin from "../features/auth/AuthenticatedAdmin";
 
 const router = createBrowserRouter([
 	{
 		path: "/",
 		element: <Layout />,
 		children: [
-			{ path: "/", element: <HomePage /> },
+			{ path: "", element: <HomePage /> },
 			{ path: "/restaurant", element: <RestaurantPage /> },
 			{ path: "/recommended", element: <RecommendedPage /> },
 			{ path: "/all-restaurants", element: <AllRestuarantPage /> },
@@ -38,20 +40,36 @@ const router = createBrowserRouter([
 	},
 	{
 		path: "/register",
-		element: <RegisterPage />,
+		element: (
+			<RedirectIfAuthenticated>
+				<RegisterPage />
+			</RedirectIfAuthenticated>
+		),
 	},
 	{
 		path: "/login",
-		element: <LoginPage />,
+		element: (
+			<RedirectIfAuthenticated>
+				<LoginPage />
+			</RedirectIfAuthenticated>
+		),
 	},
 	{
 		path: "/register-restaurant",
-		element: <RegisterRestaurantPage />,
+		element: (
+			<RedirectIfAuthenticated>
+				<RegisterRestaurantPage />
+			</RedirectIfAuthenticated>
+		),
 	},
 
 	{
 		path: "/admin",
-		element: <LayoutAdmin />,
+		element: (
+			<AuthenticatedAdmin>
+				<LayoutAdmin />
+			</AuthenticatedAdmin>
+		),
 		children: [
 			{ path: "", element: <AdminPage /> },
 			{ path: "list-restaurant", element: <AdminRestaurantPage /> },
