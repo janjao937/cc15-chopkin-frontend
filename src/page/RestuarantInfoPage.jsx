@@ -185,9 +185,7 @@ export default function RestaurantInfoPage() {
               <div className="flex flex-col gap-4">
 
                 <MyStepper setBooking={setBooking} booking={booking} mockPackage={mockPackage}/>
-                
 
-          
               </div>
             ) : (
               <div className="flex flex-col gap-4">

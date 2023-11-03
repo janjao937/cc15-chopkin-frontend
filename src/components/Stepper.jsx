@@ -8,11 +8,10 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
   const [isLastStep, setIsLastStep] = useState(false);
   const [isFirstStep, setIsFirstStep] = useState(false);
   const [isSelectPackage, setIsSelectPackage] = useState(false);
+  const [checkToggle, setCheckToggle] = useState(false);
 
   const handleNext = () => {
-
-      !isLastStep && setActiveStep((cur) => cur + 1);
-    
+    !isLastStep && setActiveStep((cur) => cur + 1);
   };
   const handlePrev = () => {
     if (isFirstStep) {
@@ -24,6 +23,11 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
   const handleSelectPackage = () => {
     setIsSelectPackage(!isSelectPackage);
   };
+
+  const handleCheckToggle = () => {    
+    setCheckToggle(!checkToggle);
+  };
+
 
   return (
     <div>
@@ -37,33 +41,81 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
         <Step
           activeClassName="!bg-secondary"
           completedClassName="!bg-secondary text-white"
-          // onClick={() => setActiveStep(0)}
-          
+          onClick={() => setActiveStep(0)}
         >
           <div>Icon</div>
         </Step>
         <Step
           activeClassName="!bg-secondary"
           completedClassName="!bg-secondary text-white"
-          // onClick={() => setActiveStep(1)}
+          onClick={() => setActiveStep(1)}
         >
           <div>Icon</div>
         </Step>
         <Step
           activeClassName="!bg-secondary"
           completedClassName="!bg-secondary text-white"
-          // onClick={() => setActiveStep(2)}
+          onClick={() => setActiveStep(2)}
         >
           <div>Icon</div>
         </Step>
       </Stepper>
 
       {isFirstStep ? (
-        <MyRadio handleNext={handleNext} mockPackage={mockPackage} handlePrev={handlePrev} />
+        <MyRadio
+          handleNext={handleNext}
+          mockPackage={mockPackage}
+          handlePrev={handlePrev}
+        />
       ) : isLastStep ? (
         <div>
-          <p className="text-center font-semibold">Confirm</p>
+          <section>
+            {" "}
+            <p className="font-semibold">Personal Information</p>
+            <p>Name</p>
+            <p>Phone</p>
+            <p>email</p>
+          </section>
 
+          <section>
+            <p className="font-semibold">summary</p>
+            <div>datetime and aduilt,kids</div>
+            <div>price</div>
+            <div>total price</div>
+          </section>
+
+          <section>
+            <div>
+              <p className="font-semibold">Paynow</p>
+              {checkToggle ? (
+                <button
+                  onClick={handleCheckToggle}
+                  className="border rounded-full border-grey flex items-center  cursor-pointer w-12 bg-secondary justify-end"
+                >
+                  <span className="rounded-full border w-6 h-6 border-grey shadow-inner bg-white "></span>
+                </button>
+              ) : (
+                <button
+                  onClick={handleCheckToggle}
+                  className="border rounded-full border-grey flex  items-center cursor-pointer w-12 justify-start"
+                >
+                  <span className="rounded-full border w-6 h-6 border-grey shadow-inner bg-white"></span>
+                </button>
+              )}
+            </div>
+            <p>QRCODE</p>
+            <p>Credit/Debit Card</p>
+          </section>
+
+          <section>
+            <p className="font-semibold">Term & Conditions</p>
+          </section>
+
+          <section>
+            <p className="font-semibold">Total Prepayment</p>
+            <p>total price</p>
+            <button>CONFIRM</button>
+          </section>
         </div>
       ) : (
         <div>Select Booking Date & Time</div>
