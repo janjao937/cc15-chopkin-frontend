@@ -4,8 +4,11 @@ import { BsPersonCircle, BsTelephone } from "react-icons/bs";
 import { FaPizzaSlice } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
+import useRes from "../../Hooks/use-res";
 
 export default function NewRestaurantItem({
+	index,
+	resId,
 	ownerName,
 	resName,
 	email,
@@ -15,7 +18,15 @@ export default function NewRestaurantItem({
 	nation,
 	status,
 }) {
-	const handleClickApprove = () => {};
+	console.log("resId=>", resId);
+	console.log("index=>", index);
+	console.log("status=>", status);
+
+	const { changeStatusRes } = useRes();
+
+	const handleClickApprove = () => {
+		changeStatusRes(resId);
+	};
 	return (
 		<div className="flex flex-col gap-2 mb-4">
 			<div className="grid grid-cols-12 gap-14 ">
@@ -98,6 +109,7 @@ export default function NewRestaurantItem({
 					<>
 						<MyButton
 							style={`bg-green-500 hover:bg-green-400 px-6 rounded-full`}
+							onClick={handleClickApprove}
 						>
 							Approve
 						</MyButton>

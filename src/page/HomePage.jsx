@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
 import { mockRestaurant } from "../data/mock-data";
 import Login from "../features/googleAuth/login";
+import useRes from "../Hooks/use-res";
 // console.log(mockRestaurant);
 
 const mocCuisine = [
@@ -63,6 +64,7 @@ const mocCuisine = [
 ];
 
 export default function HomePage() {
+	const { restaurantAll } = useRes();
 	return (
 		<div>
 			{/* image */}
@@ -94,7 +96,7 @@ export default function HomePage() {
 					</Link>
 				</div>
 				<div className="border grid grid-cols-2 md:grid-cols-4 gap-2">
-					{mockRestaurant.map((item, index) => (
+					{restaurantAll?.map((item, index) => (
 						<div key={index}>
 							<RestaurantList data={item} />
 						</div>
@@ -123,28 +125,28 @@ export default function HomePage() {
 					))}
 				</div>
 
-			<Login></Login>
+				{/* <Login></Login> */}
 
-			{/* All Restaurants */}
-			<div className="mb-4 mx-4">
-				<h1 className=" text-xl font-semibold">All Restaurants</h1>
-				<div className="flex items-center gap-2 mb-2">
-					{/* It's on trend right now, try it! */}
-					<Link to="/all-restaurants">
-						<span className="flex items-center text-red-600 cursor-pointer">
-							See More <MdKeyboardArrowRight size={30} />
-						</span>
-					</Link>
-				</div>
-				<div className="border grid grid-cols-2 md:grid-cols-4 gap-2">
-					{mockRestaurant.map((item, index) => (
-						<div key={index} className="gi">
-							<RestaurantList data={item} />
-						</div>
-					))}
+				{/* All Restaurants */}
+				<div className="mb-4 mx-4">
+					<h1 className=" text-xl font-semibold">All Restaurants</h1>
+					<div className="flex items-center gap-2 mb-2">
+						{/* It's on trend right now, try it! */}
+						<Link to="/all-restaurants">
+							<span className="flex items-center text-red-600 cursor-pointer">
+								See More <MdKeyboardArrowRight size={30} />
+							</span>
+						</Link>
+					</div>
+					<div className="border grid grid-cols-2 md:grid-cols-4 gap-2">
+						{restaurantAll?.map((item, index) => (
+							<div key={index}>
+								<RestaurantList data={item} />
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
-		</div>
 		</div>
 	);
 }
