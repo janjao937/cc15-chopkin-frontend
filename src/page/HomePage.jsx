@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
 import { mockRestaurant } from "../data/mock-data";
 import Login from "../features/googleAuth/login";
+import { useEffect } from "react";
 // console.log(mockRestaurant);
 
 const mocCuisine = [

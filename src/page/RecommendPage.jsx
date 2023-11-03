@@ -2,6 +2,8 @@ import { AiFillStar } from "react-icons/ai";
 import PageName from "../components/PageName";
 import RestaurantList from "../features/restaurant/RestaurantList";
 import MyButton from "../components/MyButton";
+import { useEffect } from "react";
+import axios from "../config/axios";
 
 const mocRestaurant = [
   {
@@ -81,7 +83,9 @@ export default function RecommendedPage() {
         ))}
       </div>
       <div className="text-center py-8">
-        <MyButton style={`py-3 px-6 rounded-full bg-secondary`}>Show More</MyButton>
+        <MyButton style={`py-3 px-6 rounded-full bg-secondary`}>
+          Show More
+        </MyButton>
       </div>
     </div>
   );
