@@ -1,6 +1,5 @@
 import { useState } from "react";
 import MyButton from "../components/MyButton";
-import { Step, Stepper } from "@material-tailwind/react";
 import MyStepper from "../components/Stepper";
 import MyRadio from "../components/MyRadio";
 import RestaurantReview from "../components/RestaurantReview";
@@ -182,14 +181,18 @@ export default function RestaurantInfoPage() {
           </div>
         </section>
 
-        <section className="w-[300px] self-start  border border-gray-100 shadow-md sticky top-16">
+        <section className="w-[300px] self-start  border border-gray-100 shadow-md sticky top-16 max-h-[500px] overflow-auto">
           <div className="w-full py-4 px-8">
             {booking ? (
               <div className="flex flex-col gap-4">
                 <MyStepper setBooking={setBooking} booking={booking} />
                 <MyRadio />
 
-                <hr />
+                <MyStepper
+                  setBooking={setBooking}
+                  booking={booking}
+                  mockPackage={mockPackage}
+                />
               </div>
             ) : (
               <div className="flex flex-col gap-4">

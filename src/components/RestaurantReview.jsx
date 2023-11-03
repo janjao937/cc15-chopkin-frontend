@@ -118,19 +118,17 @@ export default function RestaurantReview() {
         <div className="w-full border-b-2"></div>
         <div className="flex flex-col">
           {mocReview.map((item, index) => (
-            <>
+            <div key={index}>
               <div className="flex py-4">
                 <div className="w-40 px-10 pt-2 text-xs">
-                  <div key={index} className="w-full">
-                    {item.profileImg}
-                  </div>
-                  <div key={index}>{item.customer}</div>
-                  <div key={index}>{item.createAt}</div>
+                  <div className="w-full">{item.profileImg}</div>
+                  <div>{item.customer}</div>
+                  <div>{item.createAt}</div>
                 </div>
                 <div className="flex flex-col gap-[6px]">
-                  <div key={index}>{item.restaurant}</div>
-                  <div key={index}>{item.score}</div>
-                  <div key={index}>{item.message}</div>
+                  <div>{item.restaurant}</div>
+                  <div>{item.score}</div>
+                  <div>{item.message}</div>
                   <div className="flex gap-3 w-20 h-20">
                     {item.ReviewImage.map((el, index) => (
                       <img
@@ -143,7 +141,7 @@ export default function RestaurantReview() {
                 </div>
               </div>
               <div className="w-full border-b-2"></div>
-            </>
+            </div>
           ))}
         </div>
       </div>
