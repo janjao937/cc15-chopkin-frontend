@@ -2,6 +2,10 @@ import { AiFillStar } from "react-icons/ai";
 import PageName from "../components/PageName";
 import RestaurantList from "../features/restaurant/RestaurantList";
 import MyButton from "../components/MyButton";
+import { useEffect } from "react";
+import axios from "../config/axios";
+import { useState } from "react";
+import { CiGlass } from "react-icons/ci";
 
 const mocRestaurant = [
   {
@@ -69,21 +73,35 @@ const mocRestaurant = [
   },
 ];
 export default function AllRestuarantPage() {
+  // const [restaurant, setRestaurant] = useState({});
+  // useEffect(() => {
+  //   axios
+  //     .get("/restaurant/all")
+  //     .then((res) => {
+  //       console.log(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
+
   return (
     <>
-    <div className="flex flex-col gap-5 lg:px-32 md:px-16 sm:px-3">
-      <PageName name="All Restaurant"></PageName>
-      <div className="gap-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {mocRestaurant.map((item, index) => (
-          <div key={index}>
-            <RestaurantList data={item}></RestaurantList>
-          </div>
-        ))}
+      <div className="flex flex-col gap-5 lg:px-32 md:px-16 sm:px-3">
+        <PageName name="All Restaurant"></PageName>
+        <div className="gap-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {mocRestaurant.map((item, index) => (
+            <div key={index}>
+              <RestaurantList data={item}></RestaurantList>
+            </div>
+          ))}
+        </div>
+        <div className="text-center py-8">
+          <MyButton style={`py-3 px-6 rounded-full bg-secondary`}>
+            Show More
+          </MyButton>
+        </div>
       </div>
-      <div className="text-center py-8">
-        <MyButton style={`py-3 px-6 rounded-full bg-secondary`}>Show More</MyButton>
-      </div>
-    </div>
     </>
   );
 }
