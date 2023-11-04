@@ -21,6 +21,9 @@ import ViewEditingPage from "../page/admin/ViewEditingPage";
 import DetailBookingPage from "../page/admin/DetailBookingPage";
 import RedirectIfAuthenticated from "../features/auth/RedirectIfAuthenticated";
 import AuthenticatedAdmin from "../features/auth/AuthenticatedAdmin";
+import ResEditPendingPage from "../page/ResEditPendingPage";
+import AuthenticatedRestaurant from "../features/auth/AuthenticatedRestaurant";
+import AuthenticatedCustomer from "../features/auth/AuthenticatedCustomer";
 
 const router = createBrowserRouter([
 	{
@@ -31,10 +34,29 @@ const router = createBrowserRouter([
 			{ path: "/restaurant", element: <RestaurantPage /> },
 			{ path: "/recommended", element: <RecommendedPage /> },
 			{ path: "/all-restaurants", element: <AllRestuarantPage /> },
-			{ path: "/profile/:userId", element: <UserProfile /> },
 			{
-				path: "/restaurant/:restuarantId",
-				element: <RestaurantInfoPage />,
+				path: "/profile/:userId",
+				element: (
+					<AuthenticatedCustomer>
+						<UserProfile />
+					</AuthenticatedCustomer>
+				),
+			},
+			{
+				path: "/restaurant/:resId",
+				element: (
+					<AuthenticatedRestaurant>
+						<RestaurantInfoPage />
+					</AuthenticatedRestaurant>
+				),
+			},
+			{
+				path: "/restaurant/:resId/edit",
+				element: (
+					<AuthenticatedRestaurant>
+						<ResEditPendingPage />
+					</AuthenticatedRestaurant>
+				),
 			},
 		],
 	},

@@ -14,13 +14,11 @@ export default function AuthContextProvider({ children }) {
 
 	useEffect(() => {
 		if (getAccessToken()) {
-			console.log("first");
-
 			axios
 				.get("/auth/user")
 				.then((res) => {
 					setAuthUser(res.data.user);
-					console.log("fatchUser==>", res.data);
+					// console.log("fatchUser==>", res.data);
 				})
 				.catch((err) => console.log(err))
 				.finally(() => setInitialLoading(false));
@@ -46,7 +44,7 @@ export default function AuthContextProvider({ children }) {
 			"/auth/register/restaurant",
 			registerInputObject
 		);
-		console.log("restaurant==>", res.data);
+		// console.log("restaurant==>", res.data);
 
 		addAccessToken(res.data.accessToken);
 		setAuthUser(res.data.restaurant);

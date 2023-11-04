@@ -1,10 +1,12 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "../config/axios";
-import { getAccessToken } from "../utils/local-storage";
+import useAuth from "../Hooks/use-auth";
 
 export const ResContext = createContext();
 
 export default function ResContextProvider({ children }) {
+	const { authUser } = useAuth();
+
 	const [reqRestaurant, setReqRestaurant] = useState([]);
 	const [restaurantAll, setRestaurantAll] = useState([]);
 
@@ -13,15 +15,19 @@ export default function ResContextProvider({ children }) {
 	}, []);
 
 	useEffect(() => {
-		if (getAccessToken()) {
+		if (authUser?.isAdmin) {
 			fatchRequestRes();
 		}
 	}, []);
 
 	const fatchRequestRes = async () => {
-		const res = await axios.get("/restaurant/getPendingRes");
-		console.log("fatchRequestRes==>", res.data);
-		setReqRestaurant(res.data);
+		try {
+			const res = await axios.get("/restaurant/getPendingRes");
+			console.log("fatchRequestRes==>", res.data);
+			setReqRestaurant(res.data);
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	const changeStatusRes = async (resId) => {
@@ -43,9 +49,31 @@ export default function ResContextProvider({ children }) {
 		}
 	};
 
+	const resEditPending = () => {
+		try {
+			console.log("clickResEditPending");
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const resEditPendingBussiTime = async (input) => {
+		try {
+			console.log("clickResEditPendingBussiTime", input);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	return (
 		<ResContext.Provider
-			value={{ reqRestaurant, changeStatusRes, restaurantAll }}
+			value={{
+				reqRestaurant,
+				changeStatusRes,
+				restaurantAll,
+				resEditPending,
+				resEditPendingBussiTime,
+			}}
 		>
 			{children}
 		</ResContext.Provider>

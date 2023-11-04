@@ -3,6 +3,7 @@ import MyButton from "../components/MyButton";
 import { Link } from "react-router-dom";
 import useAuth from "../Hooks/use-auth";
 import logo from "../assets/logo.png";
+import Dropdown from "./Dropdown";
 
 export default function Header() {
 	const { authUser, logout } = useAuth();
@@ -25,11 +26,12 @@ export default function Header() {
 				{authUser ? (
 					<>
 						<div className="flex gap-4">
-							<div className="cursor-pointer">
+							{/* <div className="cursor-pointer">
 								{authUser.firstName ||
 									authUser.restaurantName ||
 									(authUser.isAdmin && "Admin")}
-							</div>
+							</div> */}
+							<Dropdown />
 							<div
 								onClick={handleClickLogout}
 								className="cursor-pointer text-red-500 font-semibold hover:text-red-300"
