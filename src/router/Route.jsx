@@ -10,7 +10,7 @@ import AllRestuarantPage from "../page/AllRestaurantPage";
 import UserProfile from "../page/UserProfile";
 import LayoutAdmin from "../layout/LayoutAdmin";
 import AdminPage from "../page/admin/AdminPage";
-import AdminRestaurantPage from "../page/admin/RestaurantPage";
+import ListRestaurantPage from "../page/admin/ListRestaurantPage";
 import NewRestaurantPage from "../page/admin/NewRestaurantPage";
 import CustomerPage from "../page/admin/CustomerPage";
 import BookingPage from "../page/admin/BookingPage";
@@ -24,6 +24,7 @@ import AuthenticatedAdmin from "../features/auth/AuthenticatedAdmin";
 import ResEditPendingPage from "../page/ResEditPendingPage";
 import AuthenticatedRestaurant from "../features/auth/AuthenticatedRestaurant";
 import AuthenticatedCustomer from "../features/auth/AuthenticatedCustomer";
+import ResNationPage from "../page/ResNationPage";
 
 const router = createBrowserRouter([
 	{
@@ -34,6 +35,7 @@ const router = createBrowserRouter([
 			{ path: "/restaurant", element: <RestaurantPage /> },
 			{ path: "/recommended", element: <RecommendedPage /> },
 			{ path: "/all-restaurants", element: <AllRestuarantPage /> },
+			{ path: "/nation/:nationIndex", element: <ResNationPage /> },
 			{
 				path: "/profile/:userId",
 				element: (
@@ -44,11 +46,7 @@ const router = createBrowserRouter([
 			},
 			{
 				path: "/restaurant/:resId",
-				element: (
-					<AuthenticatedRestaurant>
-						<RestaurantInfoPage />
-					</AuthenticatedRestaurant>
-				),
+				element: <RestaurantInfoPage />,
 			},
 			{
 				path: "/restaurant/:resId/edit",
@@ -94,7 +92,7 @@ const router = createBrowserRouter([
 		),
 		children: [
 			{ path: "", element: <AdminPage /> },
-			{ path: "list-restaurant", element: <AdminRestaurantPage /> },
+			{ path: "list-restaurant", element: <ListRestaurantPage /> },
 			{ path: "new-restaurant", element: <NewRestaurantPage /> },
 			{ path: "customer", element: <CustomerPage /> },
 			{ path: "customer/:customerId", element: <DetailCustomerPage /> },

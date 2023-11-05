@@ -80,6 +80,7 @@ export default function ResEditPendingPage() {
 		resEditPending();
 		resEditPendingBussiTime(data.filter((item) => item.openTime !== "-"));
 	};
+
 	return (
 		<div className="">
 			{/* EditRes */}

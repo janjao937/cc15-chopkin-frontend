@@ -53,7 +53,7 @@ export default function RegisterRestaurantForm() {
 		// 	return setError(validationError);
 		// }
 		// setError({});
-		registerRestaurant(input);
+		registerRestaurant(input).catch((err) => console.log(err));
 	};
 
 	return (

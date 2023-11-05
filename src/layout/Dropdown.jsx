@@ -93,6 +93,16 @@ export default function Dropdown() {
 						</>
 					)}
 
+					{adminName && (
+						<>
+							<Link to="/admin">
+								<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+									DashBoard
+								</div>
+							</Link>
+						</>
+					)}
+
 					<div
 						onClick={logout}
 						className="flex justify-end items-center gap-4 cursor-pointer hover:text-red-500 rounded-xl"

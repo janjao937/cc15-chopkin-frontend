@@ -1,20 +1,24 @@
 import React from "react";
 import blank from "../../assets/blank.png";
 import { Link } from "react-router-dom";
-import { AiFillStar } from "react-icons/ai";
 import { categoryIndex } from "../../data/dataRes";
+import { AiFillStar } from "react-icons/ai";
 
-export default function RestaurantItem({
-	objRes,
-	name,
+export default function ResNationItem({
+	objData,
 	profileImg,
-	price,
+	name,
 	catIndex,
+	price,
 }) {
-	const category = categoryIndex.filter((item) => item.id === +catIndex);
+	const category = categoryIndex.filter((item) => item.id === catIndex);
+	// console.log("category", category[0].title);
+
+	// console.log(objData);
+
 	return (
 		<>
-			<Link to={`/restaurant/${objRes.id}`}>
+			<Link to={`/restaurant/${objData.id}`}>
 				<div className="w-full h-[200px]">
 					<img
 						src={profileImg || blank}

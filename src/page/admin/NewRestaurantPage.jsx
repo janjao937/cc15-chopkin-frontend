@@ -1,8 +1,6 @@
 import React from "react";
-import NewRestaurantList from "../../features/restaurant/NewRestaurantList";
+import NewRestaurantList from "../../features/admin/NewRestaurantList";
 import useRes from "../../Hooks/use-res";
-
-// import { mockRestaurant } from "../../data/mock-restaurant";
 
 export default function NewRestaurantPage() {
 	const { reqRestaurant } = useRes();

@@ -18,7 +18,7 @@ export default function AuthContextProvider({ children }) {
 				.get("/auth/user")
 				.then((res) => {
 					setAuthUser(res.data.user);
-					// console.log("fatchUser==>", res.data);
+					console.log("fatchUser==>", res.data);
 				})
 				.catch((err) => console.log(err))
 				.finally(() => setInitialLoading(false));
@@ -34,8 +34,8 @@ export default function AuthContextProvider({ children }) {
 		);
 		// console.log("customer==>", res.data);
 
-		addAccessToken(res.data.accessToken);
 		setAuthUser(res.data.customer);
+		addAccessToken(res.data.accessToken);
 		// setAuthUser(res.data.user);
 	};
 
@@ -46,8 +46,9 @@ export default function AuthContextProvider({ children }) {
 		);
 		// console.log("restaurant==>", res.data);
 
-		addAccessToken(res.data.accessToken);
 		setAuthUser(res.data.restaurant);
+		addAccessToken(res.data.accessToken);
+		window.location.reload();
 		// setAuthUser(res.data.user);
 	};
 

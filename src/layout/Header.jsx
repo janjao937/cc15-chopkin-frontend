@@ -7,7 +7,7 @@ import Dropdown from "./Dropdown";
 
 export default function Header() {
 	const { authUser, logout } = useAuth();
-	console.log(authUser);
+	// console.log(authUser);
 
 	const handleClickLogout = () => {
 		logout();
