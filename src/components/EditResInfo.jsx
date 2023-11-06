@@ -5,13 +5,10 @@ import DropdownCategory from "../features/auth/DropdownCategory";
 import DropdownNation from "../features/auth/DropdownNation";
 import profileImage from "../assets/logo.png";
 import axios from "../config/axios";
-import { useEffect } from "react";
+import { json } from "react-router-dom";
 
 export default function EditResInfo() {
-
   const fileEl = useRef(null);
-  const [info, setInfo] = useState(new FormData());
-
   const [input, setInput] = useState({
     restaurantName: "",
     ownerFirstName: "",
@@ -19,73 +16,51 @@ export default function EditResInfo() {
     email: "",
     password: "",
     phone: "",
-    districtIndex:"",
+    districtIndex: "",
     categoryIndex: "",
     nationIndex: "",
     latitude: "",
     longitude: "",
     price: 0,
-    businessTime: [{ day: 5 }, { openTime: "asds" }, { closedTime: "zxc" }],
+    businessTime: [{ day: 5,openTime:"",closedTime:"" }]
   });
 
   const [file, setFile] = useState(null);
-
-  const [day, setDay] = useState({});
-  const [openTime, setOpenTime] = useState({});
-  const [closedTime, setClosedTime] = useState({});
-  const [business, setBusiness] = useState();
-
   const [error, setError] = useState({});
 
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  const handleDay = (e) => {
-    const updatedDay = { [e.target.name]: e.target.value };
-    setDay(updatedDay);
-  };
-
-  const handleOpenTime = (e) => {
-    const updateOpenTime = { [e.target.name]: e.target.value };
-    setOpenTime(updateOpenTime);
-  };
-
-  const handleClosedTime = (e) => {
-    const updatedClosedTime = { [e.target.name]: e.target.value };
-    setClosedTime(updatedClosedTime);
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const info = new FormData();
+    const formdata = new FormData();
     if (file) {
-      info.append("profileImg", file);
+      formdata.append("profileImg", file);
     }
     if (input.restaurantName) {
-      info.append("restaurantName", input.restaurantName);
+      formdata.append("restaurantName", input.restaurantName);
     }
     if (input.price) {
-      info.append("price", Number(input.price));
+      formdata.append("price", Number(input.price));
     }
     if (input.categoryIndex) {
-      info.append("categoryIndex", input.categoryIndex);
+      formdata.append("categoryIndex", input.categoryIndex);
     }
     if (input.districtIndex) {
-      info.append("districtIndex", input.districtIndex);
+      formdata.append("districtIndex", input.districtIndex);
     }
     if (input.nationIndex) {
-      info.append("nationIndex", input.nationIndex);
+      formdata.append("nationIndex", input.nationIndex);
     }
     if (input.businessTime) {
-      info.append("businessTime", input.businessTime);
+      formdata.append("businessTime", JSON.stringify(input.businessTime));
     }
 
-    setInfo(info);
-    console.log(info);
-
-    const res = axios
-      .post(`http://localhost:8888/restaurant/edit`, { info: input }, info)
+    axios
+      .post(
+        `http://localhost:8888/restaurant/edit`,formdata
+      )
       .then((res) => console.log(res))
       .then(
         (res) => console.log(res)
@@ -98,10 +73,6 @@ export default function EditResInfo() {
   };
 
   const { authUser } = useAuth();
-
-  //   console.log(authUser);
-
-  console.log(input);
 
   return (
     <div className="flex px-40 ">
@@ -139,7 +110,7 @@ export default function EditResInfo() {
             className="h-10 p-3"
             type="file"
             ref={fileEl}
-            name="profileImg"
+            name="file"
             onChange={(e) => {
               if (e.target.files[0]) {
                 setFile(e.target.files[0]);
@@ -196,30 +167,6 @@ export default function EditResInfo() {
             <InputErrorMessage message={error.nationIndex} />
           )}
         </div>
-        <p>day</p>
-        <input
-          type="text"
-          className="border h-12"
-          onChange={handleDay}
-          name="day
-          "
-        />
-        <p>openTime</p>
-        <input
-          type="text"
-          className="border h-12"
-          onChange={handleOpenTime}
-          name="openTime
-          "
-        />
-        <p>closedTime</p>
-        <input
-          type="text"
-          className="border h-12"
-          onChange={handleClosedTime}
-          name="closedTime
-          "
-        />
         <p>latitude</p>
         <input
           type="text"
