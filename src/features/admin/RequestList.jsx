@@ -2,20 +2,23 @@ import React from "react";
 import RequestItem from "./RequestItem";
 
 export default function RequestList({ data }) {
-	console.log(data);
+	// console.log(data);
 
 	return (
 		<>
 			<RequestItem
 				obj={data}
-				restaurantId={data.restaurantId}
 				restaurantName={data.restaurantName}
-				categoryIndex={data.categoryIndex}
-				districIndex={data.districIndex}
-				nationIndex={data.nationIndex}
+				profileImg={data.profileImg}
 				latitude={data.latitude}
 				longitude={data.longitude}
-				profileImg={data.profileImg}
+				price={data.price}
+				cateIndex={data.categoryIndex}
+				disIndex={data.districIndex}
+				natIndex={data.nationIndex}
+				restaurantId={data.restaurantId}
+				tempBusinessTimes={data.tempBusinessTimes}
+				tempRestaurantImages={data.tempRestaurantImages}
 			/>
 		</>
 	);

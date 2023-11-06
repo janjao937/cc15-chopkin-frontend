@@ -12,6 +12,7 @@ export default function ResContextProvider({ children }) {
 
 	const [reqRestaurant, setReqRestaurant] = useState([]);
 	const [restaurantAll, setRestaurantAll] = useState([]);
+	const [fatchResPendding, setFatchResPendding] = useState([]);
 
 	useEffect(() => {
 		fatchResAll();
@@ -69,7 +70,7 @@ export default function ResContextProvider({ children }) {
 		}
 	};
 
-	// admin => delete res or reject res
+	// admin => delete res or reject newRes
 	const deleteRes = async (resId) => {
 		try {
 			const res = await axios.delete(`/restaurant/delete/${resId}`);
@@ -80,20 +81,32 @@ export default function ResContextProvider({ children }) {
 		}
 	};
 
-	// useEffect(() => {
-	// 	fatchPendingEdit();
-	// }, []);
+	// admin => get res PenddingEdit
 	useEffect(() => {
 		const fatchPendingEdit = async () => {
 			try {
 				const res = await axios.get(`/restaurant/getPendingEdit`);
 				console.log("fatchPendingEdit =>", res.data);
+				setFatchResPendding(res.data);
 			} catch (err) {
 				console.log(err);
 			}
 		};
 		fatchPendingEdit();
 	}, []);
+
+	// admin => delete res PenddingEdit
+	const deleteResPending = async (redId) => {
+		try {
+			const res = await axios.delete(`/restaurant/editPending/${redId}`);
+			console.log("deleteResPendding =>", res.data);
+			setFatchResPendding(
+				fatchResPendding.filter((item) => item.id !== redId)
+			);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	return (
 		<ResContext.Provider
@@ -104,6 +117,8 @@ export default function ResContextProvider({ children }) {
 				restaurantAll,
 				resEditPending,
 				resEditPendingBussiTime,
+				fatchResPendding,
+				deleteResPending,
 			}}
 		>
 			{children}

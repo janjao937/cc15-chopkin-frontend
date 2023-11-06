@@ -2,14 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function RequestItem({
-	restaurantId,
+	obj,
 	restaurantName,
-	categoryIndex,
-	districIndex,
-	nationIndex,
+	profileImg,
 	latitude,
 	longitude,
-	profileImg,
+	price,
+	cateIndex,
+	disIndex,
+	natIndex,
+	restaurantId,
+	tempBusinessTimes,
+	tempRestaurantImages,
 }) {
 	return (
 		<>

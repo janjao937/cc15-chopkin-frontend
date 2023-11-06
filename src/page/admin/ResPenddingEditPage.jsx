@@ -1,11 +1,12 @@
 import React from "react";
 import SearchInput from "../../components/SearchInput";
 import RequestList from "../../features/admin/RequestList";
+import useRes from "../../Hooks/use-res";
 
-import { restaurantPendingEdit } from "../../data/mock-restaurantEdit";
-import { packageEditPending } from "../../data/mock-restaurantEdit";
+// import { packageEditPending } from "../../data/mock-restaurantEdit";
 
-export default function EditingPage() {
+export default function ResPenddingEditPage() {
+	const { fatchResPendding } = useRes();
 	return (
 		<>
 			<div className="flex flex-col gap-4 p-4 mb-10">
@@ -26,7 +27,7 @@ export default function EditingPage() {
 							Restaurant Name
 						</h1>
 					</div>
-					{restaurantPendingEdit.map((item, index) => (
+					{fatchResPendding.map((item, index) => (
 						<div key={index}>
 							<RequestList data={item} />
 						</div>
