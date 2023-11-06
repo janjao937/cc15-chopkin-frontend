@@ -25,6 +25,8 @@ import AuthenticatedRestaurant from "../features/auth/AuthenticatedRestaurant";
 import AuthenticatedCustomer from "../features/auth/AuthenticatedCustomer";
 import ResNationPage from "../page/ResNationPage";
 import ResPenddingEditPage from "../page/admin/ResPenddingEditPage";
+import PackagePage from "../page/admin/PackagePage";
+import ViewPackagePendding from "../page/admin/ViewPackagePendding";
 
 const router = createBrowserRouter([
 	{
@@ -102,6 +104,11 @@ const router = createBrowserRouter([
 			{
 				path: "edit/:resId",
 				element: <ViewResPenddingEditPage />,
+			},
+			{ path: "package", element: <PackagePage /> },
+			{
+				path: "view-package/:packageId",
+				element: <ViewPackagePendding />,
 			},
 		],
 	},
