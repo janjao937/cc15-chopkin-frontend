@@ -21,6 +21,7 @@ import ViewEditingPage from "../page/admin/ViewEditingPage";
 import DetailBookingPage from "../page/admin/DetailBookingPage";
 import RedirectIfAuthenticated from "../features/auth/RedirectIfAuthenticated";
 import AuthenticatedAdmin from "../features/auth/AuthenticatedAdmin";
+import EditResInfo from "../components/EditResInfo";
 
 const router = createBrowserRouter([
 	{
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
 				path: "/restaurant/:restuarantId",
 				element: <RestaurantInfoPage />,
 			},
+			{path: "/res-edingpending",element: <EditResInfo/>}
 		],
 	},
 	{

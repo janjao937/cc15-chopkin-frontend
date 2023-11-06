@@ -48,6 +48,11 @@ export default function Header() {
 					</>
 				)}
 			</div>
+			<div>
+				<Link to="/res-edingpending">
+					<button>res edit</button>
+				</Link>
+			</div>
 		</header>
 	);
 }
