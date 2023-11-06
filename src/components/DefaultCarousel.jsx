@@ -27,7 +27,7 @@ export default function PauseOnHovering() {
 	];
 	const [current, setCurrent] = useState(0);
 	const length = ImageData.length;
-	console.log(length);
+	// console.log(length);
 
 	const prevSlide = () => {
 		if (current === 0) {

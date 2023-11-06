@@ -1,14 +1,15 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function CuisineItem({ image, name, type }) {
+export default function CuisineItem({ id, image, type }) {
 	return (
-		<>
+		<Link to={`/nation/${id}`}>
 			<div className="relative">
 				<div className="w-[180px] h-[250px] ">
 					<div className="w-full h-full absolute bg-black/10 rounded-lg"></div>
 					<img
 						src={image}
-						alt={name}
+						alt={type}
 						className="w-full h-full rounded-lg"
 					/>
 				</div>
@@ -20,6 +21,6 @@ export default function CuisineItem({ image, name, type }) {
 					<div className="text-white text-md">222 Restaurants</div>
 				</div>
 			</div>
-		</>
+		</Link>
 	);
 }

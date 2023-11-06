@@ -149,6 +149,7 @@ export default function BookingItem({
 								<Time
 									inputModify={inputModify}
 									setInputModify={setInputModify}
+									inputKey={`bookingTime`}
 								/>
 							</div>
 							<div className="flex flex-col gap-2 mb-4">

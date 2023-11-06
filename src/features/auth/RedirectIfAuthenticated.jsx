@@ -3,7 +3,7 @@ import useAuth from "../../Hooks/use-auth";
 
 export default function RedirectIfAuthenticated({ children }) {
 	const { authUser } = useAuth();
-	console.log("authUser =>", authUser);
+	// console.log("authUser =>", authUser);
 
 	if (authUser) {
 		if (authUser?.isAdmin) {
