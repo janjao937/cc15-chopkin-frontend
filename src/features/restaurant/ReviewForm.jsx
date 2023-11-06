@@ -1,8 +1,7 @@
 import { AiFillStar } from "react-icons/ai";
 import { BiImageAdd } from "react-icons/bi";
 import MyOutlineButton from "../../components/MyOutlineButton";
-import { useState } from "react";
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import InputErrorMessage from "../auth/InputErrorMessage";
 
 export default function ReviewForm({ isOpenAfterComplete }) {

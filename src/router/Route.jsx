@@ -21,69 +21,75 @@ import ViewEditingPage from "../page/admin/ViewEditingPage";
 import DetailBookingPage from "../page/admin/DetailBookingPage";
 import RedirectIfAuthenticated from "../features/auth/RedirectIfAuthenticated";
 import AuthenticatedAdmin from "../features/auth/AuthenticatedAdmin";
+import ResEditPendingPage from "../page/ResEditPendingPage";
 
 const router = createBrowserRouter([
-	{
-		path: "/",
-		element: <Layout />,
-		children: [
-			{ path: "", element: <HomePage /> },
-			{ path: "/restaurant", element: <RestaurantPage /> },
-			{ path: "/recommended", element: <RecommendedPage /> },
-			{ path: "/all-restaurants", element: <AllRestuarantPage /> },
-			{ path: "/profile/:userId", element: <UserProfile /> },
-			{
-				path: "/restaurant/:restuarantId",
-				element: <RestaurantInfoPage />,
-			},
-		],
-	},
-	{
-		path: "/register",
-		element: (
-			<RedirectIfAuthenticated>
-				<RegisterPage />
-			</RedirectIfAuthenticated>
-		),
-	},
-	{
-		path: "/login",
-		element: (
-			<RedirectIfAuthenticated>
-				<LoginPage />
-			</RedirectIfAuthenticated>
-		),
-	},
-	{
-		path: "/register-restaurant",
-		element: (
-			<RedirectIfAuthenticated>
-				<RegisterRestaurantPage />
-			</RedirectIfAuthenticated>
-		),
-	},
+  {
+    path: "/",
+    element: <Layout />,
+    children: [
+      { path: "", element: <HomePage /> },
+      { path: "/restaurant", element: <RestaurantPage /> },
+      { path: "/recommended", element: <RecommendedPage /> },
+      { path: "/all-restaurants", element: <AllRestuarantPage /> },
+      { path: "/profile/:userId", element: <UserProfile /> },
+      {
+        path: "/restaurant/:restuarantId",
+        element: <RestaurantInfoPage />,
+      },
+    ],
+  },
+  {
+    path: "/register",
+    element: (
+      <RedirectIfAuthenticated>
+        <RegisterPage />
+      </RedirectIfAuthenticated>
+    ),
+  },
+  {
+    path: "/login",
+    element: (
+      <RedirectIfAuthenticated>
+        <LoginPage />
+      </RedirectIfAuthenticated>
+    ),
+  },
+  {
+    path: "/register-restaurant",
+    element: (
+      <RedirectIfAuthenticated>
+        <RegisterRestaurantPage />
+      </RedirectIfAuthenticated>
+    ),
+  },
 
-	{
-		path: "/admin",
-		element: (
-			<AuthenticatedAdmin>
-				<LayoutAdmin />
-			</AuthenticatedAdmin>
-		),
-		children: [
-			{ path: "", element: <AdminPage /> },
-			{ path: "list-restaurant", element: <AdminRestaurantPage /> },
-			{ path: "new-restaurant", element: <NewRestaurantPage /> },
-			{ path: "customer", element: <CustomerPage /> },
-			{ path: "customer/:customerId", element: <DetailCustomerPage /> },
-			{ path: "booking", element: <BookingPage /> },
-			{ path: "booking/:bookingId", element: <DetailBookingPage /> },
-			{ path: "edit", element: <EditingPage /> },
-			{ path: "edit/:restaurantId", element: <ViewEditingPage /> },
-		],
-	},
+  {
+    path: "/admin",
+    element: (
+      <AuthenticatedAdmin>
+        <LayoutAdmin />
+      </AuthenticatedAdmin>
+    ),
+    children: [
+      { path: "", element: <AdminPage /> },
+      { path: "list-restaurant", element: <AdminRestaurantPage /> },
+      { path: "new-restaurant", element: <NewRestaurantPage /> },
+      { path: "customer", element: <CustomerPage /> },
+      { path: "customer/:customerId", element: <DetailCustomerPage /> },
+      { path: "booking", element: <BookingPage /> },
+      { path: "booking/:bookingId", element: <DetailBookingPage /> },
+      { path: "edit", element: <EditingPage /> },
+      { path: "edit/:restaurantId", element: <ViewEditingPage /> },
+    ],
+  },
+
+  {
+    path: "/addPackage",
+    element: <ResEditPendingPage />,
+  },
 ]);
 
 export default function Route() {
-	return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />;
 }
