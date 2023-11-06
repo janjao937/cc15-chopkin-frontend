@@ -14,8 +14,6 @@ export default function AuthContextProvider({ children }) {
 
 	useEffect(() => {
 		if (getAccessToken()) {
-			console.log("first");
-
 			axios
 				.get("/auth/user")
 				.then((res) => {
@@ -36,8 +34,8 @@ export default function AuthContextProvider({ children }) {
 		);
 		// console.log("customer==>", res.data);
 
-		addAccessToken(res.data.accessToken);
 		setAuthUser(res.data.customer);
+		addAccessToken(res.data.accessToken);
 		// setAuthUser(res.data.user);
 	};
 
@@ -46,10 +44,11 @@ export default function AuthContextProvider({ children }) {
 			"/auth/register/restaurant",
 			registerInputObject
 		);
-		console.log("restaurant==>", res.data);
+		// console.log("restaurant==>", res.data);
 
-		addAccessToken(res.data.accessToken);
 		setAuthUser(res.data.restaurant);
+		addAccessToken(res.data.accessToken);
+		window.location.reload();
 		// setAuthUser(res.data.user);
 	};
 

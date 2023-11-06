@@ -1,68 +1,14 @@
 import React from "react";
-// import { AiFillStar } from "react-icons/ai";
+import useRes from "../Hooks/use-res";
+import { dataCuisine } from "../data/dataRes";
 import RestaurantList from "../features/restaurant/RestaurantList";
 import DefaultCarousel from "../components/DefaultCarousel";
-import { MdKeyboardArrowRight } from "react-icons/md";
 import CuisineList from "../features/restaurant/CuisineList";
+import { MdKeyboardArrowRight } from "react-icons/md";
 import bgHome from "../assets/image/bgHome.png";
 import { Link } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
-import { mockRestaurant } from "../data/mock-data";
 import Login from "../features/googleAuth/login";
-import { useEffect } from "react";
-import useRes from "../Hooks/use-res";
-// console.log(mockRestaurant);
-
-const mocCuisine = [
-	{
-		id: 1,
-		restaurantImage:
-			"https://imgproxy2.hungryhub.com/insecure/fill/340/530/ce/0/aHR0cHM6Ly9pbWFnZXMuaHVuZ3J5aHViLmNvbS91cGxvYWRzL3Jlc3RhdXJhbnRfdGFnL2NvdmVyLzEwL3BleGVscy10aGUtY2FzdGxlYmFyLTU4OTM1MzMuanBn.webp",
-		restaurantName: "reataurantName",
-		resType: "International",
-		price: 1000,
-	},
-	{
-		id: 2,
-		restaurantImage:
-			"https://imgproxy2.hungryhub.com/insecure/fill/340/530/ce/0/aHR0cHM6Ly9pbWFnZXMuaHVuZ3J5aHViLmNvbS91cGxvYWRzL3Jlc3RhdXJhbnRfdGFnL2NvdmVyLzEwOC9wZXhlbHMtYXVndXN0aW51cy1tYXJ0aW51cy1ub3BwZSVDQyU4MS0xMjg2NjQ5OC5qcGc=.webp",
-		restaurantName: "reataurantName",
-		resType: "Thai",
-		price: 1000,
-	},
-	{
-		id: 3,
-		restaurantImage:
-			"https://imgproxy2.hungryhub.com/insecure/fill/340/530/ce/0/aHR0cHM6Ly9pbWFnZXMuaHVuZ3J5aHViLmNvbS91cGxvYWRzL3Jlc3RhdXJhbnRfdGFnL2NvdmVyLzExL3BleGVscy0lRTUlQTUlQTUlRTUlQjAlQkMlRTUlQjAlOTQtJUU1JUFEJTk5LTI4NzE3NTYuanBn.webp",
-		restaurantName: "reataurantName",
-		resType: "Japanese",
-		price: 1000,
-	},
-	{
-		id: 4,
-		restaurantImage:
-			"https://imgproxy2.hungryhub.com/insecure/fill/340/530/ce/0/aHR0cHM6Ly9pbWFnZXMuaHVuZ3J5aHViLmNvbS91cGxvYWRzL3Jlc3RhdXJhbnRfdGFnL2NvdmVyLzcvU19fMTIyMjI0OTYuanBn.webp",
-		restaurantName: "reataurantName",
-		resType: "Chinese",
-		price: 1000,
-	},
-	{
-		id: 5,
-		restaurantImage:
-			"https://imgproxy2.hungryhub.com/insecure/fill/340/530/ce/0/aHR0cHM6Ly9pbWFnZXMuaHVuZ3J5aHViLmNvbS91cGxvYWRzL3Jlc3RhdXJhbnRfdGFnL2NvdmVyLzE2L3BleGVscy1hbnRvbnktdHJpdmV0LTE0MTY0Njc2LmpwZw==.webp",
-		restaurantName: "reataurantName",
-		resType: "Fusion",
-		price: 1000,
-	},
-	{
-		id: 6,
-		restaurantImage:
-			"https://imgproxy2.hungryhub.com/insecure/fill/340/530/ce/0/aHR0cHM6Ly9pbWFnZXMuaHVuZ3J5aHViLmNvbS91cGxvYWRzL3Jlc3RhdXJhbnRfdGFnL2NvdmVyLzgvU19fMTIyMjI1MDYuanBn.webp",
-		restaurantName: "reataurantName",
-		resType: "Italian",
-		price: 1000,
-	},
-];
 
 export default function HomePage() {
 	const { restaurantAll } = useRes();
@@ -96,9 +42,10 @@ export default function HomePage() {
 						</span>
 					</Link>
 				</div>
-				<div className="border grid grid-cols-2 md:grid-cols-4 gap-2">
+
+				<div className="grid grid-cols-12 items-center justify-items-center gap-4">
 					{restaurantAll?.map((item, index) => (
-						<div key={index}>
+						<div key={index} className=" grid col-span-4">
 							<RestaurantList data={item} />
 						</div>
 					))}
@@ -119,7 +66,7 @@ export default function HomePage() {
 					Top Cuisine
 				</h1>
 				<div className="flex items-center justify-evenly">
-					{mocCuisine.map((item, index) => (
+					{dataCuisine.map((item, index) => (
 						<div key={index}>
 							<CuisineList data={item} />
 						</div>
@@ -139,9 +86,9 @@ export default function HomePage() {
 							</span>
 						</Link>
 					</div>
-					<div className="border grid grid-cols-2 md:grid-cols-4 gap-2">
+					<div className="grid grid-cols-12 items-center justify-items-center gap-4">
 						{restaurantAll?.map((item, index) => (
-							<div key={index}>
+							<div key={index} className=" grid col-span-4">
 								<RestaurantList data={item} />
 							</div>
 						))}
