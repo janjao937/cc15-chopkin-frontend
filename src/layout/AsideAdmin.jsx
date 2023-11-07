@@ -4,6 +4,7 @@ import { BsBorderWidth } from "react-icons/bs";
 import { HiOutlineArchiveBox } from "react-icons/hi2";
 import { BsPerson, BsFillPencilFill } from "react-icons/bs";
 import { TfiBookmarkAlt } from "react-icons/tfi";
+import { TbPackages } from "react-icons/tb";
 import MenuList from "../features/admin/MenuList";
 
 const menuAdmin = [
@@ -42,6 +43,12 @@ const menuAdmin = [
 		to: "/admin/edit",
 		text: "Editing Request",
 		icon: <BsFillPencilFill />,
+	},
+	{
+		id: 7,
+		to: "/admin/package",
+		text: "Package Request",
+		icon: <TbPackages />,
 	},
 ];
 

@@ -25,7 +25,8 @@ export default function MyRadio({ handleNext, handlePrev }) {
     }
   };
 
-  console.log(numberOfAdult);
+  console.log(`Adult===>`,numberOfAdult);
+  console.log(`Kids====>`,numberOfKids);
 
   const number = [];
   for (let i = 1; i <= 20; i++) {

@@ -14,10 +14,9 @@ import ListRestaurantPage from "../page/admin/ListRestaurantPage";
 import NewRestaurantPage from "../page/admin/NewRestaurantPage";
 import CustomerPage from "../page/admin/CustomerPage";
 import BookingPage from "../page/admin/BookingPage";
-import EditingPage from "../page/admin/EditingPage";
 import RestaurantInfoPage from "../page/RestuarantInfoPage";
 import DetailCustomerPage from "../page/admin/DetailCustomerPage";
-import ViewEditingPage from "../page/admin/ViewEditingPage";
+import ViewResPenddingEditPage from "../page/admin/ViewResPenddingEditPage";
 import DetailBookingPage from "../page/admin/DetailBookingPage";
 import RedirectIfAuthenticated from "../features/auth/RedirectIfAuthenticated";
 import AuthenticatedAdmin from "../features/auth/AuthenticatedAdmin";
@@ -25,6 +24,9 @@ import ResEditPendingPage from "../page/ResEditPendingPage";
 import AuthenticatedRestaurant from "../features/auth/AuthenticatedRestaurant";
 import AuthenticatedCustomer from "../features/auth/AuthenticatedCustomer";
 import ResNationPage from "../page/ResNationPage";
+import ResPenddingEditPage from "../page/admin/ResPenddingEditPage";
+import PackagePage from "../page/admin/PackagePage";
+import ViewPackagePendding from "../page/admin/ViewPackagePendding";
 import ResEditPackagePage from "../page/ResEditPackagePage";
 
 const router = createBrowserRouter([
@@ -57,14 +59,6 @@ const router = createBrowserRouter([
           </AuthenticatedRestaurant>
         ),
       },
-      {
-        path: "/restaurant/:resId/edit/edit-package",
-        element: (
-          <AuthenticatedRestaurant>
-            <ResEditPackagePage />
-          </AuthenticatedRestaurant>
-        ),
-      },
     ],
   },
   {
@@ -91,6 +85,14 @@ const router = createBrowserRouter([
       </RedirectIfAuthenticated>
     ),
   },
+  {
+    path: "/restaurant/:resId/edit/edit-package",
+    element: (
+      <AuthenticatedRestaurant>
+        <ResEditPackagePage />
+      </AuthenticatedRestaurant>
+    ),
+  },
 
   {
     path: "/admin",
@@ -107,8 +109,16 @@ const router = createBrowserRouter([
       { path: "customer/:customerId", element: <DetailCustomerPage /> },
       { path: "booking", element: <BookingPage /> },
       { path: "booking/:bookingId", element: <DetailBookingPage /> },
-      { path: "edit", element: <EditingPage /> },
-      { path: "edit/:restaurantId", element: <ViewEditingPage /> },
+      { path: "edit", element: <ResPenddingEditPage /> },
+      {
+        path: "edit/:resId",
+        element: <ViewResPenddingEditPage />,
+      },
+      { path: "package", element: <PackagePage /> },
+      {
+        path: "view-package/:packageId",
+        element: <ViewPackagePendding />,
+      },
     ],
   },
 ]);

@@ -13,6 +13,8 @@ export default function ResContextProvider({ children }) {
   const [reqRestaurant, setReqRestaurant] = useState([]);
   const [restaurantAll, setRestaurantAll] = useState([]);
   const [addPackage, setAddPackage] = useState(null);
+  const [fatchResPendding, setFatchResPendding] = useState([]);
+  const [fatchPackagePendding, setFatchPackcagePendding] = useState([]);
 
   useEffect(() => {
     fatchResAll();
@@ -70,7 +72,7 @@ export default function ResContextProvider({ children }) {
     }
   };
 
-  // admin => delete res or reject res
+  // admin => delete res or reject newRes
   const deleteRes = async (resId) => {
     try {
       const res = await axios.delete(`/restaurant/delete/${resId}`);
@@ -81,20 +83,84 @@ export default function ResContextProvider({ children }) {
     }
   };
 
-  // useEffect(() => {
-  // 	fatchPendingEdit();
-  // }, []);
+  // admin => get res PenddingEdit
   useEffect(() => {
     const fatchPendingEdit = async () => {
       try {
         const res = await axios.get(`/restaurant/getPendingEdit`);
         console.log("fatchPendingEdit =>", res.data);
+        setFatchResPendding(res.data);
       } catch (err) {
         console.log(err);
       }
     };
     fatchPendingEdit();
   }, []);
+
+  // admin => update res PenddingEdit
+  const updateResPending = async (redId, input) => {
+    try {
+      const res = await axios.patch(`/restaurant/mergeResInfo/${redId}`, input);
+      setFatchResPendding(
+        fatchPackagePendding.filter((item) => item.restaurantId !== redId)
+      );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // admin => delete res PenddingEdit
+  const deleteResPending = async (redId) => {
+    try {
+      const res = await axios.delete(`/restaurant/editPending/${redId}`);
+      // console.log("deleteResPendding =>", res.data);
+      setFatchResPendding(fatchResPendding.filter((item) => item.id !== redId));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // admin => package getEditPending
+  useEffect(() => {
+    const fatchPackagePending = async () => {
+      try {
+        const res = await axios.get(`/package/getEditPending`);
+        console.log("fatchPackagePending =>", res.data);
+        setFatchPackcagePendding([...res.data]);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fatchPackagePending();
+  }, []);
+
+  // admin => package createPackage
+  const createPackage = async (resId, input) => {
+    try {
+      const res = await axios.post(`/package/create/${resId}`, input);
+      console.log("createPackage =>", res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  // admin => delete packagePendding
+  const deletePackagePendding = async (pendingId) => {
+    try {
+      const res = await axios.delete(`/package/delete/${pendingId}`);
+      console.log("deletePackagePendding =>", res.data);
+
+      setFatchPackcagePendding((p) => {
+        console.log(p);
+        console.log(pendingId);
+
+        return [...p.filter((item) => item.id !== +pendingId)];
+      });
+      // console.log("test111", test111);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const createPackagePending = async (data) => {
     const res = await axios.post("/package/createPending", data);
@@ -110,6 +176,12 @@ export default function ResContextProvider({ children }) {
         restaurantAll,
         resEditPending,
         resEditPendingBussiTime,
+        fatchResPendding,
+        deleteResPending,
+        updateResPending,
+        fatchPackagePendding,
+        createPackage,
+        deletePackagePendding,
         createPackagePending,
       }}
     >

@@ -6,6 +6,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import useAuth from "../Hooks/use-auth";
 
 export default function MyStepper({ setBooking, booking, mockPackage }) {
   const [activeStep, setActiveStep] = useState(0);
@@ -14,6 +15,7 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
   const [isSelectPackage, setIsSelectPackage] = useState(false);
   const [checkToggle, setCheckToggle] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const [date,setDate] = useState(null);
 
   const handleOpenMenu = (itemId) => {
     setOpenMenu(itemId === openMenu ? null : itemId);
@@ -37,6 +39,10 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
     setCheckToggle(!checkToggle);
   };
 
+  const { authUser } = useAuth();
+
+  console.log(date);
+
   return (
     <div>
       <Stepper
@@ -49,21 +55,21 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
         <Step
           activeClassName="!bg-secondary"
           completedClassName="!bg-secondary text-white"
-          onClick={() => setActiveStep(0)}
+          // onClick={() => setActiveStep(0)}
         >
           <div>Icon</div>
         </Step>
         <Step
           activeClassName="!bg-secondary"
           completedClassName="!bg-secondary text-white"
-          onClick={() => setActiveStep(1)}
+          // onClick={() => setActiveStep(1)}
         >
           <div>Icon</div>
         </Step>
         <Step
           activeClassName="!bg-secondary"
           completedClassName="!bg-secondary text-white"
-          onClick={() => setActiveStep(2)}
+          // onClick={() => setActiveStep(2)}
         >
           <div>Icon</div>
         </Step>
@@ -79,9 +85,9 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
               <section>
                 {" "}
                 <p className="font-semibold">Personal Information</p>
-                <p>Name</p>
-                <p>Phone</p>
-                <p>email</p>
+                <p>{authUser.firstName}</p>
+                <p>{authUser.phone}</p>
+                <p>{authUser.email}</p>
               </section>
               <section>
                 <p className="font-semibold">summary</p>
@@ -222,10 +228,17 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
                   label="Calender Date"
                   name="bookingDate"
                   className="w-full h-full"
+                  onChange={(e)=>{
+                    setDate({
+                      bookingDate: e.format("DD-MM-YYYY"),
+                    })
+                  }}
                 />
               </div>
             </DemoContainer>
           </LocalizationProvider>
+
+          {date ? <button onClick={handleNext}>Next</button> : undefined}
         </div>
       )}
     </div>

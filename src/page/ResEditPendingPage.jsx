@@ -1,12 +1,10 @@
-import React from "react";
 import ResBussiTime from "../features/restaurant/ResBusiTime";
 import useRes from "../Hooks/use-res";
-import { useState } from "react";
 import useAuth from "../Hooks/use-auth";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
 import axios from "../config/axios";
 import EditResInfo from "../components/EditResInfo";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 export default function ResEditPendingPage() {
   const { resId } = useParams();
@@ -86,8 +84,6 @@ export default function ResEditPendingPage() {
     <div className="">
       {/* EditRes */}
       <EditResInfo />
-      {/* EditPackage */}
-
       {/* EdktBussiTime */}
       <ResBussiTime
         resById={resById}
