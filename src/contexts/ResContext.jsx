@@ -13,6 +13,8 @@ export default function ResContextProvider({ children }) {
 	const [reqRestaurant, setReqRestaurant] = useState([]);
 	const [restaurantAll, setRestaurantAll] = useState([]);
 
+	const [business,setBusiness] = useState([]);
+
 	useEffect(() => {
 		fatchResAll();
 	}, []);
@@ -53,6 +55,7 @@ export default function ResContextProvider({ children }) {
 	const resEditPendingBussiTime = async (input) => {
 		try {
 			console.log("clickResEditPendingBussiTime", input);
+			setBusiness(input);
 		} catch (err) {
 			console.log(err);
 		}
@@ -104,6 +107,7 @@ export default function ResContextProvider({ children }) {
 				restaurantAll,
 				resEditPending,
 				resEditPendingBussiTime,
+				business
 			}}
 		>
 			{children}

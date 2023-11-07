@@ -207,11 +207,11 @@ export default function RestaurantInfoPage() {
 								/>
 								<MyRadio />
 
-								<MyStepper
+								{/* <MyStepper
 									setBooking={setBooking}
 									booking={booking}
 									mockPackage={mockPackage}
-								/>
+								/> */}
 							</div>
 						) : (
 							<div className="flex flex-col gap-4">

@@ -5,9 +5,13 @@ import DropdownCategory from "../features/auth/DropdownCategory";
 import DropdownNation from "../features/auth/DropdownNation";
 import profileImage from "../assets/logo.png";
 import axios from "../config/axios";
-import { json } from "react-router-dom";
+import useRes from "../Hooks/use-res";
 
-export default function EditResInfo() {
+export default function EditResInfo({handleOnSubmit}) {
+
+  const { business } = useRes();
+  console.log(business);
+
   const fileEl = useRef(null);
   const [input, setInput] = useState({
     restaurantName: "",
@@ -22,7 +26,7 @@ export default function EditResInfo() {
     latitude: "",
     longitude: "",
     price: 0,
-    businessTime: [{ day: 5,openTime:"",closedTime:"" }]
+    businessTime: business
   });
 
   const [file, setFile] = useState(null);
@@ -53,9 +57,17 @@ export default function EditResInfo() {
     if (input.nationIndex) {
       formdata.append("nationIndex", input.nationIndex);
     }
+    if (input.latitude) {
+      formdata.append("latitude",input.latitude);
+    }
+    if (input.longitude) {
+      formdata.append("longitude",input.longitude);
+    }
     if (input.businessTime) {
       formdata.append("businessTime", JSON.stringify(input.businessTime));
     }
+
+    handleOnSubmit();
 
     axios
       .post(
@@ -125,7 +137,7 @@ export default function EditResInfo() {
           onChange={handleChangeInput}
           name="restaurantName"
         />
-        <p>price</p>
+        <p>starter price</p>
         <input
           type="text"
           className="border h-12"

@@ -1,51 +1,6 @@
 import React from "react";
 import Time from "../../components/Time";
 
-const mockDataBusiTime = [
-	{
-		id: 1,
-		day: "Monday",
-		openTime: "",
-		closeTime: "",
-	},
-	{
-		id: 2,
-		day: "Tuesday",
-		openTime: "",
-		closeTime: "",
-	},
-	{
-		id: 3,
-		day: "Wednesday",
-		openTime: "",
-		closeTime: "",
-	},
-	{
-		id: 4,
-		day: "Thursday",
-		openTime: "",
-		closeTime: "",
-	},
-	{
-		id: 5,
-		day: "Friday",
-		openTime: "",
-		closeTime: "",
-	},
-	{
-		id: 6,
-		day: "Saturday",
-		openTime: "",
-		closeTime: "",
-	},
-	{
-		id: 7,
-		day: "Sunday",
-		openTime: "",
-		closeTime: "",
-	},
-];
-
 export default function ResBussiTime({
 	resById,
 	// inputBusiTime,

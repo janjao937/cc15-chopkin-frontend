@@ -83,7 +83,7 @@ export default function ResEditPendingPage() {
   return (
     <div className="">
       {/* EditRes */}
-      <EditResInfo />
+      <EditResInfo handleOnSubmit={handleOnSubmit}/>
       {/* EdktBussiTime */}
       <ResBussiTime
         resById={resById}
@@ -104,14 +104,14 @@ export default function ResEditPendingPage() {
         inputSun={inputSun}
         setInputSun={setInputSun}
       />
-      <div className="flex items-center justify-center">
+      {/* <div className="flex items-center justify-center">
         <button
           onClick={handleOnSubmit}
           className={`text-white px-8 py-2 border rounded-full bg-secondary`}
         >
           Submit
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
