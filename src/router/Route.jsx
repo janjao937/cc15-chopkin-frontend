@@ -25,6 +25,7 @@ import ResEditPendingPage from "../page/ResEditPendingPage";
 import AuthenticatedRestaurant from "../features/auth/AuthenticatedRestaurant";
 import AuthenticatedCustomer from "../features/auth/AuthenticatedCustomer";
 import ResNationPage from "../page/ResNationPage";
+import ResEditPackagePage from "../page/ResEditPackagePage";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,14 @@ const router = createBrowserRouter([
         element: (
           <AuthenticatedRestaurant>
             <ResEditPendingPage />
+          </AuthenticatedRestaurant>
+        ),
+      },
+      {
+        path: "/restaurant/:resId/edit/edit-package",
+        element: (
+          <AuthenticatedRestaurant>
+            <ResEditPackagePage />
           </AuthenticatedRestaurant>
         ),
       },

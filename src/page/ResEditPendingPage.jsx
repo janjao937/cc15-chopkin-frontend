@@ -7,7 +7,6 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "../config/axios";
 import EditResInfo from "../components/EditResInfo";
-import RestaurantAddPackage from "../features/restaurant/RestaurantAddPackage";
 
 export default function ResEditPendingPage() {
   const { resId } = useParams();
@@ -88,7 +87,7 @@ export default function ResEditPendingPage() {
       {/* EditRes */}
       <EditResInfo />
       {/* EditPackage */}
-      <RestaurantAddPackage />
+
       {/* EdktBussiTime */}
       <ResBussiTime
         resById={resById}

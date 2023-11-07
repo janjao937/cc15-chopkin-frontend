@@ -21,7 +21,7 @@ export default function RegisterRestaurantForm() {
     nationIndex: "",
     latitude: "",
     longitude: "",
-    price: null,
+    price: "",
   });
 
   const [checkbox, setCheckbox] = useState(false);
@@ -52,11 +52,11 @@ export default function RegisterRestaurantForm() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    // const validationError = validateRegisterRestaurant(input);
-    // if (validationError) {
-    // 	return setError(validationError);
-    // }
-    // setError({});
+    const validationError = validateRegisterRestaurant(input);
+    if (validationError) {
+      return setError(validationError);
+    }
+    setError({});
     registerRestaurant(input);
   };
 
@@ -137,6 +137,7 @@ export default function RegisterRestaurantForm() {
 
         <div>
           <RegisterInput
+            type="number"
             value={input.price}
             onChange={handleChangePrice}
             name="price"
