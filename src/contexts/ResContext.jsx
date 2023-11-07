@@ -96,6 +96,23 @@ export default function ResContextProvider({ children }) {
 		fatchPendingEdit();
 	}, []);
 
+	// admin => update res PenddingEdit
+	const updateResPending = async (redId, input) => {
+		try {
+			const res = await axios.patch(
+				`/restaurant/mergeResInfo/${redId}`,
+				input
+			);
+			setFatchResPendding(
+				fatchPackagePendding.filter(
+					(item) => item.restaurantId !== redId
+				)
+			);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	// admin => delete res PenddingEdit
 	const deleteResPending = async (redId) => {
 		try {
@@ -115,7 +132,7 @@ export default function ResContextProvider({ children }) {
 			try {
 				const res = await axios.get(`/package/getEditPending`);
 				console.log("fatchPackagePending =>", res.data);
-				setFatchPackcagePendding(res.data);
+				setFatchPackcagePendding([...res.data]);
 			} catch (err) {
 				console.log(err);
 			}
@@ -124,10 +141,28 @@ export default function ResContextProvider({ children }) {
 	}, []);
 
 	// admin => package createPackage
-	const createPackage = async (input) => {
+	const createPackage = async (resId, input) => {
 		try {
-			const res = await axios.post(`/package/create`, input);
+			const res = await axios.post(`/package/create/${resId}`, input);
 			console.log("createPackage =>", res.data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	// admin => delete packagePendding
+	const deletePackagePendding = async (pendingId) => {
+		try {
+			const res = await axios.delete(`/package/delete/${pendingId}`);
+			console.log("deletePackagePendding =>", res.data);
+
+			setFatchPackcagePendding((p) => {
+				console.log(p);
+				console.log(pendingId);
+
+				return [...p.filter((item) => item.id !== +pendingId)];
+			});
+			// console.log("test111", test111);
 		} catch (err) {
 			console.log(err);
 		}
@@ -144,8 +179,10 @@ export default function ResContextProvider({ children }) {
 				resEditPendingBussiTime,
 				fatchResPendding,
 				deleteResPending,
+				updateResPending,
 				fatchPackagePendding,
 				createPackage,
+				deletePackagePendding,
 			}}
 		>
 			{children}

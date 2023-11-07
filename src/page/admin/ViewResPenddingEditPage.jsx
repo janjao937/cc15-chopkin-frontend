@@ -9,7 +9,7 @@ export default function ViewEditingPage() {
 	const { resId } = useParams();
 	console.log("resId =>", resId);
 
-	const { fatchResPendding, deleteResPending } = useRes();
+	const { fatchResPendding, updateResPending, deleteResPending } = useRes();
 
 	const filterReq = fatchResPendding.find(
 		(item) => item.restaurantId === resId
@@ -32,7 +32,30 @@ export default function ViewEditingPage() {
 	);
 	// console.log("district", district);
 
-	const handleClickApprove = () => {};
+	console.log("tempBusinessTimes ===>", filterReq.tempBusinessTimes);
+
+	// const businessTime = JSON.stringify(filterReq.tempBusinessTimes);
+	const businessTime = filterReq.tempBusinessTimes;
+	const input = {
+		restaurantName: filterReq.restaurantName,
+		price: filterReq.price,
+		// restaurantId: String(filterReq.restaurantId),
+		categoryIndex: filterReq.categoryIndex,
+		districtIndex: filterReq.districtIndex,
+		nationIndex: filterReq.nationIndex,
+		latitude: filterReq.latitude,
+		longitude: filterReq.longitude,
+		profileImg: filterReq.profileImg,
+		// businessTime: filterReq.tempBusinessTimes,
+		businessTime: businessTime,
+	};
+
+	console.log("input =>", input);
+
+	const handleClickApprove = () => {
+		updateResPending(resId, input);
+		alert(`Approve Edit Restaurant : ${resId}`);
+	};
 
 	const handleClickReject = () => {
 		deleteResPending(filterReq.id);

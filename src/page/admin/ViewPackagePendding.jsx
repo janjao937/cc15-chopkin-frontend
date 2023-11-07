@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom";
 import blank from "../../assets/blank.png";
 
 export default function ViewPackagePendding() {
-	const { fatchPackagePendding, createPackage } = useRes();
+	const { fatchPackagePendding, createPackage, deletePackagePendding } =
+		useRes();
 	// console.log("PackagePennding =>", fatchPackagePendding);
 
 	const { packageId } = useParams();
@@ -16,7 +17,7 @@ export default function ViewPackagePendding() {
 	);
 	console.log("findPackage =>", findPackage);
 
-	console.log(typeof findPackage.restaurantId);
+	// console.log(typeof findPackage.restaurantId);
 
 	const input = {
 		name: findPackage.name,
@@ -27,10 +28,17 @@ export default function ViewPackagePendding() {
 		restaurantId: findPackage.restaurantId,
 	};
 
-	console.log("input", input);
+	// console.log("input", input);
 
 	const handleClickApprove = () => {
-		createPackage(input);
+		createPackage(findPackage.restaurantId, input);
+		alert(`Approve Package : ${packageId}`);
+		deletePackagePendding(packageId);
+	};
+
+	const handleClickReject = () => {
+		deletePackagePendding(packageId);
+		alert(`Reject Package : ${packageId}`);
 	};
 
 	return (
@@ -82,7 +90,7 @@ export default function ViewPackagePendding() {
 				<Link to="/admin/package">
 					<button
 						className={`bg-red-500 hover:bg-red-400 px-10 py-2 rounded-full text-white`}
-						// onClick={handleClickReject}
+						onClick={handleClickReject}
 					>
 						Reject
 					</button>
