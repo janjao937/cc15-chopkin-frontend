@@ -25,10 +25,12 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
   const [adultPrice, setAdultPrice] = useState(0);
   const [kidsPrice, setKidsPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isFormReady, setIsFormReady] = useState(false);
 
-  const { numberOfKids, numberOfAdult } = useBooking();
+  const { numberOfKids, numberOfAdult, customerCreateBooking } = useBooking();
   const [isBooking, setIsBooking] = useState({
     packageId: "",
+    customerId: "",
     restaurantId: "",
     bookingDate: "",
     bookingTime: "",
@@ -39,8 +41,9 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
   });
 
   const handleConfirmBooking = () => {
-    setIsBooking({
+    const updatedBooking = {
       packageId: customerPackage.id,
+      customerId: authUser.id,
       restaurantId: resId,
       bookingDate: date,
       bookingTime: time,
@@ -48,7 +51,9 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
       totalKid: numberOfKids,
       totalCustomer: numberOfAdult,
       paymentStatus: 0,
-    });
+    };
+    setIsBooking(updatedBooking);
+    setIsFormReady(true);
   };
 
   // console.log(`KID=====>`,numberOfKids);
@@ -91,6 +96,13 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
     }
   }, [customerPackage, numberOfAdult, numberOfKids]);
 
+  useEffect(() => {
+    if (isFormReady) {
+      customerCreateBooking(isBooking);
+    }
+    // console.log(isBooking);
+  }, [isFormReady, isBooking, customerCreateBooking]);
+
   const handleCheckToggle = () => {
     setCheckToggle(!checkToggle);
   };
@@ -109,7 +121,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
   // console.log(`time`,time);
   // console.log(`cuspackage`,customerPackage);
 
-  console.log(isBooking);
+  // console.log(isBooking);
 
   return (
     <div>
@@ -172,7 +184,13 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
               )}
               <section>
                 <p className="font-semibold">special request</p>
-                <input type="text" name="specialRequest" id="" className="border" onChange={handleOnChange}/>
+                <input
+                  type="text"
+                  name="specialRequest"
+                  id=""
+                  className="border"
+                  onChange={handleOnChange}
+                />
               </section>
               <section>
                 <p className="font-semibold">summary</p>

@@ -1,6 +1,7 @@
 
 import { createContext } from "react";
 import { useState } from "react";
+import axios from "../config/axios";
 
 export const BookingContext = createContext();
 
@@ -9,6 +10,15 @@ export default function BookingContextProvider({ children }) {
   const [numberOfKids, setNumberOfKids] = useState(0);
   const [haveKids, setHaveKids] = useState(false);
   const [allPackage,setAllPackage] = useState([]);
+
+  const customerCreateBooking = async(booking) => {
+    try {
+      const res = await axios.post("http://localhost:8888/booking/create",booking);
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
 
   // useEffect(() => {
@@ -49,7 +59,8 @@ export default function BookingContextProvider({ children }) {
         numberOfAdult,
         numberOfKids,
         haveKids,
-        allPackage
+        allPackage,
+        customerCreateBooking
       }}
     >
       {children}
