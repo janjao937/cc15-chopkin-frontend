@@ -15,7 +15,7 @@ export default function ViewEditingPage() {
 		(item) => item.restaurantId === resId
 	);
 	console.log("filterReq =>", filterReq);
-	// console.log("filterReqId =>", filterReq.id);
+	console.log("filterReqId =>", filterReq.id);
 
 	const nation = nationIndex.find(
 		(item) => item.id === filterReq.districtIndex
@@ -33,21 +33,24 @@ export default function ViewEditingPage() {
 	// console.log("district", district);
 
 	console.log("tempBusinessTimes ===>", filterReq.tempBusinessTimes);
+	const busi = filterReq.tempBusinessTimes;
+	const newBusinessTime = busi.map((item) => {
+		delete item.restaurantPendingEditId;
+		item.restaurantId = resId;
+		return item;
+	});
+	// console.log("newBusiTime =>", newBusinessTime);
 
-	// const businessTime = JSON.stringify(filterReq.tempBusinessTimes);
-	const businessTime = filterReq.tempBusinessTimes;
 	const input = {
 		restaurantName: filterReq.restaurantName,
 		price: filterReq.price,
-		// restaurantId: String(filterReq.restaurantId),
 		categoryIndex: filterReq.categoryIndex,
 		districtIndex: filterReq.districtIndex,
 		nationIndex: filterReq.nationIndex,
 		latitude: filterReq.latitude,
 		longitude: filterReq.longitude,
 		profileImg: filterReq.profileImg,
-		// businessTime: filterReq.tempBusinessTimes,
-		businessTime: businessTime,
+		businessTime: JSON.stringify(newBusinessTime),
 	};
 
 	console.log("input =>", input);
@@ -55,6 +58,7 @@ export default function ViewEditingPage() {
 	const handleClickApprove = () => {
 		updateResPending(resId, input);
 		alert(`Approve Edit Restaurant : ${resId}`);
+		deleteResPending(filterReq.id);
 	};
 
 	const handleClickReject = () => {
