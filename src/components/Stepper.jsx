@@ -6,16 +6,53 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import useAuth from "../Hooks/use-auth";
+import useBooking from "../Hooks/use-booking";
+import { useEffect } from "react";
 
-export default function MyStepper({ setBooking, booking, mockPackage }) {
+export default function MyStepper({ setBooking, booking, allPackage, resId }) {
   const [activeStep, setActiveStep] = useState(0);
   const [isLastStep, setIsLastStep] = useState(false);
   const [isFirstStep, setIsFirstStep] = useState(false);
   const [isSelectPackage, setIsSelectPackage] = useState(false);
   const [checkToggle, setCheckToggle] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-  const [date,setDate] = useState(null);
+  const [date, setDate] = useState(null);
+  const [isSelectTime, setIsSelectTime] = useState(false);
+  const [time, setTime] = useState(null);
+  const [customerPackage, setCustomerPackage] = useState(null);
+  const [adultPrice, setAdultPrice] = useState(0);
+  const [kidsPrice, setKidsPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const { numberOfKids, numberOfAdult } = useBooking();
+  const [isBooking, setIsBooking] = useState({
+    packageId: "",
+    restaurantId: "",
+    bookingDate: "",
+    bookingTime: "",
+    specialRequest: "",
+    totalKid: "",
+    totalCustomer: "",
+    paymentStatus: 0,
+  });
+
+  const handleConfirmBooking = () => {
+    setIsBooking({
+      packageId: customerPackage.id,
+      restaurantId: resId,
+      bookingDate: date,
+      bookingTime: time,
+      specialRequest: isBooking.specialRequest,
+      totalKid: numberOfKids,
+      totalCustomer: numberOfAdult,
+      paymentStatus: 0,
+    });
+  };
+
+  // console.log(`KID=====>`,numberOfKids);
+  // console.log(`ADULT===>`,numberOfAdult);
 
   const handleOpenMenu = (itemId) => {
     setOpenMenu(itemId === openMenu ? null : itemId);
@@ -31,17 +68,48 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
     !isFirstStep && setActiveStep((cur) => cur - 1);
   };
 
-  const handleSelectPackage = () => {
+  const handleSelectPackage = (packageId) => {
     setIsSelectPackage(!isSelectPackage);
+    // console.log(`allPack`,allPackage);
+    const pack = allPackage.find((item) => item.id === packageId);
+    // console.log(pack)
+    setCustomerPackage(pack);
   };
+
+  useEffect(() => {
+    if (customerPackage) {
+      const newAdultPrice = customerPackage.price * numberOfAdult;
+      const newKidsPrice = (customerPackage.price * numberOfKids) / 2;
+      const newTotalPrice = newAdultPrice + newKidsPrice;
+
+      setAdultPrice(newAdultPrice);
+      setKidsPrice(newKidsPrice);
+      setTotalPrice(newTotalPrice);
+
+      // console.log('total price', newTotalPrice);
+      // console.log('total in state', totalPrice);
+    }
+  }, [customerPackage, numberOfAdult, numberOfKids]);
 
   const handleCheckToggle = () => {
     setCheckToggle(!checkToggle);
   };
 
+  const handleSelectTime = () => {
+    setIsSelectTime(!isSelectTime);
+  };
+
+  const handleOnChange = (e) => {
+    setIsBooking({ ...isBooking, [e.target.name]: e.target.value });
+  };
+
   const { authUser } = useAuth();
 
-  console.log(date);
+  // console.log(`date`,date);
+  // console.log(`time`,time);
+  // console.log(`cuspackage`,customerPackage);
+
+  console.log(isBooking);
 
   return (
     <div>
@@ -82,18 +150,44 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
           {isSelectPackage ? (
             <div>
               {" "}
+              {authUser ? (
+                <section>
+                  {" "}
+                  <p className="font-semibold">Personal Information</p>
+                  <p>{authUser.firstName}</p>
+                  <p>{authUser.phone}</p>
+                  <p>{authUser.email}</p>
+                </section>
+              ) : (
+                <div>
+                  <p>Name</p>
+                  <input type="text" className="border" />
+                  <p>Phone</p>
+                  <input type="text" className="border" />
+                  <p>Email</p>
+                  <input type="email" className="border" />
+                  <p>Special Request</p>
+                  <input type="text" className="border" />
+                </div>
+              )}
               <section>
-                {" "}
-                <p className="font-semibold">Personal Information</p>
-                <p>{authUser.firstName}</p>
-                <p>{authUser.phone}</p>
-                <p>{authUser.email}</p>
+                <p className="font-semibold">special request</p>
+                <input type="text" name="specialRequest" id="" className="border" onChange={handleOnChange}/>
               </section>
               <section>
                 <p className="font-semibold">summary</p>
-                <div>datetime and aduilt,kids</div>
-                <div>price</div>
-                <div>total price</div>
+                <div className="p-2 bg-gray-300 ">
+                  Time: {time.bookingTime},Adult: {numberOfAdult},Kids:{" "}
+                  {numberOfKids}
+                </div>
+                <div className="font-bold">package: {customerPackage.name}</div>
+
+                <p className="font-semibold">ADULT PRICE:</p>
+                <p>{adultPrice}</p>
+                <p className="font-semibold">KIDS PRICE:</p>
+                <p>{kidsPrice}</p>
+                <p className="font-semibold">Total Price</p>
+                <p>{totalPrice}</p>
               </section>
               <section>
                 <div className="flex justify-between">
@@ -127,16 +221,21 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
               <section>
                 <p className="font-semibold">Total Prepayment</p>
                 <p>total price</p>
-                <button>CONFIRM</button>
+                <MyButton
+                  style={`p-2 bg-secondary rounded-full w-full`}
+                  onClick={handleConfirmBooking}
+                >
+                  CONFIRM
+                </MyButton>
               </section>
             </div>
           ) : (
             <div>
-              {mockPackage.map((item, index) => (
+              {allPackage.map((item, index) => (
                 <section key={index}>
                   <div className="flex py-10 px-4 shadow-sm border border-gray-100 flex-col">
                     <div className="flex-1 flex flex-col justify-between">
-                      <p className="font-semibold">{item.packageName}</p>
+                      <p className="font-semibold">{item.name}</p>
                       <button
                         onClick={() => handleOpenMenu(item.id)}
                         className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4 text-primary`}
@@ -145,15 +244,13 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
                       </button>
                     </div>
                     <div className="flex-1">
-                      <p className="text-gray-500 text-xs">
-                        {item.packageInfo}
-                      </p>
+                      <p className="text-gray-500 text-xs">{item.detail}</p>
                     </div>
                     <div className="flex-1 text-center">
                       <p>{item.price}</p>
                     </div>
                     <MyButton
-                      onClick={handleSelectPackage}
+                      onClick={() => handleSelectPackage(item.id)}
                       style={`bg-primary h-[40px] rounded-md`}
                     >
                       Booking
@@ -176,10 +273,10 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
                                 <p>พฤหัสบดี</p>
                               </section>
                               <section>
-                                <p>Datetime</p>
-                                <p>Datetime</p>
-                                <p>Datetime</p>
-                                <p>Datetime</p>
+                                <p>businessTime</p>
+                                <p>businessTime</p>
+                                <p>businessTime</p>
+                                <p>businessTime</p>
                               </section>
                             </div>
 
@@ -191,9 +288,9 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
                                 <p>อาทิตย์</p>
                               </section>
                               <section>
-                                <p>Datetime</p>
-                                <p>Datetime</p>
-                                <p>Datetime</p>
+                                <p>businessTime</p>
+                                <p>businessTime</p>
+                                <p>businessTime</p>
                               </section>
                             </div>
                           </div>
@@ -202,7 +299,7 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
                           <p>รายละเอียดแพ็กเกจ</p>
                         </div>
                       </div>
-                      <img className="w-full" src={item.menuImage} alt="" />
+                      <img className="w-full" src={item.img} alt="" />
                       <div className="text-center p-4">
                         <button
                           onClick={handleOpenMenu}
@@ -221,24 +318,45 @@ export default function MyStepper({ setBooking, booking, mockPackage }) {
       ) : (
         <div>
           <p>Select Booking Date & Time</p>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DemoContainer components={["DatePicker", "DatePicker"]}>
-              <div className="w-[180px] h-[60px]">
-                <DatePicker
-                  label="Calender Date"
-                  name="bookingDate"
-                  className="w-full h-full"
-                  onChange={(e)=>{
-                    setDate({
-                      bookingDate: e.format("DD-MM-YYYY"),
-                    })
-                  }}
-                />
-              </div>
-            </DemoContainer>
-          </LocalizationProvider>
-
-          {date ? <button onClick={handleNext}>Next</button> : undefined}
+          {isSelectTime ? (
+            <div>
+              <p>TIME</p>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["TimePicker"]}>
+                  <div className="w-[170px] h-[60px]">
+                    <TimePicker
+                      label="HH:MM AM/PM"
+                      name="bookingTime"
+                      // value={inputModify.inputKey}
+                      onChange={(e) => setTime(e.format("HH:mm"))}
+                      className="w-full h-full"
+                    />
+                  </div>
+                </DemoContainer>
+              </LocalizationProvider>
+              {time ? <button onClick={handleNext}>Next</button> : undefined}
+            </div>
+          ) : (
+            <div>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DemoContainer components={["DatePicker", "DatePicker"]}>
+                  <div className="w-[180px] h-[60px]">
+                    <DatePicker
+                      label="Calender Date"
+                      name="bookingDate"
+                      className="w-full h-full"
+                      onChange={(e) => {
+                        setDate(e.format("DD-MM-YYYY"));
+                      }}
+                    />
+                  </div>
+                </DemoContainer>
+              </LocalizationProvider>
+              {date ? (
+                <button onClick={handleSelectTime}>Next</button>
+              ) : undefined}
+            </div>
+          )}
         </div>
       )}
     </div>

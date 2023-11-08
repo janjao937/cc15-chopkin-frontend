@@ -7,6 +7,9 @@ import useAuth from "../Hooks/use-auth";
 import { useParams } from "react-router-dom";
 import useRes from "../Hooks/use-res";
 import profileImage from "../assets/logo.png";
+import { useEffect } from "react";
+import axios from "../config/axios";
+import useBooking from "../Hooks/use-booking";
 
 const mockRestuarantInfo = {
   id: 1,
@@ -58,10 +61,24 @@ const mockPackage = [
 ];
 
 export default function RestaurantInfoPage() {
+
+  // const {allPackage} = useBooking();
+
+    const [allPackage,setAllPackage] = useState([]);
+    useEffect(() => {
+      axios
+        .get(`http://localhost:8888/package/getAll/${resId}`)
+        .then((res) => setAllPackage(res.data))
+        .catch((e) => console.log(e));
+    }, []);
+
+    console.log(allPackage);
+
   const { authUser } = useAuth();
   const { resId } = useParams();
 
   const { restaurantAll } = useRes();
+
 
   // console.log(authUser);
   console.log(`resId=======>`, resId);
@@ -116,11 +133,11 @@ export default function RestaurantInfoPage() {
           <div>
             <p className="font-light">Packages</p>
             <div className="border-l-8 shadow-xl border-primary">
-              {mockPackage.map((item, index) => (
+              {allPackage.map((item, index) => (
                 <section key={index}>
                   <div className="flex py-10 px-4 shadow-sm border border-gray-100">
                     <div className="flex-1 flex flex-col justify-between">
-                      <p className="font-semibold">{item.packageName}</p>
+                      <p className="font-semibold">{item.name}</p>
                       <button
                         onClick={() => handleOpenMenu(item.id)}
                         className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4 text-primary`}
@@ -130,7 +147,7 @@ export default function RestaurantInfoPage() {
                     </div>
                     <div className="flex-1">
                       <p className="text-gray-500 text-xs">
-                        {item.packageInfo}
+                        {item.detail}
                       </p>
                     </div>
                     <div className="flex-1 text-center">
@@ -183,7 +200,7 @@ export default function RestaurantInfoPage() {
                           <p>รายละเอียดแพ็กเกจ</p>
                         </div>
                       </div>
-                      <img className="w-full" src={item.menuImage} alt="" />
+                      <img className="w-full" src={item.img} alt="" />
                       <div className="text-center p-4">
                         <button
                           onClick={handleOpenMenu}
@@ -200,34 +217,33 @@ export default function RestaurantInfoPage() {
           </div>
         </section>
 
-        {authUser.firstName && (
-          <section className="w-[300px] self-start  border border-gray-100 shadow-md sticky top-16 max-h-[500px] overflow-auto">
-            <div className="w-full py-4 px-8">
-              {booking ? (
-                <div className="flex flex-col gap-4">
-                  {/* <MyRadio /> */}
+        <section className="w-[300px] self-start  border border-gray-100 shadow-md sticky top-16 max-h-[500px] overflow-auto">
+          <div className="w-full py-4 px-8">
+            {booking ? (
+              <div className="flex flex-col gap-4">
+                {/* <MyRadio /> */}
 
-                  <MyStepper
-                    setBooking={setBooking}
-                    booking={booking}
-                    mockPackage={mockPackage}
-                  />
-                </div>
-              ) : (
-                <div className="flex flex-col gap-4">
-                  <p className="text-primary">Click to Book</p>
-                  <hr />
-                  <MyButton
-                    style={`bg-secondary w-full rounded-full`}
-                    onClick={handleBooking}
-                  >
-                    BOOK NOW
-                  </MyButton>
-                </div>
-              )}
-            </div>
-          </section>
-        )}
+                <MyStepper
+                  setBooking={setBooking}
+                  booking={booking}
+                  allPackage={allPackage}
+                  resId={resId}
+                />
+              </div>
+            ) : (
+              <div className="flex flex-col gap-4">
+                <p className="text-primary">Click to Book</p>
+                <hr />
+                <MyButton
+                  style={`bg-secondary w-full rounded-full`}
+                  onClick={handleBooking}
+                >
+                  BOOK NOW
+                </MyButton>
+              </div>
+            )}
+          </div>
+        </section>
       </main>
       {/* {authUser.firstName ? <RestaurantReview /> : undefined} */}
       <RestaurantReview />
