@@ -4,7 +4,7 @@ import { BiImageAdd } from "react-icons/bi";
 export default function AddPackageImage({ file, setFile }) {
   const fileEl = useRef(null);
   return (
-    <div>
+    <>
       <input
         type="file"
         className="hidden"
@@ -17,7 +17,7 @@ export default function AddPackageImage({ file, setFile }) {
       />
       {file ? (
         <div
-          className="flex justify-center items-center w-20 h-20 bg-gray-200 border border-gray-300 shadow cursor-pointer"
+          className="flex justify-evenly items-center w-32 h-32 bg-gray-200 border border-gray-300 shadow cursor-pointer"
           onClick={() => fileEl.current.click()}
         >
           <img
@@ -28,12 +28,12 @@ export default function AddPackageImage({ file, setFile }) {
         </div>
       ) : (
         <div
-          className="flex justify-center items-center w-20 h-20 bg-gray-200 border border-gray-300 shadow cursor-pointer"
+          className="flex justify-evenly items-center w-32 h-32 bg-gray-200 border border-gray-300 shadow cursor-pointer"
           onClick={() => fileEl.current.click()}
         >
           <BiImageAdd />
         </div>
       )}
-    </div>
+    </>
   );
 }

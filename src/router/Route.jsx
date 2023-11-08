@@ -59,6 +59,14 @@ const router = createBrowserRouter([
           </AuthenticatedRestaurant>
         ),
       },
+      {
+        path: "/restaurant/:resId/edit/edit-package",
+        element: (
+          <AuthenticatedRestaurant>
+            <ResEditPackagePage />
+          </AuthenticatedRestaurant>
+        ),
+      },
     ],
   },
   {
@@ -85,15 +93,6 @@ const router = createBrowserRouter([
       </RedirectIfAuthenticated>
     ),
   },
-  {
-    path: "/restaurant/:resId/edit/edit-package",
-    element: (
-      <AuthenticatedRestaurant>
-        <ResEditPackagePage />
-      </AuthenticatedRestaurant>
-    ),
-  },
-
   {
     path: "/admin",
     element: (
