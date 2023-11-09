@@ -7,15 +7,15 @@ import { Link } from "react-router-dom";
 
 export default function ViewEditingPage() {
 	const { resId } = useParams();
-	console.log("resId =>", resId);
+	// console.log("resId =>", resId);
 
 	const { fatchResPendding, updateResPending, deleteResPending } = useRes();
 
 	const filterReq = fatchResPendding.find(
 		(item) => item.restaurantId === resId
 	);
-	console.log("filterReq =>", filterReq);
-	console.log("filterReqId =>", filterReq.id);
+	// console.log("filterReq =>", filterReq);
+	// console.log("filterReqId =>", filterReq.id);
 
 	const nation = nationIndex.find(
 		(item) => item.id === filterReq.districtIndex
@@ -35,11 +35,12 @@ export default function ViewEditingPage() {
 	console.log("tempBusinessTimes ===>", filterReq.tempBusinessTimes);
 	const busi = filterReq.tempBusinessTimes;
 	const newBusinessTime = busi.map((item) => {
+		delete item.id;
 		delete item.restaurantPendingEditId;
 		item.restaurantId = resId;
 		return item;
 	});
-	// console.log("newBusiTime =>", newBusinessTime);
+	console.log("newBusiTime =>", newBusinessTime);
 
 	const input = {
 		restaurantName: filterReq.restaurantName,
