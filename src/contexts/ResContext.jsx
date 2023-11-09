@@ -13,6 +13,7 @@ export default function ResContextProvider({ children }) {
   const [restaurantAll, setRestaurantAll] = useState([]);
   const [fatchResPendding, setFatchResPendding] = useState([]);
   const [fatchPackagePendding, setFatchPackcagePendding] = useState([]);
+  const [getBookingAll, setGetBookingAll] = useState([]);
 
   useEffect(() => {
     fatchResAll();
@@ -100,7 +101,7 @@ export default function ResContextProvider({ children }) {
     try {
       const res = await axios.patch(`/restaurant/mergeResInfo/${redId}`, input);
       setFatchResPendding(
-        fatchPackagePendding.filter((item) => item.restaurantId !== redId)
+        fatchResPendding.filter((item) => item.restaurantId !== redId)
       );
     } catch (err) {
       console.log(err);
@@ -112,7 +113,9 @@ export default function ResContextProvider({ children }) {
     try {
       const res = await axios.delete(`/restaurant/editPending/${redId}`);
       // console.log("deleteResPendding =>", res.data);
-      setFatchResPendding(fatchResPendding.filter((item) => item.id !== redId));
+      setFatchResPendding(
+        fatchResPendding.filter((item) => item.restaurantId !== redId)
+      );
     } catch (err) {
       console.log(err);
     }
@@ -160,6 +163,32 @@ export default function ResContextProvider({ children }) {
     }
   };
 
+  // ####################### Booking
+  useEffect(() => {
+    const fatchBookingAll = async () => {
+      try {
+        const res = await axios.get(`/booking/all`);
+        console.log("fatchBookgingAll =>", res.data.allBooking);
+        setGetBookingAll(res.data.allBooking);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fatchBookingAll();
+  }, []);
+
+  useEffect(() => {
+    const ownerMyBooking = async () => {
+      try {
+        const res = await axios.get(`/booking/own`);
+        console.log("ownBooking =>", res.data.allBooking);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    ownerMyBooking();
+  }, []);
+
   return (
     <ResContext.Provider
       value={{
@@ -175,6 +204,7 @@ export default function ResContextProvider({ children }) {
         fatchPackagePendding,
         createPackage,
         deletePackagePendding,
+        getBookingAll,
       }}
     >
       {children}

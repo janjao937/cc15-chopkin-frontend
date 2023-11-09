@@ -28,6 +28,13 @@ import ResPenddingEditPage from "../page/admin/ResPenddingEditPage";
 import PackagePage from "../page/admin/PackagePage";
 import ViewPackagePendding from "../page/admin/ViewPackagePendding";
 import ResEditPackagePage from "../page/ResEditPackagePage";
+import Reservation from "../features/customer/Reservation";
+import Favorite from "../features/customer/Favorite";
+import BookHistory from "../features/customer/BookHistory";
+import Voucher from "../features/customer/Voucher";
+import Gift from "../features/customer/Gift";
+import Benefits from "../features/customer/Benefits";
+import Address from "../features/customer/Address";
 
 const router = createBrowserRouter([
   {
@@ -40,13 +47,63 @@ const router = createBrowserRouter([
       { path: "/all-restaurants", element: <AllRestuarantPage /> },
       { path: "/nation/:nationIndex", element: <ResNationPage /> },
       {
-        path: "/profile/:userId",
+        path: "profile/:userId/",
         element: (
           <AuthenticatedCustomer>
-            <UserProfile />
+            <Reservation />,
           </AuthenticatedCustomer>
         ),
       },
+      {
+        path: "profile/:userId/favorite",
+        element: (
+          <AuthenticatedCustomer>
+            <Favorite />
+          </AuthenticatedCustomer>
+        ),
+      },
+      {
+        path: "/profile/:userId/book-history",
+        element: (
+          <AuthenticatedCustomer>
+            <BookHistory />
+          </AuthenticatedCustomer>
+        ),
+      },
+      {
+        path: "/profile/:userId/voucher",
+        element: (
+          <AuthenticatedCustomer>
+            <Voucher />
+          </AuthenticatedCustomer>
+        ),
+      },
+      {
+        path: "/profile/:userId/gift",
+        element: (
+          <AuthenticatedCustomer>
+            <Gift />
+          </AuthenticatedCustomer>
+        ),
+      },
+      {
+        path: "/profile/:userId/benefits",
+        element: (
+          <AuthenticatedCustomer>
+            <Benefits />
+          </AuthenticatedCustomer>
+        ),
+      },
+      {
+        path: "/profile/:userId/address",
+        element: (
+          <AuthenticatedCustomer>
+            <Address />
+          </AuthenticatedCustomer>
+        ),
+      },
+
+      // ############################# restaurant
       {
         path: "/restaurant/:resId",
         element: <RestaurantInfoPage />,
@@ -69,6 +126,7 @@ const router = createBrowserRouter([
       },
     ],
   },
+
   {
     path: "/register",
     element: (
@@ -93,6 +151,16 @@ const router = createBrowserRouter([
       </RedirectIfAuthenticated>
     ),
   },
+  {
+    path: "/restaurant/:resId/edit/edit-package",
+    element: (
+      <AuthenticatedRestaurant>
+        <ResEditPackagePage />
+      </AuthenticatedRestaurant>
+    ),
+  },
+
+  // ############################# admin
   {
     path: "/admin",
     element: (
