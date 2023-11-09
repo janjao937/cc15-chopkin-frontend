@@ -1,31 +1,22 @@
 import { useState } from "react";
 import MyButton from "./MyButton";
+import useBooking from "../Hooks/use-booking";
+import { useEffect } from "react";
 
 export default function MyRadio({ handleNext, handlePrev }) {
-  const [numberOfAdult, setNumberOfAdult] = useState(0);
-  const [numberOfKids, setNumberOfKids] = useState(0);
-  const [haveKids, setHaveKids] = useState(false);
 
-  const handleGetNumberOfAdult = (value) => {
-    setNumberOfAdult(value);
-  };
+  const {
+    handleGetNumberOfAdult,
+    handleHaveKid,
+    handleAddKid,
+    handleRemoveKid,
+    numberOfAdult,
+    numberOfKids,
+    haveKids
+  } = useBooking();
 
-  const handleHaveKid = () => {
-    setHaveKids(!haveKids);
-    setNumberOfKids(0);
-  };
-
-  const handleAddKid = () => {
-    setNumberOfKids(numberOfKids + 1);
-  };
-
-  const handleRemoveKid = () => {
-    if (numberOfKids > 0) {
-      setNumberOfKids(numberOfKids - 1);
-    }
-  };
-
-  console.log(numberOfAdult);
+  // console.log(`Adult===>`, numberOfAdult);
+  // console.log(`Kids====>`, numberOfKids);
 
   const number = [];
   for (let i = 1; i <= 20; i++) {

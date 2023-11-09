@@ -15,22 +15,25 @@ import { AiOutlineMail } from "react-icons/ai";
 import { SlDiamond } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 
-import { mockBooking } from "../../data/mock-booking";
+import useRes from "../../Hooks/use-res";
 
 export default function DetailBookingPage() {
-	const { bookingId } = useParams();
-	console.log("bookingId ==>", bookingId);
+	const { getBookingAll } = useRes();
+	// console.log("getBookingAll =>", getBookingAll);
 
-	const [newBookId] = mockBooking.filter((item) => item.id === +bookingId);
-	console.log("newBookId ==>", newBookId);
+	const { bookingId } = useParams();
+	// console.log("bookingId ==>", bookingId);
+
+	const myBooking = getBookingAll.find((item) => item.id === bookingId);
+	// console.log("myBooking =>", myBooking);
 
 	return (
 		<div className="p-4 flex flex-col gap-4">
 			<div className="flex items-center justify-between">
 				<div className="w-[200px] h-[200px] rounded-full overflow-hidden">
 					<img
-						src={`${false ? "" : blank}`}
-						alt=""
+						src={myBooking.customer.profileImg || blank}
+						alt="profileImg"
 						className="w-full h-full object-cover"
 					/>
 				</div>
@@ -49,21 +52,21 @@ export default function DetailBookingPage() {
 					<div className="flex items-center justify-between">
 						<div className="flex items-center gap-2">
 							<BiCalendar size={20} />
-							<small>{newBookId.createdAt}</small>
+							<small>{myBooking.bookingDate}</small>
 						</div>
 						<div className="flex items-center gap-2">
 							<FaRegClock size={20} />
-							<small>10:00</small>
+							<small>{myBooking.bookingTime}</small>
 						</div>
 					</div>
 					<hr className="border border-black" />
 					<div className="flex items-center justify-between">
 						<div className="font-semibold">
-							{newBookId.reataurant.package.name}
+							{myBooking.package.name}
 						</div>
 						<div className="flex gap-1">
 							<div className="text-red-600 font-semibold">
-								{newBookId.reataurant.package.price}
+								{myBooking.package.price}
 							</div>
 							<span>Baht</span>
 						</div>
@@ -74,8 +77,9 @@ export default function DetailBookingPage() {
 						</div>
 						<div className="flex gap-1">
 							<div className="text-red-600 font-semibold">
-								{newBookId.reataurant.package.price *
-									newBookId.totalCustomer}
+								{myBooking.package.price *
+									(myBooking.totalCustomer +
+										myBooking.totalKid / 2)}
 							</div>
 							<span>Baht</span>
 						</div>
@@ -91,7 +95,7 @@ export default function DetailBookingPage() {
 			<div className="flex flex-col w-[70%] gap-2 p-4 ">
 				<h1 className="text-xl mb-4 font-semibold">
 					Booking ID:
-					<span className="text-red-600"> {newBookId.id}</span>
+					<span className="text-red-600"> {myBooking.id}</span>
 				</h1>
 				<div className="flex flex-col gap-4 mb-10">
 					<div className="grid grid-cols-12 items-center">
@@ -105,7 +109,7 @@ export default function DetailBookingPage() {
 							Name
 						</div>
 						<div className="col-span-6">
-							{newBookId.customer.firstName}
+							{myBooking.customer.firstName}
 						</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
@@ -116,7 +120,7 @@ export default function DetailBookingPage() {
 							Email
 						</div>
 						<div className="col-span-6">
-							{newBookId.customer.email}
+							{myBooking.customer.email}
 						</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
@@ -127,7 +131,7 @@ export default function DetailBookingPage() {
 							Phone
 						</div>
 						<div className="col-span-6">
-							{newBookId.customer.phone}
+							{myBooking.customer.phone}
 						</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
@@ -137,7 +141,9 @@ export default function DetailBookingPage() {
 						<div className="col-span-5 text-red-600 font-semibold">
 							Date & Time
 						</div>
-						<div className="col-span-6">{newBookId.createdAt}</div>
+						<div className="col-span-6">
+							{myBooking.createdAt.slice(0, 10)}
+						</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
 						<div className="col-span-1">
@@ -147,7 +153,7 @@ export default function DetailBookingPage() {
 							Number of people
 						</div>
 						<div className="col-span-6">
-							{newBookId.totalCustomer}
+							{myBooking.totalCustomer + myBooking.totalKid}
 						</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
@@ -158,7 +164,7 @@ export default function DetailBookingPage() {
 							Restaurant
 						</div>
 						<div className="col-span-6">
-							{newBookId.reataurant.reataurantName}
+							{myBooking.restaurant.restaurantName}
 						</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
@@ -169,7 +175,7 @@ export default function DetailBookingPage() {
 							Package Type
 						</div>
 						<div className="col-span-6">
-							{newBookId.reataurant.package.name}
+							{myBooking.package.name}
 						</div>
 					</div>
 				</div>

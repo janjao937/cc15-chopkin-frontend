@@ -16,6 +16,8 @@ export default function EditResInfo({ handleOnSubmit }) {
 
   console.log(allDistricts);
 
+  console.log(business);
+
   const fileEl = useRef(null);
   const [input, setInput] = useState({
     restaurantName: "",
@@ -121,7 +123,7 @@ export default function EditResInfo({ handleOnSubmit }) {
       formdata.append("longitude", input.longitude);
     }
     if (input.businessTime) {
-      formdata.append("businessTime", JSON.stringify(input.businessTime));
+      formdata.append("businessTime", JSON.stringify(business));
     }
 
     handleOnSubmit();

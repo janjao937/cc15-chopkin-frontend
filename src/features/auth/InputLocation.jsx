@@ -1,7 +1,7 @@
 export default function InputLocation({
   hasError,
   isOpen,
-  type = "text",
+  type = "number",
   placeholder,
   value,
   onChange,

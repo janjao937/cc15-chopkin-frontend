@@ -1,37 +1,35 @@
 import React from "react";
 import SearchInput from "../../components/SearchInput";
-import { mockBooking } from "../../data/mock-booking";
-// console.log(mockBooking);
-import BookingList from "../../features/admin/BookingList";
+import RequestList from "../../features/admin/RequestList";
 import useRes from "../../Hooks/use-res";
 
-export default function BookingPage() {
-	const { getBookingAll } = useRes();
-	// console.log("getBookingAll =>", getBookingAll);
+// import { packageEditPending } from "../../data/mock-restaurantEdit";
 
+export default function ResPenddingEditPage() {
+	const { fatchResPendding } = useRes();
 	return (
 		<>
 			<div className="flex flex-col gap-4 p-4 mb-10">
-				<h1>All Booking</h1>
+				<h1>Edit Request</h1>
 				<small className="mb-4">Hi, Welcome back to Admin!</small>
 
 				<div className="mb-4">
 					<SearchInput placeholder="Search Booking ID or Name" />
 				</div>
 
-				{/* BookingList */}
+				{/* EditPenddingList */}
 				<div className="">
 					<div className="grid grid-cols-12">
 						<h1 className="col-span-5 px-4 py-2 text-center border border-gray-400  bg-gray-300 text-red-500 font-semibold ">
-							Booking ID
+							Request ID
 						</h1>
 						<h1 className="col-span-3 px-4 py-2 text-center border border-gray-400 bg-gray-300 text-red-500 font-semibold ">
-							username
+							Restaurant Name
 						</h1>
 					</div>
-					{getBookingAll.map((item, index) => (
+					{fatchResPendding.map((item, index) => (
 						<div key={index}>
-							<BookingList data={item} />
+							<RequestList data={item} />
 						</div>
 					))}
 				</div>

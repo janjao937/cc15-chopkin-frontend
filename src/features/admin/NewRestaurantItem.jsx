@@ -1,8 +1,8 @@
 import React from "react";
 import MyButton from "../../components/MyButton";
 import { BsPersonCircle, BsTelephone } from "react-icons/bs";
-import { FaPizzaSlice } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
+import { FaPizzaSlice } from "react-icons/fa";
 import { CiLocationOn } from "react-icons/ci";
 import useRes from "../../Hooks/use-res";
 import { categoryIndex, dataCuisine } from "../../data/dataRes";
