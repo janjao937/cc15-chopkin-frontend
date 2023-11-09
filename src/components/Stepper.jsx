@@ -195,15 +195,24 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
               <section>
                 <p className="font-semibold">summary</p>
                 <div className="p-2 bg-gray-300 ">
-                  Time: {time.bookingTime},Adult: {numberOfAdult},Kids:{" "}
-                  {numberOfKids}
+                  Time: {time},Adult: {numberOfAdult},Kids: {numberOfKids}
                 </div>
                 <div className="font-bold">package: {customerPackage.name}</div>
 
                 <p className="font-semibold">ADULT PRICE:</p>
-                <p>{adultPrice}</p>
+                <div className="flex justify-between">
+                  <p className="text-gray-500">{customerPackage.price}</p>
+                  <p>x{numberOfAdult}</p>
+                  <p>{adultPrice}</p>
+                </div>
+
                 <p className="font-semibold">KIDS PRICE:</p>
-                <p>{kidsPrice}</p>
+                <div className="flex justify-between">
+                  <p className="text-gray-500">{customerPackage.price / 2}</p>
+                  <p>x{numberOfKids}</p>
+                  <p>{kidsPrice}</p>
+                </div>
+
                 <p className="font-semibold">Total Price</p>
                 <p>{totalPrice}</p>
               </section>
@@ -233,12 +242,12 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
                   </div>
                 ) : undefined}
               </section>
-              <section>
+              {/* <section>
                 <p className="font-semibold">Term & Conditions</p>
-              </section>
+              </section> */}
               <section>
-                <p className="font-semibold">Total Prepayment</p>
-                <p>total price</p>
+                {/* <p className="font-semibold">Total Prepayment</p> */}
+                
                 <MyButton
                   style={`p-2 bg-secondary rounded-full w-full`}
                   onClick={handleConfirmBooking}

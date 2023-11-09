@@ -47,8 +47,8 @@ export default function BookingContextProvider({ children }) {
     }
   };  
 
-  console.log(`Adult===>`, numberOfAdult);
-  console.log(`Kids====>`, numberOfKids);
+  // console.log(`Adult===>`, numberOfAdult);
+  // console.log(`Kids====>`, numberOfKids);
   return (
     <BookingContext.Provider
       value={{
