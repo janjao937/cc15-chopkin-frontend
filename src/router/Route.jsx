@@ -151,14 +151,6 @@ const router = createBrowserRouter([
       </RedirectIfAuthenticated>
     ),
   },
-  {
-    path: "/restaurant/:resId/edit/edit-package",
-    element: (
-      <AuthenticatedRestaurant>
-        <ResEditPackagePage />
-      </AuthenticatedRestaurant>
-    ),
-  },
 
   // ############################# admin
   {
