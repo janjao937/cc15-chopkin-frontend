@@ -36,6 +36,8 @@ import Gift from "../features/customer/Gift";
 import Benefits from "../features/customer/Benefits";
 import Address from "../features/customer/Address";
 import CusEditAccount from "../page/CusEditAccount";
+import PaymentSuccessPage from "../page/PaymentSuccessPage";
+import PaymentNotSuccessPage from "../page/PaymentNotSuccessPage";
 
 const router = createBrowserRouter([
 	{
@@ -134,6 +136,22 @@ const router = createBrowserRouter([
 				),
 			},
 		],
+	},
+	{
+		path: "/payment/:userId/success",
+		element: (
+			<AuthenticatedCustomer>
+				<PaymentSuccessPage />
+			</AuthenticatedCustomer>
+		),
+	},
+	{
+		path: "/payment/:userId/fail",
+		element: (
+			<AuthenticatedCustomer>
+				<PaymentNotSuccessPage />
+			</AuthenticatedCustomer>
+		),
 	},
 
 	{
