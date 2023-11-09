@@ -9,10 +9,8 @@ export default function ResContextProvider({ children }) {
   const isRestaurant = authUser?.restaurantName;
   const isCustomer = authUser?.firstName;
   const isAdmin = authUser?.isAdmin;
-
   const [reqRestaurant, setReqRestaurant] = useState([]);
   const [restaurantAll, setRestaurantAll] = useState([]);
-  const [addPackage, setAddPackage] = useState(null);
   const [fatchResPendding, setFatchResPendding] = useState([]);
   const [fatchPackagePendding, setFatchPackcagePendding] = useState([]);
 
@@ -162,11 +160,6 @@ export default function ResContextProvider({ children }) {
     }
   };
 
-  const createPackagePending = async (data) => {
-    const res = await axios.post("/package/createPending", data);
-    setAddPackage({ ...addPackage, ...res.data });
-  };
-
   return (
     <ResContext.Provider
       value={{
@@ -182,7 +175,6 @@ export default function ResContextProvider({ children }) {
         fatchPackagePendding,
         createPackage,
         deletePackagePendding,
-        createPackagePending,
       }}
     >
       {children}

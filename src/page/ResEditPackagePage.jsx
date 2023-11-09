@@ -5,18 +5,15 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "../config/axios";
 import Loading from "../components/Loading";
-import useRes from "../Hooks/use-res";
 import MyOutlineButton from "../components/MyOutlineButton";
 
 export default function ResEditPackagePage() {
   const { resId } = useParams();
   const newResId = String(resId);
 
-  const { createPackagePending } = useRes();
+  const [resPackage, setResPackage] = useState([]);
 
   const [loading, setLoading] = useState(false);
-
-  const [resPackage, setResPackage] = useState([]);
 
   const [file, setFile] = useState(null);
 
@@ -34,7 +31,7 @@ export default function ResEditPackagePage() {
   useEffect(() => {
     const getPackage = async () => {
       try {
-        const res = await axios.get(`/package/getAll/${newResId}`);
+        const res = await axios.get(`/package/getEveryPackage`);
         console.log("package =>", res.data);
         setResPackage(res.data);
       } catch (err) {
@@ -44,8 +41,22 @@ export default function ResEditPackagePage() {
     getPackage();
   }, []);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleChangePackageStatus = async (packageId) => {
+    try {
+      await axios.patch(`/package/updateStatus/${packageId}`);
+      const newRespackage = resPackage.map((item) => {
+        if (item.id === +packageId) {
+          item.status = item.status === 1 ? 0 : 1;
+        }
+        return item;
+      });
+      setResPackage(newRespackage);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleSubmit = async () => {
     try {
       const formData = new FormData();
       if (file) {
@@ -55,7 +66,7 @@ export default function ResEditPackagePage() {
         formData.append("info", JSON.stringify(input));
       }
       setLoading(true);
-      await createPackagePending(formData);
+      await axios.post("/package/createPending", formData);
     } catch (err) {
       console.log(err);
     } finally {
@@ -72,36 +83,75 @@ export default function ResEditPackagePage() {
             Current package
           </div>
           <div className="flex flex-col justify-center items-center gap-3">
-            {resPackage.length > 0 &&
-            resPackage.find((item) => item.status === 1) ? (
+            {resPackage.length > 0 ? (
               <div>
-                {resPackage.map((item, index) => (
-                  <div className="flex justify-between w-96">
-                    <div key={index} className="flex gap-3 p-4">
-                      <div>
-                        <img
-                          src={item.img}
-                          alt="package-pic"
-                          className="w-20 h-20"
-                        />
+                {resPackage.map((item, index) => {
+                  if (item.status === 1) {
+                    return (
+                      <div key={index} className="flex justify-between w-96">
+                        <div className="flex gap-3 p-4">
+                          <div>
+                            <img
+                              src={item.img}
+                              alt="package-pic"
+                              className="w-20 h-20"
+                            />
+                          </div>
+                          <div className="flex flex-col items-start justify-between">
+                            <div className="font-semibold">{item.name}</div>
+                            <div className="text-sm">{item.detail}</div>
+                            <div>Price : {item.price}</div>
+                          </div>
+                        </div>
+                        <div className="flex flex-col justify-center items-center text-sm">
+                          <MyOutlineButton
+                            outlinestyle={`bg-secondary text-white hover:text-black hover:bg-white `}
+                            onClick={() => handleChangePackageStatus(item.id)}
+                          >
+                            Hide Package
+                          </MyOutlineButton>
+                        </div>
                       </div>
-                      <div className="flex flex-col items-start justify-between">
-                        <div className="font-semibold">{item.name}</div>
-                        <div className="text-sm">{item.detail}</div>
-                        <div>Price : {item.price}</div>
+                    );
+                  } else {
+                    return (
+                      <div
+                        key={index}
+                        className="flex justify-between w-96 opacity-20"
+                      >
+                        <div className="flex gap-3 p-4">
+                          <div>
+                            <img
+                              src={item.img}
+                              alt="package-pic"
+                              className="w-20 h-20"
+                            />
+                          </div>
+                          <div className="flex flex-col items-start justify-between">
+                            <div className="font-semibold">{item.name}</div>
+                            <div className="text-sm">{item.detail}</div>
+                            <div>Price : {item.price}</div>
+                          </div>
+                        </div>
+                        <div className="flex flex-col justify-center items-center text-sm">
+                          <MyOutlineButton
+                            outlinestyle={`hover:text-white hover:bg-secondary`}
+                            onClick={() => handleChangePackageStatus(item.id)}
+                          >
+                            Show Package
+                          </MyOutlineButton>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex flex-col justify-center items-center text-sm">
-                      <MyOutlineButton>Hide Package</MyOutlineButton>
-                    </div>
-                  </div>
-                ))}
+                    );
+                  }
+                })}
               </div>
             ) : (
               <div>No Current package...</div>
             )}
           </div>
         </div>
+
         <div className="border border-gray-500 rounded-lg shadow-md w-[50%]">
           <div className="w-full rounded-t-lg p-2 text-center text-xl font-semibold bg-light-blue-100">
             Add new package
@@ -150,7 +200,16 @@ export default function ResEditPackagePage() {
         <MyButton
           type={"submit"}
           style={`py-2 bg-secondary`}
-          onClick={handleSubmit}
+          onClick={() => {
+            handleSubmit();
+            setFile(null);
+            setInput({
+              name: "",
+              detail: "",
+              price: "",
+              restaurantId: "",
+            });
+          }}
         >
           Submit
         </MyButton>
