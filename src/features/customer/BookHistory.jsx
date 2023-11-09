@@ -19,7 +19,7 @@ export default function BookHistory() {
 	const myBooking = getBookingAll.filter(
 		(item) => item.customerId === userId
 	);
-	console.log("myBooking =>", myBooking);
+	// console.log("myBooking =>", myBooking);
 
 	return (
 		<div className="flex flex-col m-4">

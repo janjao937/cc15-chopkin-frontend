@@ -3,8 +3,12 @@ import SearchInput from "../../components/SearchInput";
 import { mockBooking } from "../../data/mock-booking";
 // console.log(mockBooking);
 import BookingList from "../../features/admin/BookingList";
+import useRes from "../../Hooks/use-res";
 
 export default function BookingPage() {
+	const { getBookingAll } = useRes();
+	// console.log("getBookingAll =>", getBookingAll);
+
 	return (
 		<>
 			<div className="flex flex-col gap-4 p-4 mb-10">
@@ -25,7 +29,7 @@ export default function BookingPage() {
 							username
 						</h1>
 					</div>
-					{mockBooking.map((item, index) => (
+					{getBookingAll.map((item, index) => (
 						<div key={index}>
 							<BookingList data={item} />
 						</div>

@@ -1,6 +1,8 @@
 import React from "react";
 
 export default function MyBookItem({ obj, date }) {
+	// console.log("obj =>", obj);
+
 	return (
 		<div className="flex flex-col gap-4 border rounded-xl shadow-lg p-6">
 			<div className="text-red-500 font-semibold text-lg">

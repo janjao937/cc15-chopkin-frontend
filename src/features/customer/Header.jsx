@@ -7,7 +7,7 @@ import MemberPoint from "./MemberPoint";
 
 export default function Header() {
 	const { authUser } = useAuth();
-	console.log("authUser =>", authUser);
+	// console.log("authUser =>", authUser);
 
 	return (
 		<div className="grid grid-cols-12">
