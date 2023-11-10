@@ -7,7 +7,6 @@ import LoginPage from "../page/LoginPage";
 import RegisterRestaurantPage from "../page/RegisterRestaurantPage";
 import RecommendedPage from "../page/RecommendPage";
 import AllRestuarantPage from "../page/AllRestaurantPage";
-import UserProfile from "../page/UserProfile";
 import LayoutAdmin from "../layout/LayoutAdmin";
 import AdminPage from "../page/admin/AdminPage";
 import ListRestaurantPage from "../page/admin/ListRestaurantPage";

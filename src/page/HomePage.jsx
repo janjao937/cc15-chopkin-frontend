@@ -8,7 +8,6 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import bgHome from "../assets/image/bgHome.png";
 import { Link } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
-import Login from "../features/googleAuth/login";
 
 export default function HomePage() {
 	const { restaurantAll } = useRes();
@@ -72,8 +71,6 @@ export default function HomePage() {
 						</div>
 					))}
 				</div>
-
-				{/* <Login></Login> */}
 
 				{/* All Restaurants */}
 				<div className="mb-4 mx-4">
