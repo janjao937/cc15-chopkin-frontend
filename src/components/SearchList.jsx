@@ -20,7 +20,7 @@ function SearchList({ searchInput }) {
   return (
     <div>
       {searchResArr.length > 0 && (
-        <ul className="border border-gray-600 rounded-lg top-2py-1 z-50 bg-white absolute w-full">
+        <ul className="border border-gray-400 rounded-lg top-2py-1 z-50 bg-white absolute w-full">
           {searchResArr.map((x) => (
             <li
               key={x.id}

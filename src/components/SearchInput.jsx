@@ -21,7 +21,6 @@ export default function SearchInput({
         value={value}
         onChange={onChange}
       />
-      <MyButton style={`bg-primary rounded-md`}>Search</MyButton>
     </div>
   );
 }

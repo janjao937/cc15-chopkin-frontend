@@ -14,6 +14,8 @@ export default function ResContextProvider({ children }) {
   const [fatchResPendding, setFatchResPendding] = useState([]);
   const [fatchPackagePendding, setFatchPackcagePendding] = useState([]);
   const [getBookingAll, setGetBookingAll] = useState([]);
+  const [editRequestLoading, setEditRequestLoading] = useState(false);
+  const [homeLoading, setHomeLoading] = useState(false);
 
   useEffect(() => {
     fatchResAll();
@@ -27,9 +29,11 @@ export default function ResContextProvider({ children }) {
   useEffect(() => {
     const fatchRequestRes = async () => {
       try {
-        const res = await axios.get("/restaurant/getPendingRes");
-        console.log("fatchRequestRes==>", res.data);
-        setReqRestaurant(res.data);
+        if (authUser?.isAdmin) {
+          const res = await axios.get("/restaurant/getPendingRes");
+          console.log("fatchRequestRes==>", res.data);
+          setReqRestaurant(res.data);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -41,11 +45,15 @@ export default function ResContextProvider({ children }) {
 
   const fatchResAll = async () => {
     try {
+      setHomeLoading(true);
       const res = await axios.get("/restaurant/all");
       console.log("fatchResAll=>", res.data);
       setRestaurantAll(res.data);
+      setHomeLoading(false);
     } catch (err) {
       console.log(err);
+    } finally {
+      setHomeLoading(false);
     }
   };
 
@@ -86,20 +94,8 @@ export default function ResContextProvider({ children }) {
       console.log(err);
     }
   };
-
   // admin => get res PenddingEdit
-  useEffect(() => {
-    const fatchPendingEdit = async () => {
-      try {
-        const res = await axios.get(`/restaurant/getPendingEdit`);
-        console.log("fatchPendingEdit =>", res.data);
-        setFatchResPendding(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fatchPendingEdit();
-  }, []);
+  console.log("AUTH =>>>>", authUser);
 
   // admin => update res PenddingEdit
   const updateResPending = async (redId, input) => {
@@ -127,20 +123,6 @@ export default function ResContextProvider({ children }) {
       console.log(err);
     }
   };
-
-  // admin => package getEditPending
-  useEffect(() => {
-    const fatchPackagePending = async () => {
-      try {
-        const res = await axios.get(`/package/getEditPending`);
-        console.log("fatchPackagePending =>", res.data);
-        setFatchPackcagePendding([...res.data]);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fatchPackagePending();
-  }, []);
 
   // admin => package createPackage
   const createPackage = async (resId, input) => {
@@ -187,8 +169,10 @@ export default function ResContextProvider({ children }) {
   useEffect(() => {
     const ownerMyBooking = async () => {
       try {
-        const res = await axios.get(`/booking/own`);
-        console.log("ownBooking =>", res.data.allBooking);
+        if (authUser?.restaurantName) {
+          const res = await axios.get(`/booking/own`);
+          console.log("ownBooking =>", res.data.allBooking);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -213,6 +197,11 @@ export default function ResContextProvider({ children }) {
         deletePackagePendding,
         getBookingAll,
         business,
+        editRequestLoading,
+        homeLoading,
+        setEditRequestLoading,
+        setFatchResPendding,
+        setFatchPackcagePendding,
       }}
     >
       {children}
