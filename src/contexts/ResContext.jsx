@@ -153,18 +153,6 @@ export default function ResContextProvider({ children }) {
   };
 
   // ####################### Booking
-  useEffect(() => {
-    const fatchBookingAll = async () => {
-      try {
-        const res = await axios.get(`/booking/all`);
-        console.log("fatchBookgingAll =>", res.data.allBooking);
-        setGetBookingAll(res.data.allBooking);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fatchBookingAll();
-  }, []);
 
   useEffect(() => {
     const ownerMyBooking = async () => {
@@ -202,6 +190,7 @@ export default function ResContextProvider({ children }) {
         setEditRequestLoading,
         setFatchResPendding,
         setFatchPackcagePendding,
+        setGetBookingAll,
       }}
     >
       {children}
