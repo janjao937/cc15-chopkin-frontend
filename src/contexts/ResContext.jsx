@@ -124,22 +124,6 @@ export default function ResContextProvider({ children }) {
     }
   };
 
-  // admin => package getEditPending
-  useEffect(() => {
-    const fatchPackagePending = async () => {
-      try {
-        if (authUser?.isAdmin) {
-          const res = await axios.get(`/package/getEditPending`);
-          console.log("fatchPackagePending =>", res.data);
-          setFatchPackcagePendding([...res.data]);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fatchPackagePending();
-  }, []);
-
   // admin => package createPackage
   const createPackage = async (resId, input) => {
     try {
@@ -217,6 +201,7 @@ export default function ResContextProvider({ children }) {
         homeLoading,
         setEditRequestLoading,
         setFatchResPendding,
+        setFatchPackcagePendding,
       }}
     >
       {children}
