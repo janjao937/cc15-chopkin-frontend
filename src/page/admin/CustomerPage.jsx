@@ -8,7 +8,10 @@ import { useState } from "react";
 export default function CustomerPage() {
   const [searchInput, setSearchInput] = useState("");
   let filterdCusArr = mockCustomer.filter((x) => {
-    return x.firstName.toLowerCase().includes(searchInput);
+    return (
+      x.firstName.toLowerCase().includes(searchInput) ||
+      x.id.toString().toLowerCase().includes(searchInput)
+    );
   });
   if (searchInput.length === 0) {
     filterdCusArr = [];
@@ -21,7 +24,7 @@ export default function CustomerPage() {
 
         <div className="mb-4">
           <SearchInput
-            placeholder="Search Customer Name"
+            placeholder="Search customer name or id"
             value={searchInput}
             onChange={(e) => setSearchInput(e.target.value)}
           />
