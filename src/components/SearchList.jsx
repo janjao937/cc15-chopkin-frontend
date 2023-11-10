@@ -8,11 +8,20 @@ function SearchList({ searchInput }) {
   const navigate = useNavigate();
   const { restaurantAll } = useRes();
   const handleClick = (id) => navigate(`/restaurant/${id}`);
+  let searchResArr = restaurantAll.filter((x) =>
+    x.restaurantName.includes(searchInput)
+  );
+  console.log(searchResArr);
+  console.log("input", searchInput);
+  if (searchInput.length === 0) {
+    searchResArr = [];
+  }
+
   return (
     <div>
-      {searchInput.length > 0 && (
+      {searchResArr.length > 0 && (
         <ul className="border border-gray-600 rounded-lg top-2py-1 z-50 bg-white absolute w-full">
-          {restaurantAll.map((x) => (
+          {searchResArr.map((x) => (
             <li
               key={x.id}
               className="cursor-pointer hover:bg-gray-200 rounded-md px-4 py-2 flex gap-4"
