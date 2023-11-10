@@ -89,6 +89,11 @@ export default function Dropdown() {
                       Edit Package
                     </div>
                   </Link>
+                  <Link to={`/restaurant/${authUser.id}/approve-booking`}>
+                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+                      Approve Booking
+                    </div>
+                  </Link>
                 </>
               ) : (
                 ""

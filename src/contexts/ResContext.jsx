@@ -19,11 +19,11 @@ export default function ResContextProvider({ children }) {
     fatchResAll();
   }, []);
 
-	const [business,setBusiness] = useState([]);
+  const [business, setBusiness] = useState([]);
 
-	useEffect(() => {
-		fatchResAll();
-	}, []);
+  useEffect(() => {
+    fatchResAll();
+  }, []);
   useEffect(() => {
     const fatchRequestRes = async () => {
       try {
@@ -57,15 +57,14 @@ export default function ResContextProvider({ children }) {
     }
   };
 
-
-	const resEditPendingBussiTime = async (input) => {
-		try {
-			console.log("clickResEditPendingBussiTime", input);
-			setBusiness(input);
-		} catch (err) {
-			console.log(err);
-		}
-	};
+  const resEditPendingBussiTime = async (input) => {
+    try {
+      console.log("clickResEditPendingBussiTime", input);
+      setBusiness(input);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   // admin => change status res 0 => 1
   const changeStatusRes = async (resId) => {
     try {
@@ -211,7 +210,7 @@ export default function ResContextProvider({ children }) {
         createPackage,
         deletePackagePendding,
         getBookingAll,
-        business
+        business,
       }}
     >
       {children}

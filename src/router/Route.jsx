@@ -35,6 +35,7 @@ import Voucher from "../features/customer/Voucher";
 import Gift from "../features/customer/Gift";
 import Benefits from "../features/customer/Benefits";
 import Address from "../features/customer/Address";
+import ResApproveBookingPage from "../page/ResApproveBookingPage";
 
 const router = createBrowserRouter([
   {
@@ -121,6 +122,14 @@ const router = createBrowserRouter([
         element: (
           <AuthenticatedRestaurant>
             <ResEditPackagePage />
+          </AuthenticatedRestaurant>
+        ),
+      },
+      {
+        path: "/restaurant/:resId/approve-booking",
+        element: (
+          <AuthenticatedRestaurant>
+            <ResApproveBookingPage />
           </AuthenticatedRestaurant>
         ),
       },
