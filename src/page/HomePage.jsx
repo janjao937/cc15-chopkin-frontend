@@ -8,9 +8,12 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import bgHome from "../assets/image/bgHome.png";
 import { Link } from "react-router-dom";
 import SearchInput from "../components/SearchInput";
+import SearchList from "../components/SearchList";
+import { useState } from "react";
 
 export default function HomePage() {
 	const { restaurantAll } = useRes();
+	const [searchInput, setSearchInput] = useState("");
 	return (
 		<div>
 			{/* image */}
@@ -24,7 +27,12 @@ export default function HomePage() {
 				</div>
 				{/* Search */}
 				<div className="absolute bottom-[-8%] left-[35%]">
-					<SearchInput />
+					<SearchInput
+						placeholder="Search a restaurant"
+						value={searchInput}
+						onChange={(e) => setSearchInput(e.target.value)}
+					/>
+					<SearchList searchInput={searchInput} />
 				</div>
 			</div>
 
