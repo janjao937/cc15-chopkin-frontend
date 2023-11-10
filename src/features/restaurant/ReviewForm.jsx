@@ -38,16 +38,22 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setReviewMessage({
-      reviewMessage: reviewMessage.reviewMessage,
-      restaurantId: resId,
-      score: countingStar,
-      isAnonymous: "",
-    });
-    axios
-      .post("http://localhost:8888/review", reviewMessage)
-      .then((res) => console.log(res))
-      .catch((e) => console.log(e));
+    try {
+      const formData = new FormData();
+      setReviewMessage({
+        reviewMessage: reviewMessage.reviewMessage,
+        restaurantId: resId,
+        score: countingStar,
+        isAnonymous: "",
+      });
+      axios
+        .post("http://localhost:8888/review", reviewMessage)
+        .then((res) => console.log(res))
+        .catch((e) => console.log(e));
+    } catch (error) {
+      console.log(error);
+    }
+
   };
 
   console.log(file);
