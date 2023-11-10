@@ -20,7 +20,7 @@ export default function ResBussiTime({
 	inputSun,
 	setInputSun,
 }) {
-	console.log("resById=>", resById);
+	// console.log("resById=>", resById);
 
 	let day = [
 		"Monday",

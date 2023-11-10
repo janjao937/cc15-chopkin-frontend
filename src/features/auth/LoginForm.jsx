@@ -3,10 +3,11 @@ import LoginInput from "./LoginInput";
 import { loginSchema } from "../../validation/auth-validator";
 import useAuth from "../../Hooks/use-auth";
 import InputErrorMessage from "./InputErrorMessage";
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import { BsEyeSlash } from "react-icons/bs";
 import Logo from "../../components/Logo";
 import MyButton from "../../components/MyButton";
+import LoginWithGoogle from "../googleAuth/LoginWithGoogle";
 
 const validateLogin = (input) => {
 	const { error } = loginSchema.validate(input, { abortEarly: false });
@@ -98,7 +99,14 @@ export default function LoginForm() {
 				</MyButton>
 				<div className="flex flex-col items-center gap-3">
 					<span className="text-sm">OR USE</span>
-					<FcGoogle className="w-7 h-7 cursor-pointer" />
+					<div>
+						{/* <FcGoogle className="w-7 h-7 cursor-pointer" /> */}
+						<LoginWithGoogle
+							FnLogin={login}
+							input={input}
+							setInput={setInput}
+						/>
+					</div>
 				</div>
 			</form>
 		</>

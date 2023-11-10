@@ -1,0 +1,49 @@
+.ctn {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.input {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #999999;
+  outline: none;
+  width: 23rem;
+}
+
+.list {
+  list-style: none;
+  border: 1px solid #999999;
+  background: white;
+  border-radius: 0.5rem;
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  align-items: flex-start;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.option {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  width: 22rem;
+  font-size: 0.9rem;
+  color: #666666;
+}
+
+.option:hover {
+  cursor: pointer;
+  background: rgb(235, 235, 235);
+
+  /* width: 100%; */
+}
