@@ -40,6 +40,12 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
     e.preventDefault();
     try {
       const formData = new FormData();
+      if (file) {
+        formData.append("",file);
+      }
+      if (reviewMessage) {
+        
+      }
       setReviewMessage({
         reviewMessage: reviewMessage.reviewMessage,
         restaurantId: resId,
