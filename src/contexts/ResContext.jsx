@@ -96,22 +96,6 @@ export default function ResContextProvider({ children }) {
   };
   // admin => get res PenddingEdit
   console.log("AUTH =>>>>", authUser);
-  useEffect(() => {
-    setEditRequestLoading(true);
-    const fatchPendingEdit = async () => {
-      try {
-        const res = await axios.get(`/restaurant/getPendingEdit`);
-        console.log("fatchPendingEdit =>", res.data);
-        setFatchResPendding(res.data);
-        setEditRequestLoading(false);
-      } catch (err) {
-        console.log(err);
-      } finally {
-        setEditRequestLoading(false);
-      }
-    };
-    fatchPendingEdit();
-  }, []);
 
   // admin => update res PenddingEdit
   const updateResPending = async (redId, input) => {
@@ -231,6 +215,8 @@ export default function ResContextProvider({ children }) {
         business,
         editRequestLoading,
         homeLoading,
+        setEditRequestLoading,
+        setFatchResPendding,
       }}
     >
       {children}
