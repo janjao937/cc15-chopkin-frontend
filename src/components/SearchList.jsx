@@ -9,7 +9,7 @@ function SearchList({ searchInput }) {
   const { restaurantAll } = useRes();
   const handleClick = (id) => navigate(`/restaurant/${id}`);
   let searchResArr = restaurantAll.filter((x) =>
-    x.restaurantName.includes(searchInput)
+    x.restaurantName.toLowerCase().includes(searchInput)
   );
   console.log(searchResArr);
   console.log("input", searchInput);
