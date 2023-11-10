@@ -15,6 +15,7 @@ export default function ResContextProvider({ children }) {
   const [fatchPackagePendding, setFatchPackcagePendding] = useState([]);
   const [getBookingAll, setGetBookingAll] = useState([]);
   const [editRequestLoading, setEditRequestLoading] = useState(false);
+  const [homeLoading, setHomeLoading] = useState(false);
 
   useEffect(() => {
     fatchResAll();
@@ -44,11 +45,15 @@ export default function ResContextProvider({ children }) {
 
   const fatchResAll = async () => {
     try {
+      setHomeLoading(true);
       const res = await axios.get("/restaurant/all");
       console.log("fatchResAll=>", res.data);
       setRestaurantAll(res.data);
+      setHomeLoading(false);
     } catch (err) {
       console.log(err);
+    } finally {
+      setHomeLoading(false);
     }
   };
 
@@ -225,6 +230,7 @@ export default function ResContextProvider({ children }) {
         getBookingAll,
         business,
         editRequestLoading,
+        homeLoading,
       }}
     >
       {children}
