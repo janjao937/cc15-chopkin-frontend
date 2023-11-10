@@ -120,13 +120,13 @@ export default function ViewEditingPage() {
 					<div className="col-span-6 uppercase text-primary">
 						CATEGORY :
 					</div>
-					<div className="col-span-6">{category.title}</div>
+					<div className="col-span-6">{category?.title}</div>
 				</div>
 				<div className="grid grid-cols-12 items-center justify-items-center mb-4">
 					<div className="col-span-6 uppercase text-primary">
 						NATION :
 					</div>
-					<div className="col-span-6">{nation.title}</div>
+					<div className="col-span-6">{nation?.title}</div>
 				</div>
 
 				{/* BusinessTime */}
