@@ -24,6 +24,42 @@ export default function ResApproveBookingPage() {
     fetchBookingByResId();
   }, []);
 
+  const changeBookingStatusApprove = async (bookingId) => {
+    try {
+      const editBookingApprove = getBookingByResId.filter(
+        (e) => e.id !== bookingId
+      );
+      if (editBookingApprove.status === 1) {
+        return setGetBookingByResId(editBookingApprove);
+      }
+      await axios.patch(`booking/updateStatus/`, {
+        status: 1,
+        bookingId,
+      });
+      setGetBookingByResId(editBookingApprove);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const changeBookingStatusReject = async (bookingId) => {
+    try {
+      const editBookingReject = getBookingByResId.filter(
+        (e) => e.id !== bookingId
+      );
+      if (editBookingReject.status === 2) {
+        return setGetBookingByResId(editBookingReject);
+      }
+      await axios.patch(`booking/updateStatus/`, {
+        status: 2,
+        bookingId,
+      });
+      setGetBookingByResId(editBookingReject);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
       <div className="text-4xl font-medium p-6 pl-64 pb-10">
@@ -32,7 +68,12 @@ export default function ResApproveBookingPage() {
       <div className="flex flex-col justify-evenly items-center">
         {getBookingByResId.map((item, index) => (
           <div key={index}>
-            <NewBookingList data={item} index={index} />
+            <NewBookingList
+              data={item}
+              index={index}
+              changeBookingStatusApprove={changeBookingStatusApprove}
+              changeBookingStatusReject={changeBookingStatusReject}
+            />
           </div>
         ))}
       </div>

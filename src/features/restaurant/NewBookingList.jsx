@@ -1,12 +1,18 @@
 import NewBookingItem from "./NewBookingItem";
 
-export default function NewBookingList({ data, index }) {
+export default function NewBookingList({
+  data,
+  index,
+  changeBookingStatusApprove,
+  changeBookingStatusReject,
+}) {
   return (
     <div>
       <NewBookingItem
         index={index}
         objData={data}
-        bookId={data.id}
+        bookingId={data.id}
+        orderStatus={data.orderStatus}
         customerFirstName={data.customer.firstName}
         customerLastName={data.customer.lastName}
         email={data.customer.email}
@@ -17,6 +23,8 @@ export default function NewBookingList({ data, index }) {
         totalKid={data.totalKid}
         packageName={data.package.name}
         specialRequest={data.specialRequest}
+        changeBookingStatusApprove={changeBookingStatusApprove}
+        changeBookingStatusReject={changeBookingStatusReject}
       />
     </div>
   );
