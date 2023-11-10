@@ -7,7 +7,6 @@ import LoginPage from "../page/LoginPage";
 import RegisterRestaurantPage from "../page/RegisterRestaurantPage";
 import RecommendedPage from "../page/RecommendPage";
 import AllRestuarantPage from "../page/AllRestaurantPage";
-import UserProfile from "../page/UserProfile";
 import LayoutAdmin from "../layout/LayoutAdmin";
 import AdminPage from "../page/admin/AdminPage";
 import ListRestaurantPage from "../page/admin/ListRestaurantPage";
@@ -35,6 +34,9 @@ import Voucher from "../features/customer/Voucher";
 import Gift from "../features/customer/Gift";
 import Benefits from "../features/customer/Benefits";
 import Address from "../features/customer/Address";
+import CusEditAccount from "../page/CusEditAccount";
+import PaymentSuccessPage from "../page/PaymentSuccessPage";
+import PaymentNotSuccessPage from "../page/PaymentNotSuccessPage";
 import ResApproveBookingPage from "../page/ResApproveBookingPage";
 
 const router = createBrowserRouter([
@@ -103,6 +105,14 @@ const router = createBrowserRouter([
           </AuthenticatedCustomer>
         ),
       },
+      {
+        path: "/profile/:userId/edit-account",
+        element: (
+          <AuthenticatedCustomer>
+            <CusEditAccount />
+          </AuthenticatedCustomer>
+        ),
+      },
 
       // ############################# restaurant
       {
@@ -134,6 +144,22 @@ const router = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/payment/:userId/success",
+    element: (
+      <AuthenticatedCustomer>
+        <PaymentSuccessPage />
+      </AuthenticatedCustomer>
+    ),
+  },
+  {
+    path: "/payment/:userId/fail",
+    element: (
+      <AuthenticatedCustomer>
+        <PaymentNotSuccessPage />
+      </AuthenticatedCustomer>
+    ),
   },
 
   {

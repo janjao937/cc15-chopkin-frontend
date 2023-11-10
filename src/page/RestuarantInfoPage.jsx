@@ -63,6 +63,16 @@ const mockPackage = [
 export default function RestaurantInfoPage() {
 
   // const {allPackage} = useBooking();
+  const [allreviewMessage,setAllReviewMessage] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8888/review/${resId}`)
+      .then((res) => setAllReviewMessage(res.data))
+      .catch((e) => console.log(e));
+  }, []);
+
+  console.log(allreviewMessage);
 
     const [allPackage,setAllPackage] = useState([]);
     useEffect(() => {
@@ -107,7 +117,8 @@ export default function RestaurantInfoPage() {
         <section className="flex-1">
           <div className="flex justify-between">
             <div className="flex items-center">
-              {res.profileImg ? (
+            <img src={profileImage} className="w-[100px]"></img>
+              {/* {res.profileImg ? (
                 <img
                   className="w-[100px] rounded-full"
                   src={res.profileImg}
@@ -115,9 +126,10 @@ export default function RestaurantInfoPage() {
                 />
               ) : (
                 <img src={profileImage} className="w-[100px]"></img>
-              )}
+              )} */}
               <div>
-                <p className="text-xl font-semibold">{res.restaurantName}</p>
+                {/* <p className="text-xl font-semibold">{res.restaurantName}</p> */}
+                <p>res name</p>
                 <div className="flex gap-5">
                   <p className="">{mockRestuarantInfo.resType}</p>
                   <p className="">{mockRestuarantInfo.dateTime}</p>
@@ -249,7 +261,7 @@ export default function RestaurantInfoPage() {
         </section>}
       </main>
       {/* {authUser.firstName ? <RestaurantReview /> : undefined} */}
-      <RestaurantReview />
+      <RestaurantReview resId={resId} allreviewMessage={allreviewMessage}/>
     </div>
   );
 }

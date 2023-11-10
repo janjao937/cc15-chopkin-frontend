@@ -105,6 +105,9 @@ export default function ResContextProvider({ children }) {
   const updateResPending = async (redId, input) => {
     try {
       const res = await axios.patch(`/restaurant/mergeResInfo/${redId}`, input);
+
+      console.log("redId =>", redId);
+
       setFatchResPendding(
         fatchResPendding.filter((item) => item.restaurantId !== redId)
       );
@@ -118,9 +121,8 @@ export default function ResContextProvider({ children }) {
     try {
       const res = await axios.delete(`/restaurant/editPending/${redId}`);
       // console.log("deleteResPendding =>", res.data);
-      setFatchResPendding(
-        fatchResPendding.filter((item) => item.restaurantId !== redId)
-      );
+      console.log("redId =>", redId);
+      setFatchResPendding(fatchResPendding.filter((item) => item.id !== redId));
     } catch (err) {
       console.log(err);
     }

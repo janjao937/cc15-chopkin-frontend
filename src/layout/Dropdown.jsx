@@ -59,7 +59,17 @@ export default function Dropdown() {
                     </Link>
                   </>
                 ) : (
-                  ""
+                  <>
+                    {adminName && (
+                      <>
+                        <Link to="/admin">
+                          <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+                            DashBoard
+                          </div>
+                        </Link>
+                      </>
+                    )}
+                  </>
                 )}
               </>
             )}
@@ -98,16 +108,6 @@ export default function Dropdown() {
               ) : (
                 ""
               )}
-            </>
-          )}
-
-          {adminName && (
-            <>
-              <Link to="/admin">
-                <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
-                  DashBoard
-                </div>
-              </Link>
             </>
           )}
 

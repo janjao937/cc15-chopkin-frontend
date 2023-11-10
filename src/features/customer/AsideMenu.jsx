@@ -2,6 +2,8 @@ import React from "react";
 import Menu from "../customer/Menu";
 
 export default function AsideMenu({ profileImg, imageBlank }) {
+	console.log("profileImg =>", profileImg);
+
 	return (
 		<aside className="col-span-2 flex flex-col gap-4">
 			<div className="flex flex-col items-center justify-center gap-2">
@@ -9,7 +11,7 @@ export default function AsideMenu({ profileImg, imageBlank }) {
 					<img
 						src={profileImg || imageBlank}
 						alt=""
-						className="w-full h-full object-fill"
+						className="w-full h-full object-center"
 					/>
 				</div>
 				<div>Edit</div>
