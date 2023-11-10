@@ -1,13 +1,29 @@
 import React from "react";
 import SearchInput from "../../components/SearchInput";
 import CustomerList from "../../features/admin/CustomerList";
+import axios from "../../config/axios";
 
 import { mockCustomer } from "../../data/mock-customer";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function CustomerPage() {
   const [searchInput, setSearchInput] = useState("");
-  let filterdCusArr = mockCustomer.filter((x) => {
+  const [allCustomer, setAllCustomer] = useState([]);
+  //
+  useEffect(() => {
+    const fetchAllCus = async () => {
+      try {
+        const res = await axios.get("/customer/getAll");
+        setAllCustomer(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchAllCus();
+  }, []);
+  //
+  let filterdCusArr = allCustomer.filter((x) => {
     return (
       x.firstName.toLowerCase().includes(searchInput) ||
       x.id.toString().toLowerCase().includes(searchInput)
@@ -46,7 +62,7 @@ export default function CustomerPage() {
                   <CustomerList data={item} />
                 </div>
               ))
-            : mockCustomer.map((item) => (
+            : allCustomer.map((item) => (
                 <div key={item.id}>
                   <CustomerList data={item} />
                 </div>
