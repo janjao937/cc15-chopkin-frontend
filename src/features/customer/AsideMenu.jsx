@@ -1,8 +1,14 @@
 import React from "react";
 import Menu from "../customer/Menu";
+import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export default function AsideMenu({ profileImg, imageBlank }) {
 	console.log("profileImg =>", profileImg);
+
+	const { userId } = useParams();
+
+	const navigate = useNavigate();
 
 	return (
 		<aside className="col-span-2 flex flex-col gap-4">
@@ -14,7 +20,11 @@ export default function AsideMenu({ profileImg, imageBlank }) {
 						className="w-full h-full object-center"
 					/>
 				</div>
-				<div>Edit</div>
+				<button
+					onClick={() => navigate(`/profile/${userId}/edit-account`)}
+				>
+					Edit
+				</button>
 			</div>
 
 			<Menu />

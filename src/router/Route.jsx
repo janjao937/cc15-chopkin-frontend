@@ -38,185 +38,203 @@ import CusEditAccount from "../page/CusEditAccount";
 import PaymentSuccessPage from "../page/PaymentSuccessPage";
 import PaymentNotSuccessPage from "../page/PaymentNotSuccessPage";
 import ResApproveBookingPage from "../page/ResApproveBookingPage";
+import DetailCusBookingPage from "../page/DetailBookingPage";
+import CusEditBookingPage from "../page/CusEditBookingPage";
 
 const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Layout />,
-    children: [
-      { path: "", element: <HomePage /> },
-      { path: "/restaurant", element: <RestaurantPage /> },
-      { path: "/recommended", element: <RecommendedPage /> },
-      { path: "/all-restaurants", element: <AllRestuarantPage /> },
-      { path: "/nation/:nationIndex", element: <ResNationPage /> },
-      {
-        path: "profile/:userId/",
-        element: (
-          <AuthenticatedCustomer>
-            <Reservation />,
-          </AuthenticatedCustomer>
-        ),
-      },
-      {
-        path: "profile/:userId/favorite",
-        element: (
-          <AuthenticatedCustomer>
-            <Favorite />
-          </AuthenticatedCustomer>
-        ),
-      },
-      {
-        path: "/profile/:userId/book-history",
-        element: (
-          <AuthenticatedCustomer>
-            <BookHistory />
-          </AuthenticatedCustomer>
-        ),
-      },
-      {
-        path: "/profile/:userId/voucher",
-        element: (
-          <AuthenticatedCustomer>
-            <Voucher />
-          </AuthenticatedCustomer>
-        ),
-      },
-      {
-        path: "/profile/:userId/gift",
-        element: (
-          <AuthenticatedCustomer>
-            <Gift />
-          </AuthenticatedCustomer>
-        ),
-      },
-      {
-        path: "/profile/:userId/benefits",
-        element: (
-          <AuthenticatedCustomer>
-            <Benefits />
-          </AuthenticatedCustomer>
-        ),
-      },
-      {
-        path: "/profile/:userId/address",
-        element: (
-          <AuthenticatedCustomer>
-            <Address />
-          </AuthenticatedCustomer>
-        ),
-      },
-      {
-        path: "/profile/:userId/edit-account",
-        element: (
-          <AuthenticatedCustomer>
-            <CusEditAccount />
-          </AuthenticatedCustomer>
-        ),
-      },
+	{
+		path: "/",
+		element: <Layout />,
+		children: [
+			{ path: "", element: <HomePage /> },
+			{ path: "/restaurant", element: <RestaurantPage /> },
+			{ path: "/recommended", element: <RecommendedPage /> },
+			{ path: "/all-restaurants", element: <AllRestuarantPage /> },
+			{ path: "/nation/:nationIndex", element: <ResNationPage /> },
+			{
+				path: "/profile/:userId/edit-account",
+				element: (
+					<AuthenticatedCustomer>
+						<CusEditAccount />
+					</AuthenticatedCustomer>
+				),
+			},
+			{
+				path: "/profile/:userId/",
+				element: (
+					<AuthenticatedCustomer>
+						<Reservation />,
+					</AuthenticatedCustomer>
+				),
+			},
+			{
+				path: "/profile/:userId/favorite",
+				element: (
+					<AuthenticatedCustomer>
+						<Favorite />
+					</AuthenticatedCustomer>
+				),
+			},
+			{
+				path: "/profile/:userId/book-history",
+				element: (
+					<AuthenticatedCustomer>
+						<BookHistory />
+					</AuthenticatedCustomer>
+				),
+			},
+			{
+				path: "/profile/:userId/voucher",
+				element: (
+					<AuthenticatedCustomer>
+						<Voucher />
+					</AuthenticatedCustomer>
+				),
+			},
+			{
+				path: "/profile/:userId/gift",
+				element: (
+					<AuthenticatedCustomer>
+						<Gift />
+					</AuthenticatedCustomer>
+				),
+			},
+			{
+				path: "/profile/:userId/benefits",
+				element: (
+					<AuthenticatedCustomer>
+						<Benefits />
+					</AuthenticatedCustomer>
+				),
+			},
+			{
+				path: "/profile/:userId/address",
+				element: (
+					<AuthenticatedCustomer>
+						<Address />
+					</AuthenticatedCustomer>
+				),
+			},
+			{
+				path: "/profile/:bookingId/detail",
+				element: (
+					<AuthenticatedCustomer>
+						<DetailCusBookingPage />
+					</AuthenticatedCustomer>
+				),
+			},
+			{
+				path: "/profile/:bookingId/edit-booking",
+				element: (
+					<AuthenticatedCustomer>
+						<CusEditBookingPage />
+					</AuthenticatedCustomer>
+				),
+			},
 
-      // ############################# restaurant
-      {
-        path: "/restaurant/:resId",
-        element: <RestaurantInfoPage />,
-      },
-      {
-        path: "/restaurant/:resId/edit",
-        element: (
-          <AuthenticatedRestaurant>
-            <ResEditPendingPage />
-          </AuthenticatedRestaurant>
-        ),
-      },
-      {
-        path: "/restaurant/:resId/edit/edit-package",
-        element: (
-          <AuthenticatedRestaurant>
-            <ResEditPackagePage />
-          </AuthenticatedRestaurant>
-        ),
-      },
-      {
-        path: "/restaurant/:resId/approve-booking",
-        element: (
-          <AuthenticatedRestaurant>
-            <ResApproveBookingPage />
-          </AuthenticatedRestaurant>
-        ),
-      },
-    ],
-  },
-  {
-    path: "/payment/:userId/success",
-    element: (
-      <AuthenticatedCustomer>
-        <PaymentSuccessPage />
-      </AuthenticatedCustomer>
-    ),
-  },
-  {
-    path: "/payment/:userId/fail",
-    element: (
-      <AuthenticatedCustomer>
-        <PaymentNotSuccessPage />
-      </AuthenticatedCustomer>
-    ),
-  },
+			// ############################# restaurant
+			{
+				path: "/restaurant/:resId",
+				element: <RestaurantInfoPage />,
+			},
+			{
+				path: "/restaurant/:resId/edit",
+				element: (
+					<AuthenticatedRestaurant>
+						<ResEditPendingPage />
+					</AuthenticatedRestaurant>
+				),
+			},
+			{
+				path: "/restaurant/:resId/edit/edit-package",
+				element: (
+					<AuthenticatedRestaurant>
+						<ResEditPackagePage />
+					</AuthenticatedRestaurant>
+				),
+			},
+			{
+				path: "/restaurant/:resId/approve-booking",
+				element: (
+					<AuthenticatedRestaurant>
+						<ResApproveBookingPage />
+					</AuthenticatedRestaurant>
+				),
+			},
+		],
+	},
+	{
+		path: "/payment/:userId/success",
+		element: (
+			<AuthenticatedCustomer>
+				<PaymentSuccessPage />
+			</AuthenticatedCustomer>
+		),
+	},
+	{
+		path: "/payment/:userId/fail",
+		element: (
+			<AuthenticatedCustomer>
+				<PaymentNotSuccessPage />
+			</AuthenticatedCustomer>
+		),
+	},
 
-  {
-    path: "/register",
-    element: (
-      <RedirectIfAuthenticated>
-        <RegisterPage />
-      </RedirectIfAuthenticated>
-    ),
-  },
-  {
-    path: "/login",
-    element: (
-      <RedirectIfAuthenticated>
-        <LoginPage />
-      </RedirectIfAuthenticated>
-    ),
-  },
-  {
-    path: "/register-restaurant",
-    element: (
-      <RedirectIfAuthenticated>
-        <RegisterRestaurantPage />
-      </RedirectIfAuthenticated>
-    ),
-  },
+	{
+		path: "/register",
+		element: (
+			<RedirectIfAuthenticated>
+				<RegisterPage />
+			</RedirectIfAuthenticated>
+		),
+	},
+	{
+		path: "/login",
+		element: (
+			<RedirectIfAuthenticated>
+				<LoginPage />
+			</RedirectIfAuthenticated>
+		),
+	},
+	{
+		path: "/register-restaurant",
+		element: (
+			<RedirectIfAuthenticated>
+				<RegisterRestaurantPage />
+			</RedirectIfAuthenticated>
+		),
+	},
 
-  // ############################# admin
-  {
-    path: "/admin",
-    element: (
-      <AuthenticatedAdmin>
-        <LayoutAdmin />
-      </AuthenticatedAdmin>
-    ),
-    children: [
-      { path: "", element: <AdminPage /> },
-      { path: "list-restaurant", element: <ListRestaurantPage /> },
-      { path: "new-restaurant", element: <NewRestaurantPage /> },
-      { path: "customer", element: <CustomerPage /> },
-      { path: "customer/:customerId", element: <DetailCustomerPage /> },
-      { path: "booking", element: <BookingPage /> },
-      { path: "booking/:bookingId", element: <DetailBookingPage /> },
-      { path: "edit", element: <ResPenddingEditPage /> },
-      {
-        path: "edit/:resId",
-        element: <ViewResPenddingEditPage />,
-      },
-      { path: "package", element: <PackagePage /> },
-      {
-        path: "view-package/:packageId",
-        element: <ViewPackagePendding />,
-      },
-    ],
-  },
+	// ############################# admin
+	{
+		path: "/admin",
+		element: (
+			<AuthenticatedAdmin>
+				<LayoutAdmin />
+			</AuthenticatedAdmin>
+		),
+		children: [
+			{ path: "", element: <AdminPage /> },
+			{ path: "list-restaurant", element: <ListRestaurantPage /> },
+			{ path: "new-restaurant", element: <NewRestaurantPage /> },
+			{ path: "customer", element: <CustomerPage /> },
+			{ path: "customer/:customerId", element: <DetailCustomerPage /> },
+			{ path: "booking", element: <BookingPage /> },
+			{ path: "booking/:bookingId", element: <DetailBookingPage /> },
+			{ path: "edit", element: <ResPenddingEditPage /> },
+			{
+				path: "edit/:resId",
+				element: <ViewResPenddingEditPage />,
+			},
+			{ path: "package", element: <PackagePage /> },
+			{
+				path: "view-package/:packageId",
+				element: <ViewPackagePendding />,
+			},
+		],
+	},
 ]);
 
 export default function Route() {
-  return <RouterProvider router={router} />;
+	return <RouterProvider router={router} />;
 }
