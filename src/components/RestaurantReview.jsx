@@ -58,14 +58,14 @@ const mocReview = [
   },
 ];
 
-export default function RestaurantReview({ resId, allreviewMessage }) {
+export default function RestaurantReview({ resId, allreviewMessage, res }) {
   const { authUser } = useAuth();
   console.log(authUser);
 
   const [averageScore, setAverageScore] = useState(0);
 
   const checkCusId = allreviewMessage?.reviews?.find(
-    (item) => item.customerId === authUser.id
+    (item) => item.customerId === authUser?.id
   );
   console.log(checkCusId);
 
@@ -87,6 +87,19 @@ export default function RestaurantReview({ resId, allreviewMessage }) {
       .then((res) => console.log(res))
       .catch((e) => console.log(e));
   };
+
+const scoreCounts = {};
+res.Reviews.forEach((item) => {
+  const score = item.score;
+  // no score
+  if (!scoreCounts[score]) {
+    scoreCounts[score] = 1;
+  // have score + 1
+  } else {
+    scoreCounts[score]++;
+  }
+});
+console.log(scoreCounts);
 
   return (
     <div className="w-[60rem] mx-40 pt-4 my-10 border shadow-lg">
@@ -127,11 +140,11 @@ export default function RestaurantReview({ resId, allreviewMessage }) {
             </div>
           </div>
           <div className="flex flex-col gap-2 w-32">
-            <Progress value={50} color="red" />
-            <Progress value={50} color="red" />
-            <Progress value={50} color="red" />
-            <Progress value={50} color="red" />
-            <Progress value={50} color="red" />
+          <Progress value={scoreCounts["5"]} color="red" />
+          <Progress value={scoreCounts["4"]} color="red" />
+          <Progress value={scoreCounts["3"]} color="red" />
+          <Progress value={scoreCounts["2"]} color="red" />
+          <Progress value={scoreCounts["1"]} color="red" />
           </div>
         </div>
         <button

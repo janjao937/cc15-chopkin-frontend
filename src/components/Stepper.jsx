@@ -1,4 +1,4 @@
-import { Step, Stepper } from "@material-tailwind/react";
+import { Step, Stepper, Radio } from "@material-tailwind/react";
 import { useState } from "react";
 import MyButton from "./MyButton";
 import MyRadio from "./MyRadio";
@@ -10,8 +10,11 @@ import { TimePicker } from "@mui/x-date-pickers/TimePicker";
 import useAuth from "../Hooks/use-auth";
 import useBooking from "../Hooks/use-booking";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function MyStepper({ setBooking, booking, allPackage, resId }) {
+  const navigate = useNavigate();
+
   const [activeStep, setActiveStep] = useState(0);
   const [isLastStep, setIsLastStep] = useState(false);
   const [isFirstStep, setIsFirstStep] = useState(false);
@@ -26,6 +29,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
   const [kidsPrice, setKidsPrice] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isFormReady, setIsFormReady] = useState(false);
+  const [payStatus, setPayStatus] = useState(0);
 
   const { numberOfKids, numberOfAdult, customerCreateBooking } = useBooking();
   const [isBooking, setIsBooking] = useState({
@@ -40,7 +44,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
     paymentStatus: 0,
   });
 
-  const handleConfirmBooking = () => {
+  const handleConfirmBooking = (e) => {
     const updatedBooking = {
       packageId: customerPackage.id,
       customerId: authUser.id,
@@ -50,10 +54,12 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
       specialRequest: isBooking.specialRequest,
       totalKid: numberOfKids,
       totalCustomer: numberOfAdult,
-      paymentStatus: 0,
+      paymentStatus: payStatus,
     };
     setIsBooking(updatedBooking);
     setIsFormReady(true);
+
+    navigate("/");
   };
 
   // console.log(`KID=====>`,numberOfKids);
@@ -115,13 +121,20 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
     setIsBooking({ ...isBooking, [e.target.name]: e.target.value });
   };
 
+  const handleSelectPayment = (value) => {
+    setPayStatus(value);
+  };
+
   const { authUser } = useAuth();
+  console.log(`status:======> ${payStatus}`);
 
   // console.log(`date`,date);
   // console.log(`time`,time);
   // console.log(`cuspackage`,customerPackage);
 
   // console.log(isBooking);
+
+  console.log(payStatus);
 
   return (
     <div>
@@ -218,7 +231,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
               </section>
               <section>
                 <div className="flex justify-between">
-                  <p className="font-semibold">Paynow</p>
+                  <p className="font-semibold">Select Payment</p>
                   {checkToggle ? (
                     <button
                       onClick={handleCheckToggle}
@@ -237,8 +250,28 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
                 </div>
                 {checkToggle ? (
                   <div>
-                    <p>QRCODE</p>
-                    <p>Credit/Debit Card</p>{" "}
+                    <Radio
+                      onChange={() => handleSelectPayment(0)}
+                      name="description"
+                      label={
+                        <div>
+                          <p color="blue-gray" className="font-medium">
+                            Credit Card
+                          </p>
+                        </div>
+                      }
+                    />
+                    <Radio
+                      onChange={() => handleSelectPayment(2)}
+                      name="description"
+                      label={
+                        <div>
+                          <p color="blue-gray" className="font-medium">
+                            Pay at Restaurant
+                          </p>
+                        </div>
+                      }
+                    />
                   </div>
                 ) : undefined}
               </section>
@@ -247,7 +280,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
               </section> */}
               <section>
                 {/* <p className="font-semibold">Total Prepayment</p> */}
-                
+
                 <MyButton
                   style={`p-2 bg-secondary rounded-full w-full`}
                   onClick={handleConfirmBooking}

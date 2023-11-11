@@ -261,7 +261,7 @@ export default function RestaurantInfoPage() {
         </section>}
       </main>
       {/* {authUser.firstName ? <RestaurantReview /> : undefined} */}
-      <RestaurantReview resId={resId} allreviewMessage={allreviewMessage}/>
+      <RestaurantReview resId={resId} allreviewMessage={allreviewMessage} res={res}/>
     </div>
   );
 }

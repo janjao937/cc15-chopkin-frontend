@@ -25,7 +25,7 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
   const fileEl = useRef(null);
 
   const handleChangereviewMessage = (e) => {
-    setReviewMessage({ ...reviewMessage, [e.target.name]: e.target.value });
+    setReviewMessage({ ...reviewMessage, [e.target.name]: e.target.value,score: countingStar});
   };
 
   const handleAnonymous = () => {
@@ -39,23 +39,26 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      if (file) {
-        formData.append("",file);
-      }
-      if (reviewMessage) {
-        
-      }
       setReviewMessage({
         reviewMessage: reviewMessage.reviewMessage,
         restaurantId: resId,
         score: countingStar,
-        isAnonymous: "",
+        isAnonymous: anonymous,
       });
+      const formData = new FormData();
+      if (file) {
+        formData.append("image",file);
+      }
+      if (reviewMessage) {
+        formData.append("data",JSON.stringify(reviewMessage));
+      }
       axios
-        .post("http://localhost:8888/review", reviewMessage)
+        .post("http://localhost:8888/review", formData)
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
+
+
+      console.log(formData);
     } catch (error) {
       console.log(error);
     }
