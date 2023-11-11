@@ -31,7 +31,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
   const [isFormReady, setIsFormReady] = useState(false);
   const [payStatus, setPayStatus] = useState(0);
 
-  const { numberOfKids, numberOfAdult, customerCreateBooking } = useBooking();
+  const { numberOfKids, numberOfAdult, customerCreateBooking,handleResetBookingValues } = useBooking();
   const [isBooking, setIsBooking] = useState({
     packageId: "",
     customerId: "",
@@ -86,6 +86,11 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
     // console.log(pack)
     setCustomerPackage(pack);
   };
+
+  // reset numberOfAdult,Kids
+  useEffect(()=>{
+    handleResetBookingValues();
+  },[]);
 
   useEffect(() => {
     if (customerPackage) {

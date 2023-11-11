@@ -20,6 +20,12 @@ export default function BookingContextProvider({ children }) {
     }
   };
 
+  const handleResetBookingValues = () => {
+    setNumberOfKids(0);
+    setNumberOfAdult(0);
+    // Reset other state variables as needed...
+  };
+
 
   // useEffect(() => {
   //   axios
@@ -60,7 +66,8 @@ export default function BookingContextProvider({ children }) {
         numberOfKids,
         haveKids,
         allPackage,
-        customerCreateBooking
+        customerCreateBooking,
+        handleResetBookingValues
       }}
     >
       {children}

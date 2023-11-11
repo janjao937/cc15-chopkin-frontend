@@ -88,8 +88,12 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
       .catch((e) => console.log(e));
   };
 
+
+  console.log(allreviewMessage);
+
+
 const scoreCounts = {};
-res.Reviews.forEach((item) => {
+res?.Reviews.forEach((item) => {
   const score = item.score;
   // no score
   if (!scoreCounts[score]) {
