@@ -89,6 +89,24 @@ export default function ResContextProvider({ children }) {
 	// 	fetchAllCus();
 	// }, []);
 
+	useEffect(() => {
+		// setEditRequestLoading(true);
+		const fatchPendingEdit = async () => {
+			try {
+				const res = await axios.get(`/restaurant/getPendingEdit`);
+				console.log("fatchPendingEdit =>", res.data);
+				setFatchResPendding(res.data);
+				// setEditRequestLoading(false);
+			} catch (err) {
+				console.log(err);
+			}
+			// finally {
+			// 	setEditRequestLoading(false);
+			// }
+		};
+		fatchPendingEdit();
+	}, []);
+
 	// admin => change status res 0 => 1
 	const changeStatusRes = async (resId) => {
 		try {

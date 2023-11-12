@@ -19,7 +19,7 @@ export default function CusEditAccount() {
 
 	const inputEl = useRef(null);
 
-	const handleClickUpLoadProfile = async (e) => {
+	const handleClickForm = async (e) => {
 		try {
 			e.preventDefault();
 			const formData = new FormData();
@@ -46,7 +46,7 @@ export default function CusEditAccount() {
 		<>
 			{loading && <Loading />}
 			<form
-				onSubmit={handleClickUpLoadProfile}
+				onSubmit={handleClickForm}
 				className=" flex flex-col items-center justify-center gap-4 p-4"
 			>
 				<div className="flex flex-col items-center justify-center gap-4">

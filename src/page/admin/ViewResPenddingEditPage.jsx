@@ -14,21 +14,21 @@ export default function ViewEditingPage() {
 	const filterReq = fatchResPendding.find(
 		(item) => item.restaurantId === resId
 	);
-	// console.log("filterReq =>", filterReq);
-	// console.log("filterReqId =>", filterReq.id);
+	console.log("filterReq =>", filterReq);
+	// console.log("filterReqId =>", filterReq);
 
 	const nation = nationIndex.find(
-		(item) => item.id === filterReq.districtIndex
+		(item) => item.id === filterReq?.nationIndex
 	);
-	// console.log("nation", nation.title);
+	console.log("nation", nation.title);
 
 	const category = categoryIndex.find(
-		(item) => item.id === filterReq.categoryIndex
+		(item) => item.id === filterReq?.categoryIndex
 	);
-	// console.log("category", category.title);
+	console.log("category", category.title);
 
 	const district = districtIndex.find(
-		(item, index) => index === filterReq.districtIndex
+		(item, index) => index === filterReq?.districtIndex
 	);
 	// console.log("district", district);
 
