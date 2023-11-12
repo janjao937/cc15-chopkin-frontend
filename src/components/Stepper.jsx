@@ -41,7 +41,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
     specialRequest: "",
     totalKid: "",
     totalCustomer: "",
-    paymentStatus: 0,
+    paymentStatus: 2,
   });
 
   const handleConfirmBooking = (e) => {
@@ -54,12 +54,12 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
       specialRequest: isBooking.specialRequest,
       totalKid: numberOfKids,
       totalCustomer: numberOfAdult,
-      paymentStatus: payStatus,
+      paymentStatus: payStatus || 2,
     };
     setIsBooking(updatedBooking);
     setIsFormReady(true);
 
-    navigate("/");
+    // navigate("/");
   };
 
   // console.log(`KID=====>`,numberOfKids);
@@ -399,7 +399,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
                   </div>
                 </DemoContainer>
               </LocalizationProvider>
-              {time ? <button onClick={handleNext}>Next</button> : undefined}
+              {time ? <MyButton onClick={handleNext} style={`bg-secondary w-full`}>Next</MyButton> : undefined}
             </div>
           ) : (
             <div>
@@ -418,7 +418,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
                 </DemoContainer>
               </LocalizationProvider>
               {date ? (
-                <button onClick={handleSelectTime}>Next</button>
+                <MyButton onClick={handleSelectTime} style={`bg-secondary w-full`}>Next</MyButton>
               ) : undefined}
             </div>
           )}

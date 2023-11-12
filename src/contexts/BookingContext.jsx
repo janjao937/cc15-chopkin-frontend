@@ -1,4 +1,3 @@
-
 import { createContext } from "react";
 import { useState } from "react";
 import axios from "../config/axios";
@@ -9,11 +8,14 @@ export default function BookingContextProvider({ children }) {
   const [numberOfAdult, setNumberOfAdult] = useState(0);
   const [numberOfKids, setNumberOfKids] = useState(0);
   const [haveKids, setHaveKids] = useState(false);
-  const [allPackage,setAllPackage] = useState([]);
+  const [allPackage, setAllPackage] = useState([]);
 
-  const customerCreateBooking = async(booking) => {
+  const customerCreateBooking = async (booking) => {
     try {
-      const res = await axios.post("http://localhost:8888/booking/create",booking);
+      const res = await axios.post(
+        "http://localhost:8888/booking/create",
+        booking
+      );
       console.log(res);
     } catch (error) {
       console.log(error);
@@ -25,7 +27,6 @@ export default function BookingContextProvider({ children }) {
     setNumberOfAdult(0);
     // Reset other state variables as needed...
   };
-
 
   // useEffect(() => {
   //   axios
@@ -51,7 +52,7 @@ export default function BookingContextProvider({ children }) {
     if (numberOfKids > 0) {
       setNumberOfKids(numberOfKids - 1);
     }
-  };  
+  };
 
   // console.log(`Adult===>`, numberOfAdult);
   // console.log(`Kids====>`, numberOfKids);
@@ -67,7 +68,7 @@ export default function BookingContextProvider({ children }) {
         haveKids,
         allPackage,
         customerCreateBooking,
-        handleResetBookingValues
+        handleResetBookingValues,
       }}
     >
       {children}

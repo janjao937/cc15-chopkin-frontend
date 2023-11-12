@@ -117,8 +117,8 @@ export default function RestaurantInfoPage() {
         <section className="flex-1">
           <div className="flex justify-between">
             <div className="flex items-center">
-            <img src={profileImage} className="w-[100px]"></img>
-              {/* {res.profileImg ? (
+            {/* <img src={profileImage} className="w-[100px]"></img> */}
+              {res?.profileImg ? (
                 <img
                   className="w-[100px] rounded-full"
                   src={res.profileImg}
@@ -126,12 +126,12 @@ export default function RestaurantInfoPage() {
                 />
               ) : (
                 <img src={profileImage} className="w-[100px]"></img>
-              )} */}
+              )}
               <div>
-                {/* <p className="text-xl font-semibold">{res.restaurantName}</p> */}
-                <p>res name</p>
+                <p className="text-xl font-semibold">{res?.restaurantName}</p>
+                {/* <p>res name</p> */}
                 <div className="flex gap-5">
-                  <p className="">{mockRestuarantInfo.resType}</p>
+                  <p className="">Open Time:</p>
                   <p className="">{mockRestuarantInfo.dateTime}</p>
                 </div>
               </div>
@@ -150,7 +150,7 @@ export default function RestaurantInfoPage() {
             <div className="border-l-8 shadow-xl border-primary">
               {allPackage.map((item, index) => (
                 <section key={index}>
-                  <div className="flex py-10 px-4 shadow-sm border border-gray-100">
+                  <div className="flex py-10 px-4 border border-gray-100">
                     <div className="flex-1 flex flex-col justify-between">
                       <p className="font-semibold">{item.name}</p>
                       <button
@@ -261,7 +261,10 @@ export default function RestaurantInfoPage() {
         </section>}
       </main>
       {/* {authUser.firstName ? <RestaurantReview /> : undefined} */}
+      <div className="flex justify-center gap-5  px-64">
+
       <RestaurantReview resId={resId} allreviewMessage={allreviewMessage} res={res}/>
+      </div>
     </div>
   );
 }
