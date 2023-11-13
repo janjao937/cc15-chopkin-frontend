@@ -26,7 +26,11 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
   const fileEl = useRef(null);
 
   const handleChangereviewMessage = (e) => {
-    setReviewMessage({ ...reviewMessage, [e.target.name]: e.target.value,score: countingStar});
+    setReviewMessage({
+      ...reviewMessage,
+      [e.target.name]: e.target.value,
+      score: countingStar,
+    });
   };
 
   const handleAnonymous = () => {
@@ -48,22 +52,22 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
       });
       const formData = new FormData();
       if (file) {
-        formData.append("image",file);
+        for (let f of file) {
+          formData.append("ReviewImages", f);
+        }
       }
       if (reviewMessage) {
-        formData.append("data",JSON.stringify(reviewMessage));
+        formData.append("data", JSON.stringify(reviewMessage));
       }
       axios
         .post("http://localhost:8888/review", formData)
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
 
-
       console.log(formData);
     } catch (error) {
       console.log(error);
     }
-
   };
 
   console.log(file);
@@ -93,9 +97,13 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
                     />
                     <AiFillStar
                       className="w-6 h-6 cursor-pointer transition"
-                      color={currentRating <= (hoverStart || countingStar) ? "orange" : "gray"}
-                      onMouseEnter={()=> handleStarHover(countingStar)}
-                      onMouseLeave={()=> setHoverStar(null)}
+                      color={
+                        currentRating <= (hoverStart || countingStar)
+                          ? "orange"
+                          : "gray"
+                      }
+                      onMouseEnter={() => handleStarHover(countingStar)}
+                      onMouseLeave={() => setHoverStar(null)}
                     />
                   </label>
                 );
