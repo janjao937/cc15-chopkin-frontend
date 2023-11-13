@@ -17,6 +17,19 @@ export default function ResContextProvider({ children }) {
   const [editRequestLoading, setEditRequestLoading] = useState(false);
   const [homeLoading, setHomeLoading] = useState(false);
   const [allCustomer, setAllCustomer] = useState([]);
+  const [selected, setSelected] = useState(null);
+  const [input, setInput] = useState({
+    restaurantName: "",
+    ownerFirstName: "",
+    ownerLastName: "",
+    email: "",
+    phone: "",
+    categoryIndex: "",
+    nationIndex: "",
+    districtIndex: "",
+    price: "",
+    position: {},
+  });
 
   useEffect(() => {
     fatchResAll();
@@ -223,6 +236,10 @@ export default function ResContextProvider({ children }) {
         allCustomer,
         setReqRestaurant,
         fatchRequestRes,
+        input,
+        setInput,
+        selected,
+        setSelected,
       }}
     >
       {children}
