@@ -35,6 +35,10 @@ export default function MyBookItem({ objBooking }) {
 				>
 					Modify
 				</Link>
+				<Link to={`/`} className="border px-4 py-1 rounded-full bg-blue-500 text-white hover:bg-blue-300">
+					Payment
+				</Link>
+
 			</div>
 		</div>
 	);

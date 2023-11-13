@@ -50,7 +50,7 @@ export default function ResBussiTime({
 					<div className="col-span-4">Open Time</div>
 					<div className="col-span-4">Closed Time</div>
 				</div>
-				{resById.BusinessTimes?.length === 0 ? (
+				{resById?.BusinessTimes?.length === 0 ? (
 					<>
 						<div className="grid grid-cols-12 px-4 items-center justify-items-center">
 							<div className="col-span-4">{`-`}</div>
@@ -60,7 +60,7 @@ export default function ResBussiTime({
 					</>
 				) : (
 					<>
-						{resById.BusinessTimes?.map((item, index) => (
+						{resById?.BusinessTimes?.map((item, index) => (
 							<div
 								className="grid grid-cols-12 px-4 py-1 items-center justify-items-center "
 								key={index}
