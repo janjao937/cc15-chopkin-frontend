@@ -7,7 +7,7 @@ import { BsEyeSlash } from "react-icons/bs";
 import Logo from "../../components/Logo";
 import useAuth from "../../Hooks/use-auth";
 import { Link } from "react-router-dom";
-import RegisterWithGoogle from "../googleAuth/RegisterWithGoogle";
+// import RegisterWithGoogle from "../googleAuth/RegisterWithGoogle";
 
 export default function RegisterForm() {
 	const { registerCustomer } = useAuth();
@@ -162,7 +162,7 @@ export default function RegisterForm() {
 						Sign up for bussiness
 					</div>
 				</Link>
-				<RegisterWithGoogle FnRegister={registerCustomer} />
+				{/* <RegisterWithGoogle FnRegister={registerCustomer} /> */}
 			</form>
 		</>
 	);

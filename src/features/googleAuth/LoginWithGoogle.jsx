@@ -30,6 +30,7 @@ export default function LoginWithGoogle({ FnLogin, input, setInput }) {
 				// 	emailOrPhone: res.data.email,
 				// 	password: "",
 				// });
+
 				FnLogin({
 					emailOrPhone: res.data.email,
 					password: prompt("password "),

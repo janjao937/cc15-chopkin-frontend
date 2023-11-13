@@ -9,16 +9,16 @@ import ResContextProvider from "./contexts/ResContext.jsx";
 import BookingContextProvider from "./contexts/BookingContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
-  <GoogleOAuthProvider clientId={clientId}>
-    <AuthContextProvider>
-      <ResContextProvider>
-        <BookingContextProvider>
-          <App />
-        </BookingContextProvider>
-      </ResContextProvider>
-    </AuthContextProvider>
-  </GoogleOAuthProvider>
+	// <React.StrictMode>
+	<GoogleOAuthProvider clientId={clientId}>
+		<AuthContextProvider>
+			<ResContextProvider>
+				<BookingContextProvider>
+					<App />
+				</BookingContextProvider>
+			</ResContextProvider>
+		</AuthContextProvider>
+	</GoogleOAuthProvider>
 
-  // </React.StrictMode>,
+	// </React.StrictMode>,
 );
