@@ -1,9 +1,15 @@
 import React from "react";
 import NewRestaurantList from "../../features/admin/NewRestaurantList";
 import useRes from "../../Hooks/use-res";
+import { useEffect } from "react";
 
 export default function NewRestaurantPage() {
-	const { reqRestaurant } = useRes();
+	const { reqRestaurant, fatchRequestRes } = useRes();
+
+	useEffect(() => {
+		fatchRequestRes();
+	}, []);
+
 	return (
 		<div className="flex flex-col gap-2 p-4">
 			<h1>New Restaurant</h1>

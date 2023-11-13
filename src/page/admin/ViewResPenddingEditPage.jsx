@@ -4,12 +4,22 @@ import useRes from "../../Hooks/use-res";
 import blank from "../../assets/blank.png";
 import { nationIndex, categoryIndex, districtIndex } from "../../data/dataRes";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function ViewEditingPage() {
 	const { resId } = useParams();
 	// console.log("resId =>", resId);
 
-	const { fatchResPendding, updateResPending, deleteResPending } = useRes();
+	const {
+		fatchPendingEdit,
+		fatchResPendding,
+		updateResPending,
+		deleteResPending,
+	} = useRes();
+
+	useEffect(() => {
+		fatchPendingEdit();
+	}, []);
 
 	const filterReq = fatchResPendding.find(
 		(item) => item.restaurantId === resId
@@ -20,37 +30,37 @@ export default function ViewEditingPage() {
 	const nation = nationIndex.find(
 		(item) => item.id === filterReq?.nationIndex
 	);
-	console.log("nation", nation.title);
+	// console.log("nation", nation?.title);
 
 	const category = categoryIndex.find(
 		(item) => item.id === filterReq?.categoryIndex
 	);
-	console.log("category", category.title);
+	// console.log("category", category?.title);
 
 	const district = districtIndex.find(
 		(item, index) => index === filterReq?.districtIndex
 	);
 	// console.log("district", district);
 
-	console.log("tempBusinessTimes ===>", filterReq.tempBusinessTimes);
-	const busi = filterReq.tempBusinessTimes;
-	const newBusinessTime = busi.map((item) => {
+	// console.log("tempBusinessTimes ===>", filterReq?.tempBusinessTimes);
+	const busi = filterReq?.tempBusinessTimes;
+	const newBusinessTime = busi?.map((item) => {
 		delete item.id;
 		delete item.restaurantPendingEditId;
 		item.restaurantId = resId;
 		return item;
 	});
-	console.log("newBusiTime =>", newBusinessTime);
+	// console.log("newBusiTime =>", newBusinessTime);
 
 	const input = {
-		restaurantName: filterReq.restaurantName,
-		price: filterReq.price,
-		categoryIndex: filterReq.categoryIndex,
-		districtIndex: filterReq.districtIndex,
-		nationIndex: filterReq.nationIndex,
-		latitude: filterReq.latitude,
-		longitude: filterReq.longitude,
-		profileImg: filterReq.profileImg,
+		restaurantName: filterReq?.restaurantName,
+		price: filterReq?.price,
+		categoryIndex: filterReq?.categoryIndex,
+		districtIndex: filterReq?.districtIndex,
+		nationIndex: filterReq?.nationIndex,
+		latitude: filterReq?.latitude,
+		longitude: filterReq?.longitude,
+		profileImg: filterReq?.profileImg,
 		businessTime: JSON.stringify(newBusinessTime),
 	};
 
@@ -80,7 +90,7 @@ export default function ViewEditingPage() {
 					</div>
 					<div className="col-span-6 w-[180px] h-[180px] rounded-full overflow-hidden">
 						<img
-							src={filterReq.profileImg || blank}
+							src={filterReq?.profileImg || blank}
 							alt="profilImg"
 							className="w-full h-full"
 						/>
@@ -90,25 +100,27 @@ export default function ViewEditingPage() {
 					<div className="col-span-6 uppercase text-primary">
 						RESTAURANT-NAME :
 					</div>
-					<div className="col-span-6">{filterReq.restaurantName}</div>
+					<div className="col-span-6">
+						{filterReq?.restaurantName}
+					</div>
 				</div>
 				<div className="grid grid-cols-12 items-center justify-items-center">
 					<div className="col-span-6 uppercase text-primary">
 						PRICE :
 					</div>
-					<div className="col-span-6">{filterReq.price}</div>
+					<div className="col-span-6">{filterReq?.price}</div>
 				</div>
 				<div className="grid grid-cols-12 items-center justify-items-center">
 					<div className="col-span-6 uppercase text-primary">
 						LATITUDE :
 					</div>
-					<div className="col-span-6">{filterReq.latitude}</div>
+					<div className="col-span-6">{filterReq?.latitude}</div>
 				</div>
 				<div className="grid grid-cols-12 items-center justify-items-center">
 					<div className="col-span-6 uppercase text-primary">
 						LONGITUDE :
 					</div>
-					<div className="col-span-6">{filterReq.longitude}</div>
+					<div className="col-span-6">{filterReq?.longitude}</div>
 				</div>
 				<div className="grid grid-cols-12 items-center justify-items-center">
 					<div className="col-span-6 uppercase text-primary">
@@ -139,7 +151,7 @@ export default function ViewEditingPage() {
 						CLOSED-TIME
 					</div>
 				</div>
-				{filterReq.tempBusinessTimes.map((item, index) => (
+				{filterReq?.tempBusinessTimes.map((item, index) => (
 					<div
 						className="grid grid-cols-12 items-center justify-items-center px-4 py-1"
 						key={index}
@@ -156,7 +168,7 @@ export default function ViewEditingPage() {
 				RESTAURANT-IMAGE
 			</div>
 			<div className="flex items-center justify-evenly gap-4 ">
-				{filterReq.tempRestaurantImages.map((item, index) => (
+				{filterReq?.tempRestaurantImages.map((item, index) => (
 					<div key={index} className="w-[200px] h-[200px]">
 						<img
 							src={item.url || blank}

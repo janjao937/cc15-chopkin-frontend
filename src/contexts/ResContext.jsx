@@ -14,98 +14,37 @@ export default function ResContextProvider({ children }) {
 	const [fatchResPendding, setFatchResPendding] = useState([]);
 	const [fatchPackagePendding, setFatchPackcagePendding] = useState([]);
 	const [getBookingAll, setGetBookingAll] = useState([]);
-	const [editRequestLoading, setEditRequestLoading] = useState(false);
 	const [homeLoading, setHomeLoading] = useState(false);
 	const [allCustomer, setAllCustomer] = useState([]);
-
-	useEffect(() => {
-		fatchResAll();
-	}, []);
 
 	const [business, setBusiness] = useState([]);
 
 	useEffect(() => {
+		const fatchResAll = async () => {
+			try {
+				setHomeLoading(true);
+				const res = await axios.get("/restaurant/all");
+				console.log("fatchResAll=>", res.data);
+				setRestaurantAll(res.data);
+				setHomeLoading(false);
+			} catch (err) {
+				console.log(err);
+			} finally {
+				setHomeLoading(false);
+			}
+		};
 		fatchResAll();
 	}, []);
-	useEffect(() => {
-		const fatchRequestRes = async () => {
-			try {
-				if (authUser?.isAdmin) {
-					const res = await axios.get("/restaurant/getPendingRes");
-					console.log("fatchRequestRes==>", res.data);
-					setReqRestaurant(res.data);
-				}
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		if (!isRestaurant && !isCustomer) {
-			fatchRequestRes();
-		}
-	}, []);
 
-	const fatchResAll = async () => {
+	const fatchRequestRes = async () => {
 		try {
-			setHomeLoading(true);
-			const res = await axios.get("/restaurant/all");
-			console.log("fatchResAll=>", res.data);
-			setRestaurantAll(res.data);
-			setHomeLoading(false);
-		} catch (err) {
-			console.log(err);
-		} finally {
-			setHomeLoading(false);
-		}
-	};
-
-	const resEditPending = () => {
-		try {
-			console.log("clickResEditPending");
+			const res = await axios.get("/restaurant/getPendingRes");
+			console.log("fatchRequestRes==>", res.data);
+			setReqRestaurant(res.data);
 		} catch (err) {
 			console.log(err);
 		}
 	};
-
-	const resEditPendingBussiTime = async (input) => {
-		try {
-			console.log("clickResEditPendingBussiTime", input);
-			setBusiness(input);
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
-	//
-	// useEffect(() => {
-	// 	const fetchAllCus = async () => {
-	// 		try {
-	// 			const res = await axios.get("/customer/getAll");
-	// 			console.log("fetchAllCus +++++=>", res.data);
-	// 			setAllCustomer(res.data);
-	// 		} catch (err) {
-	// 			console.log(err);
-	// 		}
-	// 	};
-	// 	fetchAllCus();
-	// }, []);
-
-	useEffect(() => {
-		// setEditRequestLoading(true);
-		const fatchPendingEdit = async () => {
-			try {
-				const res = await axios.get(`/restaurant/getPendingEdit`);
-				console.log("fatchPendingEdit =>", res.data);
-				setFatchResPendding(res.data);
-				// setEditRequestLoading(false);
-			} catch (err) {
-				console.log(err);
-			}
-			// finally {
-			// 	setEditRequestLoading(false);
-			// }
-		};
-		fatchPendingEdit();
-	}, []);
 
 	// admin => change status res 0 => 1
 	const changeStatusRes = async (resId) => {
@@ -128,8 +67,38 @@ export default function ResContextProvider({ children }) {
 			console.log(err);
 		}
 	};
+
+	const resEditPendingBussiTime = async (input) => {
+		try {
+			console.log("clickResEditPendingBussiTime", input);
+			setBusiness(input);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const fetchAllCus = async () => {
+		try {
+			const res = await axios.get("/customer/getAll");
+			console.log("fetchAllCus =>", res.data);
+			setAllCustomer(res.data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const fatchPendingEdit = async () => {
+		try {
+			const res = await axios.get(`/restaurant/getPendingEdit`);
+			console.log("fatchPendingEdit =>", res.data);
+			setFatchResPendding(res.data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	// admin => get res PenddingEdit
-	console.log("AUTH =>>>>", authUser);
+	// console.log("AUTH =>>>>", authUser);
 
 	// admin => update res PenddingEdit
 	const updateResPending = async (redId, input) => {
@@ -138,9 +107,7 @@ export default function ResContextProvider({ children }) {
 				`/restaurant/mergeResInfo/${redId}`,
 				input
 			);
-
-			console.log("redId =>", redId);
-
+			// console.log("redId =>", redId);
 			setFatchResPendding(
 				fatchResPendding.filter((item) => item.restaurantId !== redId)
 			);
@@ -154,7 +121,7 @@ export default function ResContextProvider({ children }) {
 		try {
 			const res = await axios.delete(`/restaurant/editPending/${redId}`);
 			// console.log("deleteResPendding =>", res.data);
-			console.log("redId =>", redId);
+			// console.log("redId =>", redId);
 			setFatchResPendding(
 				fatchResPendding.filter((item) => item.id !== redId)
 			);
@@ -163,6 +130,16 @@ export default function ResContextProvider({ children }) {
 		}
 	};
 
+	// admin => getPackagePending
+	const getPackagePendding = async () => {
+		try {
+			const res = await axios.get(`/package/getEditPending`);
+			console.log("fatchPackagePending =>", res.data);
+			setFatchPackcagePendding(res.data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
 	// admin => package createPackage
 	const createPackage = async (resId, input) => {
 		try {
@@ -214,23 +191,23 @@ export default function ResContextProvider({ children }) {
 				changeStatusRes,
 				deleteRes,
 				restaurantAll,
-				resEditPending,
 				resEditPendingBussiTime,
+				fatchPendingEdit,
 				fatchResPendding,
 				deleteResPending,
 				updateResPending,
+				getPackagePendding,
 				fatchPackagePendding,
 				createPackage,
 				deletePackagePendding,
 				getBookingAll,
 				business,
-				editRequestLoading,
 				homeLoading,
-				setEditRequestLoading,
-				setFatchResPendding,
 				setFatchPackcagePendding,
 				setGetBookingAll,
+				fetchAllCus,
 				allCustomer,
+				fatchRequestRes,
 			}}
 		>
 			{children}
