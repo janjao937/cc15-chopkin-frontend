@@ -100,51 +100,54 @@ export default function RegisterRestaurantForm() {
           </div>
         </div>
 
-        <div>
-          <RegisterInput
-            value={input.restaurantName}
-            onChange={handleChangeInput}
-            name="restaurantName"
-            label="RESTAURANT NAME"
-            hasError={error.restaurantName}
-          />
-          {error.restaurantName && (
-            <InputErrorMessage message={error.restaurantName} />
-          )}
+        <div className="flex justify-between gap-2">
+          <div className="w-[50%]">
+            <RegisterInput
+              value={input.restaurantName}
+              onChange={handleChangeInput}
+              name="restaurantName"
+              label="RESTAURANT NAME"
+              hasError={error.restaurantName}
+            />
+            {error.restaurantName && (
+              <InputErrorMessage message={error.restaurantName} />
+            )}
+          </div>
+          <div className="w-[50%]">
+            <RegisterInput
+              type="number"
+              value={input.price}
+              onChange={handleChangePrice}
+              name="price"
+              label="STARTING PRICE"
+              hasError={error.price}
+            />
+            {error.price && <InputErrorMessage message={error.price} />}
+          </div>
         </div>
 
-        <div>
-          <RegisterInput
-            value={input.email}
-            onChange={handleChangeInput}
-            name="email"
-            label="EMAIL ADDRESS"
-            hasError={error.email}
-          />
-          {error.email && <InputErrorMessage message={error.email} />}
-        </div>
+        <div className="flex justify-between gap-2">
+          <div className="w-[50%]">
+            <RegisterInput
+              value={input.email}
+              onChange={handleChangeInput}
+              name="email"
+              label="EMAIL ADDRESS"
+              hasError={error.email}
+            />
+            {error.email && <InputErrorMessage message={error.email} />}
+          </div>
 
-        <div>
-          <RegisterInput
-            value={input.phone}
-            onChange={handleChangeInput}
-            name="phone"
-            label="PHONE NUMBER"
-            hasError={error.phone}
-          />
-          {error.phone && <InputErrorMessage message={error.phone} />}
-        </div>
-
-        <div>
-          <RegisterInput
-            type="number"
-            value={input.price}
-            onChange={handleChangePrice}
-            name="price"
-            label="STARTING PRICE"
-            hasError={error.price}
-          />
-          {error.price && <InputErrorMessage message={error.price} />}
+          <div className="w-[50%]">
+            <RegisterInput
+              value={input.phone}
+              onChange={handleChangeInput}
+              name="phone"
+              label="PHONE NUMBER"
+              hasError={error.phone}
+            />
+            {error.phone && <InputErrorMessage message={error.phone} />}
+          </div>
         </div>
 
         <div>
