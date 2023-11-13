@@ -1,11 +1,4 @@
-const categoryIndex = [
-  { id: 1, name: "familyRestaurant", title: "Family Restaurant" },
-  { id: 2, name: "allYouCanEat", title: "All you can eat" },
-  { id: 3, name: "izakaya", title: "Izakaya" },
-  { id: 4, name: "hotelRestaurant", title: "Hotel Restaurant" },
-  { id: 5, name: "chillCafe", title: "Chill Cafe" },
-  { id: 6, name: "sportbar", title: "Sportbar" },
-];
+import { categoryIndex } from "../../data/dataRes";
 
 export default function DropdownCategory({ input, setInput }) {
   return (
