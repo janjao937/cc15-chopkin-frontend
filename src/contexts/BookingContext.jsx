@@ -63,16 +63,24 @@ export default function BookingContextProvider({ children }) {
       console.log(err);
     }
   };
+  const handleHaveKid = () => {
+	setHaveKids(!haveKids);
+	setNumberOfKids(0);
+};
 
+const handleAddKid = () => {
+	setNumberOfKids(numberOfKids + 1);
+};
+
+const handleRemoveKid = () => {
+	if (numberOfKids > 0) {
+		setNumberOfKids(numberOfKids - 1);
+	}
+};
   const handleGetNumberOfAdult = (value) => {
     setNumberOfAdult(value);
   };
 
-  const handleRemoveKid = () => {
-    if (numberOfKids > 0) {
-      setNumberOfKids(numberOfKids - 1);
-    }
-  };
 
   // console.log(`Adult===>`, numberOfAdult);
   // console.log(`Kids====>`, numberOfKids);
