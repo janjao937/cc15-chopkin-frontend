@@ -3,7 +3,7 @@ import { BiImageAdd } from "react-icons/bi";
 import MyOutlineButton from "../../components/MyOutlineButton";
 import { useState, useRef } from "react";
 import InputErrorMessage from "../auth/InputErrorMessage";
-import { Checkbox, input } from "@material-tailwind/react";
+import { Checkbox } from "@material-tailwind/react";
 import axios from "../../config/axios";
 import { useEffect } from "react";
 
@@ -11,6 +11,7 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
   const [anonymous, setAnonymous] = useState(false);
   const [countingStar, setCountingStar] = useState(null);
   const [hoverStart, setHoverStar] = useState(null);
+  const [rating, setRating] = useState(0);
 
   const [reviewMessage, setReviewMessage] = useState({
     reviewMessage: "",
@@ -68,6 +69,10 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
   console.log(file);
   console.log(countingStar);
 
+  const handleStarHover = (currentRating) => {
+    setHoverStar(currentRating);
+  };
+
   return (
     <>
       {isOpenAfterComplete && (
@@ -87,8 +92,10 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
                       onClick={() => setCountingStar(currentRating)}
                     />
                     <AiFillStar
-                      className="w-6 h-6 cursor-pointer"
-                      color="yellow"
+                      className="w-6 h-6 cursor-pointer transition"
+                      color={currentRating <= (hoverStart || countingStar) ? "orange" : "gray"}
+                      onMouseEnter={()=> handleStarHover(countingStar)}
+                      onMouseLeave={()=> setHoverStar(null)}
                     />
                   </label>
                 );

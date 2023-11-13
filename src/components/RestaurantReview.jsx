@@ -174,7 +174,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
                   <div>{item.restaurant}</div>
                   <div className="flex">
                     {[...Array(item.score)].map((item, index) => (
-                      <AiFillStar key={index} color="yellow" />
+                      <AiFillStar key={index} color="orange" />
                     ))}
                   </div>
                   <div>{item.message}</div>
