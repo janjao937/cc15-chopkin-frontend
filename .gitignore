@@ -6,7 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-src/config/env.js
+env.js
 node_modules
 dist
 dist-ssr
