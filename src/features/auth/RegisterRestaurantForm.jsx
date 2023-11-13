@@ -6,24 +6,14 @@ import InputErrorMessage from "./InputErrorMessage";
 import DropdownCategory from "./DropdownCategory";
 import DropdownNation from "./DropdownNation";
 import DropdownLocation from "./DropdownLocation";
+import DropdownDistrict from "./DropdownDistrict";
 import Logo from "../../components/Logo";
 import useAuth from "../../Hooks/use-auth";
+import useRes from "../../Hooks/use-res";
 
 export default function RegisterRestaurantForm() {
   const { registerRestaurant } = useAuth();
-  const [input, setInput] = useState({
-    restaurantName: "",
-    ownerFirstName: "",
-    ownerLastName: "",
-    email: "",
-    phone: "",
-    categoryIndex: "",
-    nationIndex: "",
-    latitude: "",
-    longitude: "",
-    price: "",
-  });
-
+  const { input, setInput } = useRes();
   const [checkbox, setCheckbox] = useState(false);
   const [error, setError] = useState({});
 
@@ -160,6 +150,12 @@ export default function RegisterRestaurantForm() {
           <DropdownNation input={input} setInput={setInput} />
           {error.nationIndex && (
             <InputErrorMessage message={error.nationIndex} />
+          )}
+        </div>
+        <div>
+          <DropdownDistrict input={input} setInput={setInput} />
+          {error.districtIndex && (
+            <InputErrorMessage message={error.districtIndex} />
           )}
         </div>
 

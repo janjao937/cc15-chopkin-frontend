@@ -1,14 +1,9 @@
 import React, { createContext, useEffect, useState } from "react";
 import axios from "../config/axios";
-import useAuth from "../Hooks/use-auth";
 
 export const ResContext = createContext();
 
 export default function ResContextProvider({ children }) {
-	const { authUser } = useAuth();
-	const isRestaurant = authUser?.restaurantName;
-	const isCustomer = authUser?.firstName;
-	const isAdmin = authUser?.isAdmin;
 	const [reqRestaurant, setReqRestaurant] = useState([]);
 	const [restaurantAll, setRestaurantAll] = useState([]);
 	const [fatchResPendding, setFatchResPendding] = useState([]);
@@ -18,6 +13,20 @@ export default function ResContextProvider({ children }) {
 	const [allCustomer, setAllCustomer] = useState([]);
 
 	const [business, setBusiness] = useState([]);
+
+	const [selected, setSelected] = useState(null);
+	const [input, setInput] = useState({
+		restaurantName: "",
+		ownerFirstName: "",
+		ownerLastName: "",
+		email: "",
+		phone: "",
+		categoryIndex: "",
+		nationIndex: "",
+		districtIndex: "",
+		price: "",
+		position: {},
+	});
 
 	useEffect(() => {
 		const fatchResAll = async () => {
@@ -168,22 +177,6 @@ export default function ResContextProvider({ children }) {
 		}
 	};
 
-	// ####################### Booking
-
-	useEffect(() => {
-		const ownerMyBooking = async () => {
-			try {
-				if (authUser?.restaurantName) {
-					const res = await axios.get(`/booking/own`);
-					console.log("ownBooking =>", res.data.allBooking);
-				}
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		ownerMyBooking();
-	}, []);
-
 	return (
 		<ResContext.Provider
 			value={{
@@ -208,6 +201,10 @@ export default function ResContextProvider({ children }) {
 				fetchAllCus,
 				allCustomer,
 				fatchRequestRes,
+				input,
+				setInput,
+				selected,
+				setSelected,
 			}}
 		>
 			{children}
