@@ -28,15 +28,15 @@ export default function CustomerItem({
 				>
 					Detail
 				</Link>
-				<MyButton
+				{/* <MyButton
 					onClick={() => setIsOpen(!isOpen)}
 					style={`rounded-full col-span-2 bg-secondary mx-4 my-2`}
 				>
 					Modify
-				</MyButton>
+				</MyButton> */}
 
 				{/* Modify */}
-				<Modal
+				{/* <Modal
 					title={`CUSTOMER MODIFY`}
 					titleStyle={`bg-red-600 text-white`}
 					open={isOpen}
@@ -44,7 +44,7 @@ export default function CustomerItem({
 					onClose={() => setIsOpen(false)}
 				>
 					asdf
-				</Modal>
+				</Modal> */}
 			</div>
 		</>
 	);

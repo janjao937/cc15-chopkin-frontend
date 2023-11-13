@@ -8,6 +8,7 @@ import useRes from "../../Hooks/use-res.js";
 import { useParams } from "react-router-dom";
 import MyBookList from "./MyBookList.jsx";
 import BookHistoryList from "./BookHistoryList.jsx";
+import useBooking from "../../Hooks/use-booking.js";
 
 import { mockBooking } from "../../data/mock-booking.jsx";
 import { useEffect } from "react";
@@ -19,11 +20,14 @@ export default function Reservation() {
   const { authUser } = useAuth();
   // console.log("authUser", authUser);
 
-  const { getBookingAll } = useRes();
-  // console.log(getBookingAll);
+	// const { getBookingAll } = useRes();
 
-  const myBooking = getBookingAll.filter((item) => item.customerId === userId);
-  // console.log("myBooking =>", myBooking);
+	const { getBookingAll } = useBooking();
+
+	const myBooking = getBookingAll.filter(
+		(item) => item.customerId === userId
+	);
+	console.log("myBooking =>", myBooking);
 
 
   return (

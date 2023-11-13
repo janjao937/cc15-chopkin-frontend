@@ -1,7 +1,7 @@
 export default function Modal({
+	children,
 	title,
 	titleStyle,
-	children,
 	maxWidth = 27,
 	open,
 	onClose,

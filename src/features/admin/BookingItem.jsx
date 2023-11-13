@@ -47,7 +47,7 @@ export default function BookingItem({
 	);
 
 	const [inputModify, setInputModify] = useState({
-		bookingData: "",
+		bookingDate: "",
 		bookingTime: "",
 		totalCustomer: 1,
 		totalKid: 0,

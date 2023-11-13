@@ -1,30 +1,40 @@
 import React from "react";
+import { useNavigate, Link } from "react-router-dom";
 
-export default function MyBookItem({ obj, date }) {
-	// console.log("obj =>", obj);
+export default function MyBookItem({ objBooking }) {
+	console.log("obj =>", objBooking);
+
+	const navigate = useNavigate();
 
 	return (
 		<div className="flex flex-col gap-4 border rounded-xl shadow-lg p-6">
 			<div className="text-red-500 font-semibold text-lg">
-				Booking ID : {obj.id}
+				Booking ID : {objBooking.id}
 			</div>
 			<div className="flex flex-col gap-1">
 				<div className="text-md font-semibold">
-					{obj.restaurant.restaurantName}
+					{objBooking.restaurant.restaurantName}
 				</div>
 				<small className="text-gray-600 ">
-					{obj.bookingDate} at {obj.bookingTime} for{" "}
-					{obj.totalCustomer + obj.totalKid} people
+					{objBooking.bookingDate} at {objBooking.bookingTime} for{" "}
+					{objBooking.totalCustomer + objBooking.totalKid} people
 				</small>
 			</div>
 
 			<div className="flex self-start gap-3">
-				<button className="border px-4 py-1 rounded-full bg-red-500 text-white hover:bg-red-300">
+				<Link
+					to={`/profile/${objBooking.id}/detail`}
+					// onClick={() => navigate(`/profile/${objBooking.id}/detail`)}
+					className="border px-4 py-1 rounded-full bg-red-500 text-white hover:bg-red-300"
+				>
 					Detail
-				</button>
-				<button className="border px-4 py-1 rounded-full bg-red-500 text-white hover:bg-red-300">
+				</Link>
+				<Link
+					to={`/profile/${objBooking.id}/edit-booking`}
+					className="border px-4 py-1 rounded-full bg-red-500 text-white hover:bg-red-300"
+				>
 					Modify
-				</button>
+				</Link>
 			</div>
 		</div>
 	);

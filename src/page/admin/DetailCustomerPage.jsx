@@ -1,102 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import blank from "../../assets/blank.png";
-import { TfiBookmarkAlt } from "react-icons/tfi";
-import {
-	BsPersonCircle,
-	BsChevronDown,
-	BsTelephone,
-	BsBook,
-	BsPersonPlus,
-} from "react-icons/bs";
-import { FaRegClock } from "react-icons/fa";
-import { BiCalendar } from "react-icons/bi";
-import { FaPizzaSlice } from "react-icons/fa";
+import { BsPersonCircle, BsTelephone } from "react-icons/bs";
+import { MdCardMembership } from "react-icons/md";
 import { AiOutlineMail } from "react-icons/ai";
 import { SlDiamond } from "react-icons/sl";
 import { useParams } from "react-router-dom";
-
-import { mockCustomer } from "../../data/mock-customer";
+import useRes from "../../Hooks/use-res";
 
 export default function DetailCustomerPage() {
 	const { customerId } = useParams();
-	console.log("customerId ==>", customerId);
+	// console.log("customerId ==>", customerId);
 
-	const [newCustomerId] = mockCustomer.filter(
-		(item) => item.id === +customerId
-	);
-	console.log("newCustomerId ==>", newCustomerId);
+	const { allCustomer } = useRes();
+	// console.log("aullCus =>", allCustomer);
+
+	const customerById = allCustomer.find((item) => item.id === customerId);
+	// console.log("customerById =>", customerById);
 
 	return (
 		<div className="p-4 flex flex-col gap-4">
 			<div className="flex items-center justify-between">
 				<div className="w-[200px] h-[200px] rounded-full overflow-hidden">
 					<img
-						src={`${false ? "" : blank}`}
+						src={customerById.profileImg || blank}
 						alt=""
 						className="w-full h-full object-cover"
 					/>
 				</div>
-
-				{/* Charged Summary */}
-				{/* <div className="border rounded-md shadow-md px-8 py-4 flex flex-col gap-3 w-[360px]">
-					<div className="flex items-center gap-4">
-						<div>
-							<TfiBookmarkAlt
-								size={20}
-								className="text-red-600"
-							/>
-						</div>
-						<h1 className="font-bold text-xl">Charged Summary</h1>
-					</div>
-					<div className="flex items-center justify-between">
-						<div className="flex items-center gap-2">
-							<BiCalendar size={20} />
-							<small>{newBookId.createdAt}</small>
-						</div>
-						<div className="flex items-center gap-2">
-							<FaRegClock size={20} />
-							<small>10:00</small>
-						</div>
-					</div>
-					<hr className="border border-black" />
-					<div className="flex items-center justify-between">
-						<div className="font-semibold">
-							{newBookId.reataurant.package.name}
-						</div>
-						<div className="flex gap-1">
-							<div className="text-red-600 font-semibold">
-								{newBookId.reataurant.package.price}
-							</div>
-							<span>Baht</span>
-						</div>
-					</div>
-					<div className="flex items-center justify-between">
-						<div className="font-semibold">
-							Total pay at restaurant
-						</div>
-						<div className="flex gap-1">
-							<div className="text-red-600 font-semibold">
-								{newBookId.reataurant.package.price *
-									newBookId.totalCustomer}
-							</div>
-							<span>Baht</span>
-						</div>
-					</div>
-
-					<button className="flex items-center gap-2 cursor-pointer self-start px-4 py-2 rounded-full text-red-600 border border-red-600 font-semibold">
-						<BsChevronDown size={20} />
-						View Menu
-					</button>
-				</div> */}
 			</div>
 
 			{/* Detail CustomerId */}
-			<div className="flex flex-col w-[70%] gap-2 p-4 ">
+			<div className="flex flex-col w-[100%] gap-2 p-4 ">
 				<h1 className="text-xl mb-4 font-semibold">
-					Booking ID:
-					<span className="text-red-600"> {newCustomerId.id}</span>
+					Customer ID:
+					<span className="text-red-600"> {customerById?.id}</span>
 				</h1>
-				<div className="flex flex-col gap-4 mb-10">
+				<div className="flex flex-col gap-4 mb-10 w-[60%]">
 					<div className="grid grid-cols-12 items-center">
 						<div className="col-span-1">
 							<BsPersonCircle
@@ -108,7 +47,7 @@ export default function DetailCustomerPage() {
 							Name
 						</div>
 						<div className="col-span-6">
-							{newCustomerId.firstName}
+							{customerById?.firstName}
 						</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
@@ -118,7 +57,7 @@ export default function DetailCustomerPage() {
 						<div className="col-span-5 text-red-600 font-semibold">
 							Email
 						</div>
-						<div className="col-span-6">{newCustomerId.email}</div>
+						<div className="col-span-6">{customerById?.email}</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
 						<div className="col-span-1">
@@ -127,16 +66,21 @@ export default function DetailCustomerPage() {
 						<div className="col-span-5 text-red-600 font-semibold">
 							Phone
 						</div>
-						<div className="col-span-6">{newCustomerId.phone}</div>
+						<div className="col-span-6">{customerById?.phone}</div>
 					</div>
 					<div className="grid grid-cols-12 items-center">
 						<div className="col-span-1">
-							<BiCalendar size={20} className="text-red-600" />
+							<MdCardMembership
+								size={20}
+								className="text-red-600"
+							/>
 						</div>
 						<div className="col-span-5 text-red-600 font-semibold">
-							Date & Time
+							MemberPoint
 						</div>
-						<div className="col-span-6">11111</div>
+						<div className="col-span-6">
+							{customerById.memberPoint}
+						</div>
 					</div>
 				</div>
 

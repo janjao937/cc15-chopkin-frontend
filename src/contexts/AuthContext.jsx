@@ -65,6 +65,13 @@ export default function AuthContextProvider({ children }) {
 		setAuthUser(null);
 	};
 
+	const uploadProfile = async (input) => {
+		const res = await axios.patch(`/customer/edit-profile`, input);
+		console.log("upload=>", res.data);
+
+		// setAuthUser({ ...authUser, ...res.data.updateData });
+	};
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -74,6 +81,7 @@ export default function AuthContextProvider({ children }) {
 				login,
 				authUser,
 				logout,
+				uploadProfile,
 			}}
 		>
 			{children}
