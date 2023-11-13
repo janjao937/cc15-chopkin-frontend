@@ -1,10 +1,4 @@
-const nationIndex = [
-  { id: 1, name: "international", title: "International" },
-  { id: 2, name: "thai", title: "Thai" },
-  { id: 3, name: "japanese", title: "Japanese" },
-  { id: 4, name: "chinese", title: "Chinese" },
-  { id: 5, name: "italian", title: "Italain" },
-];
+import { nationIndex } from "../../data/dataRes";
 
 export default function DropdownNation({ input, setInput }) {
   return (
