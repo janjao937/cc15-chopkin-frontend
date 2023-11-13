@@ -11,7 +11,7 @@ import { allDistricts } from "../data/dataRes";
 
 export default function EditResInfo({ handleOnSubmit }) {
 	const { business } = useRes();
-	// console.log(business);
+	console.log(business);
 
 	// console.log(allDistricts);
 
@@ -22,9 +22,9 @@ export default function EditResInfo({ handleOnSubmit }) {
 		restaurantName: "",
 		ownerFirstName: "",
 		ownerLastName: "",
-		email: "",
-		password: "",
-		phone: "",
+		// email: "",
+		// password: "",
+		// phone: "",
 		districtIndex: "",
 		categoryIndex: "",
 		nationIndex: "",
@@ -200,7 +200,7 @@ export default function EditResInfo({ handleOnSubmit }) {
 					onChange={handleChangeInput}
 					name="price"
 				/>
-				<p>email</p>
+				{/* <p>email</p>
 				<input
 					type="text"
 					className="border h-12"
@@ -220,7 +220,7 @@ export default function EditResInfo({ handleOnSubmit }) {
 					className="border h-12"
 					onChange={handleChangeInput}
 					name="phone"
-				/>
+				/> */}
 				<p>category</p>
 				<div>
 					<DropdownCategory input={input} setInput={setInput} />

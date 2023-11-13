@@ -3,7 +3,7 @@ import { BiImageAdd } from "react-icons/bi";
 import MyOutlineButton from "../../components/MyOutlineButton";
 import { useState, useRef } from "react";
 import InputErrorMessage from "../auth/InputErrorMessage";
-import { Checkbox, input } from "@material-tailwind/react";
+import { Checkbox } from "@material-tailwind/react";
 import axios from "../../config/axios";
 import { useEffect } from "react";
 
@@ -11,6 +11,7 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
   const [anonymous, setAnonymous] = useState(false);
   const [countingStar, setCountingStar] = useState(null);
   const [hoverStart, setHoverStar] = useState(null);
+  const [rating, setRating] = useState(0);
 
   const [reviewMessage, setReviewMessage] = useState({
     reviewMessage: "",
@@ -25,7 +26,7 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
   const fileEl = useRef(null);
 
   const handleChangereviewMessage = (e) => {
-    setReviewMessage({ ...reviewMessage, [e.target.name]: e.target.value });
+    setReviewMessage({ ...reviewMessage, [e.target.name]: e.target.value,score: countingStar});
   };
 
   const handleAnonymous = () => {
@@ -39,23 +40,26 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      if (file) {
-        formData.append("",file);
-      }
-      if (reviewMessage) {
-        
-      }
       setReviewMessage({
         reviewMessage: reviewMessage.reviewMessage,
         restaurantId: resId,
         score: countingStar,
-        isAnonymous: "",
+        isAnonymous: anonymous,
       });
+      const formData = new FormData();
+      if (file) {
+        formData.append("image",file);
+      }
+      if (reviewMessage) {
+        formData.append("data",JSON.stringify(reviewMessage));
+      }
       axios
-        .post("http://localhost:8888/review", reviewMessage)
+        .post("http://localhost:8888/review", formData)
         .then((res) => console.log(res))
         .catch((e) => console.log(e));
+
+
+      console.log(formData);
     } catch (error) {
       console.log(error);
     }
@@ -64,6 +68,10 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
 
   console.log(file);
   console.log(countingStar);
+
+  const handleStarHover = (currentRating) => {
+    setHoverStar(currentRating);
+  };
 
   return (
     <>
@@ -84,8 +92,10 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
                       onClick={() => setCountingStar(currentRating)}
                     />
                     <AiFillStar
-                      className="w-6 h-6 cursor-pointer"
-                      color="yellow"
+                      className="w-6 h-6 cursor-pointer transition"
+                      color={currentRating <= (hoverStart || countingStar) ? "orange" : "gray"}
+                      onMouseEnter={()=> handleStarHover(countingStar)}
+                      onMouseLeave={()=> setHoverStar(null)}
                     />
                   </label>
                 );
