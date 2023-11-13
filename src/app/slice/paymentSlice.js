@@ -1,10 +1,9 @@
 import {createAsyncThunk,createSlice} from "@reduxjs/toolkit";
 import {BACKEND_URL} from "../../../env";
 import axios from "../../config/axios";
-import { stat } from "fs";
 
-const payingURL = BACKEND_URL+"/payment/create-checkout-sessions";
-const payingSuccessURL = BACKEND_URL+"/payment/update";
+const payingURL = "/payment/create-checkout-sessions";
+const payingSuccessURL = "/payment/update";
 
 const initialState = {
     loading:false,
@@ -59,7 +58,7 @@ const paymentSlice = createSlice({
         builder.addCase(paymentSuccess.fulfilled,(state)=>{
             state.loading = false;
         });
-        builder.addCase(paymentSuccess.rejectWithValue,(state)=>{
+        builder.addCase(paymentSuccess.rejected,(state)=>{
             state.loading = false;
         });
     }
@@ -68,6 +67,9 @@ const paymentSlice = createSlice({
 
 
 const paymentReducer = paymentSlice.reducer;
+
 export default paymentReducer;
 
-export {paying,paymentSuccess};
+export {paying};
+export {paymentSuccess};
+

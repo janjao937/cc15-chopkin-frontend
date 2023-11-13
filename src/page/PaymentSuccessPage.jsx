@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { BsFillCheckCircleFill } from "react-icons/bs";
+
 import { useDispatch,useSelector } from "react-redux";
 import { paymentSuccess } from "../app/slice/paymentSlice";
 import { useEffect } from "react";
@@ -14,7 +15,7 @@ export default function PaymentSuccessPage() {
 
 	useEffect(()=>{
 		dispatch(paymentSuccess({paymentId:paymentId,paymentStatus:1}))
-	})
+	},[]);
 
 	return (loading&&
 		<div className="h-screen flex flex-col justify-center items-center gap-4">
