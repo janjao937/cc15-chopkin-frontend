@@ -6,6 +6,7 @@ import ReviewForm from "../features/restaurant/ReviewForm";
 import { useState, useEffect } from "react";
 import axios from "../config/axios";
 import useAuth from "../Hooks/use-auth";
+import useBooking from "../Hooks/use-booking";
 
 const mocReview = [
   {
@@ -58,14 +59,14 @@ const mocReview = [
   },
 ];
 
-export default function RestaurantReview({ resId, allreviewMessage }) {
+export default function RestaurantReview({ resId, allreviewMessage, res }) {
   const { authUser } = useAuth();
   console.log(authUser);
 
   const [averageScore, setAverageScore] = useState(0);
 
   const checkCusId = allreviewMessage?.reviews?.find(
-    (item) => item.customerId === authUser.id
+    (item) => item.customerId === authUser?.id
   );
   console.log(checkCusId);
 
@@ -88,8 +89,21 @@ export default function RestaurantReview({ resId, allreviewMessage }) {
       .catch((e) => console.log(e));
   };
 
+  const scoreCounts = {};
+  res?.Reviews.forEach((item) => {
+    const score = item.score;
+    // no score
+    if (!scoreCounts[score]) {
+      scoreCounts[score] = 1;
+      // have score + 1
+    } else {
+      scoreCounts[score]++;
+    }
+  });
+  console.log(scoreCounts);
+
   return (
-    <div className="w-[60rem] mx-40 pt-4 my-10 border shadow-lg">
+    <div className="w-full pt-4 my-10 border shadow-lg">
       <div className="flex flex-col gap-4">
         <div className="flex justify-evenly text-red-600 text-xl">
           <div className="font-bold">Reviews(xx,xxx)</div>
@@ -127,11 +141,11 @@ export default function RestaurantReview({ resId, allreviewMessage }) {
             </div>
           </div>
           <div className="flex flex-col gap-2 w-32">
-            <Progress value={50} color="red" />
-            <Progress value={50} color="red" />
-            <Progress value={50} color="red" />
-            <Progress value={50} color="red" />
-            <Progress value={50} color="red" />
+            <Progress value={scoreCounts["5"]} color="red" />
+            <Progress value={scoreCounts["4"]} color="red" />
+            <Progress value={scoreCounts["3"]} color="red" />
+            <Progress value={scoreCounts["2"]} color="red" />
+            <Progress value={scoreCounts["1"]} color="red" />
           </div>
         </div>
         <button
@@ -147,17 +161,20 @@ export default function RestaurantReview({ resId, allreviewMessage }) {
         <div className="flex flex-col">
           {allreviewMessage?.reviews?.map((item, index) => (
             <div key={index}>
-              <div className="flex py-4">
+              <div className="flex py-4 px-2">
                 <div className="w-40 px-10 pt-2 text-xs">
-                  <div className="w-f ull">{item.profileImg}</div>
+                  <img src={defaultImage} alt="" />
+                  {/* <div className="w-full">
+                    <img src={item.profileImg} alt="" />
+                  </div> */}
                   <div>{item.customer}</div>
                   <div>{item.createAt}</div>
                 </div>
-                <div className="flex flex-col gap-[6px]">
+                <div className="flex flex-col gap-[6px] flex-1">
                   <div>{item.restaurant}</div>
                   <div className="flex">
                     {[...Array(item.score)].map((item, index) => (
-                      <AiFillStar key={index} color="yellow" />
+                      <AiFillStar key={index} color="orange" />
                     ))}
                   </div>
                   <div>{item.message}</div>
@@ -173,7 +190,7 @@ export default function RestaurantReview({ resId, allreviewMessage }) {
                   </div>
                 </div>
                 {checkCusId && item.customerId === authUser.id ? (
-                  <div className="p-3 bg-secondary text-white h-10">
+                  <div className="p-3 bg-secondary text-white h-10 flex items-center">
                     <button onClick={() => handleDeleteReview(item.id)}>
                       Delete
                     </button>

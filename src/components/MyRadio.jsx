@@ -51,7 +51,7 @@ export default function MyRadio({ handleNext, handlePrev }) {
       <div className="grid w-full grid-cols-5 gap-2 rounded-xl p-2">
         {number}
       </div>
-      <div>
+      <div className="flex flex-col">
         <button
           onClick={handleHaveKid}
           className="text-primary font-semibold p-2 hover:bg-gray-200 transition self-end rounded-full"
@@ -71,19 +71,21 @@ export default function MyRadio({ handleNext, handlePrev }) {
             </div>
           </div>
         ) : undefined}
-        <MyButton
+        <div className="flex justify-between">
+                  <MyButton
           style={`bg-secondary`}
           onClick={handlePrev}
           // disabled={isFirstStep}
         >
           Prev
         </MyButton>
-
         {numberOfAdult > 0 ? (
-          <button onClick={handleNext}>Next</button>
+          <MyButton onClick={handleNext} style={`bg-secondary`}>Next</MyButton>
         ) : (
-          <div>not ok</div>
+          undefined
         )}
+        </div>
+
       </div>
     </div>
   );
