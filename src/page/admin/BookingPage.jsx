@@ -26,6 +26,13 @@ export default function BookingPage() {
     fatchBookingAll();
   }, []);
 
+  const filteredBookings = getBookingAll.filter((x) => {
+    return (
+      x.id.toLowerCase().includes(searchInput) ||
+      x.customer.firstName.toLowerCase().includes(searchInput)
+    );
+  });
+
   return (
     <>
       <div className="flex flex-col gap-4 p-4 mb-10">
@@ -36,7 +43,7 @@ export default function BookingPage() {
           <SearchInput
             placeholder="Search Booking ID or Name"
             value={searchInput}
-            onChange={(e) => searchInput(e.target.value)}
+            onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
 
@@ -50,11 +57,17 @@ export default function BookingPage() {
               username
             </h1>
           </div>
-          {getBookingAll.map((item) => (
-            <div key={item.id}>
-              <BookingList data={item} />
-            </div>
-          ))}
+          {filteredBookings.length > 0
+            ? filteredBookings.map((item) => (
+                <div key={item.id}>
+                  <BookingList data={item} />
+                </div>
+              ))
+            : getBookingAll.map((item) => (
+                <div key={item.id}>
+                  <BookingList data={item} />
+                </div>
+              ))}
         </div>
       </div>
     </>
