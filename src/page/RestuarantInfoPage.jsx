@@ -151,10 +151,10 @@ export default function RestaurantInfoPage() {
           {/* GOOGLE MAP */}
           <div className="flex flex-col items-center relative right-[38%] gap-3">
             <div className="border-2 rounded-md">
-              <ShowOnlyMap center={{ lat: res.latitude, lng: res.longitude }} />
+              <ShowOnlyMap center={{ lat: res?.latitude, lng: res?.longitude }} />
             </div>
             <a
-              href={`https://maps.google.com/?q=${res.latitude},${res.longitude}`}
+              href={`https://maps.google.com/?q=${res?.latitude},${res?.longitude}`}
               target="_blank"
             >
               <button className="bg-primary py-2 px-4 rounded-md text-white ">

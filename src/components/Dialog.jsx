@@ -6,7 +6,7 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 
-export default function MyDialog({}) {
+export default function MyDialog({handleOpen}) {
   return (
     <div>
       <Dialog
