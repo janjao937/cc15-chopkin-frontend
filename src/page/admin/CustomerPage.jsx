@@ -1,26 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import SearchInput from "../../components/SearchInput";
 import CustomerList from "../../features/admin/CustomerList";
-import axios from "../../config/axios";
-
-import { mockCustomer } from "../../data/mock-customer";
-import { useState } from "react";
-import { useEffect } from "react";
+import useRes from "../../Hooks/use-res";
+// import axios from "../../config/axios";
 
 export default function CustomerPage() {
 	const [searchInput, setSearchInput] = useState("");
-	const [allCustomer, setAllCustomer] = useState([]);
+	// const [allCustomer, setAllCustomer] = useState([]);
+
+	const { fetchAllCus, allCustomer } = useRes();
 	//
 	useEffect(() => {
-		const fetchAllCus = async () => {
-			try {
-				const res = await axios.get("/customer/getAll");
-				console.log("fetchAllCus =>", res.data);
-				setAllCustomer(res.data);
-			} catch (err) {
-				console.log(err);
-			}
-		};
 		fetchAllCus();
 	}, []);
 	//

@@ -6,13 +6,18 @@ import { AiOutlineMail } from "react-icons/ai";
 import { SlDiamond } from "react-icons/sl";
 import { useParams } from "react-router-dom";
 import useRes from "../../Hooks/use-res";
+import { useEffect } from "react";
 
 export default function DetailCustomerPage() {
 	const { customerId } = useParams();
 	// console.log("customerId ==>", customerId);
 
-	const { allCustomer } = useRes();
+	const { fetchAllCus, allCustomer } = useRes();
 	// console.log("aullCus =>", allCustomer);
+
+	useEffect(() => {
+		fetchAllCus();
+	}, []);
 
 	const customerById = allCustomer.find((item) => item.id === customerId);
 	// console.log("customerById =>", customerById);
@@ -22,7 +27,7 @@ export default function DetailCustomerPage() {
 			<div className="flex items-center justify-between">
 				<div className="w-[200px] h-[200px] rounded-full overflow-hidden">
 					<img
-						src={customerById.profileImg || blank}
+						src={customerById?.profileImg || blank}
 						alt=""
 						className="w-full h-full object-cover"
 					/>
@@ -79,7 +84,7 @@ export default function DetailCustomerPage() {
 							MemberPoint
 						</div>
 						<div className="col-span-6">
-							{customerById.memberPoint}
+							{customerById?.memberPoint}
 						</div>
 					</div>
 				</div>

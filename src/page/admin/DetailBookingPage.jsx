@@ -14,11 +14,10 @@ import { FaPizzaSlice } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import { SlDiamond } from "react-icons/sl";
 import { useParams } from "react-router-dom";
-
-import useRes from "../../Hooks/use-res";
+import useBooking from "../../Hooks/use-booking";
 
 export default function DetailBookingPage() {
-	const { getBookingAll } = useRes();
+	const { getBookingAll } = useBooking();
 	// console.log("getBookingAll =>", getBookingAll);
 
 	const { bookingId } = useParams();

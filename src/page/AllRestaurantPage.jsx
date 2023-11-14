@@ -9,6 +9,7 @@ import { FaSearch } from "react-icons/fa";
 export default function AllRestuarantPage() {
   const { restaurantAll } = useRes();
   const [openSearch, setIsOpenSearch] = useState(false);
+  const [searchInput, setSearchInput] = useState("");
 
   return (
     <>
@@ -20,7 +21,11 @@ export default function AllRestuarantPage() {
         />
         {openSearch && (
           <div className="fixed">
-            <SearchInput placeholder="Search a restaurant" />
+            <SearchInput
+              placeholder="Search a restaurant"
+              value={searchInput}
+              onChange={(e) => setSearchInput(e.target.value)}
+            />
           </div>
         )}
       </div>
