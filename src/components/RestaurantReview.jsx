@@ -8,71 +8,38 @@ import axios from "../config/axios";
 import useAuth from "../Hooks/use-auth";
 import useBooking from "../Hooks/use-booking";
 
-const mocReview = [
-  {
-    reviewId: 1,
-    customer: "customerName",
-    profileImg: <img src={defaultImage} alt="customer" />,
-    createAt: "CreateAt",
-    restaurant: "restaurantName",
-    score: <AiFillStar />,
-    message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, veniam.",
-    ReviewImage: [
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    ],
-  },
-  {
-    reviewId: 2,
-    customer: "customerName",
-    profileImg: <img src={defaultImage} alt="customer" />,
-    createAt: "CreateAt",
-    restaurant: "restaurantName",
-    score: <AiFillStar />,
-    message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, veniam.",
-    ReviewImage: [
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    ],
-  },
-  {
-    reviewId: 3,
-    customer: "customerName",
-    profileImg: <img src={defaultImage} alt="customer" />,
-    createAt: "CreateAt",
-    restaurant: "restaurantName",
-    score: <AiFillStar />,
-    message:
-      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Pariatur, veniam.",
-    ReviewImage: [
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-      "https://images.pexels.com/photos/2725744/pexels-photo-2725744.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260",
-    ],
-  },
-];
 
 export default function RestaurantReview({ resId, allreviewMessage, res }) {
   const { authUser } = useAuth();
-  console.log(authUser);
+  // console.log(authUser);
+
+  console.log(`ALLREVIEWMESSAGE`,allreviewMessage);
 
   const [averageScore, setAverageScore] = useState(0);
+  const [cusInfo,setCusInfo] = useState([]);
 
   const checkCusId = allreviewMessage?.reviews?.find(
     (item) => item.customerId === authUser?.id
   );
-  console.log(checkCusId);
+  // console.log(`checkCusId=======>`,checkCusId);
 
   const totalScore = allreviewMessage?.reviews?.reduce((acc, review) => {
     return acc + review.score;
   }, 0);
+
+  const customerInfo = {};
+
+  // allreviewMessage?.getCusId?.find((item)=> {
+  //   customerInfo.id = item.id,
+  //   customerInfo.img = item.profileImg,
+  //   customerInfo.name = item.firstName
+  // });
+  // console.log(`VALUE =============>`,customerInfo);
+
+  useEffect(()=>{
+    allreviewMessage?.getCusId?.map((item)=> setCusInfo(item));
+  },[cusInfo]);
+  // console.log(`VALUE =============>`,customerInfo);
 
   useEffect(() => {
     const newAverageScore = totalScore / allreviewMessage?.reviews?.length;
@@ -100,7 +67,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
       scoreCounts[score]++;
     }
   });
-  console.log(scoreCounts);
+  // console.log(scoreCounts);
 
   return (
     <div className="w-full pt-4 my-10 border shadow-lg">
@@ -163,11 +130,12 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
             <div key={index}>
               <div className="flex py-4 px-2">
                 <div className="w-40 px-10 pt-2 text-xs">
-                  <img src={defaultImage} alt="" />
-                  {/* <div className="w-full">
-                    <img src={item.profileImg} alt="" />
-                  </div> */}
-                  <div>{item.customer}</div>
+                  <div className="w-full">
+                    <img src={item.customer.profileImg}/>
+                    <p>{item.customer.firstName}</p>
+                  
+                  </div>
+                  {/* <div>{cusInfo.id === item.customerId ? <p>{customerInfo.name}</p> : <p>BULL</p>}</div> */}
                   <div>{item.createAt}</div>
                 </div>
                 <div className="flex flex-col gap-[6px] flex-1">

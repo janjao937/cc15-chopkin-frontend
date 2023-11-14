@@ -28,8 +28,7 @@ export default function EditResInfo({ handleOnSubmit }) {
 		districtIndex: "",
 		categoryIndex: "",
 		nationIndex: "",
-		latitude: "",
-		longitude: "",
+		position : {},
 		price: 0,
 		businessTime: business,
 	});
@@ -263,26 +262,13 @@ export default function EditResInfo({ handleOnSubmit }) {
 						})}
 					</select>
 				</div>
-				{/* <div>
-          <DropdownDistrict input={input} setInput={setInput} />
-          {error.districtIndex && (
-            <InputErrorMessage message={error.districtIndex} />
-          )}
-        </div> */}
-				<p>latitude</p>
-				<input
-					type="text"
-					className="border h-12"
-					onChange={handleChangeInput}
-					name="latitude"
-				/>
-				<p>longitude</p>
-				<input
-					type="text"
-					className="border h-12"
-					onChange={handleChangeInput}
-					name="longitude"
-				/>
+				
+				{/* GOOGLE MAP */}
+				<div>
+					
+				</div>
+				
+
 				<button className="p-2 bg-blue-500 text-white">Confirms</button>
 			</form>
 		</div>

@@ -65,6 +65,7 @@ export default function RestaurantInfoPage() {
   const [allreviewMessage, setAllReviewMessage] = useState([]);
   const [allBusinessTime, setAllBusinessTime] = useState([]);
   const [date, setDate] = useState([]);
+  const [cusReviewImg,setCusReviewImg] = useState([]);
 
   useEffect(() => {
     axios
@@ -73,7 +74,7 @@ export default function RestaurantInfoPage() {
       .catch((e) => console.log(e));
   }, []);
 
-  console.log(allreviewMessage);
+  console.log(`ALL =========> `,allreviewMessage);
 
   const [allPackage, setAllPackage] = useState([]);
   useEffect(() => {
@@ -83,7 +84,6 @@ export default function RestaurantInfoPage() {
       .catch((e) => console.log(e));
   }, []);
 
-  console.log(allPackage);
 
   const { authUser } = useAuth();
   const { resId } = useParams();
@@ -94,8 +94,8 @@ export default function RestaurantInfoPage() {
   const { restaurantAll } = useRes();
 
   // console.log(authUser);
-  console.log(`resId=======>`, resId);
-  console.log(`Res All=====>`, restaurantAll);
+  // console.log(`resId=======>`, resId);
+  // console.log(`Res All=====>`, restaurantAll);
 
   const res = restaurantAll.find((item) => item.id === resId);
   console.log("myRes =>", res);
@@ -111,9 +111,7 @@ export default function RestaurantInfoPage() {
     setBooking(!booking);
   };
 
-  // useEffect(()=>{
-  //   console.log('RES IS ========:',res.BusinessTimes.map((item)=> setDate(item.openTime)));
-  // },[]);
+
 
   return (
     <div className="flex flex-col justify-center">
@@ -284,6 +282,7 @@ export default function RestaurantInfoPage() {
           resId={resId}
           allreviewMessage={allreviewMessage}
           res={res}
+          cusReviewImg={cusReviewImg}
         />
       </div>
     </div>
