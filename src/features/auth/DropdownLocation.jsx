@@ -3,12 +3,22 @@ import { HiChevronDown } from "react-icons/hi";
 import InputLocation from "./InputLocation";
 import InputErrorMessage from "./InputErrorMessage";
 import Modal from "../../components/Modal";
+import MapComponent from "../googleMaps/MapComponent";
+import useRes from "../../Hooks/use-res";
 
-export default function DropdownLocation({ input, setInput, error }) {
+export default function DropdownLocation({ error }) {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { input, setInput, selected } = useRes();
   const handleChangeInput = (e) => {
     setInput({ ...input, [e.target.name]: +e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setInput((prev) => {
+      return { ...prev, position: selected };
+    });
+    setIsOpen(false);
   };
 
   return (
@@ -30,7 +40,15 @@ export default function DropdownLocation({ input, setInput, error }) {
           maxWidth={60}
           title={`SEARCH LOCATION`}
         >
-          "children"
+          <div className="flex items-center flex-col gap-5">
+            <MapComponent />
+            <button
+              className="bg-primary text-white w-[25rem] py-2 rounded-sm"
+              onClick={handleSubmit}
+            >
+              SUBMIT
+            </button>
+          </div>
         </Modal>
         {/* <InputLocation
 					isOpen={isOpen}

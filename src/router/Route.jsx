@@ -40,8 +40,11 @@ import PaymentNotSuccessPage from "../page/PaymentNotSuccessPage";
 import ResApproveBookingPage from "../page/ResApproveBookingPage";
 import DetailCusBookingPage from "../page/DetailBookingPage";
 import CusEditBookingPage from "../page/CusEditBookingPage";
+import PaymentButton from "../components/paymentComponents/PayButton";
+
 
 const router = createBrowserRouter([
+	{path:"/test",element:<PaymentButton/>},
 	{
 		path: "/",
 		element: <Layout />,
@@ -164,7 +167,7 @@ const router = createBrowserRouter([
 		],
 	},
 	{
-		path: "/payment/:userId/success",
+		path: "/payment/success/:paymentId",
 		element: (
 			<AuthenticatedCustomer>
 				<PaymentSuccessPage />

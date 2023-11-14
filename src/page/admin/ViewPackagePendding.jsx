@@ -1,13 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useRes from "../../Hooks/use-res";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import blank from "../../assets/blank.png";
 
 export default function ViewPackagePendding() {
-	const { fatchPackagePendding, createPackage, deletePackagePendding } =
-		useRes();
+	const {
+		getPackagePendding,
+		fatchPackagePendding,
+		createPackage,
+		deletePackagePendding,
+	} = useRes();
 	// console.log("PackagePennding =>", fatchPackagePendding);
+
+	useEffect(() => {
+		getPackagePendding();
+	}, []);
 
 	const { packageId } = useParams();
 	// console.log("packageId =>", packageId);
@@ -20,18 +28,18 @@ export default function ViewPackagePendding() {
 	// console.log(typeof findPackage.restaurantId);
 
 	const input = {
-		name: findPackage.name,
-		detail: findPackage.detail,
-		price: findPackage.price,
-		img: findPackage.img,
+		name: findPackage?.name,
+		detail: findPackage?.detail,
+		price: findPackage?.price,
+		img: findPackage?.img,
 		status: 1,
-		restaurantId: findPackage.restaurantId,
+		restaurantId: findPackage?.restaurantId,
 	};
 
 	// console.log("input", input);
 
 	const handleClickApprove = () => {
-		createPackage(findPackage.restaurantId, input);
+		createPackage(findPackage?.restaurantId, input);
 		alert(`Approve Package : ${packageId}`);
 		deletePackagePendding(packageId);
 	};
@@ -53,7 +61,7 @@ export default function ViewPackagePendding() {
 			<div className="flex flex-col gap-4 items-center justify-center mb-4 px-4 py-2">
 				<div className="w-[600px] h-[300px] overflow-hidden rounded-xl shadow-lg mb-4">
 					<img
-						src={findPackage.img || blank}
+						src={findPackage?.img || blank}
 						alt="image"
 						className="w-full h-full object-cover "
 					/>
@@ -62,19 +70,19 @@ export default function ViewPackagePendding() {
 					<div className="col-span-6 uppercase text-primary">
 						package-name :
 					</div>
-					<div className="col-span-6">{findPackage.name}</div>
+					<div className="col-span-6">{findPackage?.name}</div>
 				</div>
 				<div className="grid grid-cols-12 gap-4">
 					<div className="col-span-6 uppercase text-primary">
 						package-detail :
 					</div>
-					<div className="col-span-6 ">{findPackage.detail}</div>
+					<div className="col-span-6 ">{findPackage?.detail}</div>
 				</div>
 				<div className="grid grid-cols-12 gap-4">
 					<div className="col-span-6 uppercase text-primary">
 						package-price :
 					</div>
-					<div className="col-span-6">{findPackage.price}</div>
+					<div className="col-span-6">{findPackage?.price}</div>
 				</div>
 			</div>
 

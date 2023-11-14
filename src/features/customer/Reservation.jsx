@@ -20,15 +20,12 @@ export default function Reservation() {
   const { authUser } = useAuth();
   // console.log("authUser", authUser);
 
-	// const { getBookingAll } = useRes();
+  // const { getBookingAll } = useRes();
 
-	const { getBookingAll } = useBooking();
+  const { getBookingAll } = useBooking();
 
-	const myBooking = getBookingAll.filter(
-		(item) => item.customerId === userId
-	);
-	console.log("myBooking =>", myBooking);
-
+  const myBooking = getBookingAll.filter((item) => item.customerId === userId);
+  console.log("myBooking =>", myBooking);
 
   return (
     <div className="flex flex-col m-4">
@@ -44,15 +41,17 @@ export default function Reservation() {
           </div>
 
           {/* Mock */}
-          <div>
+          {/* <div>
             {mockBooking.map((item, index) => (
               <div key={index} className="p-4 shadow-md">
                 {item.id}
-				{/* <MyBookList data={item} /> */}
-				<button className="p-2 bg-blue-400 text-white rounded-md">payment</button>
+                <MyBookList data={item} />
+                <button className="p-2 bg-blue-400 text-white rounded-md">
+                  payment
+                </button>
               </div>
             ))}
-          </div>
+          </div> */}
 
           {/* Detail .. */}
           <div>

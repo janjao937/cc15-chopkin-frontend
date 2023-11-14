@@ -2,19 +2,12 @@ import React, { useState } from "react";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
+import useAuth from "../../Hooks/use-auth";
 
-export default function LoginWithGoogle({ FnLogin, input, setInput }) {
-	const [profile, setProfile] = useState([]);
+export default function LoginWithGoogle() {
+	const { registerCustomer, login } = useAuth();
 
-	const onFailure = (res) => {
-		console.log("failed", res);
-	};
-
-	const logOut = () => {
-		setProfile(null);
-	};
-
-	const login = useGoogleLogin({
+	const googleLogin = useGoogleLogin({
 		onSuccess: async (response) => {
 			try {
 				const res = await axios.get(
@@ -26,15 +19,37 @@ export default function LoginWithGoogle({ FnLogin, input, setInput }) {
 					}
 				);
 				console.log(res);
-				// setInput({
-				// 	emailOrPhone: res.data.email,
-				// 	password: "",
-				// });
 
-				FnLogin({
-					emailOrPhone: res.data.email,
-					password: prompt("password "),
-				});
+				let phone = res.data.sub;
+				let pass = res.data.sub;
+				let passCon = res.data.sub;
+				let email = res.data.email;
+				let input = {
+					firstName: res.data.given_name,
+					lastName: res.data.family_name,
+					email: email,
+					phone: phone.slice(0, 10),
+					password: "Gg" + pass,
+					confirmPassword: "Gg" + passCon,
+				};
+
+				let input2 = {
+					emailOrPhone: email,
+					password: "Gg" + res.data.sub,
+				};
+
+				// "105813101229632275769"
+
+				// if (
+				// 	res.data.email !== login({ emailOrPhone: res.data.email })
+				// ) {
+				// 	registerCustomer(input);
+				// }
+				// (await login(input2)) || (await registerCustomer(input));
+				// if (res.data.email) {
+				registerCustomer(input);
+				await login(input2);
+				// }
 			} catch (err) {
 				console.log(err);
 			}
@@ -43,41 +58,10 @@ export default function LoginWithGoogle({ FnLogin, input, setInput }) {
 
 	return (
 		<>
-			{/* <GoogleLogin
-				onSuccess={(credentialResponse) => {
-					console.log(credentialResponse);
-				}}
-				onError={() => {
-					console.log("Login Failed");
-				}}
-			/> */}
-
-			<button onClick={() => login()} className="px-2 py-2">
+			<button onClick={() => googleLogin()} className="px-2 py-2">
 				<FcGoogle size={30} className="inline-block "></FcGoogle> Sign
 				in with Google{" "}
 			</button>
-			{/* <div>
-				<h2>React Google Login</h2>
-				<br />
-				{profile ? (
-					<div>
-						<img src={profile.imageUrl} alt="" />
-						<h3>User</h3>
-						<p>Name: {profile.name}</p>
-						<p>Email: {profile.email}</p>
-						<br />
-					</div>
-				) : (
-					<GoogleLogin
-						clientId={clientId}
-						buttonText="Sign in with Google"
-						onSuccess={onSuccess}
-						onFailure={onFailure}
-						cookiePolicy={"single_host_origin"}
-						isSignedIn={true}
-					/>
-				)}
-			</div> */}
 		</>
 	);
 }
