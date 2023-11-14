@@ -36,6 +36,6 @@ export const registerRestaurantSchema = Joi.object({
   price: Joi.number().integer().positive().required(),
   categoryIndex: Joi.number().integer().positive().required(),
   nationIndex: Joi.number().integer().positive().required(),
-  latitude: Joi.number().required(),
-  longitude: Joi.number().required(),
+  districtIndex: Joi.number().integer().positive().required(),
+  position: Joi.required(),
 });
