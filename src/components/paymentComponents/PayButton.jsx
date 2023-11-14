@@ -20,7 +20,7 @@ const PayButton=(p)=>{
 
 
     return(
-        <button onClick={OnClickHandeler}>{text||"Pay"}</button>
+        <button onClick={OnClickHandeler} className="border px-4 py-1 rounded-full bg-blue-500 text-white hover:bg-blue-300">{text||"Pay" }</button>
     );
 }
 
