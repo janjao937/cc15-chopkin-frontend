@@ -19,7 +19,7 @@ export default function DropdownDistrict({ input, setInput }) {
             id={item.id}
             value={index + 1}
           >
-            {item} {index}
+            {item}
           </option>
         ))}
       </select>
