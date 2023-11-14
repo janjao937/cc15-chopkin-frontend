@@ -6,8 +6,6 @@ import ReviewForm from "../features/restaurant/ReviewForm";
 import { useState, useEffect } from "react";
 import axios from "../config/axios";
 import useAuth from "../Hooks/use-auth";
-import useBooking from "../Hooks/use-booking";
-
 
 export default function RestaurantReview({ resId, allreviewMessage, res }) {
   const { authUser } = useAuth();
@@ -21,7 +19,6 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
   const checkCusId = allreviewMessage?.reviews?.find(
     (item) => item.customerId === authUser?.id
   );
-  // console.log(`checkCusId=======>`,checkCusId);
 
   const totalScore = allreviewMessage?.reviews?.reduce((acc, review) => {
     return acc + review.score;
@@ -29,17 +26,9 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
 
   const customerInfo = {};
 
-  // allreviewMessage?.getCusId?.find((item)=> {
-  //   customerInfo.id = item.id,
-  //   customerInfo.img = item.profileImg,
-  //   customerInfo.name = item.firstName
-  // });
-  // console.log(`VALUE =============>`,customerInfo);
-
   useEffect(()=>{
     allreviewMessage?.getCusId?.map((item)=> setCusInfo(item));
   },[cusInfo]);
-  // console.log(`VALUE =============>`,customerInfo);
 
   useEffect(() => {
     const newAverageScore = totalScore / allreviewMessage?.reviews?.length;
@@ -67,7 +56,6 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
       scoreCounts[score]++;
     }
   });
-  // console.log(scoreCounts);
 
   return (
     <div className="w-full pt-4 my-10 border shadow-lg">
@@ -131,8 +119,8 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
               <div className="flex py-4 px-2">
                 <div className="w-40 px-10 pt-2 text-xs">
                   <div className="w-full">
-                    <img src={item.customer.profileImg}/>
-                    <p>{item.customer.firstName}</p>
+                    <img src={item.customer.profileImg} className="rounded-full"/>
+                    <p className="text-center font-semibold text-sm">{item.customer.firstName}</p>
                   
                   </div>
                   {/* <div>{cusInfo.id === item.customerId ? <p>{customerInfo.name}</p> : <p>BULL</p>}</div> */}
@@ -147,14 +135,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
                   </div>
                   <div>{item.message}</div>
                   <div className="flex gap-3 w-20 h-20">
-                    <img src="" alt="" />
-                    {/* {item.ReviewImage.map((el, index) => (
-                      <img
-                        src={el}
-                        alt="review-pic"
-                        key={`${item.reviewId}-${index}`}
-                      />
-                    ))} */}
+                      {item.ReviewImages?.map((item)=> <img src={item.url} key={`${index}-${item.url}`}/>)}
                   </div>
                 </div>
                 {checkCusId && item.customerId === authUser.id ? (
@@ -165,7 +146,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
                   </div>
                 ) : undefined}
               </div>
-              <div className="w-full border-b-2"></div>
+              <hr />
             </div>
           ))}
         </div>
