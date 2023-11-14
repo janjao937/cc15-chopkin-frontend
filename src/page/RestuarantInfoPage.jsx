@@ -149,6 +149,11 @@ export default function RestaurantInfoPage() {
             </div>
           </div>
 
+          {/* GOOGLE MAP */}
+          <div>
+            test
+          </div>
+
           {allPackage.length > 0 ? <div>
             <p className="font-light">Packages</p>
             <div className="border-l-8 shadow-xl border-primary">
