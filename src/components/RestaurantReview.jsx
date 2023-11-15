@@ -14,7 +14,7 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 
-export default function RestaurantReview({ resId, allreviewMessage, res,setAllReviewMessage }) {
+export default function RestaurantReview({ resId, allreviewMessage, res,setAllReviewMessage,allPackage }) {
   const { authUser } = useAuth();
   // console.log(authUser);
 
@@ -124,7 +124,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res,setAllRe
             <Progress value={scoreCounts["1"]} color="red" />
           </div>
         </div>
-        {authUser && authUser.firstName ? (
+        {authUser && authUser.firstName && allPackage.length > 0 ? (
           <button
             className="p-3 text-center bg-primary self-center text-white cursor-pointer rounded-md"
             onClick={() => setIsOpenAfterComplete(!isOpenAfterComplete)}
@@ -133,7 +133,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res,setAllRe
           </button>
         ) : undefined}
         <div>
-          <ReviewForm isOpenAfterComplete={isOpenAfterComplete} resId={resId} />
+          <ReviewForm isOpenAfterComplete={isOpenAfterComplete} resId={resId}/>
         </div>
         <div className="w-full border-b-2"></div>
         <div className="flex flex-col">

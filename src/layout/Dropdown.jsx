@@ -38,12 +38,12 @@ export default function Dropdown() {
       </div>
 
       {isOpen && (
-        <div className="absolute w-[12rem] bg-gray-500/90 right-[-6.2rem] translate-y-2 border rounded-xl shadow-xl p-4">
+        <div className="absolute w-[12rem] bg-white right-[-0.2rem] translate-y-2 border rounded-xl shadow-xl p-2">
           <div className="flex flex-col items-end justify-center gap-1">
             {customerName ? (
               <>
                 <Link to={`/profile/${authUser.id}`}>
-                  <div className="cursor-pointer hover:text-red-500 text-white">
+                  <div className="cursor-pointer hover:text-red-500 text-black">
                     My Profile
                   </div>
                 </Link>
@@ -53,7 +53,7 @@ export default function Dropdown() {
                 {restaurantName ? (
                   <>
                     <Link to={`/restaurant/${authUser.id}`}>
-                      <div className="cursor-pointer hover:text-red-500 text-white">
+                      <div className="cursor-pointer hover:text-red-500 text-black">
                         My Profile
                       </div>
                     </Link>
@@ -63,7 +63,7 @@ export default function Dropdown() {
                     {adminName && (
                       <>
                         <Link to="/admin">
-                          <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+                          <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
                             DashBoard
                           </div>
                         </Link>
@@ -80,7 +80,7 @@ export default function Dropdown() {
           {customerName ? (
             <>
               <Link to={`/profile/${authUser.id}/edit-account`}>
-                <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+                <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
                   Setting
                 </div>
               </Link>
@@ -90,22 +90,22 @@ export default function Dropdown() {
               {restaurantName ? (
                 <>
                   <Link to={`/restaurant/${authUser.id}/edit`}>
-                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 transition text-black">
                       Setting
                     </div>
                   </Link>
                   <Link to={`/restaurant/${authUser.id}/edit/addImage`}>
-                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 transition text-black">
                       Add Image
                     </div>
                   </Link>
                   <Link to={`/restaurant/${authUser.id}/edit/edit-package`}>
-                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 transition text-black">
                       Edit Package
                     </div>
                   </Link>
                   <Link to={`/restaurant/${authUser.id}/approve-booking`}>
-                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
                       Approve Booking
                     </div>
                   </Link>
@@ -118,10 +118,10 @@ export default function Dropdown() {
 
           <div
             onClick={logout}
-            className="flex justify-end items-center gap-4 cursor-pointer hover:text-red-500 rounded-xl"
+            className="flex justify-end items-center gap-4 cursor-pointer hover:bg-red-500 hover:transition rounded-xl"
           >
-            <div className="font-semibold text-sm text-white">Log Out</div>
-            <div className="bg-gray-300 h-9 aspect-square rounded-full flex items-center justify-center">
+            <div className="font-semibold  text-black ">Log Out</div>
+            <div className=" h-9 aspect-square rounded-full flex items-center justify-center">
               <TbLogout />
             </div>
           </div>

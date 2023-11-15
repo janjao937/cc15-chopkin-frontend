@@ -32,12 +32,12 @@ export default function Header() {
 									(authUser.isAdmin && "Admin")}
 							</div> */}
 							<Dropdown />
-							<div
+							{/* <div
 								onClick={handleClickLogout}
 								className="cursor-pointer text-red-500 font-semibold hover:text-red-300"
 							>
 								Sign Out
-							</div>
+							</div> */}
 						</div>
 					</>
 				) : (

@@ -11,8 +11,11 @@ import useAuth from "../Hooks/use-auth";
 import useBooking from "../Hooks/use-booking";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { MdOutlineMan4 } from "react-icons/md";
+import { BsCalendarDate } from "react-icons/bs";
+import { IoFastFoodOutline } from "react-icons/io5";
 
-export default function MyStepper({ setBooking, booking, allPackage, resId }) {
+export default function MyStepper({ setBooking, booking, allPackage, resId,res }) {
   const navigate = useNavigate();
 
   const [activeStep, setActiveStep] = useState(0);
@@ -147,7 +150,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
   // console.log(`BOOKING =======> `,isBooking);
 
   return (
-    <div>
+    <div className="flex flex-col gap-4">
       <Stepper
         lineClassName="!bg-black"
         activeLineClassName="!bg-secondary"
@@ -160,21 +163,24 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
           completedClassName="!bg-secondary text-white"
           // onClick={() => setActiveStep(0)}
         >
-          <div>Icon</div>
+        
+
+          <MdOutlineMan4 size={22}></MdOutlineMan4>
+        
         </Step>
         <Step
           activeClassName="!bg-secondary"
           completedClassName="!bg-secondary text-white"
           // onClick={() => setActiveStep(1)}
         >
-          <div>Icon</div>
+          <BsCalendarDate size={22}></BsCalendarDate>
         </Step>
         <Step
           activeClassName="!bg-secondary"
           completedClassName="!bg-secondary text-white"
           // onClick={() => setActiveStep(2)}
         >
-          <div>Icon</div>
+          <IoFastFoodOutline size={22}></IoFastFoodOutline>
         </Step>
       </Stepper>
 
@@ -183,7 +189,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
       ) : isLastStep ? (
         <div>
           {isSelectPackage ? (
-            <div>
+            <div className="flex flex-col gap-3">
               {" "}
               {authUser ? (
                 <section>
@@ -211,16 +217,16 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
                   type="text"
                   name="specialRequest"
                   id=""
-                  className="border"
+                  className="border border-gray-400 w-full h-[40px]"
                   onChange={handleOnChange}
                 />
               </section>
-              <section>
+              <section className="flex flex-col gap-1">
                 <p className="font-semibold">summary</p>
                 <div className="p-2 bg-gray-300 ">
                   Time: {time},Adult: {numberOfAdult},Kids: {numberOfKids}
                 </div>
-                <div className="font-bold">package: {customerPackage.name}</div>
+                <div className="font-bold flex gap-2">PACKAGE: <p className="font-normal">{customerPackage.name}</p></div>
 
                 <p className="font-semibold">ADULT PRICE:</p>
                 <div className="flex justify-between">
@@ -261,6 +267,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
                 {checkToggle ? (
                   <div>
                     <Radio
+                    color="red"
                       onChange={() => handleSelectPayment(0)}
                       name="description"
                       label={
@@ -272,6 +279,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
                       }
                     />
                     <Radio
+                    color="red"
                       onChange={() => handleSelectPayment(2)}
                       name="description"
                       label={
@@ -303,8 +311,8 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
             <div>
               {allPackage.map((item, index) => (
                 <section key={index}>
-                  <div className="flex py-10 px-4 shadow-sm border border-gray-100 flex-col">
-                    <div className="flex-1 flex flex-col justify-between">
+                  <div className="flex py-10 px-4 shadow-sm border border-gray-100 flex-col gap-3">
+                    <div className="flex-1 flex flex-col justify-between gap-2">
                       <p className="font-semibold">{item.name}</p>
                       <button
                         onClick={() => handleOpenMenu(item.id)}
@@ -314,7 +322,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
                       </button>
                     </div>
                     <div className="flex-1">
-                      <p className="text-gray-500 text-xs">{item.detail}</p>
+                      <p className="text-gray-500 text-sm">{item.detail}</p>
                     </div>
                     <div className="flex-1 text-center">
                       <p>{item.price}</p>
@@ -331,38 +339,31 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
                     <div className="">
                       <div className="flex p-4 flex-col">
                         <div className="flex-1">
-                          <p>รอบเวลาที่เปิดจอง</p>
+                          <p className="font-semibold">รอบเวลาที่เปิดจอง</p>
 
-                          <div className="flex  justify-around">
-                            <div className="flex">
-                              <section>
-                                {" "}
-                                <p>จันทร์</p>
-                                <p>อังคาร</p>
-                                <p>พุธ</p>
-                                <p>พฤหัสบดี</p>
-                              </section>
-                              <section>
-                                <p>businessTime</p>
-                                <p>businessTime</p>
-                                <p>businessTime</p>
-                                <p>businessTime</p>
-                              </section>
-                            </div>
-
-                            <div className="flex">
-                              <section>
-                                {" "}
-                                <p>ศุกร์</p>
-                                <p>เสาร์</p>
-                                <p>อาทิตย์</p>
-                              </section>
-                              <section>
-                                <p>businessTime</p>
-                                <p>businessTime</p>
-                                <p>businessTime</p>
-                              </section>
-                            </div>
+                          <div className="flex flex-col">
+                          {res?.BusinessTimes.map((item, index) => (
+                                    <div className="flex gap-5" key={index}>
+                                      <p>
+                                        {item.day == 1
+                                          ? "mon"
+                                          : item.day == 2
+                                          ? "tue"
+                                          : item.day == 3
+                                          ? "wed"
+                                          : item.day == 4
+                                          ? "thurs"
+                                          : item.day == 5
+                                          ? "fri"
+                                          : item.day == 6
+                                          ? "sat"
+                                          : "sun"}
+                                      </p>
+                                      <p>{item.openTime}</p>
+                                      <p>-</p>
+                                      <p>{item.closedTime}</p>
+                                    </div>
+                                  ))}
                           </div>
                         </div>
                         <div className="flex-1">
@@ -389,11 +390,11 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
         <div>
           <p>Select Booking Date & Time</p>
           {isSelectTime ? (
-            <div>
+            <div className="flex flex-col gap-3">
               <p>TIME</p>
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["TimePicker"]}>
-                  <div className="w-[170px] h-[60px]">
+                <div className="w-full h-[60px]">
                     <TimePicker
                       label="HH:MM AM/PM"
                       name="bookingTime"
@@ -407,10 +408,10 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
               {time ? <MyButton onClick={handleNext} style={`bg-secondary w-full`}>Next</MyButton> : undefined}
             </div>
           ) : (
-            <div>
+            <div className="flex flex-col gap-3">
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <DemoContainer components={["DatePicker", "DatePicker"]}>
-                  <div className="w-[180px] h-[60px]">
+                  <div className="w-full h-[60px]">
                     <DatePicker
                       label="Calender Date"
                       name="bookingDate"
