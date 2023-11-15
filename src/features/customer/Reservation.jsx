@@ -24,6 +24,8 @@ export default function Reservation() {
 
 	const { getBookingAll } = useBooking();
 
+	useEffect(() => {}, []);
+
 	const myBooking = getBookingAll.filter(
 		(item) => item.customerId === userId
 	);

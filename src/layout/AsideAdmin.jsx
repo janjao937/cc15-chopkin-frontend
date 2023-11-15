@@ -67,7 +67,7 @@ const menuAdmin = [
 
 export default function AsideAdmin() {
 	return (
-		<div className="flex flex-col items-center justify-center gap-4 px-4 py-4">
+		<div className="flex flex-col items-center justify-center gap-4 px-4 py-4 ">
 			{menuAdmin.map((item, index) => (
 				<div key={index} className="w-full px-2 py-2">
 					<MenuList data={item} />

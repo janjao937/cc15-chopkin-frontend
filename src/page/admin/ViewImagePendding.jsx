@@ -3,6 +3,7 @@ import useRes from "../../Hooks/use-res";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import blank from "../../assets/blank.png";
+import { toast } from "react-toastify";
 
 export default function ViewImagePage() {
 	const { resId } = useParams();
@@ -49,12 +50,14 @@ export default function ViewImagePage() {
 
 	const handleClickApprove = () => {
 		updateImage(resId, input);
-		alert(`Approve Image RestaurantId : ${resId}`);
+		// alert(`Approve Image RestaurantId : ${resId}`);
+		toast.success(`Approve Image RestaurantId : ${resId}`);
 	};
 
 	const handleClickReject = () => {
 		deleteImage(resId);
-		alert(`Reject Image RestaurantId : ${resId}`);
+		// alert(`Reject Image RestaurantId : ${resId}`);
+		toast.warning(`Reject Image RestaurantId : ${resId}`);
 	};
 	return (
 		<div className="flex flex-col m-4 gap-4">
