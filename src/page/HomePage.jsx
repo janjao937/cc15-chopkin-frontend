@@ -1,5 +1,6 @@
 import React from "react";
 import useRes from "../Hooks/use-res";
+import useResAll from "../Hooks/use-resAll";
 import { dataCuisine } from "../data/dataRes";
 import RestaurantList from "../features/restaurant/RestaurantList";
 import DefaultCarousel from "../components/DefaultCarousel";
@@ -15,6 +16,11 @@ import Loading from "../components/Loading";
 export default function HomePage() {
   const { restaurantAll, homeLoading } = useRes();
   const [searchInput, setSearchInput] = useState("");
+
+  const { getRestaurantAll } = useResAll();
+
+  console.log("eeee", getRestaurantAll);
+
   if (homeLoading) return <Loading />;
   return (
     <div>
@@ -73,7 +79,7 @@ export default function HomePage() {
         <div className="flex items-center justify-evenly">
           {dataCuisine.map((item, index) => (
             <div key={index}>
-              <CuisineList data={item} />
+              <CuisineList data={item} getRestaurantAll={getRestaurantAll} />
             </div>
           ))}
         </div>

@@ -10,6 +10,7 @@ import ResContextProvider from "./contexts/ResContext.jsx";
 import BookingContextProvider from "./contexts/BookingContext.jsx";
 import { Provider } from "react-redux";
 import store from "./app/store/store.js";
+import ResAllContextProvider from "./contexts/ResAllContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
@@ -18,7 +19,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <AuthContextProvider>
         <ResContextProvider>
           <BookingContextProvider>
-            <App />
+            <ResAllContextProvider>
+              <App />
+            </ResAllContextProvider>
           </BookingContextProvider>
         </ResContextProvider>
       </AuthContextProvider>
