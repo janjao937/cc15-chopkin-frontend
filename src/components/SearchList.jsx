@@ -20,15 +20,18 @@ function SearchList({ searchInput }) {
   return (
     <div>
       {searchResArr.length > 0 && (
-        <ul className="border border-gray-400 rounded-lg top-2py-1 z-50 bg-white absolute w-full">
+        <ul className="border top-2py-1 z-50  absolute w-full h-14 rounded-xl">
           {searchResArr.map((x) => (
             <li
               key={x.id}
-              className="cursor-pointer hover:bg-gray-200 rounded-md px-4 py-2 flex gap-4"
+              className="cursor-pointer hover:bg-gray-200 rounded-md px-4 py-2 flex gap-4 h-14 transition"
               onClick={() => handleClick(x.id)}
             >
+              <div className="flex items-center">
+
               <AvatarForSearch src={x.profileImg} />
-              <p>{x.restaurantName}</p>
+              </div>
+              <p className="flex items-center">{x.restaurantName}</p>
             </li>
           ))}
         </ul>

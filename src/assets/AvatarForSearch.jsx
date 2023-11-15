@@ -7,7 +7,7 @@ function AvatarForSearch({ src }) {
       <img
         src={src || defaultImg}
         alt=""
-        className="rounded-full aspect-square max-w-[1.5rem]"
+        className="rounded-full aspect-square max-w-[2.0rem]"
       />
     </div>
   );

@@ -12,7 +12,7 @@ export default function SearchInput({
   value,
 }) {
   return (
-    <div className="flex items-center justify-center gap-4 border bg-white px-4 py-1 w-[500px] rounded-full outline-none">
+    <div className="flex items-center justify-center gap-4 border bg-white px-4 py-1 w-[500px] rounded-full outline-none h-14">
       <GrSearch size={20} className="text-gray-600" />
       <input
         type={type}

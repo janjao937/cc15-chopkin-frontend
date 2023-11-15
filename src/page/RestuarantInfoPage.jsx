@@ -116,7 +116,7 @@ export default function RestaurantInfoPage() {
 
   return (
     <div className="flex flex-col justify-center">
-      <main className="flex px-64 gap-5">
+      <main className="flex gap-5">
         <section className="flex-1 flex flex-col gap-5">
           <div className="flex justify-between">
             <div className="flex items-center">
@@ -292,10 +292,11 @@ export default function RestaurantInfoPage() {
         )}
       </main>
       {/* {authUser.firstName ? <RestaurantReview /> : undefined} */}
-      <div className="flex justify-center gap-5  px-64">
+      <div className="flex justify-center gap-5">
         <RestaurantReview
           resId={resId}
           allreviewMessage={allreviewMessage}
+          setAllReviewMessage={setAllReviewMessage}
           res={res}
           cusReviewImg={cusReviewImg}
         />

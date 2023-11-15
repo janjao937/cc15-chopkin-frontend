@@ -45,6 +45,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
   });
 
   const handleConfirmBooking = (e) => {
+    console.log(payStatus);
     const updatedBooking = {
       packageId: customerPackage.id,
       customerId: authUser.id,
@@ -54,7 +55,7 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
       specialRequest: isBooking.specialRequest,
       totalKid: numberOfKids,
       totalCustomer: numberOfAdult,
-      paymentStatus: payStatus || 2,
+      paymentStatus: payStatus !== undefined ? payStatus : 2,
     };
     setIsBooking(updatedBooking);
     setIsFormReady(true);
@@ -127,11 +128,13 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
   };
 
   const handleSelectPayment = (value) => {
+    console.log(value);
     setPayStatus(value);
+    // console.log(payStatus);
   };
 
   const { authUser } = useAuth();
-  console.log(`status:======> ${payStatus}`);
+  // console.log(`status:======> ${payStatus}`);
 
   // console.log(`date`,date);
   // console.log(`time`,time);
@@ -139,7 +142,9 @@ export default function MyStepper({ setBooking, booking, allPackage, resId }) {
 
   // console.log(isBooking);
 
-  console.log(payStatus);
+  // console.log(payStatus);
+
+  // console.log(`BOOKING =======> `,isBooking);
 
   return (
     <div>

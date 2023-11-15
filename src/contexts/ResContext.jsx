@@ -13,6 +13,7 @@ export default function ResContextProvider({ children }) {
 	const [allCustomer, setAllCustomer] = useState([]);
 
 	const [business, setBusiness] = useState([]);
+	
 
 	const [selected, setSelected] = useState(null);
 	const [input, setInput] = useState({

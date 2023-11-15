@@ -5,12 +5,12 @@ export default function CuisineItem({ id, image, type }) {
 	return (
 		<Link to={`/nation/${id}`}>
 			<div className="relative">
-				<div className="w-[180px] h-[250px] ">
+				<div className="w-[230px] h-[250px] hover:shadow-xl transition">
 					<div className="w-full h-full absolute bg-black/10 rounded-lg"></div>
 					<img
 						src={image}
 						alt={type}
-						className="w-full h-full rounded-lg"
+						className="w-full h-full rounded-xl"
 					/>
 				</div>
 

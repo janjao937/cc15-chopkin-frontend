@@ -151,7 +151,7 @@ export default function ViewEditingPage() {
 						CLOSED-TIME
 					</div>
 				</div>
-				{filterReq?.tempBusinessTimes.map((item, index) => (
+				{filterReq?.tempBusinessTimes?.map((item, index) => (
 					<div
 						className="grid grid-cols-12 items-center justify-items-center px-4 py-1"
 						key={index}
@@ -168,7 +168,7 @@ export default function ViewEditingPage() {
 				RESTAURANT-IMAGE
 			</div>
 			<div className="flex items-center justify-evenly gap-4 ">
-				{filterReq?.tempRestaurantImages.map((item, index) => (
+				{filterReq?.tempRestaurantImages?.map((item, index) => (
 					<div key={index} className="w-[200px] h-[200px]">
 						<img
 							src={item.url || blank}

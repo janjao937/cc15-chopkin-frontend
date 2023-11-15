@@ -9,8 +9,8 @@ export default function App() {
 		return <Loading />;
 	}
 	return (
-		<>
+		<div className="font-kanit">
 			<Route />
-		</>
+		</div>
 	);
 }

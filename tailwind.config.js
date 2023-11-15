@@ -21,6 +21,9 @@ module.exports = withMT({
 				primary: "#EF4444",
 			},
 		},
+		fontFamily:{
+			kanit: ["Kanit","sans-serif"]
+		},
 		screens: {
 			xs: "320px",
 			sm: "578px",

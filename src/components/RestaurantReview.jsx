@@ -14,7 +14,7 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 
-export default function RestaurantReview({ resId, allreviewMessage, res }) {
+export default function RestaurantReview({ resId, allreviewMessage, res,setAllReviewMessage }) {
   const { authUser } = useAuth();
   // console.log(authUser);
 
@@ -23,9 +23,11 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
   const [averageScore, setAverageScore] = useState(0);
   const [cusInfo, setCusInfo] = useState([]);
   const [open, setOpen] = React.useState(false);
-  const [forceUpdate, setForceUpdate] = useState(0);
+  const [forceUpdate, setForceUpdate] = useState([]);
 
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
   const checkCusId = allreviewMessage?.reviews?.find(
     (item) => item.customerId === authUser?.id
@@ -52,10 +54,13 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
       .delete(`http://localhost:8888/review/${reviewId}`)
       .then((res) => {
         handleOpen();
-        setForceUpdate((prev) => prev + 1);
+      
       })
       .catch((e) => console.log(e));
-  };
+    // setAllReviewMessage(allreviewMessage?.reviews?.filter((item)=> console.log(item.id)));
+    console.log('reviewId', reviewId);
+    };
+  
 
   useEffect(() => {
     console.log("Force update effect");
