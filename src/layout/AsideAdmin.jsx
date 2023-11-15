@@ -1,10 +1,11 @@
 import React from "react";
 import { AiOutlineHome } from "react-icons/ai";
-import { BsBorderWidth } from "react-icons/bs";
+import { BsBorderWidth, BsFillChatDotsFill } from "react-icons/bs";
 import { HiOutlineArchiveBox } from "react-icons/hi2";
 import { BsPerson, BsFillPencilFill } from "react-icons/bs";
 import { TfiBookmarkAlt } from "react-icons/tfi";
 import { TbPackages } from "react-icons/tb";
+import { FaRegImages } from "react-icons/fa";
 import MenuList from "../features/admin/MenuList";
 
 const menuAdmin = [
@@ -49,6 +50,18 @@ const menuAdmin = [
 		to: "/admin/package",
 		text: "Package Request",
 		icon: <TbPackages />,
+	},
+	{
+		id: 8,
+		to: "/admin/image",
+		text: "Images Request",
+		icon: <FaRegImages />,
+	},
+	{
+		id: 9,
+		to: "/admin/chat",
+		text: "Chat Request",
+		icon: <BsFillChatDotsFill />,
 	},
 ];
 
