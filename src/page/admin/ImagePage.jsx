@@ -4,13 +4,52 @@ import ImageList from "../../features/admin/ImageList";
 import useRes from "../../Hooks/use-res";
 
 export default function ImagePage() {
-	const {} = useRes();
+	const { getImageResPendding, imageResPendding } = useRes();
 	//
 	const [searchInput, setSearchInput] = useState("");
 
-	// useEffect(() => {
-	// 	fatchPendingEdit();
-	// }, []);
+	useEffect(() => {
+		getImageResPendding();
+	}, []);
+
+	console.log("imageResPendding =>", imageResPendding);
+
+	const itemRestaurant = imageResPendding.map((item) => item.restaurantId);
+	console.log("itemRestaurant =>", itemRestaurant);
+
+	const test = imageResPendding.filter(
+		(item, index) =>
+			item.restaurantId === imageResPendding[index].restaurantId
+	);
+	console.log("test", test);
+
+	// const mapImg = () => {
+	// 	const objRes = {};
+	// 	for (let i = 0; i < imageResPendding.length; i++) {
+	// 		if (objRes[imageResPendding[i].restaurantId]) {
+	// 			objRes[imageResPendding[i].restaurantId].imgs.push(
+	// 				imageResPendding[i].url
+	// 			);
+	// 		} else {
+	// 			objRes[imageResPendding[i].restaurantId] = {
+	// 				imgs: [],
+	// 				resId: imageResPendding[i].restaurantId,
+	// 			};
+	// 			objRes[imageResPendding[i].restaurantId].imgs = [
+	// 				imageResPendding[i].url,
+	// 			];
+	// 		}
+	// 	}
+
+	// 	return objRes;
+	// };
+
+	// const mapObjectRes = (b) => {
+	// 	for (let i in b) {
+	// 		// code block to be executed
+	// 		console.log(i);
+	// 	}
+	// };
 
 	// const filteredRequests = fatchResPendding.filter(
 	// 	(x) =>
@@ -19,6 +58,9 @@ export default function ImagePage() {
 	// );
 
 	// if (editRequestLoading) return <Loading />;
+
+	// const filter
+
 	return (
 		<>
 			<div className="flex flex-col gap-4 p-4 mb-10">
@@ -37,14 +79,14 @@ export default function ImagePage() {
 				<div className="">
 					<div className="grid grid-cols-12">
 						<h1 className="col-span-5 px-4 py-2 text-center border border-gray-400  bg-gray-300 text-red-500 font-semibold ">
-							Request ID
+							Restaurant Id
 						</h1>
 						<h1 className="col-span-3 px-4 py-2 text-center border border-gray-400 bg-gray-300 text-red-500 font-semibold ">
 							Restaurant Name
 						</h1>
 					</div>
-
-					{[{ id: 1, name: "test" }].map((item, index) => (
+					{/* {mapObjectRes({ hello: "asdasdasd" })} */}
+					{imageResPendding.map((item, index) => (
 						<div key={index}>
 							<ImageList data={item} />
 						</div>
