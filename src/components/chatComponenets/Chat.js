@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ChatComponentFriend, ChatComponentMe } from "./ChatBoxComponent";
+import { ChatComponentOther, ChatComponentMe } from "./ChatBoxComponent";
 
 const Chat =({socket,username,room})=>{
     const [inPutMessage,setInputMessage] = useState("");
@@ -36,7 +36,7 @@ const Chat =({socket,username,room})=>{
                     messageArr.map((e,index)=>{
                         return (username === e.author?(
                         <ChatComponentMe key={index} message={e.message} author={e.author} time={e.time}/>):(
-                        <ChatComponentFriend key={index} message={e.message} author={e.author} time={e.time}/>)
+                        <ChatComponentOther key={index} message={e.message} author={e.author} time={e.time}/>)
                         )
                     })
                 }

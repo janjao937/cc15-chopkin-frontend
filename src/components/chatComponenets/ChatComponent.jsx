@@ -19,18 +19,18 @@ const [room,setRoom] = useState("");
       setShowChat(!showChat);
     }
     //if Cus or Res
-        //CustomerOrRestaurantCreateRoom(roomId)
+        //UserCreateRoomByRoomId(roomId)
     //end
 
   }
 
-  const CustomerOrRestaurantCreateRoom = async(roomId)=>{
+  const UserCreateRoomByRoomId = async(roomId)=>{
     try{
         //post CreateRoomByUserId({userId})
-        console.log("customer create Room:"+roomId);
+        console.log("User create Room:"+roomId);
     }
     catch(error){
-        console.log("CustomerOrRestaurantCreateRoom",error);
+        console.log("UserCreateRoom",error);
     }
 
   }

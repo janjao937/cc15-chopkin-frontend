@@ -11,7 +11,7 @@ const ChatComponentMe = ({message,author,time})=>{
         </div>
     )
 }
-const ChatComponentFriend = ({message,author,time})=>{
+const ChatComponentOther = ({message,author,time})=>{
     return(
         <div  className="message">
             <div  style={{display:"flex",justifyContent:"left", gap:"4px", border:"1px solid", margin:"25px" }}>
@@ -24,5 +24,5 @@ const ChatComponentFriend = ({message,author,time})=>{
 }
 
 
-export {ChatComponentFriend};
+export {ChatComponentOther};
 export {ChatComponentMe};
