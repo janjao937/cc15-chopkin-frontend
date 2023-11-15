@@ -32,7 +32,6 @@ export default function ResEditPackagePage() {
     const getPackage = async () => {
       try {
         const res = await axios.get(`/package/getEveryPackage`);
-        console.log("package =>", res.data);
         setResPackage(res.data);
       } catch (err) {
         console.log(err);
