@@ -2,9 +2,9 @@ import React from "react";
 import Progress from "./Progress";
 
 export default function MemberPoint({ authUser, memberPoint, myBooking }) {
-	console.log("mmm=>", myBooking);
+	// console.log("mmm=>", myBooking);
 	let countMemberPoint = myBooking.length;
-	console.log("first", countMemberPoint);
+	// console.log("first", countMemberPoint);
 
 	return (
 		<div>
