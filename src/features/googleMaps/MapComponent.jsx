@@ -11,8 +11,6 @@ import {
   InfoWindowF,
 } from "@react-google-maps/api";
 import { GOOGLE_MAPS_API, LIBRARIES } from "../../../env";
-import { useEffect } from "react";
-import axios from "axios";
 import {
   Combobox,
   ComboboxInput,

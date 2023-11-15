@@ -17,7 +17,7 @@ export default function PaymentSuccessPage() {
 		dispatch(paymentSuccess({paymentId:paymentId,paymentStatus:1}))
 	},[]);
 
-	return (loading&&
+	return (!loading&&
 		<div className="h-screen flex flex-col justify-center items-center gap-4">
 			<div className="text-green-700 mb-4">
 				<BsFillCheckCircleFill size={60} />

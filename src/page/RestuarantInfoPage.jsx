@@ -10,6 +10,7 @@ import profileImage from "../assets/logo.png";
 import { useEffect } from "react";
 import axios from "../config/axios";
 import useBooking from "../Hooks/use-booking";
+import ShowOnlyMap from "../features/googleMaps/ShowOnlyMap";
 
 const mockRestuarantInfo = {
   id: 1,
@@ -65,6 +66,7 @@ export default function RestaurantInfoPage() {
   const [allreviewMessage, setAllReviewMessage] = useState([]);
   const [allBusinessTime, setAllBusinessTime] = useState([]);
   const [date, setDate] = useState([]);
+  const [cusReviewImg,setCusReviewImg] = useState([]);
 
   useEffect(() => {
     axios
@@ -73,7 +75,7 @@ export default function RestaurantInfoPage() {
       .catch((e) => console.log(e));
   }, []);
 
-  console.log(allreviewMessage);
+  console.log(`ALL =========> `,allreviewMessage);
 
   const [allPackage, setAllPackage] = useState([]);
   useEffect(() => {
@@ -83,7 +85,6 @@ export default function RestaurantInfoPage() {
       .catch((e) => console.log(e));
   }, []);
 
-  console.log(allPackage);
 
   const { authUser } = useAuth();
   const { resId } = useParams();
@@ -94,8 +95,8 @@ export default function RestaurantInfoPage() {
   const { restaurantAll } = useRes();
 
   // console.log(authUser);
-  console.log(`resId=======>`, resId);
-  console.log(`Res All=====>`, restaurantAll);
+  // console.log(`resId=======>`, resId);
+  // console.log(`Res All=====>`, restaurantAll);
 
   const res = restaurantAll.find((item) => item.id === resId);
   console.log("myRes =>", res);
@@ -111,9 +112,7 @@ export default function RestaurantInfoPage() {
     setBooking(!booking);
   };
 
-  // useEffect(()=>{
-  //   console.log('RES IS ========:',res.BusinessTimes.map((item)=> setDate(item.openTime)));
-  // },[]);
+
 
   return (
     <div className="flex flex-col justify-center">
@@ -149,42 +148,58 @@ export default function RestaurantInfoPage() {
             </div>
           </div>
 
-          {allPackage.length > 0 ? <div>
-            <p className="font-light">Packages</p>
-            <div className="border-l-8 shadow-xl border-primary">
-              {allPackage.map((item, index) => (
-                <section key={index}>
-                  <div className="flex py-10 px-4 border border-gray-100">
-                    <div className="flex-1 flex flex-col justify-between">
-                      <p className="font-semibold">{item.name}</p>
-                      <button
-                        onClick={() => handleOpenMenu(item.id)}
-                        className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4 text-primary`}
-                      >
-                        Menu
-                      </button>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-gray-500 text-xs">{item.detail}</p>
-                    </div>
-                    <div className="flex-1 text-center">
-                      <p>{item.price}</p>
-                    </div>
-                    {/* <MyButton style={`bg-primary h-[40px] rounded-md`}>
+          {/* GOOGLE MAP */}
+          <div className="flex flex-col items-center relative right-[38%] gap-3">
+            <div className="border-2 rounded-md">
+              <ShowOnlyMap center={{ lat: res?.latitude, lng: res?.longitude }} />
+            </div>
+            <a
+              href={`https://maps.google.com/?q=${res?.latitude},${res?.longitude}`}
+              target="_blank"
+            >
+              <button className="bg-primary py-2 px-4 rounded-md text-white ">
+                ดูเส้นทาง
+              </button>
+            </a>
+          </div>
+
+          {allPackage.length > 0 ? (
+            <div>
+              <p className="font-light">Packages</p>
+              <div className="border-l-8 shadow-xl border-primary">
+                {allPackage.map((item, index) => (
+                  <section key={index}>
+                    <div className="flex py-10 px-4 border border-gray-100">
+                      <div className="flex-1 flex flex-col justify-between">
+                        <p className="font-semibold">{item.name}</p>
+                        <button
+                          onClick={() => handleOpenMenu(item.id)}
+                          className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4 text-primary`}
+                        >
+                          Menu
+                        </button>
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-gray-500 text-xs">{item.detail}</p>
+                      </div>
+                      <div className="flex-1 text-center">
+                        <p>{item.price}</p>
+                      </div>
+                      {/* <MyButton style={`bg-primary h-[40px] rounded-md`}>
                       Booking
                     </MyButton> */}
-                  </div>
+                    </div>
 
-                  {openMenu === item.id ? (
-                    <div>
-                      <div className="flex p-4">
-                        <div className="flex-1">
-                          <p>รอบเวลาที่เปิดจอง</p>
+                    {openMenu === item.id ? (
+                      <div>
+                        <div className="flex p-4">
+                          <div className="flex-1">
+                            <p>รอบเวลาที่เปิดจอง</p>
 
-                          <div className="flex justify-around">
-                            <section className="flex">
-                              {/* {res.map((item,index)=> <p>{item.businessTimes}</p>)} */}
-                              {/* <div className="flex-1">
+                            <div className="flex justify-around">
+                              <section className="flex">
+                                {/* {res.map((item,index)=> <p>{item.businessTimes}</p>)} */}
+                                {/* <div className="flex-1">
                                 <p>Monday</p>
                                 <p>Tuesday</p>
                                 <p>Wednesday</p>
@@ -194,53 +209,56 @@ export default function RestaurantInfoPage() {
                                 <p>Sunday</p>
                               </div> */}
 
-                              <div className="">
-                                {res?.BusinessTimes.map((item, index) => (
-                                  <div className="flex gap-10" key={index}>
-                                    <p>
-                                      {item.day == 1
-                                        ? "mon"
-                                        : item.day == 2
-                                        ? "tue"
-                                        : item.day == 3
-                                        ? "wed"
-                                        : item.day == 4
-                                        ? "thurs"
-                                        : item.day == 5
-                                        ? "fri"
-                                        : item.day == 6
-                                        ? "sat"
-                                        : "sun"}
-                                    </p>
-                                    <p>{item.openTime}</p>
-                                    <p>-</p>
-                                    <p>{item.closedTime}</p>
-                                  </div>
-                                ))}
-                              </div>
-                            </section>
+                                <div className="">
+                                  {res?.BusinessTimes.map((item, index) => (
+                                    <div className="flex gap-10" key={index}>
+                                      <p>
+                                        {item.day == 1
+                                          ? "mon"
+                                          : item.day == 2
+                                          ? "tue"
+                                          : item.day == 3
+                                          ? "wed"
+                                          : item.day == 4
+                                          ? "thurs"
+                                          : item.day == 5
+                                          ? "fri"
+                                          : item.day == 6
+                                          ? "sat"
+                                          : "sun"}
+                                      </p>
+                                      <p>{item.openTime}</p>
+                                      <p>-</p>
+                                      <p>{item.closedTime}</p>
+                                    </div>
+                                  ))}
+                                </div>
+                              </section>
+                            </div>
+                          </div>
+                          <div className="flex-1">
+                            <p>รายละเอียดแพ็กเกจ</p>
+                            <p>{item.detail}</p>
                           </div>
                         </div>
-                        <div className="flex-1">
-                          <p>รายละเอียดแพ็กเกจ</p>
-                          <p>{item.detail}</p>
+                        <img className="w-full" src={item.img} alt="" />
+                        <div className="text-center p-4">
+                          <button
+                            onClick={handleOpenMenu}
+                            className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4`}
+                          >
+                            Close
+                          </button>
                         </div>
                       </div>
-                      <img className="w-full" src={item.img} alt="" />
-                      <div className="text-center p-4">
-                        <button
-                          onClick={handleOpenMenu}
-                          className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4`}
-                        >
-                          Close
-                        </button>
-                      </div>
-                    </div>
-                  ) : undefined}
-                </section>
-              ))}
+                    ) : undefined}
+                  </section>
+                ))}
+              </div>
             </div>
-          </div> : <p className="text-center p-5 border bg-gray-200">No package</p>}
+          ) : (
+            <p className="text-center p-5 border bg-gray-200">No package</p>
+          )}
         </section>
 
         {isCustomer && (
@@ -279,6 +297,7 @@ export default function RestaurantInfoPage() {
           resId={resId}
           allreviewMessage={allreviewMessage}
           res={res}
+          cusReviewImg={cusReviewImg}
         />
       </div>
     </div>
