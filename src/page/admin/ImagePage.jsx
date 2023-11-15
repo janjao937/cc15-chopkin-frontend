@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
 import SearchInput from "../../components/SearchInput";
-import RequestList from "../../features/admin/RequestList";
+import ImageList from "../../features/admin/ImageList";
 import useRes from "../../Hooks/use-res";
 
-// import { packageEditPending } from "../../data/mock-restaurantEdit";
-
-export default function ResPenddingEditPage() {
-	const { fatchPendingEdit, fatchResPendding } = useRes();
+export default function ImagePage() {
+	const {} = useRes();
 	//
 	const [searchInput, setSearchInput] = useState("");
 
-	useEffect(() => {
-		fatchPendingEdit();
-	}, []);
+	// useEffect(() => {
+	// 	fatchPendingEdit();
+	// }, []);
 
-	const filteredRequests = fatchResPendding.filter(
-		(x) =>
-			x.restaurantName.toLowerCase().includes(searchInput) ||
-			x.id.toString().toLowerCase().includes(searchInput)
-	);
+	// const filteredRequests = fatchResPendding.filter(
+	// 	(x) =>
+	// 		x.restaurantName.toLowerCase().includes(searchInput) ||
+	// 		x.id.toString().toLowerCase().includes(searchInput)
+	// );
 
 	// if (editRequestLoading) return <Loading />;
 	return (
@@ -45,17 +43,12 @@ export default function ResPenddingEditPage() {
 							Restaurant Name
 						</h1>
 					</div>
-					{filteredRequests.length > 0
-						? filteredRequests.map((item, index) => (
-								<div key={index}>
-									<RequestList data={item} />
-								</div>
-						  ))
-						: fatchResPendding.map((item, index) => (
-								<div key={index}>
-									<RequestList data={item} />
-								</div>
-						  ))}
+
+					{[{ id: 1, name: "test" }].map((item, index) => (
+						<div key={index}>
+							<ImageList data={item} />
+						</div>
+					))}
 				</div>
 			</div>
 		</>

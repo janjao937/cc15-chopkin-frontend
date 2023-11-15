@@ -1,45 +1,95 @@
-import { useState } from "react";
+import React, { useState } from "react";
+import { BsFillChatDotsFill, BsFillSendFill } from "react-icons/bs";
+import useAuth from "../Hooks/use-auth";
+import Chat from "../features/Chat/Chat";
+
+const mockChat = [
+	{
+		room: 1,
+		author: "Cus1",
+		message: "Cus Message",
+		time: "09:00 AM",
+	},
+	{
+		room: 1,
+		author: "Admin",
+		message: "Admin Message",
+		time: "09:00 AM",
+	},
+];
 
 export default function LiveChat() {
-  const [isOpenChat, setIsOpenChat] = useState(false);
+	const { authUser } = useAuth();
+	console.log("authUser =>", authUser);
 
-  const handleOpenChat = () => {
-    setIsOpenChat(true);
-  };
+	const [isOpenChat, setIsOpenChat] = useState(false);
 
-  const handleCloseChat = () => {
-    setIsOpenChat(false);
-  };
+	const handleOpenChat = () => {
+		setIsOpenChat(!isOpenChat);
+		console.log("Open chat Room");
+	};
 
+	const handleCloseChat = () => {
+		setIsOpenChat(false);
+	};
 
-  return (
-    <button
-      onClick={handleOpenChat}
-      className="z-10 bottom-3 right-3 fixed  text-white"
-    >
-      {isOpenChat ? (
-        <div className="w-[400px] h-[500px] bg-white shadow-lg rounded-3xl flex flex-col">
-            <div className="bg-secondary w-full rounded-t-3xl py-3 flex px-5 justify-between h-[10%]">
-                <p>Admin</p>
-                <button className="bg-blue-500 px-2" onClick={handleCloseChat}>X</button>
-            </div>
-            <div className="h-[75%] flex flex-col">
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-            </div>
-            <div className="h-[15%] bg-gray-200 rounded-b-3xl flex items-center px-3">
-                <input type="text" className="w-full h-[60%]"/>
-            </div>
-        </div>
-      ) : (
-        <div className="w-[80px] h-[80px] px-5 py-10 rounded-full bg-secondary flex items-center justify-center">
-          close
-        </div>
-      )}
-    </button>
-  );
+	return (
+		<>
+			{authUser && (
+				<div className="z-10 bottom-3 right-3 fixed">
+					<div className="">
+						{isOpenChat ? (
+							<div className="absolute shadow-xl rounded-xl flex items-center justify-center w-[350px] h-[400px] right-0 bottom-0 z-99">
+								<div className="relative right-0 bottom-0 w-full h-full">
+									<div className="bg-secondary text-secondary font-semibold text-md w-full rounded-t-xl px-4 py-2 flex justify-between">
+										<p>Admin</p>
+										<button
+											className="px-2 "
+											onClick={() => setIsOpenChat(false)}
+										>
+											X
+										</button>
+									</div>
+									{/* box chat */}
+									<div className="h-[75%] flex flex-col px-4 py-2 bg-white">
+										<Chat data={mockChat} />
+									</div>
+									<div className="h-[15%] bg-gray-200 rounded-b-xl flex items-center gap-2 px-3">
+										<input
+											type="text"
+											className="w-full h-[60%] px-4 text-sm outline-none rounded-full"
+										/>
+										<button
+											className="hover:text-secondary"
+											onClick={() =>
+												console.log("close room")
+											}
+										>
+											<BsFillSendFill size={20} />
+										</button>
+									</div>
+								</div>
+							</div>
+						) : (
+							<div
+								className={`relative text-white w-[40px] h-[40px] p-4 rounded-full bg-secondary flex items-center justify-center `}
+							>
+								<button
+									onClick={handleOpenChat}
+									className="absolute cursor-pointer right-0 bottom-0 flex items-center justify-center w-full h-full"
+								>
+									{/* <div className="w-full h-full"> */}
+									<BsFillChatDotsFill
+										size={20}
+										className=""
+									/>
+									{/* </div> */}
+								</button>
+							</div>
+						)}
+					</div>
+				</div>
+			)}
+		</>
+	);
 }

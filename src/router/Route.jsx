@@ -41,10 +41,12 @@ import ResApproveBookingPage from "../page/ResApproveBookingPage";
 import DetailCusBookingPage from "../page/DetailBookingPage";
 import CusEditBookingPage from "../page/CusEditBookingPage";
 import PaymentButton from "../components/paymentComponents/PayButton";
-
+import ChatPage from "../page/admin/ChatPage";
+import ImagePage from "../page/admin/ImagePage";
+import ViewImagePage from "../page/admin/ViewImagePage";
 
 const router = createBrowserRouter([
-	{path:"/test",element:<PaymentButton/>},
+	{ path: "/test", element: <PaymentButton /> },
 	{
 		path: "/",
 		element: <Layout />,
@@ -225,6 +227,8 @@ const router = createBrowserRouter([
 			{ path: "booking", element: <BookingPage /> },
 			{ path: "booking/:bookingId", element: <DetailBookingPage /> },
 			{ path: "edit", element: <ResPenddingEditPage /> },
+			{ path: "image", element: <ImagePage /> },
+			{ path: "image/:resId", element: <ViewImagePage /> },
 			{
 				path: "edit/:resId",
 				element: <ViewResPenddingEditPage />,
@@ -233,6 +237,10 @@ const router = createBrowserRouter([
 			{
 				path: "view-package/:packageId",
 				element: <ViewPackagePendding />,
+			},
+			{
+				path: "chat",
+				element: <ChatPage />,
 			},
 		],
 	},
