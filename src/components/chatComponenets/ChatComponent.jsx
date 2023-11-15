@@ -16,7 +16,7 @@ const [room,setRoom] = useState("");
 const [showChat,setShowChat] = useState(false);
   
 const joinOrCreateRoom = ()=>{
-    if(!username&&!room == "")return;
+    if(username&&room == "")return;
     socket.emit("join_room",room);
     setShowChat(!showChat);
     //if CusOrRes
