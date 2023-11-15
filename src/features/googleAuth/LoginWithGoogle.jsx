@@ -27,6 +27,7 @@ export default function LoginWithGoogle() {
 				let input = {
 					firstName: res.data.given_name,
 					lastName: res.data.family_name,
+					profileImg: res.data.picture,
 					email: email,
 					phone: phone.slice(0, 10),
 					password: "Gg" + pass,

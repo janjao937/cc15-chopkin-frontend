@@ -1,7 +1,9 @@
 import React from "react";
 import Progress from "./Progress";
 
-export default function MemberPoint({ authUser, memberPoint }) {
+export default function MemberPoint({ authUser, memberPoint, myBooking }) {
+	console.log("mmm=>", myBooking);
+
 	return (
 		<div>
 			<div
