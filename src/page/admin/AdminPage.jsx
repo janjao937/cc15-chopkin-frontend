@@ -19,7 +19,7 @@ export default function AdminPage() {
 
 			<div>
 				<div className="text-2xl mb-4">Total New Update</div>
-				<div className="flex gap-4 flex-wrap items-center justify-center">
+				<div className="flex gap-12 flex-wrap items-center justify-center">
 					<div className="border bg-white shadow-lg flex flex-col items-center gap-4 p-4 w-[200px]">
 						<div className="text-gray-500 font-semibold">
 							ALL RESTAURANT
