@@ -1,92 +1,58 @@
-import { AiFillStar } from "react-icons/ai";
 import PageName from "../components/PageName";
 import RestaurantList from "../features/restaurant/RestaurantList";
 import MyButton from "../components/MyButton";
+import { useState } from "react";
 import { useEffect } from "react";
 import axios from "../config/axios";
-
-const mocRestaurant = [
-  {
-    id: 1,
-    restaurantImage:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHN8ZW58MHx8MHx8fDA%3D",
-    restaurantName: "reataurantName",
-    resType: "Thai",
-    star: <AiFillStar size={30} className="text-yellow-400" />,
-    price: 1000,
-  },
-  {
-    id: 2,
-    restaurantImage:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHN8ZW58MHx8MHx8fDA%3D",
-    restaurantName: "reataurantName",
-    resType: "Thai",
-    star: <AiFillStar size={30} className="text-yellow-400" />,
-    price: 1000,
-  },
-  {
-    id: 3,
-    restaurantImage:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHN8ZW58MHx8MHx8fDA%3D",
-    restaurantName: "reataurantName",
-    resType: "Thai",
-    star: <AiFillStar size={30} className="text-yellow-400" />,
-    price: 1000,
-  },
-  {
-    id: 4,
-    restaurantImage:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHN8ZW58MHx8MHx8fDA%3D",
-    restaurantName: "reataurantName",
-    resType: "Thai",
-    star: <AiFillStar size={30} className="text-yellow-400" />,
-    price: 1000,
-  },
-  {
-    id: 5,
-    restaurantImage:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHN8ZW58MHx8MHx8fDA%3D",
-    restaurantName: "reataurantName",
-    resType: "Thai",
-    star: <AiFillStar size={30} className="text-yellow-400" />,
-    price: 1000,
-  },
-  {
-    id: 6,
-    restaurantImage:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHN8ZW58MHx8MHx8fDA%3D",
-    restaurantName: "reataurantName",
-    resType: "Thai",
-    star: <AiFillStar size={30} className="text-yellow-400" />,
-    price: 1000,
-  },
-  {
-    id: 7,
-    restaurantImage:
-      "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8Zm9vZHN8ZW58MHx8MHx8fDA%3D",
-    restaurantName: "reataurantName",
-    resType: "Thai",
-    star: <AiFillStar size={30} className="text-yellow-400" />,
-    price: 1000,
-  },
-];
+import { FaSearch } from "react-icons/fa";
+import SearchInput from "../components/SearchInput";
 
 export default function RecommendedPage() {
+  const [openSearch, setIsOpenSearch] = useState(false);
+  const [restaurantAll, setRestaurantAll] = useState([]);
+
+  useEffect(() => {
+    const fatchResAll = async () => {
+      try {
+        const res = await axios.get("/restaurant/all");
+        console.log("fatchResAll=>", res.data);
+        setRestaurantAll(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fatchResAll();
+  }, []);
+
   return (
-    <div className="flex flex-col gap-5 lg:px-32 md:px-16 sm:px-3">
-      <PageName name="Recommend Restaurant"></PageName>
-      <div className="gap-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {mocRestaurant.map((item, index) => (
-          <div key={index}>
-            <RestaurantList data={item}></RestaurantList>
+    <>
+      <div className="flex justify-end pt-2 pr-10">
+        <FaSearch
+          size={25}
+          className="fixed z-10 fill-red-500 cursor-pointer"
+          onClick={() => setIsOpenSearch(!openSearch)}
+        />
+        {openSearch && (
+          <div className="fixed">
+            <SearchInput placeholder="Search a restaurant" />
           </div>
-        ))}
+        )}
       </div>
-      <div className="text-center py-8">
-        <MyButton style={`py-3 px-6 rounded-full bg-secondary`}>
-          Show More
-        </MyButton>
+      <div className="flex flex-col gap-5 lg:px-32 md:px-16 sm:px-3">
+        <PageName name="Recommend Restaurant"></PageName>
+        <div className="gap-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {restaurantAll.map((item, index) => (
+            <div key={index}>
+              <RestaurantList data={item} recommended={true}></RestaurantList>
+            </div>
+          ))}
+        </div>
+        <div className="text-center py-8">
+          <MyButton style={`py-3 px-6 rounded-full bg-secondary`}>
+            Show More
+          </MyButton>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

@@ -1,7 +1,8 @@
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { useState } from "react";
 import AddPackageImage from "../../src/features/restaurant/AddPackageImage";
 import MyButton from "../components/MyButton";
-import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "../config/axios";
 import Loading from "../components/Loading";
@@ -32,7 +33,6 @@ export default function ResEditPackagePage() {
     const getPackage = async () => {
       try {
         const res = await axios.get(`/package/getEveryPackage`);
-        console.log("package =>", res.data);
         setResPackage(res.data);
       } catch (err) {
         console.log(err);
@@ -71,6 +71,7 @@ export default function ResEditPackagePage() {
       console.log(err);
     } finally {
       setLoading(false);
+      toast.success("Your request has been submitted...");
     }
   };
 

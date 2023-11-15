@@ -5,13 +5,14 @@ import { useState, useRef } from "react";
 import InputErrorMessage from "../auth/InputErrorMessage";
 import { Checkbox } from "@material-tailwind/react";
 import axios from "../../config/axios";
-import { useEffect } from "react";
+import MyDialog from "../../components/Dialog";
 
 export default function ReviewForm({ isOpenAfterComplete, resId }) {
   const [anonymous, setAnonymous] = useState(false);
   const [countingStar, setCountingStar] = useState(null);
   const [hoverStart, setHoverStar] = useState(null);
   const [rating, setRating] = useState(0);
+  const [isOpenDeleteReview, setIsOpenDeleteReview] = useState(false);
 
   const [reviewMessage, setReviewMessage] = useState({
     reviewMessage: "",
@@ -43,12 +44,13 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const isAnonymousValue = anonymous ? "1" : "0";
     try {
       setReviewMessage({
         reviewMessage: reviewMessage.reviewMessage,
         restaurantId: resId,
         score: countingStar,
-        isAnonymous: anonymous,
+        isAnonymous: Number(isAnonymousValue),
       });
       const formData = new FormData();
       if (file) {
@@ -59,6 +61,8 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
       if (reviewMessage) {
         formData.append("data", JSON.stringify(reviewMessage));
       }
+
+      console.log(file);
       axios
         .post("http://localhost:8888/review", formData)
         .then((res) => console.log(res))
@@ -70,11 +74,15 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
     }
   };
 
-  console.log(file);
-  console.log(countingStar);
+  // console.log(file);
+  // console.log(countingStar);
 
   const handleStarHover = (currentRating) => {
     setHoverStar(currentRating);
+  };
+
+  const handleOpenDeleteReview = () => {
+    setIsOpenDeleteReview(!isOpenDeleteReview);
   };
 
   return (

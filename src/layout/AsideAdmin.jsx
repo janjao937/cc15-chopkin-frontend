@@ -1,10 +1,11 @@
 import React from "react";
 import { AiOutlineHome } from "react-icons/ai";
-import { BsBorderWidth } from "react-icons/bs";
+import { BsBorderWidth, BsFillChatDotsFill } from "react-icons/bs";
 import { HiOutlineArchiveBox } from "react-icons/hi2";
 import { BsPerson, BsFillPencilFill } from "react-icons/bs";
 import { TfiBookmarkAlt } from "react-icons/tfi";
 import { TbPackages } from "react-icons/tb";
+import { FaRegImages } from "react-icons/fa";
 import MenuList from "../features/admin/MenuList";
 
 const menuAdmin = [
@@ -50,11 +51,23 @@ const menuAdmin = [
 		text: "Package Request",
 		icon: <TbPackages />,
 	},
+	{
+		id: 8,
+		to: "/admin/image",
+		text: "Images Request",
+		icon: <FaRegImages />,
+	},
+	{
+		id: 9,
+		to: "/admin/chat",
+		text: "Chat Request",
+		icon: <BsFillChatDotsFill />,
+	},
 ];
 
 export default function AsideAdmin() {
 	return (
-		<div className="flex flex-col items-center justify-center gap-4 px-4 py-4">
+		<div className="flex flex-col items-center justify-center gap-4 px-4 py-4 ">
 			{menuAdmin.map((item, index) => (
 				<div key={index} className="w-full px-2 py-2">
 					<MenuList data={item} />

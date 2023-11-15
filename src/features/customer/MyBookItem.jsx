@@ -1,10 +1,16 @@
 import React from "react";
 import { useNavigate, Link } from "react-router-dom";
+import PayButton from "../../components/paymentComponents/PayButton";
 
 export default function MyBookItem({ objBooking }) {
 	console.log("obj =>", objBooking);
 
 	const navigate = useNavigate();
+
+	const payButtonProps = {
+		bookingId: objBooking.id, 
+		text: "Pay",
+	  };
 
 	return (
 		<div className="flex flex-col gap-4 border rounded-xl shadow-lg p-6">
@@ -35,6 +41,8 @@ export default function MyBookItem({ objBooking }) {
 				>
 					Modify
 				</Link>
+				<PayButton {...payButtonProps}></PayButton>
+
 			</div>
 		</div>
 	);

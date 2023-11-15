@@ -61,11 +61,11 @@ export default function ResApproveBookingPage() {
   };
 
   return (
-    <div>
+    <div className="h-screen">
       <div className="text-4xl font-medium p-6 pl-64 pb-10">
         Approve Booking
       </div>
-      <div className="flex flex-col justify-evenly items-center">
+      <div className="flex flex-col justify-evenly items-center h-full">
         {getBookingByResId.map((item, index) => (
           <div key={index}>
             <NewBookingList

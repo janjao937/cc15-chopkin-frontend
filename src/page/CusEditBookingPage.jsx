@@ -6,6 +6,7 @@ import CalenderDate from "../components/CalenderDate";
 import useRes from "../Hooks/use-res";
 import axios from "../config/axios";
 import { useNavigate, Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function CusEditBookingPage() {
 	const { getBookingAll, editBooking, deleteBooking } = useBooking();
@@ -66,13 +67,15 @@ export default function CusEditBookingPage() {
 			input.totalKid = getBookingById.totalKid;
 		}
 		editBooking(bookingId, input);
-		alert("UP TO DATE BOOKING");
+		// alert("UP TO DATE BOOKING");
+		toast.success(`UPDATE BOOKING`);
 		window.location.reload();
 	};
 
 	const handleClickDeleteBooking = () => {
 		deleteBooking(bookingId);
-		alert("Delete Booking");
+		// alert("Delete Booking");
+		toast.warning(`DELETE BOOKING`);
 		navigate(`/profile/${getBookingById.customerId}`);
 		window.location.reload();
 	};

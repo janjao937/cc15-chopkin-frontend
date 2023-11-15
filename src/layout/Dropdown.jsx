@@ -38,12 +38,15 @@ export default function Dropdown() {
 			</div>
 
 			{isOpen && (
-				<div className="absolute w-[12rem] bg-gray-500/90 right-[-6.2rem] translate-y-2 border rounded-xl shadow-xl p-4">
+				<div className="absolute w-[12rem] bg-white right-[-6rem] translate-y-3 border rounded-xl shadow-xl p-4">
 					<div className="flex flex-col items-end justify-center gap-1">
 						{customerName ? (
 							<>
-								<Link to={`/profile/${authUser.id}`}>
-									<div className="cursor-pointer hover:text-red-500 text-white">
+								<Link
+									className="flex mx-auto"
+									to={`/profile/${authUser.id}`}
+								>
+									<div className="cursor-pointer hover:text-red-500 text-black">
 										My Profile
 									</div>
 								</Link>
@@ -52,8 +55,11 @@ export default function Dropdown() {
 							<>
 								{restaurantName ? (
 									<>
-										<Link to={`/restaurant/${authUser.id}`}>
-											<div className="cursor-pointer hover:text-red-500 text-white">
+										<Link
+											to={`/restaurant/${authUser.id}`}
+											className="flex mx-auto"
+										>
+											<div className="cursor-pointer hover:text-red-500 text-black ">
 												My Profile
 											</div>
 										</Link>
@@ -62,8 +68,11 @@ export default function Dropdown() {
 									<>
 										{adminName && (
 											<>
-												<Link to="/admin">
-													<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+												<Link
+													className="flex mx-auto"
+													to="/admin"
+												>
+													<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
 														DashBoard
 													</div>
 												</Link>
@@ -79,8 +88,11 @@ export default function Dropdown() {
 
 					{customerName ? (
 						<>
-							<Link to={`/profile/${authUser.id}/edit-account`}>
-								<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+							<Link
+								className="flex items-center justify-center"
+								to={`/profile/${authUser.id}/edit-account`}
+							>
+								<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
 									Setting
 								</div>
 							</Link>
@@ -90,23 +102,34 @@ export default function Dropdown() {
 							{restaurantName ? (
 								<>
 									<Link
+										className="flex items-center justify-center"
 										to={`/restaurant/${authUser.id}/edit`}
 									>
-										<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+										<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
 											Setting
 										</div>
 									</Link>
 									<Link
+										className="flex items-center justify-center"
+										to={`/restaurant/${authUser.id}/edit/addImage`}
+									>
+										<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
+											Add Image
+										</div>
+									</Link>
+									<Link
+										className="flex items-center justify-center"
 										to={`/restaurant/${authUser.id}/edit/edit-package`}
 									>
-										<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+										<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
 											Edit Package
 										</div>
 									</Link>
 									<Link
+										className="flex items-center justify-center"
 										to={`/restaurant/${authUser.id}/approve-booking`}
 									>
-										<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-white">
+										<div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
 											Approve Booking
 										</div>
 									</Link>
@@ -121,7 +144,7 @@ export default function Dropdown() {
 						onClick={logout}
 						className="flex justify-end items-center gap-4 cursor-pointer hover:text-red-500 rounded-xl"
 					>
-						<div className="font-semibold text-sm text-white">
+						<div className="font-semibold text-sm text-black">
 							Log Out
 						</div>
 						<div className="bg-gray-300 h-9 aspect-square rounded-full flex items-center justify-center">
