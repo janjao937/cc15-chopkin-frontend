@@ -23,12 +23,12 @@ const ChatComponent =()=> {
     <div>{
       !showChat?(
         <>
-        <h1>App Chat</h1>
+        <h1>Chat</h1>
         <div>
         <h2>Join Room</h2>
             <input type="text" placeholder="name..." onChange={(e)=>setUsername(e.target.value)}  value={username}/>
             <input type="text" placeholder="Room id..." onChange={(e)=>setRoom(e.target.value)} value={room} />
-            
+
             <button onClick={joinRoom}>Join Room</button>
         </div>
         </>

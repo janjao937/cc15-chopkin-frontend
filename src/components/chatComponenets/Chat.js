@@ -14,8 +14,6 @@ const Chat =({socket,username,room})=>{
             message:inPutMessage,
             time:new Date(Date.now()).getHours()+":"+new Date(Date.now()).getMinutes(),
         }
-
-        //send_message event name like back
         await socket.emit("send_message",messageData);
         setMessageArr([...messageArr,messageData]);
         setInputMessage("");
@@ -36,8 +34,9 @@ const Chat =({socket,username,room})=>{
             <div className="chat-body">
                 {
                     messageArr.map((e,index)=>{
-                        return (username === e.author?(<ChatComponentMe key={index} message={e.message} author={e.author} time={e.time}/>):
-                        <ChatComponentFriend key={index} message={e.message} author={e.author} time={e.time}/>
+                        return (username === e.author?(
+                        <ChatComponentMe key={index} message={e.message} author={e.author} time={e.time}/>):(
+                        <ChatComponentFriend key={index} message={e.message} author={e.author} time={e.time}/>)
                         )
                     })
                 }
