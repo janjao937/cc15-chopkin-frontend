@@ -9,16 +9,17 @@ const ChatComponent =({user,roomId})=> {
 //#region waiting user and roomId
 const [username,setUsername] = useState("");
 const [room,setRoom] = useState("");
+    // const username = user.name;
+    // const room  = roomId;
 //#endregion
 
-  const [showChat,setShowChat] = useState(false);
+const [showChat,setShowChat] = useState(false);
   
-  const joinOrCreateRoom = ()=>{
-    if(username&&room !== ""){
-      socket.emit("join_room",room);
-      setShowChat(!showChat);
-    }
-    //if Cus or Res
+const joinOrCreateRoom = ()=>{
+    if(!username&&!room == "")return;
+    socket.emit("join_room",room);
+    setShowChat(!showChat);
+    //if CusOrRes
         //UserCreateRoomByRoomId(roomId)
     //end
 
