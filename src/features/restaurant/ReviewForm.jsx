@@ -73,6 +73,8 @@ export default function ReviewForm({
       setLoading(true);
       // console.log(file);
       await axios.post("http://localhost:8888/review", formData);
+
+      
       
 
       // console.log(formData);
@@ -80,6 +82,7 @@ export default function ReviewForm({
       console.log(error);
     } finally {
       setLoading(false);
+      window.location.reload();
     }
   };
 
