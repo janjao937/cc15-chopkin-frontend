@@ -21,7 +21,9 @@ export default function Modal({
 									className={`flex justify-between p-4 text-xl border-b ${titleStyle}`}
 								>
 									<div className="invisible">X</div>
-									<div className={`font-bold`}>{title}</div>
+									<div className={`font-bold text-white`}>
+										{title}
+									</div>
 									<div
 										className="text-gray-500 cursor-pointer"
 										onClick={onClose}

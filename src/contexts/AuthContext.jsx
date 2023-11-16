@@ -11,6 +11,7 @@ export const AuthContext = createContext();
 export default function AuthContextProvider({ children }) {
 	const [initialLoading, setInitialLoading] = useState(true);
 	const [authUser, setAuthUser] = useState(null);
+	const [roomAll, setRoomAll] = useState([]);
 
 	useEffect(() => {
 		if (getAccessToken()) {
@@ -72,6 +73,35 @@ export default function AuthContextProvider({ children }) {
 		// setAuthUser({ ...authUser, ...res.data.updateData });
 	};
 
+	const createRoom = async (input) => {
+		try {
+			const res = await axios.post(`/chat/create`, input);
+			console.log("createRoom", res);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const deleteRoom = async (roomId) => {
+		try {
+			const res = await axios.delete(`/chat/delete/${roomId}`);
+			// console.log("first", res);
+
+			setRoomAll(roomAll.filter((item) => item.roomId !== roomId));
+		} catch (err) {
+			console.log(first);
+		}
+	};
+
+	const getRoomAll = async () => {
+		try {
+			const res = await axios.get(`/chat/roomAll`);
+			setRoomAll(res.data.allRoom);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	return (
 		<AuthContext.Provider
 			value={{
@@ -82,6 +112,10 @@ export default function AuthContextProvider({ children }) {
 				authUser,
 				logout,
 				uploadProfile,
+				createRoom,
+				deleteRoom,
+				getRoomAll,
+				roomAll,
 			}}
 		>
 			{children}
