@@ -24,6 +24,7 @@ export default function RequestItem({
         <div className="col-span-3 px-4 py-2 text-center border border-gray-400 ">
           {restaurantName}
         </div>
+        {console.log(restaurantId)}
         <Link
           to={`/admin/edit/${restaurantId}`}
           className="rounded-full col-span-2 text-center justify-items-center py-1  bg-secondary mx-4 my-2 text-white"

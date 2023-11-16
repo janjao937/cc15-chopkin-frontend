@@ -106,7 +106,7 @@ export default function EditResInfo({ handleOnSubmit }) {
       formdata.append("nationIndex", input.nationIndex);
     }
     if (input.position) {
-      formdata.append("position", input.position);
+      formdata.append("position", JSON.stringify(input.position));
     }
     if (business) {
       formdata.append("businessTime", JSON.stringify(business));
