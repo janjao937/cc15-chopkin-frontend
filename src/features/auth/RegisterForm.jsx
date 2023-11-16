@@ -64,7 +64,7 @@ export default function RegisterForm() {
     <>
       <form
         onSubmit={handleOnSubmit}
-        className="px-8 pt-14 pb-6 flex flex-col justify-evenly border shadow-lg w-[36rem] h-[40rem] bg-white relative z-10"
+        className="px-8 pt-14 pb-6 flex flex-col justify-evenly shadow-2xl rounded-3xl w-[36rem] h-[40rem] bg-white relative z-10"
       >
         <div className="absolute top-[-4rem] left-[40%]">
           <Logo />

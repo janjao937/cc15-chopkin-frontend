@@ -16,18 +16,41 @@ import { Carousel } from "@material-tailwind/react";
 import carouselImage1 from "../assets/image/carousel1.jpeg";
 import carouselImage2 from "../assets/image/carousel2.jpeg";
 import carouselImage3 from "../assets/image/carousel3.jpeg";
+import { useEffect } from "react";
+import axios from "../config/axios";
 
 export default function HomePage() {
 	const { restaurantAll, homeLoading } = useRes();
 	const [searchInput, setSearchInput] = useState("");
-
 	const { getRestaurantAll } = useResAll();
+	const [scoreAvg, setScoreAvg] = useState([]);
 
-	// console.log("eeee", getRestaurantAll);
+	useEffect(() => {
+		const fetchScoreAvg = async () => {
+			try {
+				const res = await axios.get(`/restaurant/review-score`);
+				console.log("scoreAvg ==>", res.data);
+				setScoreAvg(res.data);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		fetchScoreAvg();
+	}, []);
+
+	const newRecommended =
+		scoreAvg?.avgResScore?.filter((item) => item.avgScore >= 4) || [];
+	console.log("ffff", newRecommended);
+
+	const scoreRecommended = newRecommended
+		.map((i) => ({ ...restaurantAll.find((j) => i.id === j.id), ...i }))
+		.filter(Boolean);
+
+	console.log(scoreRecommended);
 
 	if (homeLoading) return <Loading />;
 	return (
-		<div className="flex flex-col gap-3">
+		<div className="flex flex-col gap-3 px-32">
 			{/* image */}
 			<div className="mb-8 relative ">
 				<div className="h-[300px] w-full ">
@@ -49,7 +72,7 @@ export default function HomePage() {
 			</div>
 
 			{/* Recommended Restaurants */}
-			<div className="mb-4 px-32">
+			<div className="mb-4">
 				<div className="text-2xl font-semibold font-kanit">
 					Recommended Restaurants !
 				</div>
@@ -62,16 +85,27 @@ export default function HomePage() {
 					</Link>
 				</div>
 
-				<div className="grid grid-cols-4 place-items-center gap-10">
-					{restaurantAll?.map((item, index) => (
-						<div key={index}>
-							<RestaurantList data={item} />
-						</div>
-					))}
+				<div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-center gap-x-20 gap-y-14 py-8">
+					{scoreRecommended?.map((item, index) => {
+						console.log("dashed item", item);
+						return (
+							<div key={index}>
+								{index < 5 ? (
+									<RestaurantList
+										data={item}
+										recommended={true}
+										scoreAvg={scoreAvg}
+									/>
+								) : (
+									<></>
+								)}
+							</div>
+						);
+					})}
 				</div>
 			</div>
 
-			<div className="py-4 px-32">
+			<div className="py-4">
 				<div className=" h-[300px] w-full ">
 					<Carousel
 						className="rounded-xl h-[300px] w-full"
@@ -99,21 +133,24 @@ export default function HomePage() {
 			</div>
 
 			{/* Top Cuisine */}
-			<div className="flex flex-col gap-4">
+			<div className="flex flex-col gap-4 ">
 				<PageName name="Top Cuisine"></PageName>
-				<div className="flex justify-between px-32">
-					{dataCuisine.map((item, index) => (
-						<div key={index}>
-							<CuisineList
-								data={item}
-								getRestaurantAll={getRestaurantAll}
-							/>
-						</div>
-					))}
+				<div className="flex justify-between p-10 border-gray-200 border-4 rounded-3xl my-10 min-w-[1075px]">
+					{dataCuisine.map((item, index) => {
+						console.log("cuisine item", item);
+						return (
+							<div key={index}>
+								<CuisineList
+									data={item}
+									getRestaurantAll={getRestaurantAll}
+								/>
+							</div>
+						);
+					})}
 				</div>
 
 				{/* All Restaurants */}
-				<div className="pt-5 pb-12 px-32">
+				<div className="w-full">
 					<h1 className=" text-2xl font-semibold">All Restaurants</h1>
 					<div className="flex items-center gap-2 mb-2">
 						{/* It's on trend right now, try it! */}
@@ -124,12 +161,19 @@ export default function HomePage() {
 						</Link>
 					</div>
 
-					<div className="grid grid-cols-4 place-items-center gap-7">
-						{restaurantAll?.map((item, index) => (
-							<div key={index}>
-								<RestaurantList data={item} />
-							</div>
-						))}
+					<div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-center gap-x-20 gap-y-14 py-8">
+						{restaurantAll?.map((item, index) => {
+							console.log("item", item);
+							return (
+								<div key={index}>
+									{index < 5 ? (
+										<RestaurantList data={item} />
+									) : (
+										<></>
+									)}
+								</div>
+							);
+						})}
 					</div>
 				</div>
 			</div>

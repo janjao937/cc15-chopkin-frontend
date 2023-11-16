@@ -48,11 +48,11 @@ export default function ResAddImagePage() {
   };
 
   return (
-    <div className="h-full flex flex-col gap-3">
+    <div className="min-h-[83vh] flex flex-col gap-3">
       {loading && <Loading />}
       <PageName name="Add Restaurant Image"></PageName>
-      <div className="flex flex-col justify-center gap-3 p-3 border border-gray-500 shadow-lg h-full">
-        <div className="flex flex-col justify-center items-center gap-4 p-4 border border-gray-500 border-b-2 shadow-md h-[50%]">
+      <div className="flex flex-col justify-center items-center gap-3 p-3 h-full">
+        <div className="flex flex-col justify-center items-center font-semibold gap-4 p-4 border border-gray-500 border-b-2 shadow-lg w-[90%]">
           <div className="text-primary">Current Image...</div>
           {getResImage?.RestaurantImages?.length === 0 ? (
             <div>No restaurant images</div>
@@ -66,7 +66,7 @@ export default function ResAddImagePage() {
             </div>
           )}
         </div>
-        <div className="flex flex-col justify-center items-center gap-4 p-4 border border-gray-500 shadow-lg h-[50%]">
+        <div className="flex flex-col justify-center items-center font-semibold gap-4 p-4 border border-gray-500 shadow-lg w-[90%]">
           <div className="text-primary">Add new Images here...</div>
           <input
             type="file"
@@ -113,15 +113,15 @@ export default function ResAddImagePage() {
       </div>
 
       <div className="flex flex-col justify-center items-center py-8">
-        <MyOutlineButton
+        <button
+          className="px-4 self-center py-2 bg-primary text-white cursor-pointer hover:bg-orange-300 hover:text-black hover:scale-125 duration-300 ease-in-out border rounded-md"
           onClick={() => {
             handleSubmit();
             setFile(null);
           }}
-          outlinestyle={`outline-red-600 hover:bg-red-500 hover:text-white`}
         >
           Submit
-        </MyOutlineButton>
+        </button>
       </div>
     </div>
   );

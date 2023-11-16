@@ -5,14 +5,14 @@ import Footer from "./Footer";
 import LiveChat from "./LiveChat";
 
 export default function Layout() {
-	return (
-		<div className="w-[100vw] min-h-[100vh]">
-			<Header />
-			<div id="CONTAINER" className=" mx-auto">
-				<LiveChat />
-				<Outlet />
-			</div>
-			<Footer />
-		</div>
-	);
+  return (
+    <div className="w-[100vw]">
+      <Header />
+      <div id="CONTAINER" className=" mx-auto min-h-[83vh]">
+        <LiveChat />
+        <Outlet />
+      </div>
+      <Footer />
+    </div>
+  );
 }
