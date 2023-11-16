@@ -83,13 +83,8 @@ export default function HomePage() {
           </Link>
         </div>
 
-<<<<<<< HEAD
-        <div className="grid grid-cols-4 place-items-center gap-10">
-          {scoreRecommended.map((item, index) => (
-=======
         <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-center gap-x-20 gap-y-14 py-8">
           {restaurantAll?.map((item, index) => (
->>>>>>> feature/googleMaps
             <div key={index}>
               {index < 4 ? (
                 <RestaurantList
@@ -153,11 +148,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-<<<<<<< HEAD
-          <div className="grid grid-cols-4 place-items-center gap-10">
-=======
           <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-center gap-x-20 gap-y-14 py-8">
->>>>>>> feature/googleMaps
             {restaurantAll?.map((item, index) => (
               <div key={index}>
                 {index < 4 ? <RestaurantList data={item} /> : <></>}
