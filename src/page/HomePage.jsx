@@ -84,19 +84,22 @@ export default function HomePage() {
         </div>
 
         <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-center gap-x-20 gap-y-14 py-8">
-          {scoreRecommended?.map((item, index) => (
-            <div key={index}>
-              {index < 4 ? (
-                <RestaurantList
-                  data={item}
-                  recommended={true}
-                  scoreAvg={scoreAvg}
-                />
-              ) : (
-                <></>
-              )}
-            </div>
-          ))}
+          {scoreRecommended?.map((item, index) => {
+            console.log("dashed item", item);
+            return (
+              <div key={index}>
+                {index < 5 ? (
+                  <RestaurantList
+                    data={item}
+                    recommended={true}
+                    scoreAvg={scoreAvg}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -128,16 +131,19 @@ export default function HomePage() {
       {/* Top Cuisine */}
       <div className="flex flex-col gap-4 ">
         <PageName name="Top Cuisine"></PageName>
-        <div className="flex justify-between p-10 border-gray-200 border-4 rounded-3xl my-10">
-          {dataCuisine.map((item, index) => (
-            <div key={index}>
-              <CuisineList data={item} getRestaurantAll={getRestaurantAll} />
-            </div>
-          ))}
+        <div className="flex justify-between p-10 border-gray-200 border-4 rounded-3xl my-10 min-w-[1075px]">
+          {dataCuisine.map((item, index) => {
+            console.log("cuisine item", item);
+            return (
+              <div key={index}>
+                <CuisineList data={item} getRestaurantAll={getRestaurantAll} />
+              </div>
+            );
+          })}
         </div>
 
         {/* All Restaurants */}
-        <div className="pt-5 pb-12 w-full">
+        <div className="w-full">
           <h1 className=" text-2xl font-semibold">All Restaurants</h1>
           <div className="flex items-center gap-2 mb-2">
             {/* It's on trend right now, try it! */}
@@ -149,11 +155,14 @@ export default function HomePage() {
           </div>
 
           <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-center gap-x-20 gap-y-14 py-8">
-            {restaurantAll?.map((item, index) => (
-              <div key={index}>
-                {index < 4 ? <RestaurantList data={item} /> : <></>}
-              </div>
-            ))}
+            {restaurantAll?.map((item, index) => {
+              console.log("item", item);
+              return (
+                <div key={index}>
+                  {index < 5 ? <RestaurantList data={item} /> : <></>}
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
