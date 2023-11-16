@@ -117,7 +117,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-4 place-items-center gap-10">
+          <div className="grid grid-cols-4 place-items-center gap-7">
             {restaurantAll?.map((item, index) => (
               <div key={index}>
                 <RestaurantList data={item} />

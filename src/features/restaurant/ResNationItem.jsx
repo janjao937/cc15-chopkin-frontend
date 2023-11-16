@@ -25,7 +25,7 @@ export default function ResNationItem({
             <img
               src={profileImg || blank}
               alt={name}
-              className="w-full h-full object-fill rounded-t-3xl"
+              className="w-full h-full object-fill rounded-t-lg"
             />
           </div>
           <div className="p-4">
