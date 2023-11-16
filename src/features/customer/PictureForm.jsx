@@ -7,7 +7,7 @@ export default function PictureForm({ children, initialSrc, onSave }) {
 	const inputEl = useRef(null);
 	return (
 		<div className=" flex flex-col gap-2">
-			<div>
+			<div className="mx-auto">
 				{children(file ? URL.createObjectURL(file) : initialSrc, () =>
 					inputEl.current.click()
 				)}
@@ -37,10 +37,10 @@ export default function PictureForm({ children, initialSrc, onSave }) {
 					</>
 				) : (
 					<button
-						className="mx-auto"
+						className="mx-auto border border-primary shadow-md rounded-full  px-6 py-1 text-primary"
 						onClick={() => inputEl.current.click()}
 					>
-						Edit
+						Change Avatar
 					</button>
 				)}
 			</div>
