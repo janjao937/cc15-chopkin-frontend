@@ -1,12 +1,12 @@
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddPackageImage from "../../src/features/restaurant/AddPackageImage";
 import MyButton from "../components/MyButton";
-import { useEffect } from "react";
 import axios from "../config/axios";
 import Loading from "../components/Loading";
 import MyOutlineButton from "../components/MyOutlineButton";
+import PageName from "../components/PageName";
 
 export default function ResEditPackagePage() {
   const { resId } = useParams();
@@ -76,11 +76,12 @@ export default function ResEditPackagePage() {
   };
 
   return (
-    <div className="h-screen flex flex-col gap-4 justify-evenly items-center">
+    <div className="h-full flex flex-col gap-4 justify-evenly items-center p-4">
       {loading && <Loading />}
-      <div className="flex justify-center gap-3 p-3 border border-gray-500 rounded-lg shadow-md w-[80rem]">
-        <div className="border border-gray-500 rounded-lg shadow-md w-[50%]">
-          <div className="w-full rounded-t-lg p-2 text-center text-xl font-semibold bg-light-blue-100">
+      <PageName name="Edit Package"></PageName>
+      <div className="flex justify-center gap-3 p-3 border border-gray-500 shadow-lg w-[80rem]">
+        <div className="border border-gray-500 shadow-md w-[50%]">
+          <div className="w-full p-2 text-center text-xl font-semibold bg-light-blue-100">
             Current package
           </div>
           <div className="flex flex-col justify-center items-center gap-3">
@@ -153,11 +154,11 @@ export default function ResEditPackagePage() {
           </div>
         </div>
 
-        <div className="border border-gray-500 rounded-lg shadow-md w-[50%]">
-          <div className="w-full rounded-t-lg p-2 text-center text-xl font-semibold bg-light-blue-100">
+        <div className="border border-gray-500 shadow-md w-[50%]">
+          <div className="w-full p-2 text-center text-xl font-semibold bg-light-blue-100">
             Add new package
           </div>
-          <div className="flex flex-col gap-4 items-center p-2 border-gray-500 font-semibold">
+          <div className="flex flex-col gap-4 items-center justify-center p-2 border-gray-500 font-semibold">
             <AddPackageImage file={file} setFile={setFile} />
             <div className="flex flex-col gap-3 w-96">
               <div className="flex justify-between">

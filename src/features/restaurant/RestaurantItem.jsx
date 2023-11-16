@@ -81,14 +81,14 @@ export default function RestaurantItem({
                 {reviews.length === 0 ? (
                   <>
                     <div>
-                      <AiFillStar size={30} className="text-gray-400" />
+                      <AiFillStar size={20} className="text-gray-400" />
                     </div>
                     <div className="text-primary">No review</div>
                   </>
                 ) : (
                   <>
                     <div>
-                      <AiFillStar size={30} className="text-yellow-400" />
+                      <AiFillStar size={20} className="text-yellow-400" />
                     </div>
                     <div className="text-primary font-semibold">
                       {averageScore.toFixed(1)}
@@ -97,7 +97,7 @@ export default function RestaurantItem({
                 )}
               </div>
               <div className="flex gap-1">
-                <div className="flex justify-center items-center text-xs">
+                <div className="flex justify-center items-center">
                   Starting Price :
                 </div>
                 <div className="text-primary font-semibold">{price}</div>

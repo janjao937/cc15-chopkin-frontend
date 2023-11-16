@@ -6,6 +6,12 @@ import {
   AiFillLinkedin,
   AiFillYoutube,
 } from "react-icons/ai";
+import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import { RiFacebookCircleLine } from "react-icons/ri";
+import { GrTwitter } from "react-icons/gr";
+import { SiTwitter } from "react-icons/si";
+import { TiSocialLinkedinCircular } from "react-icons/ti";
+import { PiYoutubeLogoFill } from "react-icons/pi";
 
 export default function Footer() {
   return (
@@ -18,21 +24,21 @@ export default function Footer() {
           </h3>
         </div>
         {/* Social */}
-        <ul className="flex items-center gap-2">
-          <li className="text-slate-500 cursor-pointer">
-            <AiFillFacebook size={20} />
+        <ul className="flex items-center gap-3">
+          <li className="flex justify-center items-center text-slate-500 cursor-pointe w-8 h-8 bg-brown-50 rounded-full">
+            <FaFacebookF size={23} />
           </li>
-          <li className="text-slate-500 cursor-pointer">
-            <AiFillTwitterSquare size={20} />
+          <li className="flex justify-center items-center text-slate-500 cursor-pointer w-8 h-8 bg-brown-50 rounded-full">
+            <FaTwitter size={23} />
           </li>
-          <li className="text-slate-500 cursor-pointer">
-            <AiFillInstagram size={20} />
+          <li className="flex justify-center items-center text-slate-500 cursor-pointer w-8 h-8 bg-brown-50 rounded-full">
+            <AiFillInstagram size={23} />
           </li>
-          <li className="text-slate-500 cursor-pointer">
-            <AiFillLinkedin size={20} />
+          <li className="flex justify-center items-center text-slate-500 cursor-pointer w-8 h-8 bg-brown-50 rounded-full">
+            <FaLinkedinIn size={23} />
           </li>
-          <li className="text-slate-500 cursor-pointer">
-            <AiFillYoutube size={20} />
+          <li className="flex justify-center items-center text-slate-500 cursor-pointer w-8 h-8 bg-brown-50 rounded-full">
+            <PiYoutubeLogoFill size={23} />
           </li>
         </ul>
       </footer>
