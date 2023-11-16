@@ -42,7 +42,7 @@ export default function AdminChatItem({ obj }) {
 				</button>
 				<Modal
 					title={`CHAT`}
-					titleStyle={`bg-secondary`}
+					titleStyle={`bg-secondary text-white`}
 					maxWidth={46}
 					open={isOpen}
 					onClose={() => setIsOpen(false)}

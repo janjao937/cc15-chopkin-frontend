@@ -50,7 +50,7 @@ export default function LiveChat() {
 				<div className="z-10 bottom-3 right-3 fixed">
 					<div className="">
 						{isOpenChat ? (
-							<div className="absolute shadow-xl rounded-xl flex items-center justify-center w-[350px] h-[440px] right-0 bottom-0 z-99">
+							<div className="absolute shadow-xl rounded-xl flex items-center justify-center w-[350px] h-[460px] right-0 bottom-0 z-99">
 								<div className="relative right-0 bottom-0 w-full h-full">
 									<div className="bg-secondary text-secondary font-semibold text-md w-full rounded-t-xl px-4 py-2 flex justify-between">
 										<p>Admin</p>
@@ -63,7 +63,7 @@ export default function LiveChat() {
 									</div>
 									{/* box chat */}
 
-									<div className="h-[80%] flex flex-col py-2 bg-white">
+									<div className="h-[90%] flex flex-col py-2 bg-white">
 										{/* <Chat data={mockChat} /> */}
 										<ChatComponent
 											user={input.name}

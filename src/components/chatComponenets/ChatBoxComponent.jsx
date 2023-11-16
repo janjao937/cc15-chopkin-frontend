@@ -12,11 +12,14 @@ const ChatComponentMe = ({ message, author, time }) => {
 				className="flex justify-end gap-4 "
 			>
 				<p>{message}</p>
-				<p style={{ color: "green" }} className="flex flex-col">
+				<p
+					style={{ color: "green" }}
+					className="flex flex-col items-end justify-center"
+				>
 					: {author}
 					<small
 						// style={{ color: "brown" }}
-						className="text-xs text-gray-500/90"
+						className="text-xs text-gray-500/90 "
 					>
 						{time}
 					</small>

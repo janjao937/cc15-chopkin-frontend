@@ -41,9 +41,9 @@ const Chat = ({ socket, username, room }) => {
 			<div className="flex flex-col px-1">
 				<div className="chat-header mb-2">
 					{/* <p>Realtime Chat | ROOM_ID:{room}</p> */}
-					<div className="text-lg">ROOM_ID:{room}</div>
+					{/* <div className="text-lg">ROOM_ID:{room}</div> */}
 				</div>
-				<div className="chat-body flex flex-col gap-2 px-1 h-[280px] overflow-auto">
+				<div className="chat-body flex flex-col gap-2 px-1 mt-4 h-[320px]  overflow-y-auto ">
 					{messageArr.map((e, index) => {
 						return username === e.author ? (
 							<ChatComponentMe
@@ -64,8 +64,8 @@ const Chat = ({ socket, username, room }) => {
 				</div>
 			</div>
 
-			<div className="absolute bottom-0 w-full">
-				<div className="h-[60px] bg-gray-200 rounded-b-xl flex items-center  gap-2 px-3">
+			<div className="absolute bottom-[-10px] w-full">
+				<div className="h-[50px] bg-gray-200 rounded-b-xl flex items-center  gap-2 px-3">
 					<input
 						onChange={(e) => setInputMessage(e.target.value)}
 						type="text"
