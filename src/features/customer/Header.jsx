@@ -5,7 +5,7 @@ import { AiOutlineMail } from "react-icons/ai";
 import useAuth from "../../Hooks/use-auth";
 import MemberPoint from "./MemberPoint";
 
-export default function Header() {
+export default function Header({ myBooking }) {
 	const { authUser } = useAuth();
 	// console.log("authUser =>", authUser);
 
@@ -51,6 +51,7 @@ export default function Header() {
 				<MemberPoint
 					authUser={authUser}
 					memberPoint={authUser.memberPoint}
+					myBooking={myBooking}
 				/>
 			</div>
 		</div>

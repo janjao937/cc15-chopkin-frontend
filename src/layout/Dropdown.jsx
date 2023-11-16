@@ -5,37 +5,37 @@ import { TbLogout } from "react-icons/tb";
 import useAuth from "../Hooks/use-auth";
 
 export default function Dropdown() {
-  const { authUser, logout } = useAuth();
+	const { authUser, logout } = useAuth();
 
-  const customerName = authUser?.firstName;
-  const restaurantName = authUser?.restaurantName;
-  const adminName = authUser?.isAdmin;
+	const customerName = authUser?.firstName;
+	const restaurantName = authUser?.restaurantName;
+	const adminName = authUser?.isAdmin;
 
-  const [isOpen, setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
-  const dropdownEl = useRef(null);
+	const dropdownEl = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (!dropdownEl.current?.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
+	useEffect(() => {
+		const handleClickOutside = (e) => {
+			if (!dropdownEl.current?.contains(e.target)) {
+				setIsOpen(false);
+			}
+		};
 
-    document.addEventListener("click", handleClickOutside);
-    return () => document.removeEventListener("click", handleClickOutside);
-  }, []);
+		document.addEventListener("click", handleClickOutside);
+		return () => document.removeEventListener("click", handleClickOutside);
+	}, []);
 
-  return (
-    <div className="relative text-black" ref={dropdownEl}>
-      <div
-        className="cursor-pointer hover:text-orange-500"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {customerName}
-        {restaurantName}
-        {adminName && "Admin"}
-      </div>
+	return (
+		<div className="relative text-black" ref={dropdownEl}>
+			<div
+				className="cursor-pointer hover:text-orange-500"
+				onClick={() => setIsOpen(!isOpen)}
+			>
+				{customerName}
+				{restaurantName}
+				{adminName && "Admin"}
+			</div>
 
       {isOpen && (
         <div className="absolute w-[14rem] bg-white right-[-0.2rem] translate-y-2 border rounded-xl shadow-xl">
@@ -75,7 +75,7 @@ export default function Dropdown() {
             )}
           </div>
 
-          <hr className="m-2 border" />
+					<hr className="m-2 border" />
 
           {customerName ? (
             <>

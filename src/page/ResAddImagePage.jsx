@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { toast } from "react-toastify";
 import { BiImageAdd } from "react-icons/bi";
 import MyOutlineButton from "../components/MyOutlineButton";
 import InputErrorMessage from "../features/auth/InputErrorMessage";
@@ -11,21 +12,21 @@ export default function ResAddImagePage() {
   const { resId } = useParams();
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
-  //   const [getResImage, setGetResImage] = useState([]);
+  const [getResImage, setGetResImage] = useState([]);
   const fileEl = useRef(null);
 
-  //   useEffect(() => {
-  //     const fatchResByResId = async () => {
-  //       try {
-  //         const res = await axios.get(`/restaurant/resById/${resId}`);
-  //         console.log("fatchResId=>", res.data);
-  //         setGetResImage(res.data);
-  //       } catch (err) {
-  //         console.log(err);
-  //       }
-  //     };
-  //     fatchResByResId();
-  //   }, []);
+  useEffect(() => {
+    const fatchResByResId = async () => {
+      try {
+        const res = await axios.get(`/restaurant/resById/${resId}`);
+        console.log("getResImage=>", res.data);
+        setGetResImage(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fatchResByResId();
+  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -41,28 +42,33 @@ export default function ResAddImagePage() {
       console.log(error);
     } finally {
       setLoading(false);
+      toast.success("Your request has been submitted...");
     }
   };
 
   return (
-    <div className="h-screen flex flex-col justify-between">
+    <div className="h-full flex flex-col justify-between">
       {loading && <Loading />}
       <div className="text-4xl font-medium p-6 pl-64 pb-10">
         Add Restaurant Image
       </div>
-
       <div className="flex flex-col justify-center gap-3 p-3 border border-gray-500 rounded-lg shadow-md h-full">
-        <div className="border border-gray-500 border-b-2 rounded-lg shadow-md h-[50%]">
-          Current Image...
-        </div>
-        {/* <div>
-          {getResImage.map((item, index) => (
-            <div key={index}>
-              <img src={item.url} alt="res-image" />
+        <div className="flex flex-col justify-center items-center gap-4 p-4 border border-gray-500 border-b-2 rounded-lg shadow-md h-[50%]">
+          <div className="text-primary">Current Image...</div>
+          {getResImage?.RestaurantImages?.length === 0 ? (
+            <div>No restaurant images</div>
+          ) : (
+            <div className="grid grid-cols-5 gap-5">
+              {getResImage?.RestaurantImages?.map((item, index) => (
+                <div key={index}>
+                  <img src={item.url} alt="res-image" className="w-32 h-32" />
+                </div>
+              ))}
             </div>
-          ))}
-        </div> */}
-        <div className="flex flex-col justify-center items-center border border-gray-500 rounded-lg shadow-md h-[50%]">
+          )}
+        </div>
+        <div className="flex flex-col justify-center items-center gap-4 p-4 border border-gray-500 rounded-lg shadow-md h-[50%]">
+          <div className="text-primary">Add new Images here...</div>
           <input
             type="file"
             multiple
@@ -80,7 +86,7 @@ export default function ResAddImagePage() {
           {file ? (
             <div
               onClick={() => fileEl.current.click()}
-              className="cursor-pointer grid grid-flow-col gap-5"
+              className="cursor-pointer grid grid-rows-2 grid-flow-col gap-5"
             >
               {file.map((item, index) => (
                 <img
@@ -92,7 +98,7 @@ export default function ResAddImagePage() {
               ))}
             </div>
           ) : (
-            <div className="flex flex-col justify-center items-center gap-3">
+            <div className="flex flex-col justify-center items-center gap-2">
               <div
                 className="flex justify-center items-center bg-gray-200 border border-gray-300 shadow w-40 h-40 cursor-pointer"
                 onClick={() => fileEl.current.click()}

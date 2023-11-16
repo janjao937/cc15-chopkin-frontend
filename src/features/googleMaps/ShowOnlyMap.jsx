@@ -56,7 +56,7 @@ function ShowOnlyMap({ center }) {
           //   onLoad={onLoad}
           //   onUnmount={onUnmount}
         >
-          {selected && <MarkerF position={center} />}
+          {center && <MarkerF position={center} />}
         </GoogleMap>
       </div>
     </>

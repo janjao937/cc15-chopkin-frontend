@@ -5,6 +5,7 @@ import blank from "../../assets/blank.png";
 import { nationIndex, categoryIndex, districtIndex } from "../../data/dataRes";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function ViewEditingPage() {
 	const { resId } = useParams();
@@ -68,13 +69,15 @@ export default function ViewEditingPage() {
 
 	const handleClickApprove = () => {
 		updateResPending(resId, input);
-		alert(`Approve Edit Restaurant : ${resId}`);
+		// alert(`Approve Edit Restaurant : ${resId}`);
+		toast.success(`Approve Edit Restaurant : ${resId}`);
 		deleteResPending(filterReq.id);
 	};
 
 	const handleClickReject = () => {
 		deleteResPending(filterReq.id);
-		alert(`Reject Edit Restaurant : ${resId}`);
+		// alert(`Reject Edit Restaurant : ${resId}`);
+		toast.warning(`Reject Edit Restaurant : ${resId}`);
 	};
 
 	return (

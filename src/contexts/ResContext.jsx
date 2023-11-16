@@ -11,6 +11,8 @@ export default function ResContextProvider({ children }) {
 	const [getBookingAll, setGetBookingAll] = useState([]);
 	const [homeLoading, setHomeLoading] = useState(false);
 	const [allCustomer, setAllCustomer] = useState([]);
+	const [imageResPendding, setImageResPendding] = useState([]);
+	const [imageResPenddingByResId, setImageResPenddingByResId] = useState([]);
 
 	const [business, setBusiness] = useState([]);
 	
@@ -102,6 +104,59 @@ export default function ResContextProvider({ children }) {
 			const res = await axios.get(`/restaurant/getPendingEdit`);
 			console.log("fatchPendingEdit =>", res.data);
 			setFatchResPendding(res.data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const getImageResPendding = async () => {
+		try {
+			const res = await axios.get(`/restaurant/getResImgPending`);
+			// const res2 = JSON.parse(res);
+			console.log("getResImgPending =>", JSON.parse(res.data));
+			const resParse = JSON.parse(res.data);
+
+			setImageResPendding(resParse);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const getImageResPenddingByResId = async (redId) => {
+		try {
+			const res = await axios.get(
+				`/restaurant/getImgPendingByResId/${redId}`
+			);
+			console.log("getImgPendingByResId=>", res.data);
+			setImageResPenddingByResId(res.data);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const updateImage = async (resId, input) => {
+		try {
+			const res = await axios.post(
+				`/restaurant/mergeResImgWithTemp`,
+				input
+			);
+			setImageResPendding(
+				imageResPendding.filter((item) => item[0] !== resId)
+			);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const deleteImage = async (resId) => {
+		try {
+			const res = await axios.delete(
+				`/restaurant/deleteAllTempImg/${resId}`
+			);
+
+			setImageResPendding(
+				imageResPendding.filter((item) => item[0] !== resId)
+			);
 		} catch (err) {
 			console.log(err);
 		}
@@ -206,6 +261,12 @@ export default function ResContextProvider({ children }) {
 				setInput,
 				selected,
 				setSelected,
+				getImageResPendding,
+				imageResPendding,
+				updateImage,
+				getImageResPenddingByResId,
+				imageResPenddingByResId,
+				deleteImage,
 			}}
 		>
 			{children}

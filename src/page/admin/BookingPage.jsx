@@ -20,7 +20,7 @@ export default function BookingPage() {
 
 	return (
 		<>
-			<div className="flex flex-col gap-4 p-4 mb-10">
+			<div className="flex flex-col gap-4 p-4 mb-10 max-w-[1200px] mx-auto">
 				<h1>All Booking</h1>
 				<small className="mb-4">Hi, Welcome back to Admin!</small>
 

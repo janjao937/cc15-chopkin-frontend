@@ -25,6 +25,7 @@ export default function Reservation() {
 
   const myBooking = getBookingAll.filter((item) => item.customerId === userId);
   console.log("myBooking =>", myBooking);
+  useEffect(() => {}, []);
 
   return (
     <div className="flex flex-col m-4">
@@ -36,27 +37,40 @@ export default function Reservation() {
         <div className="col-span-10 flex flex-col gap-4 mx-4">
           <div className="mb-10">
             {/* ### Header ### */}
-            <Header />
+            <Header myBooking={myBooking} />
           </div>
+
+          {/* Mock */}
+          {/* <div>
+            {mockBooking.map((item, index) => (
+              <div key={index} className="p-4 shadow-md">
+                {item.id}
+                <MyBookList data={item} />
+                <button className="p-2 bg-blue-400 text-white rounded-md">
+                  payment
+                </button>
+              </div>
+            ))}
+          </div> */}
 
           {/* Detail .. */}
           <div>
             {/* detail etc. */}
             {myBooking.length > 0 ? (
               <div className="flex flex-col gap-4 px-4 py-2">
-                <div className="text-lg font-semibold">
-                  My Reservation
-                </div>
-                {<div className="grid grid-cols-12 gap-4">
-                  {myBooking.map((item, index) => (
-                    <div
-                      key={index}
-                      className="col-span-12 md:col-span-6 lg:col-span-4"
-                    >
-                      <MyBookList data={item} myBooking={myBooking}/>
-                    </div>
-                  ))}
-                </div>}
+                <div className="text-lg font-semibold">My Reservation</div>
+                {
+                  <div className="grid grid-cols-12 gap-4">
+                    {myBooking.map((item, index) => (
+                      <div
+                        key={index}
+                        className="col-span-12 md:col-span-6 lg:col-span-4"
+                      >
+                        <MyBookList data={item} myBooking={myBooking} />
+                      </div>
+                    ))}
+                  </div>
+                }
               </div>
             ) : (
               <>

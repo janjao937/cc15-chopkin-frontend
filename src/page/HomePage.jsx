@@ -1,5 +1,6 @@
 import React from "react";
 import useRes from "../Hooks/use-res";
+import useResAll from "../Hooks/use-resAll";
 import { dataCuisine } from "../data/dataRes";
 import RestaurantList from "../features/restaurant/RestaurantList";
 import DefaultCarousel from "../components/DefaultCarousel";
@@ -17,6 +18,11 @@ import { Carousel } from "@material-tailwind/react";
 export default function HomePage() {
   const { restaurantAll, homeLoading } = useRes();
   const [searchInput, setSearchInput] = useState("");
+
+  const { getRestaurantAll } = useResAll();
+
+  console.log("eeee", getRestaurantAll);
+
   if (homeLoading) return <Loading />;
   return (
     <div className="flex flex-col gap-3">
@@ -94,7 +100,7 @@ export default function HomePage() {
         <div className="flex justify-between px-32">
           {dataCuisine.map((item, index) => (
             <div key={index}>
-              <CuisineList data={item} />
+              <CuisineList data={item} getRestaurantAll={getRestaurantAll} />
             </div>
           ))}
         </div>
