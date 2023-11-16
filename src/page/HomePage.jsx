@@ -25,7 +25,7 @@ export default function HomePage() {
 
   if (homeLoading) return <Loading />;
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 px-32">
       {/* image */}
       <div className="mb-8 relative ">
         <div className="h-[300px] w-full ">
@@ -47,7 +47,7 @@ export default function HomePage() {
       </div>
 
       {/* Recommended Restaurants */}
-      <div className="mb-4 px-32">
+      <div className="mb-4">
         <div className="text-2xl font-semibold font-kanit">
           Recommended Restaurants !
         </div>
@@ -60,7 +60,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-4 place-items-center gap-10">
+        <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-center gap-x-20 gap-y-14 py-8">
           {restaurantAll?.map((item, index) => (
             <div key={index}>
               <RestaurantList data={item} />
@@ -69,7 +69,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <div className="py-4 px-32">
+      <div className="py-4">
         <div className=" h-[300px] w-full ">
           <Carousel
             className="rounded-xl h-[300px] w-full"
@@ -95,9 +95,9 @@ export default function HomePage() {
       </div>
 
       {/* Top Cuisine */}
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-4 ">
         <PageName name="Top Cuisine"></PageName>
-        <div className="flex justify-between px-32">
+        <div className="flex justify-between p-10 border-gray-200 border-4 rounded-3xl my-10">
           {dataCuisine.map((item, index) => (
             <div key={index}>
               <CuisineList data={item} getRestaurantAll={getRestaurantAll} />
@@ -106,7 +106,7 @@ export default function HomePage() {
         </div>
 
         {/* All Restaurants */}
-        <div className="pt-5 pb-12 px-32">
+        <div className="pt-5 pb-12 w-full">
           <h1 className=" text-2xl font-semibold">All Restaurants</h1>
           <div className="flex items-center gap-2 mb-2">
             {/* It's on trend right now, try it! */}
@@ -117,7 +117,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-4 place-items-center gap-7">
+          <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-center gap-x-20 gap-y-14 py-8">
             {restaurantAll?.map((item, index) => (
               <div key={index}>
                 <RestaurantList data={item} />
