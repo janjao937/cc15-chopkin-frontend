@@ -66,7 +66,7 @@ export default function RestaurantInfoPage() {
   const [allreviewMessage, setAllReviewMessage] = useState([]);
   const [allBusinessTime, setAllBusinessTime] = useState([]);
   const [date, setDate] = useState([]);
-  const [cusReviewImg,setCusReviewImg] = useState([]);
+  const [cusReviewImg, setCusReviewImg] = useState([]);
 
   useEffect(() => {
     axios
@@ -75,7 +75,7 @@ export default function RestaurantInfoPage() {
       .catch((e) => console.log(e));
   }, []);
 
-  console.log(`ALL =========> `,allreviewMessage);
+  console.log(`ALL =========> `, allreviewMessage);
 
   const [allPackage, setAllPackage] = useState([]);
   useEffect(() => {
@@ -84,7 +84,6 @@ export default function RestaurantInfoPage() {
       .then((res) => setAllPackage(res.data))
       .catch((e) => console.log(e));
   }, []);
-
 
   const { authUser } = useAuth();
   const { resId } = useParams();
@@ -112,14 +111,12 @@ export default function RestaurantInfoPage() {
     setBooking(!booking);
   };
 
-
-
   return (
-    <div className="flex flex-col justify-center">
-      <main className="flex px-64 gap-5">
+    <div className="flex flex-col justify-center px-32">
+      <main className="flex gap-5">
         <section className="flex-1 flex flex-col gap-5">
           <div className="flex justify-between">
-            <div className="flex items-center">
+            <div className="flex items-center gap-5">
               {/* <img src={profileImage} className="w-[100px]"></img> */}
               {res?.profileImg ? (
                 <img
@@ -131,11 +128,30 @@ export default function RestaurantInfoPage() {
                 <img src={profileImage} className="w-[100px]"></img>
               )}
               <div>
-                <p className="text-xl font-semibold">{res?.restaurantName}</p>
+                <p className="text-2xl font-semibold">{res?.restaurantName}</p>
                 {/* <p>res name</p> */}
                 <div className="flex gap-5">
                   <p className="">Open Time:</p>
-                  <p className="">{mockRestuarantInfo.dateTime}</p>
+                  {res?.BusinessTimes.map((item) => (
+                    <div className="flex gap-2">
+                      <p className="font-semibold">
+                        {item.day == 1
+                          ? "mon:"
+                          : item.day == 2
+                          ? "tue:"
+                          : item.day == 3
+                          ? "wed:"
+                          : item.day == 4
+                          ? "thurs:"
+                          : item.day == 5
+                          ? "fri:"
+                          : item.day == 6
+                          ? "sat:"
+                          : "sun:"}
+                      </p>
+                      <p>{item.openTime} </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -151,7 +167,9 @@ export default function RestaurantInfoPage() {
           {/* GOOGLE MAP */}
           <div className="flex flex-col items-center relative right-[38%] gap-3">
             <div className="border-2 rounded-md">
-              <ShowOnlyMap center={{ lat: res?.latitude, lng: res?.longitude }} />
+              <ShowOnlyMap
+                center={{ lat: res?.latitude, lng: res?.longitude }}
+              />
             </div>
             <a
               href={`https://maps.google.com/?q=${res?.latitude},${res?.longitude}`}
@@ -170,8 +188,8 @@ export default function RestaurantInfoPage() {
                 {allPackage.map((item, index) => (
                   <section key={index}>
                     <div className="flex py-10 px-4 border border-gray-100">
-                      <div className="flex-1 flex flex-col justify-between">
-                        <p className="font-semibold">{item.name}</p>
+                      <div className="flex-1 flex flex-col justify-between gap-2">
+                        <p className="font-semibold text-xl">{item.name}</p>
                         <button
                           onClick={() => handleOpenMenu(item.id)}
                           className={`w-[80px] cursor-pointer outline outline-primary rounded-full outline-2 py-1 px-4 text-primary`}
@@ -180,7 +198,7 @@ export default function RestaurantInfoPage() {
                         </button>
                       </div>
                       <div className="flex-1">
-                        <p className="text-gray-500 text-xs">{item.detail}</p>
+                        <p className="text-gray-500 text-md">{item.detail}</p>
                       </div>
                       <div className="flex-1 text-center">
                         <p>{item.price}</p>
@@ -194,25 +212,17 @@ export default function RestaurantInfoPage() {
                       <div>
                         <div className="flex p-4">
                           <div className="flex-1">
-                            <p>รอบเวลาที่เปิดจอง</p>
+                            <p className="font-semibold">รอบเวลาที่เปิดจอง</p>
 
-                            <div className="flex justify-around">
-                              <section className="flex">
-                                {/* {res.map((item,index)=> <p>{item.businessTimes}</p>)} */}
-                                {/* <div className="flex-1">
-                                <p>Monday</p>
-                                <p>Tuesday</p>
-                                <p>Wednesday</p>
-                                <p>Thursday</p>
-                                <p>Friday</p>
-                                <p>Saturday</p>
-                                <p>Sunday</p>
-                              </div> */}
-
-                                <div className="">
+                            <div className="flex">
+                              <section className="flex w-[50%]">
+                                <div className="w-[100%]">
                                   {res?.BusinessTimes.map((item, index) => (
-                                    <div className="flex gap-10" key={index}>
-                                      <p>
+                                    <div
+                                      className="flex gap-2 flex-1"
+                                      key={index}
+                                    >
+                                      <p className="flex-1">
                                         {item.day == 1
                                           ? "mon"
                                           : item.day == 2
@@ -227,9 +237,11 @@ export default function RestaurantInfoPage() {
                                           ? "sat"
                                           : "sun"}
                                       </p>
-                                      <p>{item.openTime}</p>
+                                      <p className="flex-1">{item.openTime}</p>
                                       <p>-</p>
-                                      <p>{item.closedTime}</p>
+                                      <p className="flex-1 text-end">
+                                        {item.closedTime}
+                                      </p>
                                     </div>
                                   ))}
                                 </div>
@@ -237,7 +249,7 @@ export default function RestaurantInfoPage() {
                             </div>
                           </div>
                           <div className="flex-1">
-                            <p>รายละเอียดแพ็กเกจ</p>
+                            <p className="font-semibold">รายละเอียดแพ็กเกจ</p>
                             <p>{item.detail}</p>
                           </div>
                         </div>
@@ -273,18 +285,34 @@ export default function RestaurantInfoPage() {
                     booking={booking}
                     allPackage={allPackage}
                     resId={resId}
+                    res={res}
                   />
                 </div>
               ) : (
-                <div className="flex flex-col gap-4">
-                  <p className="text-primary">Click to Book</p>
-                  <hr />
-                  <MyButton
-                    style={`bg-secondary w-full rounded-full`}
-                    onClick={handleBooking}
-                  >
-                    BOOK NOW
-                  </MyButton>
+                <div>
+                  {allPackage.length > 0 ? (
+                    <div className="flex flex-col gap-4">
+                      <p className="text-primary">Click To Booking</p>
+                      <hr />
+                      <MyButton
+                        style={`bg-secondary w-full rounded-full`}
+                        onClick={handleBooking}
+                      >
+                        BOOK NOW
+                      </MyButton>
+                    </div>
+                  ) : (
+                    <div className="flex flex-col gap-4">
+                      <p className="text-primary">Cannot Booking</p>
+                      <hr />
+                      <MyButton
+                        style={`bg-gray-400 w-full rounded-full`}
+                        disabled={true}
+                      >
+                        NO PACKAGE
+                      </MyButton>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -292,12 +320,14 @@ export default function RestaurantInfoPage() {
         )}
       </main>
       {/* {authUser.firstName ? <RestaurantReview /> : undefined} */}
-      <div className="flex justify-center gap-5  px-64">
+      <div className="flex justify-center gap-5">
         <RestaurantReview
           resId={resId}
           allreviewMessage={allreviewMessage}
+          setAllReviewMessage={setAllReviewMessage}
           res={res}
           cusReviewImg={cusReviewImg}
+          allPackage={allPackage}
         />
       </div>
     </div>

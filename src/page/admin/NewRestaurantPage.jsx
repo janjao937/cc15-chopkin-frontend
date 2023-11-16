@@ -11,7 +11,7 @@ export default function NewRestaurantPage() {
 	}, []);
 
 	return (
-		<div className="flex flex-col gap-2 p-4">
+		<div className="flex flex-col gap-2 p-4 max-w-[1200px] mx-auto">
 			<h1>New Restaurant</h1>
 			<small className="mb-4">Hi, Welcome back to Admin!</small>
 

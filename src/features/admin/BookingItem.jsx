@@ -1,27 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import MyButton from "../../components/MyButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal";
-import { useState } from "react";
 import blank from "../../assets/blank.png";
 import CalenderDate from "../../components/CalenderDate";
 import Time from "../../components/Time";
-
-const mockPackageId = [
-	{
-		name: "Premium Buffet Unlimited1",
-		price: 500,
-	},
-	{
-		name: "Premium Buffet Unlimited2",
-		price: 1000,
-	},
-	{
-		name: "Premium Buffet Unlimited3",
-		price: 1500,
-	},
-];
+import useBooking from "../../Hooks/use-booking";
+import axios from "../../config/axios";
+import { toast } from "react-toastify";
 
 export default function BookingItem({
 	obj,
@@ -36,27 +23,89 @@ export default function BookingItem({
 	packageName,
 	packPrice,
 }) {
-	// console.log("id==>", id);
+	console.log("obj==>", obj);
+
+	const navigate = useNavigate();
+	const { editBooking, deleteBooking } = useBooking();
+
+	const [getPackageByRes, setGetPackageByRes] = useState([]);
+
+	useEffect(() => {
+		const fetchPackageByRes = async () => {
+			try {
+				const res = await axios.get(
+					`package/getAll/${obj.restaurantId}`
+				);
+				console.log("fetchPackageByRes =>", res.data);
+				setGetPackageByRes(res.data);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		fetchPackageByRes();
+	}, []);
 
 	const [isOpen, setIsOpen] = useState(false);
 	// const [bookingDate, setBookingDate] = useState(null);
 	// const [bookingTime, setBookingTime] = useState(dayjs());
 
-	const [totalPrice, setTotalPrice] = useState(
-		(totalCustomer + totalKid / 2) * packPrice
-	);
+	// const [totalPrice, setTotalPrice] = useState(
+	// 	(totalCustomer + totalKid / 2) * packPrice
+	// );
 
-	const [inputModify, setInputModify] = useState({
-		bookingDate: "",
-		bookingTime: "",
-		totalCustomer: 1,
-		totalKid: 0,
-		specialRequest: "",
-		packageName: "",
-	});
+	// const [inputModify, setInputModify] = useState({
+	// 	bookingDate: "",
+	// 	bookingTime: "",
+	// 	totalCustomer: 1,
+	// 	totalKid: 0,
+	// specialRequest: "",
+	// 	packageName: "",
+	// });
 
 	// console.log(bookingDate.format("DD/MM/YYYY"));
 	// console.log(bookingTime.format("HH:mm"));
+
+	const [input, setInput] = useState({
+		packageId: "",
+		totalCustomer: "",
+		totalKid: "",
+		bookingDate: "",
+		bookingTime: "",
+	});
+
+	const handleClickEditBooking = () => {
+		if (input.bookingDate === "") {
+			input.bookingDate = date;
+		}
+		if (input.bookingTime === "") {
+			input.bookingTime = obj.bookingTime;
+		}
+		if (input.packageId === "") {
+			input.packageId = obj.package.id;
+		}
+		if (input.totalCustomer === "") {
+			input.totalCustomer = totalCustomer;
+		}
+		if (input.totalKid === "") {
+			input.totalKid = totalKid;
+		}
+		editBooking(obj.id, input);
+		// alert("UP TO DATE BOOKING");
+		toast.success(`UPDATE BOOKING`);
+		// window.location.reload();
+	};
+
+	const handleClickDeleteBooking = () => {
+		deleteBooking(obj.id);
+		// alert("Delete Booking");
+		toast.warning(`DELETE BOOKING`);
+		navigate(`/admin/booking`);
+	};
+
+	const handleClickCloseBooking = () => {
+		setIsOpen(false);
+		window.location.reload();
+	};
 
 	return (
 		<>
@@ -111,14 +160,15 @@ export default function BookingItem({
 					<div className="grid grid-cols-12">
 						<div className="col-span-3">
 							<div className="flex flex-col gap-2 mb-4">
-								<div>Date</div>
+								<div>BOOKING-DATE :</div>
 								{/* Calender Date */}
 								{/* <select name="" id="">
 									<option value="">10 jun 23</option>
 								</select> */}
 								<CalenderDate
-									inputModify={inputModify}
-									setInputModify={setInputModify}
+									inputModify={input}
+									setInputModify={setInput}
+									// defaultValue={getBookingById.bookingDate}
 								/>
 							</div>
 							<div className="flex flex-col gap-2 mb-4">
@@ -126,11 +176,12 @@ export default function BookingItem({
 								<input
 									type="number"
 									name="totalCustomer"
-									value={inputModify.totalCustomer}
+									placeholder={totalCustomer}
+									// value={inputModify.totalCustomer}
 									onChange={(e) =>
-										setInputModify({
-											...inputModify,
-											[e.target.name]: +e.target.value,
+										setInput({
+											...input,
+											totalCustomer: +e.target.value,
 										})
 									}
 									className="px-4 py-2 w-[180px] border rounded-md outline-none"
@@ -140,16 +191,18 @@ export default function BookingItem({
 
 						<div className="col-span-3">
 							<div className="flex flex-col gap-2 mb-4">
-								<div>Time</div>
+								<div>BOOKING-TIME</div>
 								{/* Time */}
 								{/* <select name="" id="">
 									<option value="">11:00</option>
 								</select> */}
 
 								<Time
-									inputModify={inputModify}
-									setInputModify={setInputModify}
+									inputModify={input}
+									setInputModify={setInput}
 									inputKey={`bookingTime`}
+									// defaultValue={`2022-04-17T${getBookingById.bookingTime}`}
+									// defaultValue={`2022-04-17T15:30`}
 								/>
 							</div>
 							<div className="flex flex-col gap-2 mb-4">
@@ -157,11 +210,12 @@ export default function BookingItem({
 								<input
 									type="number"
 									name="totalKid"
-									value={inputModify.totalKid}
+									placeholder={totalKid}
+									// value={inputModify.totalKid}
 									onChange={(e) =>
-										setInputModify({
-											...inputModify,
-											[e.target.name]: +e.target.value,
+										setInput({
+											...input,
+											totalKid: +e.target.value,
 										})
 									}
 									className="px-4 py-2 w-[180px] border rounded-md outline-none"
@@ -177,23 +231,25 @@ export default function BookingItem({
 								</select>
 							</div> */}
 							<div className="flex flex-col gap-2 mb-4">
-								<div>Package Name</div>
+								<div>PACKAGE-NAME</div>
 								<select
-									name="packageName"
+									name={input.packageId}
 									className="border rounded-md px-4 py-2 outline-none "
 									onChange={(e) =>
-										setInputModify({
-											...inputModify,
-											[e.target.name]: e.target.value,
+										setInput({
+											...input,
+											packageId: +e.target.value,
 										})
 									}
 								>
-									<option value="select">
-										{packageName}
-									</option>
-									{mockPackageId.map((item, index) => (
-										<option key={index} value={item.name}>
-											{item.name}
+									<option
+										// value={getBookingById.packageId}
+										disabled="disabled"
+										// hidden
+									></option>
+									{getPackageByRes.map((item, index) => (
+										<option key={index} value={item.id}>
+											{item.name} {` `} {item.price}
 										</option>
 									))}
 								</select>
@@ -201,7 +257,7 @@ export default function BookingItem({
 						</div>
 					</div>
 
-					<div className="grid grid-cols-12 items-center gap-4 mb-4">
+					{/* <div className="grid grid-cols-12 items-center gap-4 mb-4">
 						<div className="col-span-6 flex flex-col gap-2">
 							<div>Special request</div>
 							<textarea
@@ -222,19 +278,25 @@ export default function BookingItem({
 						<h1 className="col-span-6 text-red-600 text-2xl font-semibold text-center">
 							฿{totalPrice}
 						</h1>
-					</div>
+					</div> */}
 
 					<div className="flex items-center justify-start gap-4">
-						<button className="border px-4 py-2 rounded-full bg-red-600 text-white hover:bg-red-400 hover:text-black">
+						<button
+							onClick={handleClickEditBooking}
+							className="border px-4 py-2 rounded-full bg-red-600 text-white hover:bg-red-400 hover:text-black"
+						>
 							Update and Modify
 						</button>
-						<button className="border px-4 py-2 rounded-full bg-red-600 text-white hover:bg-red-400 hover:text-black">
+						<button
+							onClick={handleClickDeleteBooking}
+							className="border px-4 py-2 rounded-full bg-red-600 text-white hover:bg-red-400 hover:text-black"
+						>
 							Cancel this booking
 						</button>
 						<div className="">
 							<button
 								className="border px-4 py-2 rounded-full bg-green-600 text-white hover:bg-green-400 hover:text-black"
-								onClick={() => setIsOpen(false)}
+								onClick={handleClickCloseBooking}
 							>
 								Close this windew
 							</button>

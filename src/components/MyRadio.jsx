@@ -47,11 +47,11 @@ export default function MyRadio({ handleNext, handlePrev }) {
   return (
     <div className="flex flex-col gap-4">
       <hr />
-      <p className="text-center font-semibold">Select Adult</p>
+      <p className="text-center font-semibold text-lg">Select Adult</p>
       <div className="grid w-full grid-cols-5 gap-2 rounded-xl p-2">
         {number}
       </div>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-3">
         <button
           onClick={handleHaveKid}
           className="text-primary font-semibold p-2 hover:bg-gray-200 transition self-end rounded-full"
@@ -60,12 +60,12 @@ export default function MyRadio({ handleNext, handlePrev }) {
         </button>
         {haveKids ? (
           <div className="border-b flex justify-between">
-            <div>{numberOfKids} kid</div>
-            <div>
-              <button className="p-2 bg-red-500" onClick={handleRemoveKid}>
+            <div className="flex items-center">{numberOfKids} kid</div>
+            <div className="flex gap-1">
+              <button className="p-2 bg-red-500 text-white" onClick={handleRemoveKid}>
                 -
               </button>
-              <button className="p-2 bg-red-500" onClick={handleAddKid}>
+              <button className="p-2 bg-red-500 text-white" onClick={handleAddKid}>
                 +
               </button>
             </div>

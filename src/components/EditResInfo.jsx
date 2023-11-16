@@ -10,46 +10,67 @@ import { allDistricts } from "../data/dataRes";
 import ShowOnlyMap from "../features/googleMaps/ShowOnlyMap";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
+import MapComponent from "../features/googleMaps/MapComponent";
+import Modal from "./Modal";
+import DropdownLocation from "../features/auth/DropdownLocation";
 
 export default function EditResInfo({ handleOnSubmit }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const { input, setInput, selected } = useRes();
+  // const handleGoogleChangeInput = (e) => {
+  //   setInput({ ...input, [e.target.name]: +e.target.value });
+  // };
+
+  // const handleGoogleSubmit = (e) => {
+  //   e.preventDefault();
+  //   setInput((prev) => {
+  //     return { ...prev, position: selected };
+  //   });
+  //   setIsOpen(false);
+  // };
+
   const { business } = useRes();
   console.log(`BUSINESS`, business);
 
   const { restaurantAll } = useRes();
   const { resId } = useParams();
 
-  console.log(`resId=======>`, resId);
+  // console.log(`resId=======>`, resId);
 
   const res = restaurantAll.find((item) => item.id === resId);
-  console.log("myRes =>", res);
+  // console.log("myRes =>", res);
 
   const fileEl = useRef(null);
-  const [input, setInput] = useState({
-    restaurantName: "",
-    ownerFirstName: "",
-    ownerLastName: "",
-    // email: "",
-    // password: "",
-    // phone: "",
-    districtIndex: "",
-    categoryIndex: "",
-    nationIndex: "",
-    position: {
-      lat: "",
-      lng: "",
-    },
-    // latitude: "",
-    // longitude: "",
-    price: 0,
-    businessTime: business,
-  });
+  // const [input, setInput] = useState({
+  //   restaurantName: "",
+  //   ownerFirstName: "",
+  //   ownerLastName: "",
+  //   // email: "",
+  //   // password: "",
+  //   // phone: "",
+  //   districtIndex: "",
+  //   categoryIndex: "",
+  //   nationIndex: "",
+  //   position: {
+  //     lat: "",
+  //     lng: "",
+  //   },
+  //   // latitude: "",
+  //   // longitude: "",
+  //   price: 0,
+  //   businessTime: business,
+  // });
 
-  useEffect(() => {  setInput(input=>{return{...input, businessTime:business}})},[business])
+  useEffect(() => {
+    setInput((input) => {
+      return { ...input, businessTime: business };
+    });
+  }, [business]);
 
   const [file, setFile] = useState(null);
   const [error, setError] = useState({});
 
-  console.log(`BUSINESS ======== :: `,business);
+  // console.log(`BUSINESS ======== :: `, business);
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
@@ -60,9 +81,12 @@ export default function EditResInfo({ handleOnSubmit }) {
     }
   };
 
+  // console.log(`==================`,input.position);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const formdata = new FormData();
+    // console.log(`***************`,business);
     if (file) {
       formdata.append("profileImg", file);
     }
@@ -81,13 +105,10 @@ export default function EditResInfo({ handleOnSubmit }) {
     if (input.nationIndex) {
       formdata.append("nationIndex", input.nationIndex);
     }
-    if (input.latitude) {
-      formdata.append("position", input.position.lat);
+    if (input.position) {
+      formdata.append("position", input.position);
     }
-    if (input.longitude) {
-      formdata.append("position", input.position.lng);
-    }
-    if (input.businessTime) {
+    if (business) {
       formdata.append("businessTime", JSON.stringify(business));
     }
 
@@ -104,11 +125,18 @@ export default function EditResInfo({ handleOnSubmit }) {
 
   console.log(input);
 
+  const handleLocationChange = (newPosition) => {
+    setInput((prevInput) => ({
+      ...prevInput,
+      position: newPosition,
+    }));
+  };
+
   return (
-    <div className="flex px-40 ">
+    <div className="flex px-32 pt-10 gap-2">
       {/* Resaurant Start Info */}
-      <section className="flex-1 shadow-md border p-5 flex flex-col gap-5">
-        <p>
+      <section className="flex-1 shadow-md border p-5 flex flex-col gap-6 bg-white">
+        <p className="font-semibold text-xl">
           profileImg:
           {authUser.profileImg ? (
             <img src={authUser.profileImg} alt="" />
@@ -116,20 +144,40 @@ export default function EditResInfo({ handleOnSubmit }) {
             <img src={profileImage} className="w-[400px]"></img>
           )}
         </p>
-        <p>ResId: {authUser.id}</p>
-        <p>restaurantName: {authUser.restaurantName}</p>
-        <p>Email: {authUser.email}</p>
-        <p>ownerFirstName: {authUser.ownerFirstName}</p>
-        <p>ownerLastName :{authUser.ownerLastName}</p>
-        <p>phone: {authUser.phone}</p>
-        <p>start price: {authUser.price}</p>
+        {/* <p>ResId: {authUser.id}</p> */}
+        <div className="flex gap-3">
+          <p className="font-semibold">restaurantName:</p>
+          <p className="font-normal">{authUser.restaurantName}</p>
+        </div>
+        <div className="flex gap-3">
+          <p className="font-semibold">Email:</p>
+          <p className="">{authUser.email}</p>
+        </div>
+        <div className="flex gap-3">
+          <p className="font-semibold">OwnerFirstName:</p>
+          <p>{authUser.ownerFirstName}</p>
+        </div>
+        <div className="flex gap-3">
+          <p className="font-semibold">OwnerLastName:</p>
+          <p>{authUser.ownerLastName}</p>
+        </div>
+
+        <div className="flex gap-3">
+          <p className="font-semibold">phone:</p>
+          <p>{authUser.phone}</p>
+        </div>
+
+        <div className="flex gap-3">
+          <p className="font-semibold">start price:</p>
+          <p>{authUser.price}</p>
+        </div>
       </section>
 
       {/* Restaurabt New Info */}
       {/* Create to db: createEditPending */}
       <form
         onSubmit={handleSubmit}
-        className="flex-1 shadow-md border p-5 flex flex-col gap-2"
+        className="flex-1 shadow-md border p-5 flex flex-col gap-2 bg-white"
       >
         {file ? (
           <div onClick={() => fileEl.current.click()}>
@@ -148,14 +196,14 @@ export default function EditResInfo({ handleOnSubmit }) {
             }}
           />
         )}
-        <p>restaurantName</p>
+        <p className="font-semibold">restaurantName</p>
         <input
           type="text"
           className="border h-12"
           onChange={handleChangeInput}
           name="restaurantName"
         />
-        <p>starter price</p>
+        <p className="font-semibold">starter price</p>
         <input
           type="text"
           className="border h-12"
@@ -184,21 +232,21 @@ export default function EditResInfo({ handleOnSubmit }) {
 					onChange={handleChangeInput}
 					name="phone"
 				/> */}
-        <p>category</p>
+        <p className="font-semibold">category</p>
         <div>
           <DropdownCategory input={input} setInput={setInput} />
           {error.categoryIndex && (
             <InputErrorMessage message={error.categoryIndex} />
           )}
         </div>
-        <p>nation</p>
+        <p className="font-semibold">nation</p>
         <div>
           <DropdownNation input={input} setInput={setInput} />
           {error.nationIndex && (
             <InputErrorMessage message={error.nationIndex} />
           )}
         </div>
-        <p>district</p>
+        <p className="font-semibold">district</p>
         <div>
           <select
             name="districtIndex"
@@ -226,11 +274,13 @@ export default function EditResInfo({ handleOnSubmit }) {
             })}
           </select>
         </div>
-        <p>Lat</p>
+        <p className="font-semibold">Location</p>
+        <DropdownLocation onLocationChange={handleLocationChange} />
+        {/* <p>Lat</p>
         <input
           type="text"
           className="border h-12"
-          onChange={handleChangeInput}
+          onChange={handleGoogleChangeInput}
           name="lat"
         />
         <p>Long</p>
@@ -239,7 +289,7 @@ export default function EditResInfo({ handleOnSubmit }) {
           className="border h-12"
           onChange={handleChangeInput}
           name="lng"
-        />
+        /> */}
 
         {/* GOOGLE MAP */}
         {/* <div className="flex flex-col items-center relative right-[38%] gap-3">
@@ -256,7 +306,9 @@ export default function EditResInfo({ handleOnSubmit }) {
             </a>
           </div> */}
 
-        <button className="p-2 bg-blue-500 text-white">Confirms</button>
+        <button className="p-2 bg-blue-500 text-white" type="submit">
+          Confirms
+        </button>
       </form>
     </div>
   );

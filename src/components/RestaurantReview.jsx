@@ -14,7 +14,7 @@ import {
   DialogFooter,
 } from "@material-tailwind/react";
 
-export default function RestaurantReview({ resId, allreviewMessage, res }) {
+export default function RestaurantReview({ resId, allreviewMessage, res,setAllReviewMessage,allPackage }) {
   const { authUser } = useAuth();
   // console.log(authUser);
 
@@ -23,9 +23,11 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
   const [averageScore, setAverageScore] = useState(0);
   const [cusInfo, setCusInfo] = useState([]);
   const [open, setOpen] = React.useState(false);
-  const [forceUpdate, setForceUpdate] = useState(0);
+  const [forceUpdate, setForceUpdate] = useState([]);
 
-  const handleOpen = () => setOpen(!open);
+  const handleOpen = () => {
+    setOpen(!open);
+  };
 
   const checkCusId = allreviewMessage?.reviews?.find(
     (item) => item.customerId === authUser?.id
@@ -52,10 +54,13 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
       .delete(`http://localhost:8888/review/${reviewId}`)
       .then((res) => {
         handleOpen();
-        setForceUpdate((prev) => prev + 1);
+      
       })
       .catch((e) => console.log(e));
-  };
+    // setAllReviewMessage(allreviewMessage?.reviews?.filter((item)=> console.log(item.id)));
+    console.log('reviewId', reviewId);
+    };
+  
 
   useEffect(() => {
     console.log("Force update effect");
@@ -119,7 +124,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
             <Progress value={scoreCounts["1"]} color="red" />
           </div>
         </div>
-        {authUser && authUser.firstName ? (
+        {authUser && authUser.firstName && allPackage.length > 0 ? (
           <button
             className="p-3 text-center bg-primary self-center text-white cursor-pointer rounded-md"
             onClick={() => setIsOpenAfterComplete(!isOpenAfterComplete)}
@@ -128,7 +133,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res }) {
           </button>
         ) : undefined}
         <div>
-          <ReviewForm isOpenAfterComplete={isOpenAfterComplete} resId={resId} />
+          <ReviewForm isOpenAfterComplete={isOpenAfterComplete} resId={resId}/>
         </div>
         <div className="w-full border-b-2"></div>
         <div className="flex flex-col">

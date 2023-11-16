@@ -9,15 +9,15 @@ export default function BookingList({ data }) {
 			<BookingItem
 				obj={data}
 				id={data.id}
-				firstName={data.customer.firstName}
-				email={data.customer.email}
-				phone={data.customer.phone}
+				firstName={data.customer?.firstName}
+				email={data.customer?.email}
+				phone={data.customer?.phone}
 				date={data.createdAt}
 				totalCustomer={data.totalCustomer}
 				totalKid={data.totalKid}
-				reataurantName={data.restaurant.restaurantName}
-				packageName={data.package.name}
-				packPrice={data.package.price}
+				reataurantName={data.restaurant?.restaurantName}
+				packageName={data.package?.name}
+				packPrice={data.package?.price}
 			/>
 		</>
 	);

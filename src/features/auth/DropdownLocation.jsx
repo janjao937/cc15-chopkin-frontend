@@ -6,7 +6,7 @@ import Modal from "../../components/Modal";
 import MapComponent from "../googleMaps/MapComponent";
 import useRes from "../../Hooks/use-res";
 
-export default function DropdownLocation({ error }) {
+export default function DropdownLocation({ error,onLocationChange }) {
   const [isOpen, setIsOpen] = useState(false);
   const { input, setInput, selected } = useRes();
   const handleChangeInput = (e) => {
@@ -19,7 +19,9 @@ export default function DropdownLocation({ error }) {
       return { ...prev, position: selected };
     });
     setIsOpen(false);
+    onLocationChange(selected);
   };
+
 
   return (
     <>

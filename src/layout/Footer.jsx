@@ -1,22 +1,12 @@
 import React from "react";
-import {
-  AiFillFacebook,
-  AiFillTwitterSquare,
-  AiFillInstagram,
-  AiFillLinkedin,
-  AiFillYoutube,
-} from "react-icons/ai";
+import { AiFillInstagram } from "react-icons/ai";
 import { FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
-import { RiFacebookCircleLine } from "react-icons/ri";
-import { GrTwitter } from "react-icons/gr";
-import { SiTwitter } from "react-icons/si";
-import { TiSocialLinkedinCircular } from "react-icons/ti";
 import { PiYoutubeLogoFill } from "react-icons/pi";
 
 export default function Footer() {
   return (
     <div className="bg-[#FFC24B]">
-      <footer className=" flex items-center justify-between h-[10vh] px-4 max-w-[78vw] mx-auto">
+      <footer className=" flex items-center justify-between h-[10vh] px-4">
         <div>
           <h3 className="text-slate-400">
             copyright &copy; Chopkin Enjoy Eating{" "}
