@@ -10,7 +10,7 @@ import {
 export default function Footer() {
 	return (
 		<div className="bg-[#FFC24B]">
-			<footer className=" flex items-center justify-between h-[10vh] px-4 max-w-[1440px] mx-auto">
+			<footer className=" flex items-center justify-between h-[10vh] px-4 ">
 				<div>
 					<h3 className="text-slate-400">
 						copyright &copy; Chopkin Enjoy Eating{" "}

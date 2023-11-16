@@ -1,6 +1,6 @@
 import React from "react";
 import useAuth from "../../Hooks/use-auth.js";
-
+import { useEffect } from "react";
 import imageBlank from "../../assets/blank.png";
 import AsideMenu from "./AsideMenu";
 import Header from "./Header";
@@ -37,7 +37,7 @@ export default function Reservation() {
         <div className="col-span-10 flex flex-col gap-4 mx-4">
           <div className="mb-10">
             {/* ### Header ### */}
-            <Header myBooking={myBooking} />
+            <Header />
           </div>
 
           {/* Mock */}
