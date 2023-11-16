@@ -277,7 +277,7 @@ export default function RestaurantInfoPage() {
                       <p className="text-primary">Click To Booking</p>
                       <hr />
                       <MyButton
-                        style={`bg-secondary w-full rounded-full`}
+                        style={`h-10 bg-secondary text-white cursor-pointer hover:bg-red-300 hover:text-black hover:scale-125 duration-300 rounded-full`}
                         onClick={handleBooking}
                       >
                         BOOK NOW

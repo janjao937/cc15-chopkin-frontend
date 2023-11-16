@@ -13,7 +13,7 @@ export default function Header() {
 		logout();
 	};
 	return (
-		<header className="flex items-center justify-between px-4 py-5 sticky top-0 z-50 h-[7vh] mx-auto bg-white">
+		<header className="flex items-center justify-between px-4 py-5 sticky top-0 z-50 h-[7vh] mx-auto bg-white border-b-2">
 			{/* Logo */}
 			<div className="">
 				<Link to="/">
