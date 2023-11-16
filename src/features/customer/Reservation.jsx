@@ -27,6 +27,8 @@ export default function Reservation() {
   console.log("myBooking =>", myBooking);
   useEffect(() => {}, []);
 
+  
+
   return (
     <div className="flex flex-col m-4">
       <div className="grid grid-cols-12">
@@ -83,7 +85,7 @@ export default function Reservation() {
             {/* {myBooking.length > 0 ? (
               <div className="flex flex-col gap-4 px-4 py-2">
                 <div className="text-lg font-semibold">Booking History</div>
-                <div className="grid grid-cols-12 gap-4">
+                <div className="flex">
                   {myBooking.map((item, index) => (
                     <div
                       key={index}

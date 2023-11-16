@@ -1,11 +1,3 @@
-import React from "react";
-import { AiFillStar } from "react-icons/ai";
-import defaultImage from "../assets/blank.png";
-import { Progress } from "@material-tailwind/react";
-import ReviewForm from "../features/restaurant/ReviewForm";
-import { useState, useEffect } from "react";
-import axios from "../config/axios";
-import useAuth from "../Hooks/use-auth";
 import {
   Button,
   Dialog,
@@ -13,8 +5,24 @@ import {
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+import React from "react";
+import { AiFillStar } from "react-icons/ai";
+import defaultImage from "../assets/blank.png";
+import { Progress } from "@material-tailwind/react";
+import ReviewForm from "../features/restaurant/ReviewForm";
+import { useState, useEffect } from "react";
+import axios from "../config/axios";
+import { toast } from "react-toastify";
+import useAuth from "../Hooks/use-auth";
+import Loading from "./Loading";
 
-export default function RestaurantReview({ resId, allreviewMessage, res,setAllReviewMessage,allPackage }) {
+export default function RestaurantReview({
+  resId,
+  allreviewMessage,
+  res,
+  setAllReviewMessage,
+  allPackage,
+}) {
   const { authUser } = useAuth();
   // console.log(authUser);
 
@@ -24,6 +32,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res,setAllRe
   const [cusInfo, setCusInfo] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [forceUpdate, setForceUpdate] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const handleOpen = () => {
     setOpen(!open);
@@ -49,22 +58,35 @@ export default function RestaurantReview({ resId, allreviewMessage, res,setAllRe
 
   const [isOpenAfterComplete, setIsOpenAfterComplete] = useState(false);
 
-  const handleDeleteReview = (reviewId) => {
-    axios
-      .delete(`http://localhost:8888/review/${reviewId}`)
-      .then((res) => {
-        handleOpen();
-      
-      })
-      .catch((e) => console.log(e));
-    // setAllReviewMessage(allreviewMessage?.reviews?.filter((item)=> console.log(item.id)));
-    console.log('reviewId', reviewId);
-    };
-  
+  const handleDeleteReview = async (reviewId) => {
+    try {
+      handleOpen();
+      // setLoading(true);
+      await axios.delete(`http://localhost:8888/review/${reviewId}`);
+      setAllReviewMessage((prevReviewMessage) => {
+        // Assuming allreviewMessage is an object with a 'reviews' property
+        const updatedReviews = prevReviewMessage.reviews.filter(
+          (review) => review.id !== reviewId
+        );
+
+        return {
+          ...prevReviewMessage,
+          reviews: updatedReviews,
+        };
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      // setLoading(false);
+      // toast.success("Your request has been submitted...");
+    }
+    // setLoading(false);
+    // console.log("reviewId", reviewId);
+  };
 
   useEffect(() => {
     console.log("Force update effect");
-  }, [forceUpdate]);
+  }, [allreviewMessage, setAllReviewMessage]);
 
   const scoreCounts = {};
   res?.Reviews.forEach((item) => {
@@ -80,6 +102,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res,setAllRe
 
   return (
     <div className="w-full pt-4 my-10 border shadow-lg">
+      {loading && <Loading />}
       <div className="flex flex-col gap-4">
         <div className="flex justify-evenly text-red-600 text-xl">
           <div className="font-bold">Reviews(xx,xxx)</div>
@@ -126,14 +149,19 @@ export default function RestaurantReview({ resId, allreviewMessage, res,setAllRe
         </div>
         {authUser && authUser.firstName && allPackage.length > 0 ? (
           <button
-            className="p-3 text-center bg-primary self-center text-white cursor-pointer rounded-md"
+            className="px-4 self-center py-2 bg-primary text-white cursor-pointer hover:bg-orange-300 hover:text-black hover:scale-125 duration-300 ease-in-out border  rounded-md"
             onClick={() => setIsOpenAfterComplete(!isOpenAfterComplete)}
           >
             Review Us!
           </button>
         ) : undefined}
         <div>
-          <ReviewForm isOpenAfterComplete={isOpenAfterComplete} resId={resId}/>
+          <ReviewForm
+            isOpenAfterComplete={isOpenAfterComplete}
+            resId={resId}
+            allreviewMessage={allreviewMessage}
+            setAllReviewMessage={setAllReviewMessage}
+          />
         </div>
         <div className="w-full border-b-2"></div>
         <div className="flex flex-col">
@@ -168,7 +196,7 @@ export default function RestaurantReview({ resId, allreviewMessage, res,setAllRe
                   </div>
                 </div>
                 {checkCusId && item.customerId === authUser.id ? (
-                  <div className="p-3 bg-secondary text-white h-10 flex items-center">
+                  <div className="px-4 py-2 h-10 bg-secondary text-white cursor-pointer hover:bg-red-300 hover:text-black hover:scale-125 duration-300 ease-in-out border  rounded-md">
                     <button onClick={() => handleDeleteReview(item.id)}>
                       Delete
                     </button>

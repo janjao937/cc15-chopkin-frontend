@@ -6,13 +6,21 @@ import InputErrorMessage from "../auth/InputErrorMessage";
 import { Checkbox } from "@material-tailwind/react";
 import axios from "../../config/axios";
 import MyDialog from "../../components/Dialog";
+import Loading from "../../components/Loading";
 
-export default function ReviewForm({ isOpenAfterComplete, resId }) {
+export default function ReviewForm({
+  isOpenAfterComplete,
+  resId,
+  allreviewMessage,
+  setAllReviewMessage,
+}) {
   const [anonymous, setAnonymous] = useState(false);
   const [countingStar, setCountingStar] = useState(null);
   const [hoverStart, setHoverStar] = useState(null);
   const [rating, setRating] = useState(0);
   const [isOpenDeleteReview, setIsOpenDeleteReview] = useState(false);
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const [reviewMessage, setReviewMessage] = useState({
     reviewMessage: "",
@@ -42,7 +50,7 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
 
   // { reviewMessage, restaurantId, score } backend
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const isAnonymousValue = anonymous ? "1" : "0";
     try {
@@ -62,15 +70,16 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
         formData.append("data", JSON.stringify(reviewMessage));
       }
 
-      console.log(file);
-      axios
-        .post("http://localhost:8888/review", formData)
-        .then((res) => console.log(res))
-        .catch((e) => console.log(e));
+      setLoading(true);
+      // console.log(file);
+      await axios.post("http://localhost:8888/review", formData);
+      
 
-      console.log(formData);
+      // console.log(formData);
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -87,6 +96,7 @@ export default function ReviewForm({ isOpenAfterComplete, resId }) {
 
   return (
     <>
+      {loading && <Loading />}
       {isOpenAfterComplete && (
         <form className="px-10 flex flex-col gap-4 border shadow-md p-5">
           <div className="flex gap-4 pb-3">

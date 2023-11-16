@@ -17,10 +17,10 @@ export default function BookHistoryItem({ obj }) {
 			</div>
 
 			<div className="flex self-start gap-3">
-				<button className="border px-4 py-1 rounded-full bg-red-500 text-white hover:bg-red-300">
+				<button className="px-4 py-2 bg-red-700 text-white cursor-pointer hover:bg-red-300 hover:text-black hover:scale-125 duration-300 ease-in-out border  rounded-md">
 					Detail
 				</button>
-				<button className="border px-4 py-1 rounded-full bg-red-500 text-white hover:bg-red-300">
+				<button className="px-4 py-2 bg-red-700 text-white cursor-pointer hover:bg-red-300 hover:text-black hover:scale-125 duration-300 ease-in-out border  rounded-md">
 					Book Again
 				</button>
 			</div>

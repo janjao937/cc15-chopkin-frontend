@@ -1,3 +1,10 @@
+import {
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
 import { useState } from "react";
 import MyButton from "../components/MyButton";
 import MyStepper from "../components/Stepper";
@@ -11,62 +18,20 @@ import { useEffect } from "react";
 import axios from "../config/axios";
 import useBooking from "../Hooks/use-booking";
 import ShowOnlyMap from "../features/googleMaps/ShowOnlyMap";
-
-const mockRestuarantInfo = {
-  id: 1,
-  resName: "RestaurantName",
-  restaurantImage:
-    "https://images.unsplash.com/photo-1479044769763-c28e05b5baa5?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8cmVzdHVhcmFudHxlbnwwfHwwfHx8MA%3D%3D",
-  resType: "International",
-  location: "พญาไท",
-  dateTime: "12.00 - 19.15",
-};
-
-const mockPackage = [
-  {
-    id: 1,
-    packageName: "Premium Buffet",
-    packageInfo:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, repellendus. Aperiam aut vero dignissimos mollitia odit architecto beatae ab exercitationem!",
-    price: 3000,
-    menuImage:
-      "https://images.unsplash.com/photo-1625173616412-7b403d49a41e?auto=format&fit=crop&q=80&w=1974&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  },
-  {
-    id: 2,
-    packageName: "Great Great Harbour: Weekday Buffet",
-    packageInfo:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, repellendus. Aperiam aut vero dignissimos mollitia odit architecto beatae ab exercitationem!",
-    price: 3000,
-    menuImage:
-      "https://images.unsplash.com/photo-1515697320591-f3eb3566bc3c?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8bWVudXxlbnwwfHwwfHx8MA%3D%3D",
-  },
-  {
-    id: 3,
-    packageName: "Great Harbour: Weekend Buffet ",
-    packageInfo:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, repellendus. Aperiam aut vero dignissimos mollitia odit architecto beatae ab exercitationem!",
-    price: 3000,
-    menuImage:
-      "https://images.unsplash.com/photo-1579042877201-21342f2083a5?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fG1lbnV8ZW58MHx8MHx8fDA%3D",
-  },
-  {
-    id: 4,
-    packageName: "Great Harbour: วันหยุดยาว",
-    packageInfo:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo, repellendus. Aperiam aut vero dignissimos mollitia odit architecto beatae ab exercitationem!",
-    price: 3000,
-    menuImage:
-      "https://images.unsplash.com/photo-1617298452285-ceb241df5c67?auto=format&fit=crop&q=60&w=500&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTh8fG1lbnV8ZW58MHx8MHx8fDA%3D",
-  },
-];
+import { Carousel } from "@material-tailwind/react";
+import Loading from "../components/Loading";
 
 export default function RestaurantInfoPage() {
   // const {allPackage} = useBooking();
   const [allreviewMessage, setAllReviewMessage] = useState([]);
-  const [allBusinessTime, setAllBusinessTime] = useState([]);
-  const [date, setDate] = useState([]);
   const [cusReviewImg, setCusReviewImg] = useState([]);
+  const [getResImage, setGetResImage] = useState([]);
+  const [size, setSize] = useState(null);
+
+  const handleOpen = (value) => {
+    setSize(value);
+    // setOpen(!open);
+  };
 
   useEffect(() => {
     axios
@@ -110,6 +75,19 @@ export default function RestaurantInfoPage() {
   const handleBooking = () => {
     setBooking(!booking);
   };
+
+  useEffect(() => {
+    const fetchResByResId = async () => {
+      try {
+        const res = await axios.get(`/restaurant/resById/${resId}`);
+        console.log("getResImage=>", res.data);
+        setGetResImage(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchResByResId();
+  }, []);
 
   return (
     <div className="flex flex-col justify-center px-32">
@@ -155,12 +133,16 @@ export default function RestaurantInfoPage() {
                 </div>
               </div>
             </div>
-            <div>
-              <img
-                className="w-[400px] h-[200px]"
-                src={mockRestuarantInfo.restaurantImage}
-                alt=""
-              />
+            <div onClick={() => handleOpen("xl")}>
+              {getResImage?.RestaurantImages?.length > 0 ? (
+                <img
+                  className="w-[400px] h-[200px]"
+                  src={getResImage?.RestaurantImages[0].url}
+                  alt=""
+                />
+              ) : (
+                undefined
+              )}
             </div>
           </div>
 
@@ -330,6 +312,50 @@ export default function RestaurantInfoPage() {
           allPackage={allPackage}
         />
       </div>
+      <Dialog
+        className="rounded-3xl"
+        open={
+          size === "xs" ||
+          size === "sm" ||
+          size === "md" ||
+          size === "lg" ||
+          size === "xl" ||
+          size === "xxl"
+        }
+        size={size || "md"}
+        handler={handleOpen}
+        animate={{
+          mount: { scale: 1, y: 0 },
+          unmount: { scale: 0.9, y: -100 },
+        }}
+      >
+        {/* <DialogHeader></DialogHeader> */}
+        <DialogBody className="overflow-hidden ">
+          {getResImage?.RestaurantImages?.length > 0 ? (
+            <div className="flex">
+              <Carousel
+                className="rounded-xl h-[800px] overflow-hidden"
+                transition={{ duration: 1 }}
+              >
+                {getResImage?.RestaurantImages?.map((item, index) => (
+                  <div key={index}>
+                    <img
+                      src={item.url}
+                      alt="res-image"
+                      className="bg-cover object-cover w-full"
+                    />
+                  </div>
+                ))}
+              </Carousel>
+            </div>
+          ) : (
+            <div className="h-[800px] flex items-center justify-center text-xl">
+              No Restaurant Images
+            </div>
+          )}
+        </DialogBody>
+        {/* <DialogFooter></DialogFooter> */}
+      </Dialog>
     </div>
   );
 }
