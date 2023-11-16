@@ -11,13 +11,14 @@ export default function RestaurantItem({
   price,
   catIndex,
   reviews,
+  avgScore,
   recommended,
 }) {
   const category = categoryIndex.filter((item) => item.id === +catIndex);
   const averageScore =
     reviews.reduce((acc, el) => (acc += el.score), 0) / reviews.length;
 
-  if (recommended && averageScore >= 4) {
+  if (recommended && avgScore >= 4) {
     return (
       <>
         <Link to={`/restaurant/${objRes.id}`}>
@@ -36,17 +37,17 @@ export default function RestaurantItem({
                 {reviews.length === 0 ? (
                   <>
                     <div>
-                      <AiFillStar size={30} className="text-gray-400" />
+                      <AiFillStar size={20} className="text-gray-400" />
                     </div>
                     <div className="text-primary">No review</div>
                   </>
                 ) : (
                   <>
                     <div>
-                      <AiFillStar size={30} className="text-yellow-400" />
+                      <AiFillStar size={20} className="text-yellow-400" />
                     </div>
                     <div className="text-primary font-semibold">
-                      {averageScore.toFixed(1)}
+                      {avgScore?.toFixed(1)}
                     </div>
                   </>
                 )}
@@ -91,7 +92,7 @@ export default function RestaurantItem({
                       <AiFillStar size={20} className="text-yellow-400" />
                     </div>
                     <div className="text-primary font-semibold">
-                      {averageScore.toFixed(1)}
+                      {averageScore?.toFixed(1)}
                     </div>
                   </>
                 )}

@@ -10,6 +10,7 @@ import SearchInput from "../components/SearchInput";
 export default function RecommendedPage() {
   const [openSearch, setIsOpenSearch] = useState(false);
   const [restaurantAll, setRestaurantAll] = useState([]);
+  const [scoreAvg, setScoreAvg] = useState([]);
 
   useEffect(() => {
     const fatchResAll = async () => {
@@ -23,6 +24,27 @@ export default function RecommendedPage() {
     };
     fatchResAll();
   }, []);
+
+  useEffect(() => {
+    const fetchScoreAvg = async () => {
+      try {
+        const res = await axios.get(`/restaurant/review-score`);
+        console.log("scoreAvg ==>", res.data);
+        setScoreAvg(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchScoreAvg();
+  }, []);
+
+  const newRecommended =
+    scoreAvg?.avgResScore?.filter((item) => item.avgScore >= 4) || [];
+  console.log("ffff", newRecommended);
+
+  const scoreRecommended = newRecommended
+    .map((i) => ({ ...restaurantAll.find((j) => i.id === j.id), ...i }))
+    .filter(Boolean);
 
   return (
     <>
@@ -41,7 +63,7 @@ export default function RecommendedPage() {
       <div className="flex flex-col gap-5 lg:px-32 md:px-16 sm:px-3">
         <PageName name="Recommend Restaurant"></PageName>
         <div className="gap-8 grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-          {restaurantAll.map((item, index) => (
+          {scoreRecommended.map((item, index) => (
             <div key={index}>
               <RestaurantList data={item} recommended={true}></RestaurantList>
             </div>
