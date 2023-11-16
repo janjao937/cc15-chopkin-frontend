@@ -8,7 +8,7 @@ export default function Layout() {
   return (
     <div className="w-[100vw]">
       <Header />
-      <div id="CONTAINER" className=" mx-auto min-h-[81vh]">
+      <div id="CONTAINER" className=" mx-auto min-h-[83vh]">
         <LiveChat />
         <Outlet />
       </div>
