@@ -12,7 +12,7 @@ export default function Progress({ memberPoint, countMemberPoint }) {
 					<div className="absolute w-full top-0 border border-red-200 py-2 rounded-full"></div>
 					<div
 						className={`${
-							countMemberPoint < 0
+							countMemberPoint < 2
 								? "hidden"
 								: countMemberPoint < 10
 								? "w-[10%]"
