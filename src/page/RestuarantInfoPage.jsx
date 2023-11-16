@@ -132,7 +132,26 @@ export default function RestaurantInfoPage() {
                 {/* <p>res name</p> */}
                 <div className="flex gap-5">
                   <p className="">Open Time:</p>
-                  <p className="">{mockRestuarantInfo.dateTime}</p>
+                  {res?.BusinessTimes.map((item) => (
+                    <div className="flex gap-2">
+                      <p className="font-semibold">
+                        {item.day == 1
+                          ? "mon:"
+                          : item.day == 2
+                          ? "tue:"
+                          : item.day == 3
+                          ? "wed:"
+                          : item.day == 4
+                          ? "thurs:"
+                          : item.day == 5
+                          ? "fri:"
+                          : item.day == 6
+                          ? "sat:"
+                          : "sun:"}
+                      </p>
+                      <p>{item.openTime} </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -193,25 +212,17 @@ export default function RestaurantInfoPage() {
                       <div>
                         <div className="flex p-4">
                           <div className="flex-1">
-                            <p>รอบเวลาที่เปิดจอง</p>
+                            <p className="font-semibold">รอบเวลาที่เปิดจอง</p>
 
-                            <div className="flex justify-around">
-                              <section className="flex">
-                                {/* {res.map((item,index)=> <p>{item.businessTimes}</p>)} */}
-                                {/* <div className="flex-1">
-                                <p>Monday</p>
-                                <p>Tuesday</p>
-                                <p>Wednesday</p>
-                                <p>Thursday</p>
-                                <p>Friday</p>
-                                <p>Saturday</p>
-                                <p>Sunday</p>
-                              </div> */}
-
-                                <div className="">
+                            <div className="flex">
+                              <section className="flex w-[50%]">
+                                <div className="w-[100%]">
                                   {res?.BusinessTimes.map((item, index) => (
-                                    <div className="flex gap-10" key={index}>
-                                      <p>
+                                    <div
+                                      className="flex gap-2 flex-1"
+                                      key={index}
+                                    >
+                                      <p className="flex-1">
                                         {item.day == 1
                                           ? "mon"
                                           : item.day == 2
@@ -226,9 +237,11 @@ export default function RestaurantInfoPage() {
                                           ? "sat"
                                           : "sun"}
                                       </p>
-                                      <p>{item.openTime}</p>
+                                      <p className="flex-1">{item.openTime}</p>
                                       <p>-</p>
-                                      <p>{item.closedTime}</p>
+                                      <p className="flex-1 text-end">
+                                        {item.closedTime}
+                                      </p>
                                     </div>
                                   ))}
                                 </div>
@@ -236,7 +249,7 @@ export default function RestaurantInfoPage() {
                             </div>
                           </div>
                           <div className="flex-1">
-                            <p>รายละเอียดแพ็กเกจ</p>
+                            <p className="font-semibold">รายละเอียดแพ็กเกจ</p>
                             <p>{item.detail}</p>
                           </div>
                         </div>

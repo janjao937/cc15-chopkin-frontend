@@ -38,8 +38,8 @@ export default function Dropdown() {
       </div>
 
       {isOpen && (
-        <div className="absolute w-[12rem] bg-white right-[-0.2rem] translate-y-2 border rounded-xl shadow-xl p-2">
-          <div className="flex flex-col items-end justify-center gap-1">
+        <div className="absolute w-[14rem] bg-white right-[-0.2rem] translate-y-2 border rounded-xl shadow-xl">
+          <div className="flex flex-col items-end justify-center gap-1 p-3">
             {customerName ? (
               <>
                 <Link to={`/profile/${authUser.id}`}>
@@ -80,7 +80,7 @@ export default function Dropdown() {
           {customerName ? (
             <>
               <Link to={`/profile/${authUser.id}/edit-account`}>
-                <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
+                <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black p-2">
                   Setting
                 </div>
               </Link>
@@ -90,22 +90,22 @@ export default function Dropdown() {
               {restaurantName ? (
                 <>
                   <Link to={`/restaurant/${authUser.id}/edit`}>
-                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 transition text-black">
+                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 transition text-black p-2" >
                       Setting
                     </div>
                   </Link>
                   <Link to={`/restaurant/${authUser.id}/edit/addImage`}>
-                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 transition text-black">
+                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 transition text-black p-2">
                       Add Image
                     </div>
                   </Link>
                   <Link to={`/restaurant/${authUser.id}/edit/edit-package`}>
-                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 transition text-black">
+                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 transition text-black p-2">
                       Edit Package
                     </div>
                   </Link>
                   <Link to={`/restaurant/${authUser.id}/approve-booking`}>
-                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black">
+                    <div className="text-end mb-1 cursor-pointer hover:text-red-500 text-black p-2">
                       Approve Booking
                     </div>
                   </Link>
@@ -118,11 +118,11 @@ export default function Dropdown() {
 
           <div
             onClick={logout}
-            className="flex justify-end items-center gap-4 cursor-pointer hover:bg-red-500 hover:transition rounded-xl"
+            className="flex justify-end items-center gap-4 cursor-pointer hover:bg-red-500 hover:transition rounded-xl hover:text-white"
           >
-            <div className="font-semibold  text-black ">Log Out</div>
+            <div className="font-semibold p-2">Log Out</div>
             <div className=" h-9 aspect-square rounded-full flex items-center justify-center">
-              <TbLogout />
+              <TbLogout size={20}/>
             </div>
           </div>
         </div>

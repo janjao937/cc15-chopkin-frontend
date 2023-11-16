@@ -39,8 +39,9 @@ export default function ResBussiTime({
 	};
 
 	return (
-		<div className="px-4 py-2 my-4 grid grid-cols-12 gap-4">
-			<div className="col-span-6 px-4 py-2">
+		<div className="flex justify-center pb-8">
+			<div className="py-2 my-4 flex shadow-lg border px-60 bg-white">
+			<div className="px-4 py-2 w-[600px] ">
 				{/* Table Current */}
 				<h1 className="text-center text-xl mb-2 font-semibold">
 					Current
@@ -215,5 +216,7 @@ export default function ResBussiTime({
 				</div>
 			</div>
 		</div>
+		</div>
+		
 	);
 }

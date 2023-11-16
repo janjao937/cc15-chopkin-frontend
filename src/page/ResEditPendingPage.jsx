@@ -81,7 +81,7 @@ export default function ResEditPendingPage() {
   const handleOnSubmit = () => {};
 
   return (
-    <div className="">
+    <div className="bg-gray-100 flex flex-col gap-5">
       {/* EditRes */}
       <EditResInfo handleOnSubmit={handleOnSubmit} />
       {/* EdktBussiTime */}

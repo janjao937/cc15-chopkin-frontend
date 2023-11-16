@@ -9,7 +9,7 @@ export default function MyBookItem({ objBooking, myBooking }) {
 
   const payButtonProps = {
     bookingId: objBooking.id,
-    text: "Pay",
+    text: "Payment",
   };
 
   return (
@@ -31,13 +31,13 @@ export default function MyBookItem({ objBooking, myBooking }) {
         <Link
           to={`/profile/${objBooking.id}/detail`}
           // onClick={() => navigate(`/profile/${objBooking.id}/detail`)}
-          className="border px-4 py-1 rounded-lg bg-red-500 text-white hover:bg-red-300"
+          className="px-4 py-2 bg-red-700 text-white cursor-pointer hover:bg-red-300 hover:text-black hover:scale-125 duration-300 ease-in-out border  rounded-md"
         >
           Detail
         </Link>
         {objBooking && objBooking?.payment?.paymentStatus === 1 ? undefined : <Link
           to={`/profile/${objBooking.id}/edit-booking`}
-          className="border px-4 py-1 rounded-full bg-red-500 text-white hover:bg-red-300"
+          className="px-4 py-2 bg-red-700 text-white cursor-pointer hover:bg-red-300 hover:text-black hover:scale-125 duration-300 ease-in-out border  rounded-md"
         >
           Modify
         </Link>}

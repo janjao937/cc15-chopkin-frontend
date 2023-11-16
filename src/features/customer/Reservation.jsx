@@ -45,7 +45,7 @@ export default function Reservation() {
             {myBooking.length > 0 ? (
               <div className="flex flex-col gap-4 px-4 py-2">
                 <div className="text-lg font-semibold">
-                  Upcoming Reservation
+                  My Reservation
                 </div>
                 {<div className="grid grid-cols-12 gap-4">
                   {myBooking.map((item, index) => (

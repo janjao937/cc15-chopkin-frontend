@@ -54,7 +54,7 @@ export default function HomePage() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-4 place-items-center">
+        <div className="grid grid-cols-4 place-items-center gap-10">
           {restaurantAll?.map((item, index) => (
             <div key={index}>
               <RestaurantList data={item} />
@@ -111,7 +111,7 @@ export default function HomePage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-4 place-items-center">
+          <div className="grid grid-cols-4 place-items-center gap-10">
           {restaurantAll?.map((item, index) => (
             <div key={index}>
               <RestaurantList data={item} />

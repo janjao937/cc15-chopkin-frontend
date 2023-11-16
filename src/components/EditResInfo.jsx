@@ -12,7 +12,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import MapComponent from "../features/googleMaps/MapComponent";
 import Modal from "./Modal";
-import DropdownLocation from "../features/auth/DropdownLocation"
+import DropdownLocation from "../features/auth/DropdownLocation";
 
 export default function EditResInfo({ handleOnSubmit }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,8 +28,6 @@ export default function EditResInfo({ handleOnSubmit }) {
   //   });
   //   setIsOpen(false);
   // };
-
-
 
   const { business } = useRes();
   console.log(`BUSINESS`, business);
@@ -135,10 +133,10 @@ export default function EditResInfo({ handleOnSubmit }) {
   };
 
   return (
-    <div className="flex px-40 ">
+    <div className="flex px-32 pt-10 gap-2">
       {/* Resaurant Start Info */}
-      <section className="flex-1 shadow-md border p-5 flex flex-col gap-5">
-        <p>
+      <section className="flex-1 shadow-md border p-5 flex flex-col gap-6 bg-white">
+        <p className="font-semibold text-xl">
           profileImg:
           {authUser.profileImg ? (
             <img src={authUser.profileImg} alt="" />
@@ -146,20 +144,40 @@ export default function EditResInfo({ handleOnSubmit }) {
             <img src={profileImage} className="w-[400px]"></img>
           )}
         </p>
-        <p>ResId: {authUser.id}</p>
-        <p>restaurantName: {authUser.restaurantName}</p>
-        <p>Email: {authUser.email}</p>
-        <p>ownerFirstName: {authUser.ownerFirstName}</p>
-        <p>ownerLastName :{authUser.ownerLastName}</p>
-        <p>phone: {authUser.phone}</p>
-        <p>start price: {authUser.price}</p>
+        {/* <p>ResId: {authUser.id}</p> */}
+        <div className="flex gap-3">
+          <p className="font-semibold">restaurantName:</p>
+          <p className="font-normal">{authUser.restaurantName}</p>
+        </div>
+        <div className="flex gap-3">
+          <p className="font-semibold">Email:</p>
+          <p className="">{authUser.email}</p>
+        </div>
+        <div className="flex gap-3">
+          <p className="font-semibold">OwnerFirstName:</p>
+          <p>{authUser.ownerFirstName}</p>
+        </div>
+        <div className="flex gap-3">
+          <p className="font-semibold">OwnerLastName:</p>
+          <p>{authUser.ownerLastName}</p>
+        </div>
+
+        <div className="flex gap-3">
+          <p className="font-semibold">phone:</p>
+          <p>{authUser.phone}</p>
+        </div>
+
+        <div className="flex gap-3">
+          <p className="font-semibold">start price:</p>
+          <p>{authUser.price}</p>
+        </div>
       </section>
 
       {/* Restaurabt New Info */}
       {/* Create to db: createEditPending */}
       <form
         onSubmit={handleSubmit}
-        className="flex-1 shadow-md border p-5 flex flex-col gap-2"
+        className="flex-1 shadow-md border p-5 flex flex-col gap-2 bg-white"
       >
         {file ? (
           <div onClick={() => fileEl.current.click()}>
@@ -178,14 +196,14 @@ export default function EditResInfo({ handleOnSubmit }) {
             }}
           />
         )}
-        <p>restaurantName</p>
+        <p className="font-semibold">restaurantName</p>
         <input
           type="text"
           className="border h-12"
           onChange={handleChangeInput}
           name="restaurantName"
         />
-        <p>starter price</p>
+        <p className="font-semibold">starter price</p>
         <input
           type="text"
           className="border h-12"
@@ -214,21 +232,21 @@ export default function EditResInfo({ handleOnSubmit }) {
 					onChange={handleChangeInput}
 					name="phone"
 				/> */}
-        <p>category</p>
+        <p className="font-semibold">category</p>
         <div>
           <DropdownCategory input={input} setInput={setInput} />
           {error.categoryIndex && (
             <InputErrorMessage message={error.categoryIndex} />
           )}
         </div>
-        <p>nation</p>
+        <p className="font-semibold">nation</p>
         <div>
           <DropdownNation input={input} setInput={setInput} />
           {error.nationIndex && (
             <InputErrorMessage message={error.nationIndex} />
           )}
         </div>
-        <p>district</p>
+        <p className="font-semibold">district</p>
         <div>
           <select
             name="districtIndex"
@@ -256,7 +274,7 @@ export default function EditResInfo({ handleOnSubmit }) {
             })}
           </select>
         </div>
-        <p>Location</p>
+        <p className="font-semibold">Location</p>
         <DropdownLocation onLocationChange={handleLocationChange} />
         {/* <p>Lat</p>
         <input
