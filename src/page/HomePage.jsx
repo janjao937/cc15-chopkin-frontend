@@ -84,7 +84,7 @@ export default function HomePage() {
         </div>
 
         <div className="grid 2xl:grid-cols-5 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 place-items-center gap-x-20 gap-y-14 py-8">
-          {restaurantAll?.map((item, index) => (
+          {scoreRecommended?.map((item, index) => (
             <div key={index}>
               {index < 4 ? (
                 <RestaurantList
