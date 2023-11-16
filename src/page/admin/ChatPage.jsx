@@ -1,19 +1,15 @@
 import React, { useEffect, useState } from "react";
 import SearchInput from "../../components/SearchInput";
 import AdminChatList from "../../features/Chat/AdminChatList";
-
-const room = [
-	{
-		id: "id-cus1",
-		name: "cus1",
-	},
-	{
-		id: "id-cus1",
-		name: "cus1",
-	},
-];
+import useAuth from "../../Hooks/use-auth";
 
 export default function ChatPage() {
+	const { getRoomAll, roomAll } = useAuth();
+	useEffect(() => {
+		getRoomAll();
+	}, []);
+	// console.log("roomAll =>", roomAll);
+
 	return (
 		<>
 			<div className="flex flex-col gap-4 p-4 mb-10 max-w-[1200px] mx-auto">
@@ -38,13 +34,13 @@ export default function ChatPage() {
 							Username
 						</h1>
 					</div>
-					{room.length > 0
-						? room.map((item, index) => (
+					{roomAll.length > 0
+						? roomAll.map((item, index) => (
 								<div key={index}>
 									<AdminChatList data={item} />
 								</div>
 						  ))
-						: room.map((item, index) => (
+						: roomAll.map((item, index) => (
 								<div key={index}>
 									<AdminChatList data={item} />
 								</div>
