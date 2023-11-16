@@ -25,10 +25,10 @@ export default function RestaurantItem({
             <img
               src={profileImg || blank}
               alt={name}
-              className="w-full h-full object-fill rounded-t-3xl"
+              className="w-full h-full object-fill rounded-t-lg"
             />
           </div>
-          <div className="p-4">
+          <div className="p-2">
             <div className="font-semibold text-lg">{name}</div>
             <div className="font-light text-md ">{category[0].title}</div>
             <div className="flex items-center justify-between">
@@ -70,20 +70,20 @@ export default function RestaurantItem({
             <img
               src={profileImg || blank}
               alt={name}
-              className="w-full h-full object-fill rounded-t-3xl"
+              className="w-full h-full object-fill rounded-t-lg"
             />
           </div>
-          <div className="p-4">
+          <div className="py-2 mx-3">
             <div className="font-semibold text-lg">{name}</div>
             <div className="font-light text-md ">{category[0].title}</div>
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between mt-1">
               <div className="flex items-center gap-1">
                 {reviews.length === 0 ? (
                   <>
                     <div>
-                      <AiFillStar size={20} className="text-gray-400" />
+                      <AiFillStar size={17} className="text-gray-400" />
                     </div>
-                    <div className="text-primary">No review</div>
+                    <div className="text-primary text-sm">No review</div>
                   </>
                 ) : (
                   <>
@@ -97,10 +97,12 @@ export default function RestaurantItem({
                 )}
               </div>
               <div className="flex gap-1">
-                <div className="flex justify-center items-center">
+                <div className="flex justify-center items-center text-[.8rem]">
                   Starting Price :
                 </div>
-                <div className="text-primary font-semibold">{price}</div>
+                <div className="text-primary font-semibold text-[.8rem]">
+                  {price}
+                </div>
               </div>
             </div>
           </div>
