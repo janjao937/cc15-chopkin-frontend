@@ -14,37 +14,14 @@ import { useState } from "react";
 import Loading from "../components/Loading";
 import PageName from "../components/PageName";
 import { Carousel } from "@material-tailwind/react";
-import { useEffect } from "react";
-import axios from "../config/axios";
 
 export default function HomePage() {
   const { restaurantAll, homeLoading } = useRes();
   const [searchInput, setSearchInput] = useState("");
+
   const { getRestaurantAll } = useResAll();
-  const [scoreAvg, setScoreAvg] = useState([]);
 
-  useEffect(() => {
-    const fetchScoreAvg = async () => {
-      try {
-        const res = await axios.get(`/restaurant/review-score`);
-        console.log("scoreAvg ==>", res.data);
-        setScoreAvg(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchScoreAvg();
-  }, []);
-
-  const newRecommended =
-    scoreAvg?.avgResScore?.filter((item) => item.avgScore >= 4) || [];
-  console.log("ffff", newRecommended);
-
-  const scoreRecommended = newRecommended
-    .map((i) => ({ ...restaurantAll.find((j) => i.id === j.id), ...i }))
-    .filter(Boolean);
-
-  console.log(scoreRecommended);
+  console.log("eeee", getRestaurantAll);
 
   if (homeLoading) return <Loading />;
   return (
@@ -84,17 +61,9 @@ export default function HomePage() {
         </div>
 
         <div className="grid grid-cols-4 place-items-center gap-10">
-          {scoreRecommended.map((item, index) => (
+          {restaurantAll?.map((item, index) => (
             <div key={index}>
-              {index < 4 ? (
-                <RestaurantList
-                  data={item}
-                  recommended={true}
-                  scoreAvg={scoreAvg}
-                />
-              ) : (
-                <></>
-              )}
+              <RestaurantList data={item} />
             </div>
           ))}
         </div>
@@ -151,7 +120,7 @@ export default function HomePage() {
           <div className="grid grid-cols-4 place-items-center gap-10">
             {restaurantAll?.map((item, index) => (
               <div key={index}>
-                {index < 4 ? <RestaurantList data={item} /> : <></>}
+                <RestaurantList data={item} />
               </div>
             ))}
           </div>
