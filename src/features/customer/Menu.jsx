@@ -42,7 +42,7 @@ export default function Menu() {
 		},
 	];
 	return (
-		<div className="flex flex-col shadow-lg border ">
+		<div className="flex flex-col shadow-lg border rounded-md max-w-[200px] items-stretch mx-auto justify-center ">
 			{menuCus.map((item, index) => (
 				<div key={index} className="">
 					<MenuList data={item} />

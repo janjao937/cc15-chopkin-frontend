@@ -10,7 +10,7 @@ export default function Favorite() {
 	// console.log("authUser", authUser);
 
 	return (
-		<div className="flex flex-col m-4">
+		<div className="flex flex-col m-4 min-h-[83vh]">
 			<div className="grid grid-cols-12">
 				{/* left */}
 				<AsideMenu
