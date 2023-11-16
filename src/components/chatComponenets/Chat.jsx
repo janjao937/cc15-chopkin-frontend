@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ChatComponentOther, ChatComponentMe } from "./ChatBoxComponent";
 import { BsFillSendFill } from "react-icons/bs";
+import { useRef } from "react";
 
 const Chat = ({ socket, username, room }) => {
 	const [inPutMessage, setInputMessage] = useState("");
@@ -29,6 +30,17 @@ const Chat = ({ socket, username, room }) => {
 		}
 	};
 
+	const messageEl = useRef(null);
+
+	useEffect(() => {
+		if (messageEl) {
+			messageEl.current.addEventListener("DOMNodeInserted", (event) => {
+				const { currentTarget: target } = event;
+				target.scroll({ top: target.scrollHeight, behavior: "smooth" });
+			});
+		}
+	}, []);
+
 	useEffect(() => {
 		socket.on("recive_message", (data) => {
 			console.log(data);
@@ -43,7 +55,10 @@ const Chat = ({ socket, username, room }) => {
 					{/* <p>Realtime Chat | ROOM_ID:{room}</p> */}
 					{/* <div className="text-lg">ROOM_ID:{room}</div> */}
 				</div>
-				<div className="chat-body flex flex-col gap-2 px-1 mt-4 h-[320px]  overflow-y-auto ">
+				<div
+					ref={messageEl}
+					className="chat-body flex flex-col gap-2 px-1 mt-4 h-[320px]  overflow-y-auto "
+				>
 					{messageArr.map((e, index) => {
 						return username === e.author ? (
 							<ChatComponentMe
