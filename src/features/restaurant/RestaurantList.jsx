@@ -2,8 +2,6 @@ import React from "react";
 import RestaurantItem from "./RestaurantItem";
 
 export default function RestaurantList({ data, recommended = false }) {
-  // console.log("dataTest", data.status);
-
   return (
     <div className="border border-gray-200 rounded-3xl w-[280px] cursor-pointer hover:shadow-lg hover:transition">
       {data.status === 1 && (
@@ -14,6 +12,7 @@ export default function RestaurantList({ data, recommended = false }) {
           price={data.price}
           catIndex={data.categoryIndex}
           reviews={data.Reviews}
+          avgScore={data.avgScore}
           recommended={recommended}
         />
       )}
