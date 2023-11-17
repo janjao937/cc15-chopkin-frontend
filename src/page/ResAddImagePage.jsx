@@ -1,7 +1,6 @@
 import { useState, useRef } from "react";
 import { toast } from "react-toastify";
 import { BiImageAdd } from "react-icons/bi";
-import MyOutlineButton from "../components/MyOutlineButton";
 import InputErrorMessage from "../features/auth/InputErrorMessage";
 import Loading from "../components/Loading";
 import axios from "../config/axios";
@@ -16,16 +15,18 @@ export default function ResAddImagePage() {
   const [getResImage, setGetResImage] = useState([]);
   const fileEl = useRef(null);
 
+  const fatchResByResId = async () => {
+    try {
+      const res = await axios.get(`/restaurant/resById/${resId}`);
+      console.log("getResImage=>", res.data);
+      console.log("hayy");
+      setGetResImage(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
-    const fatchResByResId = async () => {
-      try {
-        const res = await axios.get(`/restaurant/resById/${resId}`);
-        console.log("getResImage=>", res.data);
-        setGetResImage(res.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
     fatchResByResId();
   }, []);
 
@@ -47,6 +48,19 @@ export default function ResAddImagePage() {
     }
   };
 
+  const handleDeleteImg = async (imgId) => {
+    try {
+      setLoading(true);
+      await axios.delete(`/restaurant/deleteAResImg/${imgId}`);
+      fatchResByResId();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      toast.warning(`DELETE IMAGES`);
+    }
+  };
+
   return (
     <div className="min-h-[83vh] flex flex-col gap-3">
       {loading && <Loading />}
@@ -60,7 +74,19 @@ export default function ResAddImagePage() {
             <div className="grid grid-cols-5 gap-5">
               {getResImage?.RestaurantImages?.map((item, index) => (
                 <div key={index}>
-                  <img src={item.url} alt="res-image" className="w-32 h-32" />
+                  <div className="relative">
+                    <img
+                      src={item.url}
+                      alt="res-image"
+                      className="w-32 h-32 rounded-lg shadow-lg"
+                    />
+                    <span
+                      className="cursor-pointer absolute top-0 right-2 text-white text-sm"
+                      onClick={() => handleDeleteImg(item.id)}
+                    >
+                      X
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
