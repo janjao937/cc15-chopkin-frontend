@@ -6,14 +6,17 @@ export default function ResNationList({ data }) {
 
   return (
     <div className="border border-gray-200 rounded-lg  w-[15rem] cursor-pointer hover:shadow-lg hover:transition">
-      <ResNationItem
-        objData={data}
-        profileImg={data.profileImg}
-        name={data.restaurantName}
-        catIndex={data.categoryIndex}
-        price={data.price}
-        status={data.status}
-      />
+      {data.status === 1 && (
+        <ResNationItem
+          objData={data}
+          profileImg={data.profileImg}
+          name={data.restaurantName}
+          catIndex={data.categoryIndex}
+          price={data.price}
+          status={data.status}
+          reviews={data.Reviews}
+        />
+      )}
     </div>
   );
 }
